@@ -1,0 +1,244 @@
+﻿/*************************************************************
+ CSS Style sheet defining layout for admin_config.php 
+ Nick Brown
+ 27 August 2008
+ *************************************************************/
+
+.npb-tooltip {
+	margin-right: 5px;
+}
+
+#npb_config_save_error {
+	font:	normal 90% verdana, tahoma, arial, Sans;
+}
+
+ /* The alert icon on the save error modal */
+.npb-save-alert {
+  float: left;
+  margin-right: 10px;
+}
+
+/* The wrapper div for npb-save-error-list on the save error modal */
+#npb-save-error-div {
+  height: 90px;
+	overflow: auto;
+}
+
+#npb-save-error-list {
+	font:	normal 75% verdana, tahoma, arial, Sans;
+}
+
+ /* Define look of the popup menu used by page */
+#npb_popupmenu_div {
+	position:	absolute;
+	background-color:	white;
+	border:	1px solid #CCCCCC;
+	font:	normal 80% verdana, tahoma, arial, Sans;
+	line-height: 1.2em;
+	z-index: 100;
+	visibility: hidden;
+}
+
+#npb_popupmenu_div a{
+	text-decoration: none;
+	padding-left: 4px;
+	color: black;
+	display: block;
+}
+
+/* Highlight menu links as mouse moves over them */
+#npb_popupmenu_div a:hover{
+	background-color: #e1e1e1;
+}
+
+ /* Pad the navigation list */
+ul.npb_tab_nav{
+	font-size:80%;
+	margin: 0px;
+	padding:	2px 10px;
+}
+
+/* Configure layout of navigation tabs */
+ul.npb_tab_nav li{
+	display: inline;
+	padding: 0px 10px 0px 10px;
+	border-right: 1px #Cccccc solid;
+}
+
+/* Set different padding for "General" navigation tab and make bold as default */
+#npb_config_general_tab{
+	padding: 0px 10px 0px 0px;
+	font-weight:	bold;
+}
+
+/* Hide the "Security", "Homepage", and Server Connection pages (DIVs) initially */
+#npb_config_security_div, #npb_config_homepage_div,
+#npb_config_connections_div, #npb_config_audits_div,
+#npb_config_save_error {
+	display:	none;
+}
+
+/* Override the "div.npb_section_data p" formatting in default.css */
+#config_general p, #config_security p, #config_homepage p, #config_ldap p {
+	font-weight:	normal;
+}
+
+/* Layout for the DIV containing the form "Save" button */
+#npb_config_save_div {
+	padding:	10px;
+}
+
+/* Padding for the general, security, audits & homepage "pages" (DIVs) */
+#npb_config_general_div, #npb_config_security_div,
+#npb_config_homepage_div, #npb_config_audits_div {
+	padding: 10px;
+}
+
+/* Align the rightmost form input elements and pad */
+div.npb_config_col {
+	display: inline;
+	margin: 0 0 0 15px;
+}
+
+/* layout the LDAP/SMTP DIV */
+#npb_ldap_connections_div, #npb_smtp_connection_div {
+	margin:	10px;
+	padding:	5px;
+	font-size: 85%;
+}
+
+/* layout the LDAP connections, LDAP paths & Server configuration DIVs */
+.npb-connection-config {
+	font:	normal 80% verdana, tahoma, arial, Sans;
+	padding: 10px;
+	display:	none;
+}
+
+/* No extra padding between the test div*/
+#npb_connection_test_div {
+	margin: -20px 0px 0px 0px;
+}
+
+/* size and pad buttons on the Connections config page */
+#npb_config_connections_div  button, #npb_choose_email_div button {
+	font:	normal 80% verdana, tahoma, arial, Sans;
+	margin: 0px 0px 0px 10px;
+}
+
+/* size buttons on LDAP connection & page config DIV */
+.npb-connection-config button {
+	font:	normal 90% verdana, tahoma, arial, Sans;
+}
+
+/* define how the fieldset borders look */
+.npb-connection-config fieldset, #npb_config_security_div fieldset,
+#npb_config_audits_div fieldset, #npb_config_general_div fieldset {
+	margin:	5px;
+	width:	95%;
+	border:	1px solid #cccccc;
+}
+
+/* float labels left and right-align them for these forms */
+.npb-connection-config label, #npb_config_general_div label, #npb_smtp_test{
+	display: block;
+	float: left; 
+	width: 150px; 
+	padding: 0; 
+	margin: 5px 0 0;
+	text-align: right; 
+}
+
+/* float labels left and right-align them for security/audits form */
+#npb_config_security_div label, #npb_config_general_div label{
+	display: block;
+	float: left; 
+	width: 200px; 
+	padding: 0; 
+	margin: 5px 0 0;
+	text-align: right; 
+}
+
+/* float labels left and right-align them for homepage form */
+#npb_config_homepage_div label{
+	display: block;
+	float: left; 
+	width: 400px; 
+	padding: 0; 
+	margin: 5px 0 0;
+	text-align: right; 
+}
+
+/* Layout for form input controls */
+.npb-connection-config input, #npb_config_general_div input,
+#npb_config_security_div input, #npb_config_homepage_div  input,
+#npb_config_audits_div input{
+	margin:	0 0 10px 10px;
+	font:	normal 90% verdana, tahoma, arial, Sans;
+	vertical-align: middle;
+}
+
+/* Layout for form select control for smtp */
+.npb-connection-config select {
+	margin:	0 0 10px 10px;
+	font:	normal 90% verdana, tahoma, arial, Sans;
+	vertical-align: middle;
+}
+
+/* Size checkbox controls to make them align better with accomapnying label */
+.npb-connection-config input[type=checkbox], #npb_config_security_div input[type=checkbox], #npb_config_homepage_div input[type=checkbox], #npb_choose_email_div input[type=radio], #npb_config_general_div input[type=checkbox] {
+	margin:	4px 0 10px 10px;
+}
+
+/* margin for form select control */
+#npb_config_general_div select {
+	margin:	4px 0 10px 10px;
+}
+
+/* Mainly for IE - the "page" DIVs "break out " of the form otherwise */
+div.npb_section_content form {
+	display: inline;
+}
+
+/* layout for LDAP/SMTP images */
+#npb_ldap_connections_div img, #npb_smtp_connection_div img {
+	width: 24px;
+	height: 24px;
+	vertical-align: middle;
+	border: 0px;
+	margin:	0px 5px 0px 0px;
+}
+
+/* layout for the LDAP/SMTP tables */
+#npb_ldap_connections_div table, #npb_smtp_connection_div table {
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width:	100%;
+	vertical-align:	middle;
+}
+
+/* Appply a bottom-border line between table rows */
+#npb_ldap_connections_div td, #npb_smtp_connection_div td {
+	border-bottom:	2px solid #e0e0e0;
+	padding: 5px;
+}
+
+/* Apply formatting to the LDAP/SMTP table header */
+#npb_ldap_connections_div th, #npb_smtp_connection_div th {
+	text-align: left;
+	padding: 5px;
+	background-color: #E0E0E0	;
+	margin-bottom: 25px;
+}
+
+/* Format the LDAP paths list */
+#npb_ldap_connections_div ul {
+	list-style: none outside;
+	padding: 0px;
+}
+
+/* Format SMTP data cells so they align with each other */
+.npb-smtp-data { text-align: center; }
+
+/* Align the button for choosing LDAP/SMTP */
+.npb-label-div { margin-left: 75px; float: left; }
+

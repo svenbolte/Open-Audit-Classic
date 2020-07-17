@@ -1,0 +1,20 @@
+<?php
+    $query_array=array("headline"=>__("Web-Schedule Log"),
+                       "sql"=>"SELECT * FROM ws_log",
+                       "sort"=>"ws_log_timestamp",
+                       "dir"=>"DESC",
+                       "fields"=>array("10"=>array("name"=>"ws_log_message",
+                                                   "head"=>__("Log Message"),
+                                                   "show"=>"y",
+                                                  ),
+                                       "20"=>array("name"=>"ws_log_pid",
+                                                   "head"=>__("PID"),
+                                                   "show"=>"y",
+                                                  ),
+                                       "30"=>array("name"=>"ws_log_timestamp",
+                                                   "head"=>__("Date and Time"),
+                                                   "show"=>"y",
+                                                  ),
+                                      ),
+                      );
+?>

@@ -1,0 +1,142 @@
+fieldset#fs_ldap, fieldset#fs_list, 
+fieldset#fs_range, fieldset#fs_windows, 
+fieldset#fs_linux, fieldset#fs_nmap, 
+fieldset#fs_auth, fieldset#fs_command,
+fieldset#fs_mysql { display: none }
+
+.mysql { font-size: .9em; }
+.formResult img {
+  padding: 0px 5px;
+  margin: 0px 5px;
+  width: 1.0em;
+  height: 1.0em;
+}
+.tooltip { margin-right: 5px; }
+
+#DragContainer {
+  float: left;
+  margin: 3px;
+  width: 300;
+  padding: 5px;
+}
+
+.commandContainer {
+  padding: 5px;
+}
+
+#sortButtons {
+  float: left;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.Box {
+  border: #000 1px solid;
+  padding: 2px;
+  font-size: 10px;
+  margin-bottom: 5px;
+  width: 150px;
+  cursor: pointer;
+  font-family: verdana, tahoma, arial;
+  background-color: #eee;
+}
+
+.MoveBox {
+  border: #000 1px solid;
+  padding: 2px;
+  font-size: 10px;
+  margin-bottom: 5px;
+  width: 150px;
+  cursor: pointer;
+  font-family: verdana, tahoma, arial;
+  background-color: #a8bad4;
+}
+
+.sort:hover, .addbutton:hover, .deletebutton:hover {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 1px solid #ccc;
+  padding: 1em;
+  font: 80%/1 sans-serif;
+  width: 70em;
+  margin-left: 7em;
+  margin-right: 7em;
+  margin-bottom: 2em;
+}
+
+.submit-push {
+  float: left;
+  width: 15%;
+  margin-right: 0.5em;
+  padding-top: 0.5em;
+  text-align: right;
+  font-weight: bold;
+}
+
+legend {
+  background-color: #eee;
+  padding: 1em 1em;
+  border: 1px solid #ccc;
+}
+
+label {
+  float: left;
+  width: 35%;
+  margin-right: 0.5em;
+  padding-top: 0.8em;
+  padding-right: 0.8em;
+  text-align: right;
+  font-weight: bold;
+}
+
+.form-table {
+  width:75%;
+  margin-right: 0.5em;
+  padding-top: 0.6em;
+  padding-right: 0.8em;
+  margin-left: 0.8em;
+  font-weight: bold;
+}
+
+#clear-left {
+  clear: left;
+}
+
+input, select {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.formResult {
+  margin-left: 19em;
+  padding-top: 0.8em;
+  padding-right: 0.8em;
+}
+
+#fail-list {
+  margin-left: 8em;
+  padding-top: 0.8em;
+  padding-right: 0.8em;
+}
+
+.header {
+  font-weight:bold;
+  vertical-align:top;
+  padding-top:20px;
+  font-size: 120%;
+  color: #555;
+}
+
+.busy {
+  width: 2em;
+  height: 2em;
+}
+
+#dialog-test-results {
+  text-align: center;
+}
+
+#dialog-test-text { text-align: left; width: 380px; margin-right: auto; margin-left: auto; }

@@ -1,0 +1,9 @@
+set shell = CreateObject ("Shell.Application")
+set wshshell = CreateObject ("WScript.Shell")
+
+Path = "\\NAME\C$"
+ThisMessage="Click OK to connect to " & Path
+ThisResult = MsgBox (ThisMessage, 65, "Launch")
+if ThisResult = 1 then
+ shell.Explore Path
+end if

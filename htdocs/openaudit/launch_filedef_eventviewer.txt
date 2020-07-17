@@ -1,0 +1,8 @@
+ThisMessage="Click OK to view Event logs on NAME"
+ThisResult = MsgBox (ThisMessage, 65, "Eventviewer")
+if ThisResult = 1 then
+Dim WshShell, oExec
+Set WshShell = CreateObject("WScript.Shell")
+cmdline = "cmd.exe /c eventvwr.exe NAME"
+Set oExec = WshShell.Exec(cmdline)
+end if

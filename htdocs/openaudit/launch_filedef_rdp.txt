@@ -1,0 +1,25 @@
+screen mode id:i:2
+desktopwidth:i:1024
+desktopheight:i:768
+session bpp:i:16
+winposstr:s:0,3,0,0,800,600
+full address:s:NAME
+compression:i:1
+keyboardhook:i:2
+audiomode:i:2
+redirectdrives:i:0
+redirectprinters:i:1
+redirectcomports:i:0
+redirectsmartcards:i:1
+displayconnectionbar:i:1
+autoreconnection enabled:i:1
+username:s:administrator
+domain:s:MYDOMAIN
+alternate shell:s:
+shell working directory:s:
+disable wallpaper:i:1
+disable full window drag:i:1
+disable menu anims:i:1
+disable themes:i:1
+disable cursor setting:i:0
+bitmapcachepersistenable:i:1

@@ -1,0 +1,97 @@
+#config-table, #sched-table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 10px;
+  margin: 15px 10px 10px 20px;
+  width: 500px;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+#config-table th,#sched-table th {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 8px;
+  background: #b9c9fe;
+  border-top: 4px solid #aabcfe;
+  border-bottom: 1px solid #fff;
+  color: #039;
+}
+
+#config-table td,#sched-table td {
+  padding: 8px;
+  background: #e8edff; 
+  border-bottom: 1px solid #fff;
+  color: #669;
+  border-top: 1px solid transparent;
+}
+
+#config-table tr:hover td,#sched-table tr:hover td {
+  background: #d0dafd;
+  color: #339;
+}
+
+#log-box {
+  color: #339;
+	font:	normal 80% verdana, tahoma, arial, Sans;
+  width: 400px;
+  overflow: auto;
+}
+
+#ws-status-img { margin-left: 7px; }
+
+#manage-img, #ws-status-img, .hand-img:hover {
+  cursor: pointer;
+}
+
+#toggle-service {
+  display: none;
+  font-size: 10px;
+  font-style: italic;
+}
+
+label {
+  float: left;
+  margin-right: 0.5em;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.header {
+  margin-left: 2em;
+  font-weight:bold;
+  vertical-align:top;
+  padding-top:15px;
+  font-size: 120%;
+  color: #555;
+}
+
+#log-link-holder img { border: none; margin-right: 5px; }
+#log-link-holder { margin-left: 10px; }
+
+#busy { margin-right: 5px; }
+.busy { width: 2em; height: 2em; }
+
+.hand-img {
+  text-decoration: underline;
+  color: blue;
+  font-weight: bolder;
+}
+
+.notify-text {
+  font-size: 110%;
+  font-weight: bolder;
+}
+
+.notifier {
+  z-index: 100;
+  margin: 0px 0px;
+  padding: 8px 8px;
+  border: 1px solid #4f79b3;
+  background-color: #9cbede;
+	font:	normal 90% verdana, tahoma, arial, Sans;
+}
+
+.confirm-icon { float: left; margin: 0 7px 20px 0; }
+.no-table { margin-left: 20px; }
+#config-tables { margin-left: 30px; }
+

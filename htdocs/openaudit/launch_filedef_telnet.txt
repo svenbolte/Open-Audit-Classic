@@ -1,0 +1,34 @@
+    Option explicit
+    Dim strHost, strMessage, strTitle, strDefaultPort, strPort, lngPort, oShell, strSocket, intMsg
+    ' Set hostname
+    strHost = "NAME"
+    ' Set prompt.
+    strMessage = "Enter TCP port number to telnet (1-65534, default=23)"
+    ' Set title.
+    strTitle = "Telnet " & strHost
+    ' Set default port value.
+    strDefaultPort = "23"
+    ' Display message, title, and default value. If user has clicked Cancel ,exit.
+    strPort = InputBox(strMessage, strTitle, strDefaultPort)
+    ' No null values,  only numerics, max 5 numbers, no xEy-like numbers, no .  or , number separators, no + or - signs allowed
+    strPort = UCase(StrPort)
+    If (strPort <> "" and _           
+        IsNumeric(strPort) and _     
+       Len(strPort) < 6 and _       
+       InStr(strPort,"E") = 0  and _
+       InStr(strPort,".") = 0  and _
+       InStr(strPort,",") = 0  and _
+       InStr(strPort,"+") = 0  and _
+       InStr(strPort,"-") = 0) Then
+          ' Allowed range 1-65534
+          lngPort = Clng(strPort)
+          if lngPort > 0 and lngPort < 65535 Then
+            set oShell = CreateObject ("WScript.Shell")
+            strSocket = strHost & " " & lngPort
+            oshell.Run "Telnet " & strSocket
+         Else
+            intMsg = MsgBox ("Value not in the allowed range", 0, "Error")
+          End If
+       Else
+         intMsg = MsgBox ("Value not allowed", 0, "Error")
+    End if
