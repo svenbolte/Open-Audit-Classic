@@ -38,29 +38,40 @@ Der Projekt-Fork ist unter Github zu finden. Beiträge und Weiterentwicklung jed
 
 
 = Installation =
+Mit dem beiliegenden Innosetup Skript und Innosetup ein Setup erzeugen oder von Hand wie folgt installieren:
 
 Voraussetzungen: Apache benötigt die Visual C++ Runtimes 2015-19 (64-Bit) installiert. Diese kann bei Microsoft heruntergeladen werden.
 Auf einem Windows Server ab Version 2012 R2 :
 * xampp installieren
 * nmap und winpcap installieren 
 * Open-Audit Projektdateien unter htdocs/ kopieren
+* Datenbankersteinrichtung: http://localhost:888/openaudit/setup.php aufrufen und den Anweisungen folgen
 * htdocs/openaudit/scripts/pc-list-file.txt --> alle IP-Adressen aller Netze, die gescannt werden sollen, hier rein. Liste am Besten mit Excel erstellen
 * htdocs/openaudit/all-tools-scripts/jobs und batches: Aufgabe in den Taskplaer importieren
+* ./nmap/npcap09995.exe installieren auf dem Server (NMAP benötigt NPCAP auf der Netzwerkkarte des Servers installiert)
 
-Werkzeuge: --> htdocs/openaudit/all-tools-scripts
-		Offline Scan zum Inventarisieren ohne Netzwerk (howto.txt)
-		nmap-zweigstelle: Invenatisieren der IP-Geräte in Zweignetzen
-		jobs und batches: Ausführbare Aufgaben für täglichen Scan am Server  (audit und nmap)
+= Absichern =
+Die open-Audit-Oberfläche kann mit einem Login versehen werden, dazu in der Oberfläche http://localhost:888/openaudit auf
+ Administrator/Konfiguration/Security das Oberflächenpasswort anschalten und Zugangsdaten eingeben
+PHPMyadmin sichern:
+./phpmyadmin/config.inc.php öffnen und die Zeile $cfg['Servers'][$i]['auth_type'] = 'config';
+ statt config dort http setzen
 
-Benötigte freie IP-Ports auf dem Server:
+
+= Werkzeuge = 
+
+--> htdocs/openaudit/all-tools-scripts
+	Offline Scan zum Inventarisieren ohne Netzwerk (howto.txt)
+	nmap-zweigstelle: Invenatisieren der IP-Geräte in Zweignetzen
+	jobs und batches: Ausführbare Aufgaben für täglichen Scan am Server  (audit und nmap)
+
+ = Benötigte freie IP-Ports auf dem Server = 
+ 
 888 <- HTTP Oberfläche Webserver. Die Software sollte nur im Intranet verwendet werden. Dafür reicht http aus.
 3306 <- Mysql Datenbank Port
 
 = Post-Installation (optional, nur im Fehlerfall) =
-Stamm-Ordner ist: C:\Program Files (x86)\xampplite\htdocs\openaudit
-
-./nmap/npcap09995.exe installieren auf dem Server (NMAP benötigt NPCAP auf der Netzwerkkarte des Servers installiert)
-
+--> Stamm-Ordner ist: C:\Program Files (x86)\xampplite\htdocs\openaudit
 Nach der Installation auf Server 2016 müssen Apache und Mysql ggf. üder die CMD-Dateien 
 ./apache/apache_installservice-win10.cmd
 ./mysql/mysqli_installservice-win10.cmd
@@ -72,7 +83,6 @@ Die "pc_list_File.txt" auf dem Desktop bearbeiten und alle IP-Adressen aller Net
 ./scripts/audit.config bearbeiten und in der NMAP Sektion das richtige Supnetz eintragen
 Die Geplanten Tasks (Aufgaben) für Scan und nmap scan installieren über die Aufgabenplanung.
 Aufgabe ausführen.
-
 
 = Mögliche Bausteine =
 
