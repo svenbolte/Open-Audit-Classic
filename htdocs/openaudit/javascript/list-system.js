@@ -240,7 +240,7 @@ Returns:	[Boolean] False
 function ExportPageToCsv() {
   $('#export-page').val('list_export.php');
   $('#export-page-form').val('n');
-  $('#export-file-ext').html('.xls');
+  $('#export-file-ext').html('.csv');
   $(".pdf-sidemenu-select").hide();
   $("#export-dialog").dialog('option','title','Export CSV');
   $("#export-dialog").dialog('open');

@@ -27,8 +27,8 @@
 
 <div style="display: none; " id="export-dialog">
     <label class="ui-dialog-content-label">File Name:</label>
-    <input type="text" id="export-file-name" style="clear: none;" class="text ui-widget-content ui-corner-all ui-dialog-content-button"/>&nbsp;<strong><span id="export-file-ext"></span></strong>
-    <label class="ui-dialog-content-label pdf-sidemenu-select">Report Type:</label>
+    <input type="text" id="export-file-name" style="clear: none;width:50px;" class="text ui-widget-content ui-corner-all ui-dialog-content-button"/><?php echo '-'. $_GET["view"]; ?><strong><span id="export-file-ext"></span></strong>
+	<label class="ui-dialog-content-label pdf-sidemenu-select">Report Type:</label>
     <select id="export-select-report" class="ui-widget ui-dialog-content-button pdf-sidemenu-select">
       <option value="report_full">Full</option>
       <option value="report">Partial</option>

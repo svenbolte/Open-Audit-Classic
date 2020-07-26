@@ -59,4 +59,4 @@ $show_systems_audited_graph = 'y';
 $systems_audited_days = 30;
 $show_hard_disk_alerts = 'y';
 $hard_disk_alerts_days = '7';
-$language = 'en'; ?>
+$language = 'de_de'; ?>

@@ -3,6 +3,19 @@ include_once("include_config.php");
 include_once("include_functions.php");
 include_once("include_lang.php");
 
+// Umlaute für Excel
+function convertToWindowsCharset($string) {
+  $charset =  mb_detect_encoding(
+    $string,
+    "UTF-8, ISO-8859-1, ISO-8859-15",
+    true
+  );
+ 
+  $string =  mb_convert_encoding($string, "Windows-1252", $charset);
+  return $string;
+}
+
+
 // If they selected to email the report, this page is called via AJAX, so set some headers
 // then check if SMTP is enabled
 if(isset($_GET["email_list"])){
@@ -13,7 +26,7 @@ if(isset($_GET["email_list"])){
   header( "Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
   header( "Cache-Control: no-cache, must-revalidate" );
   header( "Pragma: no-cache" );
-  header("Content-type: text/xml");
+  header("Content-type: text/xml;charset=ISO-8859-1");
 
   $email =& GetEmailObject();
 
@@ -50,8 +63,8 @@ $csv_data = '';
 //Table head
 foreach($viewdef_array["fields"] as $field) {
     if($field["show"]!="n"){
-        $csv_data .= $field["head"];
-        $csv_data .= "\t";
+        $csv_data .= '"'.convertToWindowsCharset($field["head"]).'"';
+        $csv_data .= ";";
     }
 }
 $csv_data .= "\r\n";
@@ -61,8 +74,9 @@ if ($myrow = mysqli_fetch_array($result)){
     do{
         foreach($query_array["fields"] as $field){
             if($field["show"]!="n"){
-                $csv_data .= $myrow[$field["name"]];
-                $csv_data .= "\t";
+                $csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
+                //$csv_data .= "\t";
+                $csv_data .= ";";
             }
         }
         $csv_data .= "\r\n";
@@ -70,12 +84,11 @@ if ($myrow = mysqli_fetch_array($result)){
 }
 
 // set the filename if specified
-$filename = (isset($_GET["filename"])) ? $_GET["filename"] . '.xls' : 'export.xls';
+$filename = (isset($_GET["filename"])) ? $_GET["filename"] . '-' . $_GET["view"] . '.csv' : 'export-' . $_GET["view"] .'.csv';
 
 if (!isset($_GET["email_list"])){
   header("Content-Type: application/vnd.ms-excel");
-  header("Content-Disposition: inline; filename=\"$filename\"");
-
+  header("Content-Disposition: attachment; filename=\"$filename\"");
   exit("$csv_data");
 }
 else {

@@ -2,71 +2,8 @@
 ' Open Audit                   
 ' Software and Hardware Inventory 
 ' Outputs into MySQL              
-' (c) Open-Audit.org 2003-2014    
+' (c) Open-Audit.org 2003-2020    
 ' Licensed under the GPL          
-
-' Change Control:
-
-'	[Edoardo]		30/01/2008	 Added detection of MDAC/WDAC, system last boot, HDD status, scheduled tasks, env. variables, ip routes, event logs, pagefile, mobo and onboard devices detection
-'								 Fixed SSL self-signed certs issue when sending XML data to server
-'	[Edoardo]		31/01/2008	 Fixed error in current script PID detection on W2k.
-'	[Edoardo]		06/02/2008	 Fixed hanging when auditing sched. tasks on Win9x.
-'	[Edoardo]		07/02/2008	 Fixed NICs link speed detection when providing username/password 
-'	[Edoardo]		08/02/2008	 Hopefully fixed both hanging when auditing sched. tasks on Win9x and error in current script PID detection on W2k.
-'								 Fixed error when sending xml data (uses ServerXMLHTTP first, otherwise the XMLHTTP object) 
-'	[Edoardo]		20/02/2008	 Fixed error when sending xml data to a W2k OA server
-'	[Edoardo]		13/04/2008	 Modified IIS section to use IIS WMI provider, when available. Detected also
-'								 - IIS version and installed components
-'								 - Web service extensions (name, path and access)
-'								 - Site state, application pool, anonymous user, anonymous/basic/NTLM authentication flag, SSL/SSL 128 communications flag
-'								 Added detection of Automatic Updating settings
-'	[Edoardo]		15/04/2008	 Fixed an internationalization bug causing the home page not reporting systems without up to date antivirus
-'	[Edoardo]		21/04/2008	 Display W2k3 R2, when detected
-'	[Edoardo]		19/05/2008	 Added driver provider, version and date for installed Network Cards
-'	[Edoardo]		21/05/2008	 Fixed Antivirus and Win Firewall detection for Windows XP SP3
-'	[Edoardo]		04/06/2008	 Slightly improved Processor Socket type detection
-'	[Edoardo]		06/06/2008	 Added persistently mapped drives detection for each user who logged on the system.
-'								 Added CPU sockets # and memory slots # detection to the Motherboard section. Removed memory slot # for each memory bank
-'	[Edoardo]		07/06/2008	 Fixed Mapped drive letters to Uppercase
-'	[Edoardo]		20/06/2008	 Fixed Local Groups members detection for standalone servers
-'	[Edoardo]		23/08/2008	 Added detection of memory tag (slot # on Mobo) for memory banks
-'	[Edoardo]		27/08/2008	 Hopefully fixed hanging when auditing mapped drives.
-'	[Edoardo]		23/10/2008	 (by Nick Brown) Fixed slow mapped drives auditing
-'	[Edoardo]		24/02/2009	 (by jvandermark) Fixed IIS details
-'	[Nick Brown]	17/04/2009	 Changes to system user detection - line 893
-'	[Nick Brown]	23/04/2009	 [Bug] ODBC section not using Echo() - around line 3926 - Fixed
-'	[Edoardo]		01/08/2009	 In the Services section added auditing of StartName 
-'	[Chad Sikorra]	09/10/2009	 Add support for named arguments from the command line
-'	[Edoardo]		16/10/2009	 Fixed AV and Win Firewall info detection for Vista, Seven and 2k8.
-'	[Edoardo]		13/01/2010	 (By jpmorgan) Fixed Windows Security Center Registered Antivirus detection for Vista and Seven
-'	[Edoardo]		19/01/2010	 (By jpmorgan) Filtered out detection of several virtual NICS
-'	[Edoardo]		28/05/2010	 Added auditing of S.M.A.R.T. failure prediction for supported HDDs	to the Hard Drive Information section
-'	[Edoardo]		31/05/2010	 (Suggested by jpa) Added printer driver name
-'	[Edoardo]		19/06/2010	 (By tekkie330) Software collection 32 and 64 bit regardless of plattform audit.vbs runs on.
-'												Added Office 2010 PKs
-'												Fixed scheduled tasks auditing for Seven X64
-'								 (By jpa) Fixed the IsWMIConnectible function adding declaration of wbemConnectFlagUseMaxWait. This should prevent script hanging when the ConnectServer method fails
-'								 (By lsvi) Added Windows 7 PKs
-'								 (By ccpyle) Added Windows 2008 PKs
-'								 Fixed on-screen counting of auditing systems, retrieved from ldap or PC list file  
-'								 Added //Nologo to the cscript command line also for PC list file auditing. This permits to the CheckForHungWMI function to terminate running scripts after script_timeout seconds
-'								 Added the wbemConnectFlagUseMaxWait flag whenever the ConnectServer method of the SWbemLocator object is used.
-'								 Removed wscript.quit after completing domain and PC list file auditing, otherwise email sending is broken.
-'								 Deleted oShell object at the end of scheduled tasks auditing, to terminate RPC connections to audited hosts caused by the schtasks.exe command
-'	[Edoardo]		27/07/2010	 (by jpa) Added auditing of OS Architecture in system03
-'	[Edoardo]		26/08/2010	 Fixed auditing of local groups members for standalone (non-domain) PCs
-'	[Edoardo]		01/09/2010	 Added detection of the locked out property for User accounts 
-'	[tekkie330]		01/09/2010	 Added Detection of x64 keys from an x64 host running this script (Office 2010)
-'	[tekkie330]		28/01/2013	 Added Detection of x64 keys from an x64 host running this script (Office 2013) and changed decoding of win8/server2012 keys
-'   [tekkie330]		05/10/2014   Added table softwareapps in setup script, added modern-ui apps in this script to inventory installed app names of HK Users (queries all users)
-'									* New table softwapps in mysql database (fields like software)
-'									* php list definitions and menu addons für modern apps and modern apps installed on host
-'									* folder softwarelogos added. softwarelisting and software register detect and display when filename exists in softwarename chartacters until blank
-'									* PHMYadmin on current version, Mysql 5.x and apache 2.2 current build_number
-'									* database openaudit and user openaudit given password that is preset in setup.php, config change to use database password
-'									* ISS SETUP script renewed
-'									* MS MUI und Langpacks aus Softwareliste --> Patches Liste
-' 									* Windows Updates und QFE in Software Tabelle gespeichert und in Patches Liste zugefügt
 '***********************************************************************************************
 
 this_config_url = "%host_url%"
@@ -1110,6 +1047,14 @@ For Each objItem in colItems
   tm_daylight = clean(objItem.DaylightName)
 Next
 
+' virtuelle und logische cores bekommen
+Set colItems = objWMIService.ExecQuery("Select * from Win32_Processor",,48)
+For Each objItem in colItems
+   system_vcpu = clean(objItem.NumberOfCores)
+   system_lcpu = clean(objItem.NumberOfLogicalProcessors)
+Next
+
+
 if system_system_type = "1" then system_system_type = "Other" end if
 if system_system_type = "2" then system_system_type = "Unknown" end if
 if system_system_type = "3" then system_system_type = "Desktop" end if
@@ -1134,13 +1079,14 @@ if system_system_type = "21" then system_system_type = "Peripheral Chassis" end 
 if system_system_type = "22" then system_system_type = "Storage Chassis" end if
 if system_system_type = "23" then system_system_type = "Rack Mount Chassis" end if
 if system_system_type = "24" then system_system_type = "Sealed-Case PC"  end if
+if system_system_type = "31" then system_system_type = "Tablet-PC"  end if
 
 form_input = "system02^^^" & trim(system_model) & "^^^" & system_name _
                   & "^^^" & system_num_processors & "^^^" & system_part_of_domain _
                   & "^^^" & system_primary_owner_name & "^^^" & system_system_type _
                   & "^^^" & mem_size & "^^^" & system_id_number _
                   & "^^^" & trim(system_vendor) & "^^^" & domain_role_text _
-                  & "^^^" & tm_zone & "^^^" & tm_daylight & "^^^"
+                  & "^^^" & tm_zone & "^^^" & tm_daylight & "^^^" & system_vcpu & "^^^" & system_lcpu & "^^^"
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 
@@ -1753,6 +1699,10 @@ Next
     Set objEnumDiskPartition = objWMIService.ExecQuery _
       ("Select " & strQueryFields & " from Win32_DiskPartition", "WQL", 0)
 
+    Set objWMIServiceB = GetObject("winmgmts:\\" & strComputer & "root\CIMV2\Security\MicrosoftVolumeEncryption")
+    Set objEnumDiskBitlocker = objWMIServiceB.ExecQuery("Select ProtectionStatus from Win32_EncryptableVolume",,48)
+	  
+
     For Each objItem in objEnumLogicalDisk
       on error resume next
       partition_caption = objItem.Caption
@@ -1761,7 +1711,8 @@ Next
       partition_free_space = int(objItem.FreeSpace /1024 /1024)
       partition_size = 0
       partition_size = int(objItem.Size /1024 /1024)
-   
+      partition_used_space = 0
+      partition_used_space = int(objItem.Size /1024 /1024) - int(objItem.FreeSpace /1024 /1024)
       partition_volume_name = objItem.VolumeName
       partition_percent = 0
       
@@ -1793,18 +1744,20 @@ Next
           LogicalDisk_DeviceID = replace(LogicalDisk_DeviceID,"\","")
           LogicalDisk_DeviceID = replace(LogicalDisk_DeviceID,"""","")
           'wscript.echo LogicalDisk_DeviceID & VBCRLF
+		  LogicalDisk_Bitlocker = objEnumDiskBitlocker.ProtectionStatus
+          ' wscript.echo "Bitlocker: " & LogicalDisk_Bitlocker & VBCRLF
         Else
           Err.Clear
         End If
         On Error Resume Next
       ' END Associate with Device_ID in Win32_DiskPartition using objLogicalDiskToPartition
       Next
-      form_input = "partition^^^" & partition_bootable & "^^^"  & partition_boot_partition            & "^^^" _
+      form_input = "partition^^^" & partition_bootable & "^^^"  & partition_boot_partition & "^^^" _
       & partition_device_id         & "^^^" & partition_disk_index        & "^^^" _
       & partition_index             & "^^^" & partition_percent           & "^^^" _
       & partition_primary_partition & "^^^" & partition_caption           & "^^^" _
       & partition_file_system       & "^^^" & partition_free_space        & "^^^" _
-      & partition_size              & "^^^" & partition_volume_name       & "^^^"
+      & partition_size              & "^^^" & partition_volume_name       & "^^^" & partition_used_space & "^^^"
       entry form_input,comment,objTextFile,oAdd,oComment
       form_input = ""
     Next

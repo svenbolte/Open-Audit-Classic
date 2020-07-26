@@ -513,11 +513,14 @@ function insert_system02 ($split){
     $net_domain_role = trim($extended[10]);
     $time_caption = trim($extended[11]);
     $time_daylight = trim($extended[12]);
+    $system_vcpu = trim($extended[13]);
+    $system_lcpu = trim($extended[14]);
     $sql  = "UPDATE system SET system_model = '$system_model', system_name = '$system_name', ";
     $sql .= "system_num_processors = '$system_num_processors', system_part_of_domain = '$system_part_of_domain', ";
     $sql .= "system_primary_owner_name = '$system_primary_owner_name', system_system_type = '$system_system_type', ";
     $sql .= "system_memory = '$system_memory', system_id_number = '$system_id_number', system_vendor = '$system_vendor', ";
-    $sql .= "net_domain_role = '$net_domain_role', time_caption = '$time_caption', time_daylight = '$time_daylight' ";
+    $sql .= "net_domain_role = '$net_domain_role', time_caption = '$time_caption', time_daylight = '$time_daylight', ";
+    $sql .= "system_vcpu = '$system_vcpu', system_lcpu = '$system_lcpu' ";
     $sql .= "WHERE system_uuid = '$uuid' AND system_timestamp = '$timestamp'";
     if ($verbose == "y"){echo $sql . "<br />\n\n";}
 	$db=GetOpenAuditDbConnection();
@@ -933,6 +936,7 @@ function insert_partition ($split){
         $partition_free_space        = trim($extended[10]);
         $partition_size              = trim($extended[11]);
         $partition_volume_name       = trim($extended[12]);
+        $partition_used_space        = trim($extended[13]);
         if (is_null($partition_timestamp)){
           $sql = "SELECT MAX(partition_timestamp) FROM `partition` WHERE partition_uuid = '$uuid'";
           if ($verbose == "y"){echo $sql . "<br />\n\n";}
@@ -953,12 +957,12 @@ function insert_partition ($split){
           $sql  = "INSERT into `partition` (partition_uuid, partition_bootable, partition_boot_partition, ";
           $sql .= "partition_device_id, partition_disk_index, partition_index, ";
           $sql .= "partition_primary_partition, partition_caption, partition_file_system, ";
-          $sql .= "partition_free_space, partition_size, partition_volume_name, ";
+          $sql .= "partition_free_space, partition_size, partition_volume_name, partition_used_space, ";
           $sql .= "partition_timestamp, partition_first_timestamp) VALUES (";
           $sql .= "'$uuid', '$partition_bootable', '$partition_boot_partition', ";
           $sql .= "'$partition_device_id', '$partition_disk_index', '$partition_index', ";
           $sql .= "'$partition_primary_partition', '$partition_caption', '$partition_file_system', ";
-          $sql .= "'$partition_free_space', '$partition_size', '$partition_volume_name', ";
+          $sql .= "'$partition_free_space', '$partition_size', '$partition_volume_name','$partition_used_space', ";
           $sql .= "'$timestamp', '$timestamp')";
           if ($verbose == "y"){echo $sql . "<br />\n\n";}
           $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
@@ -968,6 +972,7 @@ function insert_partition ($split){
           $sql .= "partition_boot_partition = '$partition_boot_partition', partition_device_id = '$partition_device_id', ";
           $sql .= "partition_disk_index = '$partition_disk_index', partition_index = '$partition_index', ";
           $sql .= "partition_primary_partition = '$partition_primary_partition', ";
+          $sql .= "partition_used_space = '$partition_used_space', ";
           $sql .= "partition_free_space = '$partition_free_space' WHERE partition_caption = '$partition_caption' AND ";
           $sql .= "partition_uuid = '$uuid' AND partition_timestamp = '$partition_timestamp'";
           if ($verbose == "y"){echo $sql . "<br />\n\n";}

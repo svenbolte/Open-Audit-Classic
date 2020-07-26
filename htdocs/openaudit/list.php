@@ -399,6 +399,11 @@ if ($myrow = mysqli_fetch_array($result)){
 				if(isset($field["calculate"]) AND $field["calculate"]=="y"){
 				// Special field calculations here, for example warranty days. 
 				//
+			   if ($field["name"]=="partition_used_space") {
+					$show_value=($myrow["partition_size"] - $myrow["partition_free_space"]);	
+			   }				
+				
+				
 				if(isset($field["dell_warranty"]) AND $field["dell_warranty"]=="y"){
 				// allow another 10 seconds for this bit to complete
 				set_time_limit(240);
