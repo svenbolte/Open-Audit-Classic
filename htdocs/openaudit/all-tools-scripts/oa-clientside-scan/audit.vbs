@@ -2752,7 +2752,7 @@ Echo(comment)
 Next 
 '// Ende 32 Bit Desktopapps
 
-'// 64-Bit
+'// 64-Bit Desktopapps pro Maschine
 objCtx.Add "__ProviderArchitecture", 64
 objCtx.Add "__RequiredArchitecture", TRUE
 Set objLocator = CreateObject("Wbemscripting.SWbemLocator")
@@ -2844,7 +2844,296 @@ Echo(comment)
       end If
 Next 
 
-'//   End Softwareinventory 32 and 64 bit
+'//   End Softwareinventory 32 and 64 bit,  now HKCU 32 Bit Software installed in iser hive of logged in user
+
+objCtx.Add "__ProviderArchitecture", 32
+objCtx.Add "__RequiredArchitecture", TRUE
+Set objLocator = CreateObject("Wbemscripting.SWbemLocator")
+Set objServices = objLocator.ConnectServer(strComputer, "root\default", strUser, strPass, "", "", wbemConnectFlagUseMaxWait, objCtx)
+Set o64reg = objServices.Get("StdRegProv") 
+comment = "Installed Software 32 Bit (current user)"
+Echo(comment)
+
+  Set Inparams = o64reg.Methods_("EnumKey").Inparameters
+  Inparams.Hdefkey = HKLM
+  Inparams.Ssubkeyname = subhive
+  set Outparams = o64reg.ExecMethod_("EnumKey", Inparams,,objCtx) 
+  For Each strSubKey In Outparams.snames 
+    Set Inparams = o64reg.Methods_("GetStringValue").Inparameters
+    Inparams.Hdefkey = HKLM
+    Inparams.Ssubkeyname = Subhive & strSubKey
+		Inparams.Svaluename = "DisplayName"
+		set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+		if Outparams.SValue <> "" then
+        version = ""
+        uninstall_string = ""
+        install_date = ""
+        publisher = ""
+        install_source = ""
+        install_location = ""
+        system_component = ""
+        display_name = Outparams.SValue
+        Inparams.Svaluename = "DisplayVersion"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        version = Outparams.SValue
+        if (isnull(version)) then version = "" end if
+
+        Inparams.Svaluename = "UninstallString"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        uninstall_string = Outparams.SValue
+        if (isnull(uninstall_string)) then uninstall_string = "" end if
+
+        Inparams.Svaluename = "InstallDate"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_date = Outparams.SValue
+        if (isnull(install_date)) then install_date = "" end if
+
+        Inparams.Svaluename = "Publisher"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        publisher = Outparams.SValue
+        if (isnull(publisher)) then publisher = "" end if
+
+        Inparams.Svaluename = "InstallSource"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_source = Outparams.SValue
+        if (isnull(install_source)) then install_source = "" end if
+
+        Inparams.Svaluename = "InstallLocation"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_location = Outparams.SValue
+        if (isnull(install_location)) then install_location = "" end if
+
+        Inparams.Svaluename = "SystemComponent"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        system_component = Outparams.SValue
+        if (isnull(system_component)) then system_component = "" end if
+
+        Inparams.Svaluename = "URLInfoAbout"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        software_url = Outparams.SValue
+        if (isnull(software_url)) then software_url = "" end if
+
+        Inparams.Svaluename = "Comments"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        software_comments = Outparams.SValue
+        if (isnull(software_comments)) then software_comments = " " end if
+
+        if online = "p" then
+          software = software & display_name & vbcrlf
+        end if
+       form_input = "software^^^" & clean(display_name)      & " ^^^" _
+                   & clean(version)           & " ^^^" _
+                   & clean(install_location)  & " ^^^" _
+                   & clean(uninstall_string)  & " ^^^" _
+                   & clean(install_date)      & " ^^^" _
+                   & clean(publisher)         & " ^^^" _
+                   & clean(install_source)    & " ^^^" _
+                   & clean(system_component)  & " ^^^" _
+                   & clean(software_url)      &  "^^^" _
+                   & clean(software_comments) & "^^^"
+		entry form_input,comment,objTextFile,oAdd,oComment
+        form_input = ""
+      end If
+Next 
+
+'// 64-Bit Current User Software
+objCtx.Add "__ProviderArchitecture", 64
+objCtx.Add "__RequiredArchitecture", TRUE
+Set objLocator = CreateObject("Wbemscripting.SWbemLocator")
+Set objServices = objLocator.ConnectServer(strComputer, "root\default", strUser, strPass, "", "", wbemConnectFlagUseMaxWait, objCtx)
+Set o64reg = objServices.Get("StdRegProv") 
+comment = "Installed Software 64 Bit (current user)"
+Echo(comment)
+
+  Set Inparams = o64reg.Methods_("EnumKey").Inparameters
+  Inparams.Hdefkey = HKCU
+  Inparams.Ssubkeyname = subhive
+  set Outparams = o64reg.ExecMethod_("EnumKey", Inparams,,objCtx) 
+  For Each strSubKey In Outparams.snames 
+    Set Inparams = o64reg.Methods_("GetStringValue").Inparameters
+    Inparams.Hdefkey = HKCU
+    Inparams.Ssubkeyname = Subhive & strSubKey
+		Inparams.Svaluename = "DisplayName"
+		set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+		if Outparams.SValue <> "" then
+        version = ""
+        uninstall_string = ""
+        install_date = ""
+        publisher = ""
+        install_source = ""
+        install_location = ""
+        system_component = ""
+        display_name = Outparams.SValue
+        Inparams.Svaluename = "DisplayVersion"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        version = Outparams.SValue
+        if (isnull(version)) then version = "" end if
+
+        Inparams.Svaluename = "UninstallString"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        uninstall_string = Outparams.SValue
+        if (isnull(uninstall_string)) then uninstall_string = "" end if
+
+        Inparams.Svaluename = "InstallDate"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_date = Outparams.SValue
+        if (isnull(install_date)) then install_date = "" end if
+
+        Inparams.Svaluename = "Publisher"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        publisher = Outparams.SValue
+        if (isnull(publisher)) then publisher = "" end if
+
+        Inparams.Svaluename = "InstallSource"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_source = Outparams.SValue
+        if (isnull(install_source)) then install_source = "" end if
+
+        Inparams.Svaluename = "InstallLocation"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_location = Outparams.SValue
+        if (isnull(install_location)) then install_location = "" end if
+
+        Inparams.Svaluename = "SystemComponent"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        system_component = Outparams.SValue
+        if (isnull(system_component)) then system_component = "" end if
+
+        Inparams.Svaluename = "URLInfoAbout"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        software_url = Outparams.SValue
+        if (isnull(software_url)) then software_url = "" end if
+
+        Inparams.Svaluename = "Comments"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        software_comments = Outparams.SValue
+        if (isnull(software_comments)) then software_comments = " " end if
+        if online = "p" then
+          software = software & display_name & vbcrlf
+        end if
+       form_input = "software^^^" & clean(display_name)      & " ^^^" _
+                   & clean(version)           & " ^^^" _
+                   & clean(install_location)  & " ^^^" _
+                   & clean(uninstall_string)  & " ^^^" _
+                   & clean(install_date)      & " ^^^" _
+                   & clean(publisher)         & " ^^^" _
+                   & clean(install_source)    & " ^^^" _
+                   & clean(system_component)  & " ^^^" _
+                   & clean(software_url)      &  "^^^" _
+                   & clean(software_comments) & "^^^"
+		entry form_input,comment,objTextFile,oAdd,oComment
+        form_input = ""
+      end If
+Next 
+
+'//   End Softwareinventory Curruser 32 and 64 bit
+
+
+'// Neu - inventory user apps 32 Bit (all users where software in profile)
+Set objCtx = CreateObject("WbemScripting.SWbemNamedValueSet")
+objCtx.Add "__ProviderArchitecture", 32
+objCtx.Add "__RequiredArchitecture", TRUE
+Set objLocator = CreateObject("Wbemscripting.SWbemLocator")
+Set objServices = objLocator.ConnectServer(strComputer, "root\default", strUser, strPass, "", "", wbemConnectFlagUseMaxWait, objCtx)
+Set o64reg = objServices.Get("StdRegProv") 
+comment = "Installed Software 32 Bit (for each User)"
+Echo(comment)
+
+  Set Inparamu = o64reg.Methods_("EnumKey").Inparameters
+  Inparamu.Hdefkey = HKUS
+  Inparamu.Ssubkeyname = ""
+  '   on error goto 0
+  set Outparamu = o64reg.ExecMethod_("EnumKey", Inparamu,,objCtx) 
+  For Each strSubUser In Outparamu.snames 
+	  Subhive= strSubUser &"\Software\Microsoft\Windows\CurrentVersion\Uninstall\" 
+	  ' echo(" - " & subhive)
+	  Set Inparams = o64reg.Methods_("EnumKey").Inparameters
+	  Inparams.Hdefkey = HKUS
+	  Inparams.Ssubkeyname = subhive
+	  set Outparams = o64reg.ExecMethod_("EnumKey", Inparams,,objCtx) 
+    Set Inparams = o64reg.Methods_("GetStringValue").Inparameters
+	For Each strSubKey In Outparams.snames 
+		Inparams.Ssubkeyname = Subhive & strSubKey
+		Inparams.Svaluename = "DisplayName"
+		set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+		if Outparams.SValue <> "" then
+        version = ""
+        uninstall_string = ""
+        install_date = ""
+        publisher = ""
+        install_source = ""
+        install_location = ""
+        system_component = ""
+        display_name = Outparams.SValue
+        Inparams.Svaluename = "DisplayVersion"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        version = Outparams.SValue
+        if (isnull(version)) then version = "" end if
+
+        Inparams.Svaluename = "UninstallString"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        uninstall_string = Outparams.SValue
+        if (isnull(uninstall_string)) then uninstall_string = "" end if
+
+        Inparams.Svaluename = "InstallDate"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_date = Outparams.SValue
+        if (isnull(install_date)) then install_date = "" end if
+
+        Inparams.Svaluename = "Publisher"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        publisher = Outparams.SValue
+        if (isnull(publisher)) then publisher = "" end if
+
+        Inparams.Svaluename = "InstallSource"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_source = Outparams.SValue
+        if (isnull(install_source)) then install_source = "" end if
+
+        Inparams.Svaluename = "InstallLocation"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        install_location = Outparams.SValue
+        if (isnull(install_location)) then install_location = "" end if
+
+        Inparams.Svaluename = "SystemComponent"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        system_component = Outparams.SValue
+        if (isnull(system_component)) then system_component = "" end if
+
+        Inparams.Svaluename = "URLInfoAbout"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        software_url = Outparams.SValue
+        if (isnull(software_url)) then software_url = "" end if
+
+        Inparams.Svaluename = "Comments"
+        set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
+        software_comments = Outparams.SValue
+        if (isnull(software_comments)) then software_comments = " " end if
+
+        if online = "p" then
+          software = software & display_name & vbcrlf
+        end if
+       form_input = "software^^^" & clean(display_name)      & " ^^^" _
+                   & clean(version)           & " ^^^" _
+                   & clean(install_location)  & " ^^^" _
+                   & clean(uninstall_string)  & " ^^^" _
+                   & clean(install_date)      & " ^^^" _
+                   & clean(publisher)         & " ^^^" _
+                   & clean(install_source)    & " ^^^" _
+                   & clean(system_component)  & " ^^^" _
+                   & clean(software_url)      &  "^^^" _
+                   & clean(software_comments) & "^^^"
+		entry form_input,comment,objTextFile,oAdd,oComment
+        form_input = ""
+      end If
+	Next 
+  Next
+	'// Ende 32 Bit User apps
+
+
+
+
+
 
 '// inventory modern (metro) app names
 
@@ -2866,7 +3155,7 @@ Echo(comment)
   For Each strSubUser In Outparamu.snames 
 	  if len(strSubUser)>40 and instr(strSubUser,"Classes")=0 then	
 		  Subhive= strSubUser &"\Software\Classes\ActivatableClasses\Package\" 
-		  echo(" - " & subhive)
+		  ' echo(" - " & subhive)
 		  Set Inparams = o64reg.Methods_("EnumKey").Inparameters
 		  Inparams.Hdefkey = HKUS
 		  Inparams.Ssubkeyname = subhive
