@@ -3,7 +3,7 @@
 #define MyAppName "Open-Audit Classic"
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
-#define MyAppURL "https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/"
+#define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
 #define Inhalte "Apache 2.4.43VC15x64, MySQL-MariaDBx64 10.1.45, PHP 7.4.8x64, phpMyAdmin 5.0.2x64, NMap 7.8, NPCAP 0.9995, Wordpress 5.4.2, WPKG 1.31*"
 
 [Setup]
@@ -20,7 +20,7 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 LicenseFile=C:\temp\xampplite\readme.txt
-DefaultDirName={pf}\xampplite
+DefaultDirName={commonpf}\xampplite
 DisableDirPage=yes
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
@@ -48,7 +48,6 @@ Name: "AufgabeNMAPScan"; Description: "Aufgabe für NMAP-Scan importieren"; Flags
 
 [Files]
 Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: {app}\htdocs\openaudit\scripts; 
@@ -59,16 +58,49 @@ Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/o
 Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon;
 
 [Run]
-; Filename: "{app}\apache\apache_installservice.bat"; Description: "Apache als Dienst und starten"; Flags: shellexec postinstall;
-; Filename: "{app}\mysql\mysql_installservice.bat"; Description: "MySQL als Dienst und starten"; Flags: shellexec postinstall;
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
 Filename: "schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: runascurrentuser postinstall; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
 Filename: "schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: runascurrentuser postinstall; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
-; Filename: "schtasks.exe"; Parameters: "/create /XML ""c:\anwend\oa-clientside-scan\Openaudit-PCScan.xml"" /TN Openaudit-offline-PCScan"
+Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64"; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Parameters: "/q /norestart"; Check: VC2017RedistNeedsInstall ; Flags: waituntilterminated
+Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Parameters: "/q /norestart"; Check: VC2013RedistNeedsInstall ; Flags: waituntilterminated
+
 
 [UninstallRun]
-; Filename: "{app}\apache\apache_uninstallservice.bat"; Flags: shellexec; 
-; Filename: "{app}\mysql\mysql_uninstallservice.bat"; Flags: shellexec; 
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; 
 Filename: "{app}\mysql\mysql_uninstallservice-win10.cmd"; Flags: shellexec; 
+
+[Code]
+function VC2017RedistNeedsInstall: Boolean;
+var 
+  Version: String;
+begin
+  if (RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X64', 'Version', Version)) then
+  begin
+    // Is the installed version at least 14.14 ? 
+    Log('VC Redist Version check : found ' + Version);
+    Result := (CompareStr(Version, 'v14.14.26429.03')<0);
+  end
+  else 
+  begin
+    // Not even an old version installed
+    Result := True;
+  end;
+end;
+
+function VC2013RedistNeedsInstall: Boolean;
+var 
+  Version: String;
+begin
+  if (RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\WOW6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\X86', 'Version', Version)) then
+  begin
+    // Is the installed version at least 12.0 ? 
+    Log('VC Redist Version check : found ' + Version);
+    Result := (CompareStr(Version, 'v12.0.40664.00')<0);
+  end
+  else 
+  begin
+    // Not even an old version installed
+    Result := True;
+  end;
+end;
