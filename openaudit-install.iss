@@ -60,11 +60,10 @@ Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openau
 [Run]
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
-Filename: "schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: runascurrentuser postinstall; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
-Filename: "schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: runascurrentuser postinstall; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
-Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64"; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Parameters: "/q /norestart"; Check: VC2017RedistNeedsInstall ; Flags: waituntilterminated
-Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Parameters: "/q /norestart"; Check: VC2013RedistNeedsInstall ; Flags: waituntilterminated
-
+Filename: "{sys}schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: postinstall runasoriginaluser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
+Filename: "{sys}schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: postinstall runasoriginaluser; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
+Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Check: VC2017RedistNeedsInstall
+Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
 
 [UninstallRun]
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; 
