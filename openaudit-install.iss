@@ -64,7 +64,7 @@ Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64"; Parameters: "/q /nores
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
 Filename: "{app}\nmap\npcap-0.9996.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes Winpcap installieren"
-Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
+Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; Description: "VC Runtime 2013 x86 für NMAP installieren"; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
 
 [UninstallRun]
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; 
