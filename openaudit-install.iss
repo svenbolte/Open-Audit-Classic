@@ -4,7 +4,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.43VC15x64, MySQL-MariaDBx64 10.1.45, PHP 7.4.8x64, phpMyAdmin 5.0.2x64, NMap 7.8, NPCAP 0.9995, Wordpress 5.4.2, WPKG 1.31*"
+#define Inhalte "Apache 2.4.43VC15x64, MySQL-MariaDBx64 10.1.45, PHP 7.4.8x64, phpMyAdmin 5.0.2x64, NMap 7.8, NPCAP 0.9996, Wordpress 5.4.2, WPKG 1.31*"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -58,12 +58,13 @@ Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/o
 Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon;
 
 [Run]
-Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
-Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
 Filename: "{sys}schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: postinstall runasoriginaluser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
 Filename: "{sys}schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: postinstall runasoriginaluser; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
 Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Check: VC2017RedistNeedsInstall
-Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
+Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
+Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
+Filename: "{app}\nmap\npcap-0.9996.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes Winpcap installieren"
+Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
 
 [UninstallRun]
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; 
