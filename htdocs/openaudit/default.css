@@ -1,33 +1,20 @@
-﻿/* armata-regular - latin */
-@font-face {
-  font-family: 'Armata';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/openaudit/fonts/armata-v11-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local('Armata Regular'), local('Armata-Regular'),
-       url('/openaudit/fonts/armata-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/openaudit/fonts/armata-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/openaudit/fonts/armata-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('/openaudit/fonts/armata-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/openaudit/fonts/armata-v11-latin-regular.svg#Armata') format('svg'); /* Legacy iOS */
-}
-* { font-family:Armata,sans-serif; }
+﻿* { font-family:Arial,sans-serif; }
 
 acronym,abbr {
 	text-decoration : none;
-	font-size : 11px;
+	font-size : 12px;
 	color: #616161;
 	text-shadow: #e0e0e0 1px 1px 0;}
 
 .tabgrey {
 	border : 1px solid #eeeeee;
 	color: #000000;
-	background-color: #e0e0e0;
+	background-color: #eee;
 	vertical-align: middle;
 	padding: 2px;
 }
 body {
-  font: normal 80% Armata, Sans-serif ;
+  font: normal 85% Arial, Sans-serif ;
   text-decoration: none;
   color: #000000;
   margin: 5px;
@@ -49,7 +36,7 @@ img.logo {
 form { margin-bottom:0; }
 
 .for_forms {
-  font: normal 100%  Armata, arial, Sans ;
+  font: normal 100%  arial, sans-serif;
   text-decoration: none;
   color: #777777;
   margin: 5px;
@@ -57,17 +44,16 @@ form { margin-bottom:0; }
   }
 
 .main_each {
-  box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
   width:100%
   margin: 0px;
   padding: 3px;
-  border: 0px solid #cccccc;
+  border: 1px solid transparent;
 }
 	
 .headerbanner {
   background-image:url('images/back_chipsatz.jpg');
   background-size:cover;
-  border: 0px solid #cccccc;
+  border: 0px solid rgba(192,192,192,0.1);
   margin:0px;
 }
 
@@ -120,16 +106,15 @@ ul#primary-nav ul {
   margin: 0px;
   padding: 0px;
   width: 160px; /* Width of Menu Items */
+  background-color:#fff;
   color: #000000;
-  background: #e1e1e1; /* IE6 Bug */
-	position: relative; /* Needed for z-index to be affective - Nick Brown */
-	z-index: 1; /* Ensures that menu displays in front of center section DIVS - Nick Brown */
+  position: relative; /* Needed for z-index to be affective - Nick Brown */
+  z-index: 1; /* Ensures that menu displays in front of center section DIVS - Nick Brown */
 }
 
 ul#primary-nav li {
   position: relative;
   list-style: none;
-  background: url(images/Shading3.png) repeat-x top left; /* Adds shading to menus - Nick Brown */
 }
 
 ul#primary-nav li a {
@@ -349,7 +334,7 @@ a.npb_ldap_logout{
 }
 
 div.ldap_details div {
-  font: bold 120%  Armata, arial, Sans ;
+  font: bold 120%  Arial, arial, Sans ;
   text-decoration: none;
   color: #444;
 }
