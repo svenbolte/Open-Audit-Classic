@@ -4,7 +4,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.46 VC15/x64, MySQL-MariaDB/x64 10.1.47, PHP 7.4.11/x64, phpMyAdmin 5.0.4/x64, NMap 7.91, NPCap 1.0, Wordpress 5.5.1, WPKG 1.31*"
+#define Inhalte "Apache 2.4.46 VC15/x64, MySQL-MariaDB/x64 10.1.47, PHP 7.4.12/x64, phpMyAdmin 5.0.4/x64, NMap 7.91, NPCap 1.0, Wordpress 5.5.3, WPKG 1.31*"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
