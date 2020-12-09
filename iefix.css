@@ -1,0 +1,48 @@
+/* Hack for lack of PNG transparency support pre IE7 */
+img {behavior: url(iepngfix.htc);}
+
+/* "Drop-shadow" DIV  - Nick Brown - Need to use a GIF pre IE7 */
+div.npb_section_shadow{
+  background: url(images/DropShadow.gif) repeat-x bottom right;
+}
+
+/************** Hacks for lack of max-height & max-width selector support pre IE7 ****************************************/
+/* Note: Strictly speaking this does result in a slightly different layout, but shouldn't be noticeable                                                                */
+/*******************************************************************************************************/
+/* Format section content data - Nick Brown */
+div.npb_content_data{
+	/* Height limit also ensures that data doesn't disappear off the page - Nick Brown */
+	height: expression(this.scrollHeight > 395 ? "395px" : "auto"); /* sets max-width for IE */
+	overflow-y:	expression(this.scrollHeight > 395 ? "scroll" : "hidden");;	/* Display scrollbar when needed - Nick Brown */
+}
+
+#CenterColumn{
+	width: expression(this.clientWidth > 800 ? "800px" : "auto"); /* sets max-width for IE */
+}
+/*****************************************************************************************************/
+
+/************** Hacks for lack of attribute selector support pre IE7 ************************************************/
+/* Set size & position of icons - Nick Brown */
+img.npb_rss, img.npb_down, img.npb_hourglass 
+{
+	width: 16px;
+	height: 16px;
+	vertical-align: bottom;
+	border: 0px;
+}
+
+/* Force down arrow IMG to the right of the section heading DIV - Nick Brown */
+img.npb_down {
+  position: absolute;
+  right: 5px;
+  padding: 0px;
+}
+
+/* Use larger size for graph section "hourglass" - Nick Brown */
+img.npb_auditedsystems_hourglass{
+	width: 32px;
+	height: 32px;
+	vertical-align: bottom;
+	border: 0px;
+
+/**************************************************************************************************/

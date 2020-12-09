@@ -1,0 +1,8 @@
+ThisMessage="Click OK to Manage NAME"
+ThisResult = MsgBox (ThisMessage, 65, "Manage")
+if ThisResult = 1 then
+Dim WshShell, oExec
+Set WshShell = CreateObject("WScript.Shell")
+cmdline = "cmd.exe /c compmgmt.msc /computer=NAME"
+Set oExec = WshShell.Exec(cmdline)
+end if

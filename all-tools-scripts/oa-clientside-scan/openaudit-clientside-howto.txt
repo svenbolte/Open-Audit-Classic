@@ -1,0 +1,12 @@
+Falls mal ein Rechner nicht über WMI erreichbar ist (Access denied), 
+kann man den Client installieren und ihn die Daten am Server abliefern lassen.
+
+* Den Inhalt des Openaudit Server-Ordners: 
+C:/Program Files (x86)/xampplite/htdocs/openaudit/all-tools-scripts/oa-clientside-scan
+auf den Rechner kopieren (z.B. nach c:/anwend/oa-clientside-scan)
+
+* Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit"
+ (oder in der audit.config der korrekte Name eingetragen werden).
+
+* Die Aufgabe "openaudit-pcscan.xml" in die Windows Aufgabenplanung importieren
+ (sie startet bei jeder Anmeldung am PC im Hintergrund und liefert an http://openaudit:888 ab)

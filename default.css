@@ -1,0 +1,351 @@
+﻿* { font-family:Arial,sans-serif; }
+
+acronym,abbr {
+	text-decoration : none;
+	font-size : 12px;
+	color: #616161;
+	text-shadow: #e0e0e0 1px 1px 0;}
+
+.tabgrey {
+	border : 1px solid #eeeeee;
+	color: #000000;
+	background-color: #eee;
+	vertical-align: middle;
+	padding: 2px;
+}
+body {
+  font: normal 85% Arial, Sans-serif ;
+  text-decoration: none;
+  color: #000000;
+  margin: 5px;
+  padding: 0;
+  padding-left: 0px; }
+
+img.logo {
+	width: 300px;
+	height: 48px;
+	border: 0px; 
+}
+#inforechts {
+	z-index : 2;
+	border : 1px none;
+	float : right;
+	text-align : right;
+}
+
+form { margin-bottom:0; }
+
+.for_forms {
+  font: normal 100%  arial, sans-serif;
+  text-decoration: none;
+  color: #777777;
+  margin: 5px;
+  padding: 0;
+  }
+
+.main_each {
+  width:100%
+  margin: 0px;
+  padding: 3px;
+  border: 1px solid transparent;
+}
+	
+.headerbanner {
+  background-image:url('images/back_chipsatz.jpg');
+  background-size:cover;
+  border: 0px solid rgba(192,192,192,0.1);
+  margin:0px;
+}
+
+td.main_each {
+	border: none; 
+	background-repeat: repeat-x;}
+
+td.indexheadlines {
+  vertical-align:top;
+  font-size: 120%;
+  color: #000000}
+
+td.contenthead {
+  font-weight:bold;
+  vertical-align:top;
+  font-size: 120%;
+  width:80%;
+  height:12px;
+  color: #000000;
+}
+  
+	
+td.contentsubtitle {
+  font-size: 100%;
+  color: #000000;
+  font-weight:bold;}
+
+.navarrows {
+  float: right;
+  padding-right: 5px;
+  padding-left: 5px; }
+
+
+a:link, a:visited {
+	font-weight:normal;
+	text-decoration : none;
+	text-shadow: 0.5px 0px 0px #006060;
+	color: #006060;
+	background-color : transparent;
+}
+a:active, a:hover {
+	font-weight:normal;
+	color : #333333;
+	text-shadow: 0.5px 0px 1px #000000;
+}
+
+ul#primary-nav,
+ul#primary-nav ul {
+  box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+  margin: 0px;
+  padding: 0px;
+  width: 160px; /* Width of Menu Items */
+  background-color:#fff;
+  color: #000000;
+  position: relative; /* Needed for z-index to be affective - Nick Brown */
+  z-index: 1; /* Ensures that menu displays in front of center section DIVS - Nick Brown */
+}
+
+ul#primary-nav li {
+  position: relative;
+  list-style: none;
+}
+
+ul#primary-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #000000;
+  margin: 0px;
+  padding: 5px;
+  padding-right: 0px;
+  }
+
+/* Fix IE. Hide from IE Mac \*/
+* html ul#primary-nav li { float: left; height: 1%; }
+* html ul#primary-nav li a { height: 1%; }
+/* End */
+
+ul#primary-nav ul {
+  position: absolute;
+  display: none;
+  left: 159px; /* Set 1px less than menu width */
+width:230px;
+  top: 0;
+}
+
+ul#primary-nav li ul li a { padding: 2px 5px; } /* Sub Menu Styles */
+
+ul#primary-nav li:hover ul ul,
+ul#primary-nav li:hover ul ul ul,
+ul#primary-nav li.over ul ul,
+ul#primary-nav li.over ul ul ul { display: none;} /* Hide sub-menus initially */
+
+ul#primary-nav li:hover ul,
+ul#primary-nav li li:hover ul,
+ul#primary-nav li li li:hover ul,
+ul#primary-nav li.over ul,
+ul#primary-nav li li.over ul,
+ul#primary-nav li li li.over ul {display: block; z-index: 1; position: absolute;} /* The magic */ /* Ensures that menu displays in front of center section DIVS - Nick Brown */
+
+ul#primary-nav li.menuparent:hover,
+ul#primary-nav li.over { background-color: #c1c1c1;}
+
+ul#primary-nav li a:hover { color: #006060; }
+
+.menuparent img {
+  border: none;
+  width: 16px;
+  height: 16px;
+  padding-right: 5px;
+  /* may need some top padding as well */
+}
+
+.menuparent span {
+  float: right;
+  cursor: pointer;
+}
+
+td.views_tablehead{
+  padding-right:10px;
+  font-weight:bold;
+  border-bottom: 1px solid #000000;
+  text-align: left;
+}
+
+td.system_tablehead{
+  padding-right:10px;
+  font-weight:bold;
+}
+td.system_tablebody_left{
+  vertical-align:top;
+  padding-right:10px;
+  width: 200px;
+}
+td.system_tablebody_right{
+  vertical-align:top;
+  padding-right:10px;
+}
+
+/* Remove graph IMG border - Nick Brown */
+div#graph img {border: 0px;}
+
+/* Set size & position of icons - Nick Brown */
+img[src="images/down.png"],img[src="images/hourglass-busy.gif"],img[src="images/users_2.png"],img[src="images/feed-icon.png"] 
+{
+	width: 16px;
+	height: 16px;
+	vertical-align: bottom;
+	border: 0px;
+}
+
+/* Center graph section content - Nick Brown  */
+div#AuditedSystems {
+	text-align: center;
+	padding-top:	15px;
+	padding-bottom:	5px;
+}
+
+/* Use larger size for graph section "hourglass" - Nick Brown */
+div#AuditedSystems img[src="images/hourglass-busy.gif"]{
+	width: 32px;
+	height: 32px;
+	vertical-align: bottom;
+	border: 0px;
+}
+
+/* "Drop-shadow" DIV  - Nick Brown */
+div.npb_section_shadow{
+}
+
+/* Section content DIV, uses relative offset to expose shadow from the "drop-shadow" DIV  - Nick Brown */
+div.npb_section_content{
+}
+
+/* Section heading DIV formatting - Nick Brown */
+div.npb_section_heading
+{
+	background-color: #e1e1e1;
+	padding: 2px;
+	margin-top:8px;
+	font-weight: normal;
+	border:none;
+}
+
+/* Format links in the section heading DIV - Nick Brown */
+div.npb_section_heading a { color: #000000; text-decoration: none; }
+div.npb_section_heading a:visited { color: #000000; }
+div.npb_section_heading a:hover { color: #006060; text-decoration: none; }
+
+/* Force down arrow IMG to the right of the section heading DIV - Nick Brown */
+div.npb_section_heading img[src="images/down.png"]{
+  position: absolute;
+  right: 20px;
+  padding: 0px;
+}
+
+/* Apply shading to the section data DIVs - Nick Brown */ 
+div.npb_section_data{
+	padding: 4px;
+	background: url(images/Shading3.png) repeat-x top left;
+}
+
+/* Format section data <P> blocks to make them stand out from the data tables - Nick Brown */
+div.npb_section_data p{
+	padding-top: 8px;
+	padding-bottom: 4px;
+	margin: 0px;
+	font-weight:	bold;
+	width: 95%;
+}
+
+/* Display a horizontal line above the section data summary - Nick Brown */
+}
+
+/* Format section content data - Nick Brown */
+div.npb_content_data{
+	letter-spacing:-0.1em; /* Compress text slightly to fit more data within the space - Nick Brown */
+  font-size: 80%; /* Reduce text size to fit more data within the space - Nick Brown */
+	width: 100%;
+	text-align: left;
+	/* Limit height and width so DIV doesn't exceed drop shadow size */
+	/* Height limit also ensures that data doesn't disappear off the page - Nick Brown */
+	max-height: 395px;
+	overflow-y:	auto;	/* Display scrollbar when needed - Nick Brown */
+	overflow-x:	hidden;
+}
+
+/* Remove "cellpadding" from data tables - Nick Brown */
+div.npb_content_data table{
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+/* Highlight tables rows (alternately) - Nick Brown */
+tr.npb_highlight_row{
+	background-color: #e1e1e1;
+}
+
+/* Position LDAP logout link top right - Nick Brown */
+a.npb_ldap_logout{
+	position: absolute;
+	right: 10px;
+	top: 6px;
+}
+
+/* Apply shading to right column (search box) - Nick Brown */
+#right_col{	background: url(images/Shading3.png) repeat-x top left;}
+
+#CenterColumn{
+/*	display: block;*/
+/*	width: 95%;*/
+}
+
+/* Format LDAP details page - Nick Brown */
+.ldap_details {
+  margin: 5px;
+  padding: 20px;
+  border: 1px solid #e1e1e1;
+}
+
+.ldap_details table {
+  width: 100%;
+}
+
+.ldap_details th {
+	text-align: left;
+  color: #666;
+}
+
+.ldap_details hr {
+	text-align: left;
+  border: 2px solid #BBBBBB;
+}
+
+.ldap_details img {
+	vertical-align: middle;
+	margin: 10px;
+}
+
+div.ldap_details div {
+  font: bold 120%  Arial, arial, Sans ;
+  text-decoration: none;
+  color: #444;
+}
+
+div.error {
+  margin: 5px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+div.error img {
+	vertical-align: middle;
+	margin: 10px;
+}

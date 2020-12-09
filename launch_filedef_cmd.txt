@@ -1,0 +1,24 @@
+Option explicit
+    Dim strHost, strMessage, strTitle, strDefaultPath, strPath, objFSO, objShell, strParams, intMsg
+    ' Set hostname
+    strHost = "NAME"
+    ' Set prompt.
+    strMessage = "Enter the path for PsExec.exe"
+    ' Set title.
+    strTitle = "Launch Cmd shell on " & strHost
+    ' Set default path.
+    strDefaultPath = "c:\PsTools\PsExec.exe"
+    ' Display message, title, and default value. If user has clicked Cancel, exit.
+    strPath = InputBox(strMessage, strTitle, strDefaultPath)
+    If strPath <> ""  Then
+      ' Check if file exists
+      Set objFSO = CreateObject("Scripting.FileSystemObject")
+      If objFSO.FileExists (strPath) then
+        ' Set PsExec parameters and run
+        strParams = "\\" & strHost & " " & "cmd.exe"
+        set objShell = CreateObject ("WScript.Shell")
+        objshell.Run strPath & " " & strParams
+      Else
+        intMsg = MsgBox ("File doesn't exist in the selected path.", 0, "Error")
+      End If
+    End If

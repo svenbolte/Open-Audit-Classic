@@ -1,0 +1,18 @@
+Option explicit
+    Dim strHost, strMessage, strTitle, strDefaultShare, strShare, objShell, wshShell, strUNCPath
+    ' Set hostname
+    strHost = "NAME"
+    ' Set prompt.
+    strMessage = "Enter share name"
+    ' Set title.
+    strTitle = "Explore " & strHost
+    ' Set default share name.
+    strDefaultShare = "C$"
+    ' Display message, title, and default value. If user has clicked Cancel, exit.
+    strShare = InputBox(strMessage, strTitle, strDefaultShare)
+    If strShare <> "" Then
+      set objShell = CreateObject ("Shell.Application")
+      set wshShell = CreateObject ("WScript.Shell")
+      strUNCPath = "\\" & strHost & "\" & strShare
+      objShell.Explore strUNCPath
+    End If

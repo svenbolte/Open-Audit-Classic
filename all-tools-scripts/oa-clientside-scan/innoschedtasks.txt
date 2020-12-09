@@ -1,0 +1,2 @@
+[Run]
+Filename: "schtasks.exe"; Parameters: "/create /XML ""c:\anwend\oa-clientside-scan\Openaudit-PCScan.xml"" /TN Openaudit-PCScan"

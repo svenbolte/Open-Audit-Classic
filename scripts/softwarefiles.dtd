@@ -1,0 +1,19 @@
+  <!ELEMENT softwarefiles  (software*)>
+  <!ELEMENT software ((version|versionFile),test)>
+  <!ATTLIST software 
+            name      CDATA #REQUIRED
+            publisher CDATA #REQUIRED>
+  <!ELEMENT version EMPTY>
+  <!ATTLIST version name CDATA #REQUIRED>
+  <!ELEMENT versionFile EMPTY>
+  <!ATTLIST versionFile filename CDATA #REQUIRED>
+  <!ELEMENT test    ((not|or|xor|and|file))>
+  <!ELEMENT or      ((not|or|xor|and|file)+)>
+  <!ELEMENT not     ((not|or|xor|and|file))>
+  <!ELEMENT xor     ((not|or|xor|and|file)+)>
+  <!ELEMENT and     ((not|or|xor|and|file)+)>
+  <!ELEMENT file EMPTY>
+  <!ATTLIST file 
+            filename CDATA #REQUIRED
+            size CDATA #IMPLIED
+            version CDATA #IMPLIED>

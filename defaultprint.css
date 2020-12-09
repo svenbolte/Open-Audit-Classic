@@ -1,0 +1,133 @@
+body {
+  font: normal 80%  Verdana, arial, Sans ;
+  text-decoration: none;
+  color: #777;
+  margin: 5px;
+  padding: 0;
+  padding-left: 0px; }
+
+.for_forms {
+  font: normal 100%  Verdana, arial, Sans ;
+  text-decoration: none;
+  color: #777;
+  margin: 5px;
+  padding: 0;
+  }
+
+.main_each {
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid #ccc; }
+
+td.indexheadlines {
+  vertical-align:top;
+  font-size: 120%;
+  color: #555}
+
+td.contenthead {
+  font-weight:bold;
+  vertical-align:top;
+  padding-top:20px;
+  font-size: 120%;
+  color: #555}
+td.contentsubtitle {
+  font-size: 100%;
+  color: #555;
+  font-weight:bold;}
+
+.navarrows {
+  float: right;
+  padding-right: 5px;
+  padding-left: 5px; }
+
+a { color: #3161A5; text-decoration: none; }
+a:visited { color: #3161A5; }
+a:hover { color: #FF0000; text-decoration: none; }
+
+ul#primary-nav,
+ul#primary-nav ul {
+  margin: 0;
+  padding: 0;
+  width: 165px; /* Width of Menu Items */
+  background: #fff; /* IE6 Bug */
+  font-size: 90%; }
+
+ul#primary-nav li {
+  position: relative;
+  list-style: none; }
+
+ul#primary-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #777;
+  margin: 0px;
+  padding: 5px;
+  padding-right: 0px;
+  border: 1px solid #ccc;
+  }
+
+/* Fix IE. Hide from IE Mac \*/
+* html ul#primary-nav li { float: left; height: 1%; }
+* html ul#primary-nav li a { height: 1%; }
+/* End */
+
+ul#primary-nav ul {
+  position: absolute;
+  display: none;
+  left: 164px; /* Set 1px less than menu width */
+  top: 0; }
+
+ul#primary-nav li ul li a { padding: 2px 5px; } /* Sub Menu Styles */
+ul#primary-nav li:hover ul ul,
+ul#primary-nav li:hover ul ul ul,
+ul#primary-nav li.over ul ul,
+ul#primary-nav li.over ul ul ul { display: none; } /* Hide sub-menus initially */
+ul#primary-nav li:hover ul,
+ul#primary-nav li li:hover ul,
+ul#primary-nav li li li:hover ul,
+ul#primary-nav li.over ul,
+ul#primary-nav li li.over ul,
+ul#primary-nav li li li.over ul { display: block; } /* The magic */
+ul#primary-nav li.menuparent:hover,
+ul#primary-nav li.over { background-color: #f9f9f9; }
+ul#primary-nav li a:hover { color: #E2144A; }
+
+.menuparent img {
+  border: none;
+  width: 16px;
+  height: 16px;
+  border: none;
+  padding-right: 5px;
+  /* may need some top padding as well */
+  }
+.menuparent span {
+  float: right;
+  cursor: pointer;
+}
+
+td.views_tablehead{
+  padding-right:10px;
+  font-weight:bold;
+  border-bottom: 1px solid #000000;
+  text-align: left;
+}
+
+td.system_tablehead{
+  padding-right:10px;
+  font-weight:bold;
+}
+td.system_tablebody_left{
+  vertical-align:top;
+  padding-right:10px;
+  width: 200px;
+}
+td.system_tablebody_right{
+  vertical-align:top;
+  padding-right:10px;
+}
+
+img { behavior: url(iepngfix.htc); }
+
+#nav, #rightnav {
+   display:none;
+}

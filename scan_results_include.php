@@ -1,0 +1,6 @@
+<?php 
+echo "<tr bgcolor=\"#F1F1F1\"><td><a href=\"system.php?pc=00:16:E6:5C:B8:C6\">PROMO-CS-QPCU2</a></td><td align=\"center\">192.168.0.1</td><td align=\"center\">port</td><td align=\"center\">22</td><td align=\"center\">2007-10-30 15:35:00</td><td align=\"center\" style=\"color: red;\"><b>DOWN</b></td></tr>";
+echo "<tr bgcolor=\"#FFFFFF\"><td><a href=\"system.php?pc=00:09:6B:B0:95:5A\">QLDPOLCU</a></td><td align=\"center\">192.168.0.3</td><td align=\"center\">port</td><td align=\"center\">80</td><td align=\"center\">2007-10-30 15:35:00</td><td align=\"center\" style=\"color: green;\"><b>UP</b></td></tr>";
+echo "<tr bgcolor=\"#F1F1F1\"><td><a href=\"system.php?pc=00:09:6B:B0:95:5A\">QLDPOLCU</a></td><td align=\"center\">192.168.0.2</td><td align=\"center\">port</td><td align=\"center\">80</td><td align=\"center\">2007-10-30 15:35:00</td><td align=\"center\" style=\"color: green;\"><b>UP</b></td></tr>";
+echo "<tr bgcolor=\"#FFFFFF\"><td><a href=\"system.php?pc=00:10:C6:A8:B1:09\">IT-KS-QPCU</a></td><td align=\"center\">192.168.0.2</td><td align=\"center\">port</td><td align=\"center\">80</td><td align=\"center\">2007-11-26 16:09:00</td><td align=\"center\" style=\"color: red;\"><b>DOWN</b></td></tr>";
+?>

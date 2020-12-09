@@ -1,0 +1,102 @@
+/* default style for the page*/
+body {
+  font: normal 80% verdana, tahoma, arial, Sans ;
+  text-decoration: none;
+  color: #777;
+  margin: 5px;
+}
+
+img.logo {
+	width: 300px;
+	height: 48px;
+	border: 0px; 
+}
+
+/* Apply orange line throught the header (& logo) */
+div.npb_ldap_login_header{
+	background-image: url(images/grad.png); 
+	background-repeat: repeat-x;
+	padding:	7px;
+}
+
+div.npb_ldap_login_header img{
+	border: 0px;
+}
+
+/* Apply styling to the main login DIV */
+div.npb_ldap_login
+{
+	border: 1px solid #8BA3B7;
+	width: 350px;
+	margin: 20px auto 20px auto;
+	padding:	15px;
+	background: url(images/Shading3.png) repeat-x top left;
+}
+
+/* Size and style the login (key) IMG */
+div.npb_ldap_login img {
+	width:	64px;
+	height:	64px;
+	display: inline;
+	vertical-align:	middle;
+	margin-bottom:	10px;
+}
+
+/* Position the "Please Login" header */
+h2.npb_ldap_login
+{
+	display: inline;
+	margin: 20px 0px 10px 20px;
+}
+
+/* Float the form labels left */
+div.npb_ldap_login label{
+	display: block;
+	float: left; 
+	width: 150px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+/* Position the form input controls */
+div.npb_ldap_login input, select
+{
+	width: 150px;
+	margin:	0 0 5px 5px;
+	vertical-align: middle;
+	text-align: left;
+}
+
+/* Centers the submit button */
+div.npb_ldap_login form {
+	text-align: center;
+}
+
+/* Used by include_ldap_config_err.php only to justify error notification text */
+div.npb_ldap_login p {
+	text-align: justify;
+}
+
+div.npb_ldap_login_disclaimer {
+	text-align: center;
+  font-size: 80%;
+}
+
+/* table settings used by "include_ldap_config_err.php" */
+table {
+	border-collapse: collapse;
+	margin: 5px 0 10px 0;
+}
+
+td, th {
+	text-align: left;
+	border: 2px solid #eee;
+	padding: 5px;
+}
+
+#submit
+{
+	margin: 5px 0px 0px 0px;
+	text-align: center;
+	/*border: 1px solid #aaaaaa;*/ /* Some may prefer this look? */
+}
