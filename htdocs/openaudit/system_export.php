@@ -152,7 +152,7 @@ foreach($systems_array as $system){
     //Delete undisplayed categories from $query_array, if a certain category is given
     if(isset($array_category) AND is_array($array_category) AND $_REQUEST["category"]!=""){
         reset($query_array["views"]);
-        while (list ($viewname, $viewdef_array) = @each ($query_array["views"])) {
+       	foreach ($query_array["views"] as $viewname=>$viewdef_array) {
             if(!in_array($viewname, $array_category)){
                 unset($query_array["views"][$viewname]);
             }
@@ -184,7 +184,7 @@ foreach($systems_array as $system){
     //Show each Category
     $cat_count=0;
     reset($query_array["views"]);
-    while (list ($viewname, $viewdef_array) = @each ($query_array["views"])) {
+	foreach ($query_array["views"] as $viewname=>$viewdef_array) {
         if(!isset($viewdef_array["print"]) OR $viewdef_array["print"]!="n"){
             $cat_count++;
             //Executing Query

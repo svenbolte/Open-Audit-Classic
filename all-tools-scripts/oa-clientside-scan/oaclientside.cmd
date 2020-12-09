@@ -1,2 +1,0 @@
-@cscript audit.vbs .
-

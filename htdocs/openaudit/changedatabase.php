@@ -1,13 +1,6 @@
 <?php
 /**********************************************************************************************************
 Module:	changedatabase.php
-
-Description:
-			
-Recent Changes:
-	
-	[Edoardo]		12/06/2010	Added missing $show_hard_disk_alerts and $hard_disk_alerts_days in function ReturnConfig(). Suggested by jpa.
-
 **********************************************************************************************************/
 
 if (isset($_POST['language_post'])) $GLOBALS["language"] = $_POST['language_post'];
@@ -85,9 +78,8 @@ function step33SetupDB() {
     
   <input type="hidden" name="mysqli_new_user" maxlength="16" size="12" value="openaudit" class="for_forms" />
   <input type="hidden" name="mysqli_new_pass" size="12" value="flocke" class="for_forms" />
-
-  <br />
-  <input type="hidden" name="language_post" value="<?php echo $_POST['language_post']; ?>" />
+  <br>
+  <!-- <input type="hidden" name="language_post" value="<?php echo $_POST['language_post']; ?> "> -->
   <input type="hidden" name="step" value="3.5" />
   <input type="submit" value="<?php echo __("change to database") ?>" name="submit_button" />
   </form>
@@ -209,7 +201,8 @@ $content .= "\$show_hard_disk_alerts = 'y';\n";
 $content .= "\$hard_disk_alerts_days = '7';\n";
 
 $content .= "\$language = '";
-$content .= $_POST['language_post'];
+$content .= "de_de";
+// $_POST['language_post'];
 $content .= "'; ";
 $content .= "?";
 $content .= ">";

@@ -10,6 +10,7 @@ Recent Changes:
 
 **********************************************************************************************************/
 
+include "include_config.php";
 if (isset($_POST['language_post'])) $GLOBALS["language"] = $_POST['language_post'];
 include_once "include_lang.php";
 ?>
@@ -116,7 +117,8 @@ function step2CheckPrereq() {
   echo "<li>include_config.php ... ";
   $filename = "include_config.php";
   if (!file_exists($filename) or is_writable($filename)) {
-    if (@fopen($filename, 'a')) {
+    $handle = @fopen($filename, 'a');
+	if ($handle) {
       @fclose($handle);
       echo __("Success!") . "<br />";
     } else {
@@ -131,7 +133,8 @@ function step2CheckPrereq() {
   echo "<li>scripts/audit.config ... ";
   $filename = "scripts/audit.config";
   if (!file_exists($filename) or is_writable($filename)) {
-    if (@fopen($filename, 'a')) {
+    $handle = @fopen($filename, 'a');
+	if ($handle) {
       @fclose($handle);
       echo __("Success!") . "<br />";
     } else {

@@ -91,7 +91,7 @@ foreach($query_array as $view_master) {
                             if(isset($field["link"]) AND $field["link"]=="y"){
                                 unset($link_query);
                                 @reset ($get_array["var"]);
-                                while (list ($varname, $value) = @each ($get_array["var"])) {
+                               	foreach ($get_array["var"] as $varname=>$value) {
                                     if(substr($value,0,1)=="%"){
                                         $value=substr($value,1);
                                         $value2=$$value;

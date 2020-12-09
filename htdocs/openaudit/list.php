@@ -86,7 +86,8 @@ $page_count=0;
     //Check for searchvalues
     if(isset($_REQUEST["filter"]) ){
         reset($_REQUEST["filter"]);
-        while (list ($filter_var, $filter_val) = @each ($_REQUEST["filter"])) {
+	
+		 foreach ($_REQUEST["filter"] as $filter_var=>$filter_val) {
             if($filter_val!="")$show_filter=1;
         }
     }
@@ -350,9 +351,9 @@ if ($myrow = mysqli_fetch_array($result)){
                 if(isset($field["link"]) AND $field["link"]=="y")
 								{
 									unset($link_query);
-									@reset ($get_array["var"]);
-									while (list ($varname, $value) = @each ($get_array["var"])) 
-									{
+									if (isset($get_array["var"])) {
+									 reset ($get_array["var"]);
+									 foreach ($get_array["var"] as $varname=>$value) {
 										$value = (isset($value)) ? $value : "";
 										if(substr($value,0,1)=="%")
 										{
@@ -368,6 +369,7 @@ if ($myrow = mysqli_fetch_array($result)){
 										//Don't show the link if one GET-variable is empty
 										if(!isset($value2) or $value2==""){$field["link"]="n";}
 									}
+								   }	
 								}
                 
 

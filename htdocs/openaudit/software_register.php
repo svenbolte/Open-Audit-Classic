@@ -60,8 +60,8 @@ if ($myrow = mysqli_fetch_array($result)){
     if ($number_audit > "0") { $font = "<font color=\"green\">";}
       
     $count = $count + 1;
-    if ($bgcolor == $bg1) { $bgcolor = "#FFFFFF"; } else { $bgcolor = $bg1; }
-    echo "<tr bgcolor=\"" . $bgcolor . "\">";
+    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+	echo " <tr style=\"background-color:" . $bgcolor . ";\">\n";
     echo "<td style=\"max-width:300px;\">";
 
 	if (strpos($myrow["software_title"]," ")!=0) {$logobild = substr($myrow["software_title"],0,strpos($myrow["software_title"]," "));} else {$logobild=$myrow["software_title"];}
@@ -94,7 +94,7 @@ if ($myrow = mysqli_fetch_array($result)){
 }
 
 
-echo "</div>\n";
+echo "</div><br>\n";
 echo __("This Page was generated in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").".";
 
 

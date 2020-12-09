@@ -79,7 +79,12 @@ echo "<td valign=\"top\">\n";
 //Delete undisplayed categories from $query_array, if a certain category is given
 if(isset($array_category) AND is_array($array_category) AND $_REQUEST["category"]!=""){
     reset($query_array["views"]);
-    while (list ($viewname, $viewdef_array) = @each ($query_array["views"])) {
+
+//		 while ( list ($key, $value) = each ($clone) ) {
+//		 foreach ($clone as $key => $value) {
+
+
+	foreach ($query_array["views"] as $viewname=>$viewdef_array) {		
         if(!in_array($viewname, $array_category)){
             unset($query_array["views"][$viewname]);
         }
@@ -88,7 +93,7 @@ if(isset($array_category) AND is_array($array_category) AND $_REQUEST["category"
 
 //Show each Category
 reset($query_array["views"]);
-while (list ($viewname, $viewdef_array) = @each ($query_array["views"])) {
+foreach ($query_array["views"] as $viewname=>$viewdef_array) {
 
     //Executing Query
     $sql=$viewdef_array["sql"];
@@ -195,8 +200,9 @@ while (list ($viewname, $viewdef_array) = @each ($query_array["views"])) {
                         unset($link_query);
                         $link_query = "";
                         @reset ($field["get"]["var"]);
-                        while (list ($varname, $value) = @each ($field["get"]["var"])) {
-                            if(substr($value,0,1)=="%"){
+                        foreach ($field["get"]["var"] as $varname=>$value) {
+
+							if(substr($value,0,1)=="%"){
                                 $value=substr($value,1);
                                 $value2=$$value;
                             }else{
@@ -337,7 +343,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
                                        break;
                                        case "select_static":
                                            echo "<select name=\"".$field["name"]."\" style=\"width:300px\" class=\"for_forms\">\n";
-                                           while (list ($varname, $value) = @each ($field["select_static_values"])) {
+											foreach ($field["select_static_values"] as $varname=>$value) {
                                                if($value==$myrow[$field["name"]]) $selected="selected"; else $selected=" ";
                                                echo "<option value=\"".$value."\" $selected>".$varname."</option>\n";
                                            }

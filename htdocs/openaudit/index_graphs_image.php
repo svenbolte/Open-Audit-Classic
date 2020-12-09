@@ -12,13 +12,13 @@ $top=$_GET["top"];
 
 header("Content-type: image/png");
 
-$border = 4;
+$border = 1;
 
 // create image
 $image = imagecreatetruecolor ($width, $height);
 $white = imagecolorallocate($image, 255, 255, 255);
-$orange = imagecolorallocate($image, 255,128, 0);
-$edge = imagecolorallocate($image, 156, 190, 222 );
+$orange = imagecolorallocate($image, 0,128, 0);
+$edge = imagecolorallocate($image, 192,192,192 );
 
 imagefilledrectangle ($image, 0, 0, $width, $height, $white);
 imagecolortransparent($image, $white);

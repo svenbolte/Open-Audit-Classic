@@ -48,7 +48,8 @@
 
                 echo "<div style=\"display:none; margin:7px;\" id=\"m".$i."\">\n";
                 @reset ($topic_item["childs"]);
-                while (list ($key_2, $child_item_2) = @each ($topic_item["childs"])) {
+
+				foreach ($topic_item["childs"] as $key_2=>$child_item_2) {	
                     echo "<a href=\"".$child_item_2["link"]."\"";
                     if (isset($child_item_2["title"])) {
                       echo " title=\"".$child_item_2["title"]."\"";

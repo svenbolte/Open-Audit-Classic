@@ -21,7 +21,7 @@ Change Control:
 **********************************************************************************************************/
 
 // ****************  General Settings *******************************************
-$language = 'en';
+$language = 'de_de';
 $mysqli_server = 'localhost';
 $mysqli_user = 'root';
 $mysqli_password = 'password';

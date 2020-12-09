@@ -219,7 +219,8 @@ if ($pc > "0") {
         if(isset($topic_item["childs"]) AND is_array($topic_item["childs"])){
           echo "<ul>\n";
           @reset ($topic_item["childs"]);
-          while (list ($key_2, $child_item) = @each ($topic_item["childs"])) {
+
+		foreach ($topic_item["childs"] as $key_2=>$child_item) {		
             echo "<li><a href=\"".$child_item["link"]."\"";
             if (isset($topic_item["title"])) {
               echo " title=\"".$topic_item["title"]."\"";
@@ -273,7 +274,7 @@ if ($pc > "0") {
                  if(isset($child_item["childs"]) AND is_array($child_item["childs"])){
                     echo "<ul>\n";
                     @reset ($child_item["childs"]);
-                    while (list ($key_3, $child_item_2) = @each ($child_item["childs"])) {
+					foreach ($child_item["childs"] as $key_3=>$child_item_2) {
                         echo "<li>";
                          echo "<a href=\"".$child_item_2["link"]."\" title=\"".$child_item_2["title"]."\">";
                           echo "<img src=\"".$child_item_2["image"]."\"  width=\"16\" height=\"16\" style=\"border:0px;\" alt=\"\" />&nbsp;";

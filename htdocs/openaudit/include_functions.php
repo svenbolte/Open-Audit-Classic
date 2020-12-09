@@ -658,7 +658,7 @@ function sql_insert_search($sql_query, $filter){
     //Generating the WHERE-Clause
     $sql_where =" ( 1 ";
     @reset($filter);
-    while (list ($filter_var, $filter_val) = @each ($filter)) {
+	foreach ($filter as $filter_var=>$filter_val) {
         if($filter_val!=""){
             //Delete all "-" if the Searchbox is a timestamp
             if(strpos($filter_var, "timestamp")!== false) { $filter_val=str_replace("-","",$filter_val); }
