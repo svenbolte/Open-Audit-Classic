@@ -63,8 +63,8 @@ return $div_clean;
     echo "    <td align=\"center\"><b>Tick to Add</b></td>\n";
     echo "  </tr>\n";
     do {
-      if ($bgcolor == $bg1) { $bgcolor = "#FFFFFF"; } else { $bgcolor = $bg1; }
-      echo "<tr bgcolor=\"" . $bgcolor . "\">\n";
+  	  $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+	  echo " <tr style=\"background-color:" . $bgcolor . ";\">\n";
       echo "  <td align=\"center\">" . $myrow["count(software_name)"] . "</td>\n";
       echo "  <td>&nbsp;&nbsp;" . $myrow["software_name"] . "</td>\n";
       echo "<td align=\"center\">";
