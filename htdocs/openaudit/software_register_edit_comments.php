@@ -42,7 +42,7 @@ if ($myrow = mysqli_fetch_array($result)){
 	  
       $count = $count + 1;
 
-      echo "<tr bgcolor=\"$bg1\">";
+      echo "<tr>";
       echo "<td>" . $myrow["software_title"] . "&nbsp;&nbsp;</td>";
       echo "<td align=\"center\">" . $number_purchased . "</td>";
       echo "<td align=\"center\">" . $number_used . "</td>";
@@ -69,7 +69,7 @@ if ($myrow = mysqli_fetch_array($result)){
 $sql = "SELECT * FROM software_licenses WHERE license_comments <> 'OA initial license' AND license_software_id = '" . $_GET["id"] . "'";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+  echo "<table>\n";
   echo "<tr>\n";
   echo "  <td colspan=\"7\" class=\"contenthead\"><br />Software Licenses Purchased.</td>\n";
   echo "</tr>\n";
@@ -83,7 +83,7 @@ if ($myrow = mysqli_fetch_array($result)){
   echo "  <td width=\"40%\"><b>Comments</b></td>\n";
   echo "</tr>\n";
   do {
-    echo "<tr bgcolor=\"" . $bgcolor . "\">\n";
+    echo "<tr>\n";
     echo "  <td align=\"center\">" . substr($myrow["license_purchase_date"],0,10) . "</td>\n";
     echo "  <td align=\"center\">" . $myrow["license_purchase_number"] . "</td>\n";
     echo "  <td align=\"center\">" . $myrow["license_purchase_vendor"] . "</td>\n";

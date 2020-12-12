@@ -4,7 +4,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.46 VC15/x64, MySQL-MariaDB/x64 10.1.48, PHP 7.4.13/x64, phpMyAdmin 5.0.4/x64, NMap 7.91, NPCap 1.0, Wordpress 5.6, WPKG 1.31*"
+#define Inhalte "Apache 2.4.46 VC15/x64, MySQL-MariaDB/x64 10.4.17, PHP 7.4.13/x64, phpMyAdmin 5.0.4/x64, NMap 7.91, NPCap 1.0, Wordpress 5.6, WPKG 1.31*"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -42,7 +42,7 @@ UninstallDisplayIcon={app}\openaudit_logo.ico
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "desktopicon"; Description: "Desktop-Verknüpfungen erstellen"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "Aufgabepcscan"; Description: "Importieren der PC-Scan Aufgabe"; Flags: unchecked
 Name: "AufgabeNMAPScan"; Description: "Aufgabe für NMAP-Scan importieren"; Flags: unchecked
 
