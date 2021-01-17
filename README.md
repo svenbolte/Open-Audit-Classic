@@ -11,7 +11,7 @@ https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/
 
 Aus dem Projekt werden nur Apache, Mysql (MariaDB), PHP und PHPMyadmin benötigt.
 
-### Hinweis: Open-Audit ist nun Mariadb 10.4 kompatibel (Supportende 2024) auf PHP8 umgestellt (Suppoprtende Dez 2023)
+### Hinweis: Open-Audit ist nun Mariadb 10.4 kompatibel (Supportende 2024) auf PHP8 umgestellt (Supportende Dez 2023)
 
 Für das Inventarisieren von SNMP- und Netzwerkgeräten (Switches, Kameras, Webserver, IRMCs) wird das ebenfalls quelloffene NMAP mit WinPCAP benötigt
 Für eine auch häufig benötigte, einfache Softwareverteilung ist WPKG leicht zu implementieren.
