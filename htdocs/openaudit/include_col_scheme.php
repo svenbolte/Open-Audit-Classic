@@ -1,9 +1,9 @@
 <?php
-  $header_top = "background-color: rgb(97, 146, 199);";
+  $header_top = "background-color: rgba(192,192,192,0.2);";
   $header_top_image = "images/header_top_blue.jpg";
-  $header_middle = "background-color: rgb(58, 110, 165);";
+  $header_middle = "background-color: rgba(192,192,192,0.2);";
   $header_middle_image = "images/header_middle_blue.jpg";
-  $header_bottom = "background-color: rgb(29, 37, 141);";
+  $header_bottom = "background-color: rgba(192,192,192,0.2);";
   $background = "#EEEEEE";
   $background_image = "";
   $h1 = "777777";

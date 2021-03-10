@@ -309,7 +309,7 @@ function ConvertSpecialField($myrow, $field, $db, $page)
 		case "evt_log_max_file_size":
 			return number_format($myrow[$field["name"]])." KB";
 		case "video_current_number_colours":
-			return (strlen(decbin($myrow[$field["name"]]))+1)." Bit";
+			return (strlen(decbin(intval($myrow[$field["name"]])))+1)." Bit";
 		case "video_current_refresh_rate":
 			return $myrow[$field["name"]]." Hz";
 		case "firewall_enabled_domain":

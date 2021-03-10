@@ -71,7 +71,7 @@ while($tabs = mysqli_fetch_row($tables)):
     
     $table_len=strlen($backup)-$file_len;
     $file_len=strlen($backup);
-    echo "<tr bgcolor=\"" . $bgcolor . "\"><td>$tabs[0]</td><td>".$table_len." ".__("Bytes")."</td><td><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td></tr>";
+    echo "<tr style=\"background-color:".$bgcolor."\"><td>$tabs[0]</td><td>".$table_len." ".__("Bytes")."</td><td><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td></tr>";
    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
    while($all = mysqli_fetch_assoc($res)):
        $str = str_replace("CREATE TABLE `$tabs[0]` (", "", $all['Create Table']);
@@ -109,13 +109,13 @@ if (is_writable($backup_filename)) {
   $database_length = strlen($backup);
 //      $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
    echo "  <tr><td colspan=\"3\"><hr /></td></tr>";
-   echo "<tr bgcolor=\"" . $bgcolor . "\"><td class=\"contentsubtitle\">".__("Success, wrote ").$database_length." ".__("bytes to file").$backup_filename."</td><td></td><td></td></tr>";
+   echo "<tr style=\"background-color:".$bgcolor."\"><td class=\"contentsubtitle\">".__("Success, wrote ").$database_length." ".__("bytes to file").$backup_filename."</td><td></td><td></td></tr>";
   
    fclose($handle);
 
    
 //     $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-   echo "<tr bgcolor=\"" . $bgcolor . "\"><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>";
+   echo "<tr style=\"background-color:".$bgcolor."\"><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>";
    echo "<tr><td>".__("Database Backed up in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").". </td></tr>";
 } else {
    echo "<tr><td>".__("The file $backup_filename is not writable")."</td></tr>";

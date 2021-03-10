@@ -32,7 +32,7 @@ $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   do{
     if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-    echo "<tr bgcolor=\"" . $bgcolor . "\">\n";
+    echo "<tr style=\"background-color:".$bgcolor."\">\n";
     echo " <td>" . $myrow['system_name'] . "</td>\n";
     echo " <td align=\"center\"><input type=\"text\" id=\"ip_" . $myrow['system_uuid'] . "\" name=\"ip_" . $myrow['system_uuid'] . "\" value=\"" . ip_trans($myrow['net_ip_address']) . "\" size=\"12\" /></td>\n";
     echo " <td align=\"center\">\n";

@@ -42,7 +42,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if ($bgcolor == "#F1F1F1") {
       $bgcolor = "#FFFFFF"; }
     else { $bgcolor = "#F1F1F1"; }
-    echo "<tr bgcolor=\"" . $bgcolor . "\">";
+    echo "<tr style=\"background-color:".$bgcolor."\">";
     echo "<td><a href=\"software_register_del_2.php?id=" . $myrow["software_reg_id"] . "&amp;sub=no\" onclick=\"return confirm('Do you really want to DELETE this Package and all its associated purchases ?','software_register_del_2.php?id=" . $myrow["software_reg_id"] . "')\">";
     echo "<input name=\"Submit\" value=\"Delete\" type=\"submit\" /></a></td>";
     echo "<td><a href=\"software_register_details.php?id=" . $myrow["software_reg_id"] . "\">" . $myrow["software_title"] . "</a>&nbsp;&nbsp;</td>";

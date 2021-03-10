@@ -1,20 +1,20 @@
 <?php
 
-$query_array=array("headline"=>__("Statistic for Google Chrome Versions"),
+$query_array=array("headline"=>__("Statistic for Microsoft Edge on Chromium Versions"),
                    "sql"=>"
                            SELECT
                                DISTINCT software_name, software_version,
                                COUNT( * ) AS count_item,
                                round( 100 / (
                                        SELECT count(software_uuid) FROM software, system
-                                       WHERE (software_name LIKE 'Google Chrome%' OR software_name LIKE 'Chrome%')
+                                       WHERE (software_name LIKE 'Microsoft Edge%' OR software_name LIKE 'Edge%')
                                               AND (software_name NOT LIKE 'Google Chrome Extension%' AND software_name NOT LIKE 'GoogleChrome%') 
                                               AND software_timestamp=system_timestamp AND software_uuid=system_uuid
                                        )
                                  * COUNT( * )
                                ,$round_to_decimal_places ) AS percentage
                                FROM software, system
-                               WHERE (software_name LIKE 'Google Chrome%' OR software_name LIKE 'Chrome%')
+                               WHERE (software_name LIKE 'Microsoft Edge%' OR software_name LIKE 'Edge%')
                                       AND (software_name NOT LIKE 'Google Chrome Extension%' AND software_name NOT LIKE 'GoogleChrome%') 
                                       AND software_timestamp=system_timestamp AND software_uuid=system_uuid
                                GROUP BY software_version

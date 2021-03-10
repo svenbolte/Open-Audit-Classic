@@ -85,7 +85,7 @@ if ($bd){
         echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
      	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
         echo "<p>"; 
-        echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
 }
 
 
@@ -100,7 +100,7 @@ if ($bd){
         echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
      	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
         echo "<p>"; 
-        echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
 }
 
 
@@ -131,7 +131,7 @@ if ($num_found == 0 ){
         echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
      	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
         echo "<p>"; 
-        echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>".__("Not found in ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("Not found in ".$ldap_base_dn.".")."</b></td></tr>";
 
 } else {
 
@@ -147,11 +147,11 @@ $record_number = $computer_record_number+1;
 //      echo "<td><img src='images/o_terminal_server.png' width='64' height='64' alt='' />";
     	$bgcolor == "#FFFFFF";	
 //      if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-	  echo "<tr bgcolor=\"" . $bgcolor . "\"><td><h3>" . $entries[$computer_record_number]["name"][0] . "</h3></td><td></td></tr>";
+	  echo "<tr style=\"background-color:".$bgcolor."\"><td><h3>" . $entries[$computer_record_number]["name"][0] . "</h3></td><td></td></tr>";
       if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-//	  echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>Telephone:</td><td>" . $entries[$computer_record_number]["telephonenumber"][0] . "</a></b></td></tr>";	
+//	  echo "<tr style=\"background-color:".$bgcolor."\"><td><b>Telephone:</td><td>" . $entries[$computer_record_number]["telephonenumber"][0] . "</a></b></td></tr>";	
 	  if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
- 	  echo "<tr bgcolor=\"" . $bgcolor . "\"><td>" .__("Full Account Details"). "</td><td></td></tr>";      
+ 	  echo "<tr style=\"background-color:".$bgcolor."\"><td>" .__("Full Account Details"). "</td><td></td></tr>";      
       for ($computer_record_field_number=0; $computer_record_field_number<$entries[$computer_record_number]["count"]; $computer_record_field_number++){
       $data =$entries[$computer_record_number][$computer_record_field_number];
 
@@ -159,14 +159,14 @@ $record_number = $computer_record_number+1;
       if  (isEmailAddress($entries[$computer_record_number][$data][$computer_record_field_number_data])){
           // If its a valid email address, highlight it, and add a URL mailto:
       if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }	
-     echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>".__($data).":</b></td><td><a href='mailto:" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "'>" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "</a></td></tr>";
+     echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__($data).":</b></td><td><a href='mailto:" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "'>" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "</a></td></tr>";
      }
      else 
      {
             // Else just show it. 
       	  if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-          echo "<tr bgcolor=\"" . $bgcolor . "\"><td>".__($data).":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
-//         echo "<tr bgcolor=\"" . $bgcolor . "\"><td>".$data.":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
+          echo "<tr style=\"background-color:".$bgcolor."\"><td>".__($data).":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
+//         echo "<tr style=\"background-color:".$bgcolor."\"><td>".$data.":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
 
 }    
      }
@@ -186,7 +186,7 @@ $record_number = $computer_record_number+1;
         echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
      	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
         echo "<p>"; 
-        echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>".__("LDAP Not configured. Please set this up in Admin> Config")."</b></td></tr>";
+        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("LDAP Not configured. Please set this up in Admin> Config")."</b></td></tr>";
 
 
 //        echo "<tr>".__("LDAP Not configured. Please set this up in Admin> Config")."</tr>";
@@ -198,7 +198,7 @@ $record_number = $computer_record_number+1;
         echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
      	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
         echo "<p>"; 
-        echo "<tr bgcolor=\"" . $bgcolor . "\"><td><b>".__("Bind failure attempting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("Bind failure attempting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
 }
 
 echo "</table>";

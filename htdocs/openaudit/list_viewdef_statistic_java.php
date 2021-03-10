@@ -3,13 +3,14 @@
 $query_array=array("headline"=>__("Statistic for Java Versions"),
                    "sql"=>"
                            SELECT
-                               DISTINCT software_name, software_version,
+                               DISTINCT software_name,software_publisher, software_version, software_location,
                                COUNT( * ) AS count_item,
                                round( 100 / (
                                        SELECT count(software_uuid) FROM software, system
                                        WHERE
                                            (software_name LIKE 'Java%' OR
-                                           software_name LIKE 'J2SE%') AND
+                                           software_name LIKE 'J2SE%' OR
+											software_name LIKE 'AdoptOpenJDK%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
                                        )
@@ -19,7 +20,8 @@ $query_array=array("headline"=>__("Statistic for Java Versions"),
                                    software, system
                                WHERE
                                     (software_name LIKE 'Java%' OR
-                                    software_name LIKE 'J2SE%') AND
+                                    software_name LIKE 'J2SE%' OR
+									software_name LIKE 'AdoptOpenJDK%') AND
                                     software_timestamp=system_timestamp AND
                                     software_uuid=system_uuid
                                GROUP BY software_version
@@ -34,16 +36,32 @@ $query_array=array("headline"=>__("Statistic for Java Versions"),
                                              "headline_addition"=>"%software_name",
                                             ),
                                ),
-                   "fields"=>array("10"=>array("name"=>"software_version",
-                                               "head"=>__("Version"),
-                                               "show"=>"y",
-                                               "link"=>"y",
-                                              ),
-                                   "20"=>array("name"=>"count_item",
+                   "fields"=>array(
+				                  "9"=>array("name"=>"count_item",
                                                "head"=>__("Count"),
                                                "show"=>"y",
                                                "link"=>"n",
                                                "search"=>"n",
+                                              ),
+								 "10"=>array("name"=>"software_name",
+                                               "head"=>__("Name"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+								"11"=>array("name"=>"software_version",
+                                               "head"=>__("Version"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+								 "12"=>array("name"=>"software_publisher",
+                                               "head"=>__("Hersteller"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+								 "13"=>array("name"=>"software_location",
+                                               "head"=>__("Installdir"),
+                                               "show"=>"y",
+                                               "link"=>"y",
                                               ),
                                    "30"=>array("name"=>"percentage",
                                                "head"=>__("Percentage"),

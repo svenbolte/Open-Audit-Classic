@@ -58,7 +58,7 @@ echo $sql4 . "<br />\n";
     if ($bgcolor == $bg1) {
       $bgcolor = "#FFFFFF"; }
     else { $bgcolor = $bg1; }
-    echo "<tr bgcolor=\"" . $bgcolor . "\">";
+    echo "<tr style=\"background-color:".$bgcolor."\">";
     echo "<td><a href=\"software_register_details.php?id=" . $myrow["software_reg_id"] . "\">" . $myrow["software_title"] . "</a>&nbsp;&nbsp;</td>";
     //echo "<td align=\"center\">" . $number_purchased . "</td>";
     if ($number_purchased == -1) {

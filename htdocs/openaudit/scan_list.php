@@ -29,7 +29,7 @@ $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   do{
     if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-    echo "<tr bgcolor=\"" . $bgcolor . "\">\n";
+    echo "<tr style=\"background-color:".$bgcolor."\">\n";
     echo " <td><a href=\"system.php?pc=" . $myrow['scan_type_uuid'] . "\">" . $myrow['system_name'] . "</a></td>\n";
     echo " <td align=\"center\">" . $myrow['scan_type_ip_address'] . "</td>\n";
     echo " <td align=\"center\">" . $myrow['scan_type'] . "</td>\n";
