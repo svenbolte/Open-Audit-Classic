@@ -87,12 +87,12 @@ while($tabs = mysqli_fetch_row($tables)):
    $backup .= "--$newline-- ".__("Table structure for")." `$tabs[0]`".$newline."--".$newline."-- DROP TABLE IF EXISTS `$tabs[0]`;".$newline."CREATE TABLE IF NOT EXISTS `$tabs[0]` (".$newline;
     }
     
-   $res = mysqli_query($db,"SHOW CREATE TABLE $tabs[0]");
+   $res = mysqli_query($db,"SHOW CREATE TABLE `$tabs[0]`");
    //echo "<tr><td>". __($tabs[0])."</td><td>$tabs[0]</td></tr>";
 
     $table_len=strlen($backup)-$file_len;
     $file_len=strlen($backup);
-    echo "<tr bgcolor=\"" . $bgcolor . "\">
+    echo "<tr style=\"background-color:".$bgcolor."\">
            <td>$tabs[0]</td><td>".$table_len." ".__("Bytes")."</td>
            <td align=\"center\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>
           </tr>";
@@ -105,13 +105,13 @@ while($tabs = mysqli_fetch_row($tables)):
        //" AUTO_INCREMENT=".$tbl_stat[$tabs[0]].";".$newline.$newline;
    endwhile;
    $backup .= "--$newline-- ".__("All Data from table")." `$tabs[0]`".$newline."--".$newline.$newline;
-   $data = mysqli_query($db,"SELECT * FROM $tabs[0]");
+   $data = mysqli_query($db,"SELECT * FROM `$tabs[0]`");
    while($dt = mysqli_fetch_row($data)):
          $this_value =  preg_replace("//","//", $dt[0]);
          $this_value = preg_replace("/'/","/'",$this_value);
         $last_value = $this_value ;
    
-       $backup .= "INSERT INTO `$tabs[0]` VALUES('".mysqli_escape_string($db,$this_value)."'";
+       $backup .= "INSERT INTO $tabs[0] VALUES('".mysqli_escape_string($db,$this_value)."'";
        for($i=1; $i<sizeof($dt); $i++):
            $backup .= ", '".mysqli_escape_string($db,$dt[$i])."'";
        endfor;
@@ -128,46 +128,46 @@ if (is_writable($backup_filename)) {
 
    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
    if (!$handle = fopen($backup_filename, 'w+')) {
-         echo "<tr><td colspan=\"3\" bgcolor=\"" . $bgcolor . "\">".__("Could not open file (").$backup_filename.")</td></tr>\n";
+         echo "<tr><td colspan=\"3\" style=\"background-color:" . $bgcolor . "\">".__("Could not open file (").$backup_filename.")</td></tr>\n";
          exit;
    }else{
        echo "<tr>\n";
-        echo "<td bgcolor=\"" . $bgcolor . "\">".__("Create File")." '".$backup_filename."'</td>\n";
-        echo "<td bgcolor=\"" . $bgcolor . "\"></td>\n";
-        echo "<td align=\"center\" bgcolor=\"" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
+        echo "<td style=\"background-color:" . $bgcolor . "\">".__("Create File")." '".$backup_filename."'</td>\n";
+        echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
+        echo "<td align=\"center\" style=\"background-color:" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
        echo "</tr>\n";
    }
 
    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
    // Write $somecontent to our opened file.
    if (fwrite($handle, $backup) === FALSE) {
-       echo "<tr><td colspan=\"3\" bgcolor=\"" . $bgcolor . "\">".__("Could not write to file (").$backup_filename.")</td></tr>\n";
+       echo "<tr><td colspan=\"3\" style=\"background-color:" . $bgcolor . "\">".__("Could not write to file (").$backup_filename.")</td></tr>\n";
        exit;
    }else{
        echo "<tr>\n";
-        echo "<td bgcolor=\"" . $bgcolor . "\">".__("Write File")." '".$backup_filename."'</td>\n";
-        echo "<td bgcolor=\"" . $bgcolor . "\"></td>\n";
-        echo "<td align=\"center\" bgcolor=\"" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
+        echo "<td style=\"background-color:" . $bgcolor . "\">".__("Write File")." '".$backup_filename."'</td>\n";
+        echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
+        echo "<td align=\"center\" style=\"background-color:" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
        echo "</tr>\n";
    }
    $database_length = strlen($backup);
    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
 
    echo "<tr>\n";
-    echo "<td bgcolor=\"" . $bgcolor . "\">".__("Success, wrote ").$database_length." ".__("bytes to file")."</td>\n";
-    echo "<td bgcolor=\"" . $bgcolor . "\"></td>\n";
-    echo "<td align=\"center\" bgcolor=\"" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
+    echo "<td style=\"background-color:" . $bgcolor . "\">".__("Success, wrote ").$database_length." ".__("bytes to file")."</td>\n";
+    echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
+    echo "<td align=\"center\" style=\"background-color:" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
    echo "</tr>\n";
 
    fclose($handle);
 
    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-   echo "<tr bgcolor=\"" . $bgcolor . "\"><td colspan=\"3\">&nbsp;</td></tr>\n";
+   echo "<tr style=\"background-color:".$bgcolor."\"><td colspan=\"3\">&nbsp;</td></tr>\n";
    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-   echo "<tr bgcolor=\"" . $bgcolor . "\"><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>\n";
+   echo "<tr style=\"background-color:".$bgcolor."\"><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>\n";
    echo "<tr>";
     echo "<td>".__("Database Backed up in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").". </td>\n";
-    echo "<td bgcolor=\"" . $bgcolor . "\"></td>\n";
+    echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
     echo "<td align=\"center\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
    echo "</tr>\n";
 } else {

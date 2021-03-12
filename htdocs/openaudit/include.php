@@ -152,18 +152,10 @@ echo "</div>\n";
 ?>		
     </td>
   </tr>
-
   <tr>
     <td style="width:170px;" rowspan="12" valign="top" id="nav">
       <ul id="primary-nav">
-        <li>
-<?php
-echo "<a title=\"click here to change database\" href=\"changedatabase.php\"><img src=\"images/database.gif\"> ".$mysqli_database."</A>";
-?>		
-		</li>
 		<li><a href="index.php"><?php echo __("Home"); ?></a></li>
-        
-
 <?php
 if ($pc > "0") {
 	// This query has less joins and is syntactically simpler than previous - 17/04/2009	[Nick Brown]

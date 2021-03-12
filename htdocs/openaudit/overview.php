@@ -162,7 +162,7 @@ foreach($query_array as $view_master) {
                             $body .= " </td>\n";
                         }
                     }
-                    $body .= " <td bgcolor=\"" . $bgcolor . "\">&nbsp;</td>\n";
+                    $body .= " <td style=\"background-color:" . $bgcolor . "\">&nbsp;</td>\n";
                     $body .= " </tr>\n";
 
                 }while ($myrow = mysqli_fetch_array($result));

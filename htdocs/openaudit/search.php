@@ -413,7 +413,8 @@ if(isset($result_set) AND $result_set) {
   for ($i=0; $i<$count; $i++){
     $countmore=count($result_set[0]);
     $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-    echo "<tr bgcolor=\"$bgcolor\">";
+    echo '<tr style="background-color:'.$bgcolor.'">';
+    echo '<tr style="background-color:'.$bgcolor.'">';
     echo "<td>&nbsp;" . $result_set[$i][2] . "&nbsp;</td>";
     $result_type = substr($result_set[$i][3],0,6);
     if ($result_type == "Device"){
