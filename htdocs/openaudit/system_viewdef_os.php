@@ -23,6 +23,18 @@ $query_array=array("name"=>array("name"=>__("OS Settings"),
                                                                     "130"=>array("name"=>"system_last_boot", "head"=>__("Last Boot On"),),
                                                                    ),
                                                     ),
+                                   "optionalfeatures"=>array(
+                                                    "headline"=>__("Optional Features"),
+                                                    "sql"=>"SELECT opt_uuid, caption, name
+                                                            FROM optionalfeatures
+                                                            WHERE opt_uuid = '".$_REQUEST["pc"]."' 
+                                                            ORDER BY name ",
+                                                    "table_layout"=>"horizontal",
+                                                    "image"=>"images/kvm.png",
+                                                    "fields"=>array("10"=>array("name"=>"name", "head"=>__("Name"),),
+                                                                    "20"=>array("name"=>"caption", "head"=>__("Version"),),
+                                                                   ),
+                                                    ),
                                    "software"=>array(
                                                     "headline"=>__("Software"),
                                                     "sql"=>"SELECT software_name, software_version

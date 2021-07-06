@@ -243,6 +243,8 @@ $split = mysqli_real_escape_string($db,$split);
   if (substr($split, 0, 4) == "bios")     { insert_bios($split); }
   // Memory
   if (substr($split, 0, 6) == "memory")   { insert_memory($split); }
+  // Optional features
+  if (substr($split, 0, 16) == "optionalfeatures")    { insert_optionalfeatures($split); }
   // Video
   if (substr($split, 0, 5) == "video")    { insert_video($split); }
   // Monitor - System Table
@@ -713,6 +715,22 @@ function insert_memory ($split){
     }
   }
 
+
+function insert_optionalfeatures ($split){
+    global $timestamp, $uuid, $verbose;
+    $extended = explode('^^^',$split);
+    if ($verbose == "y"){echo "<h2>Optional Features</h2><br />";}
+    $optional_caption = trim($extended[1]);
+    $optional_name = trim($extended[2]);
+    $sql  = "DELETE FROM optionalfeatures WHERE opt_uuid = '$uuid' AND name = '$optional_name'";
+    if ($verbose == "y"){echo $sql . "<br />\n\n";}
+    $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Delete failed: ' . mysqli_error($db) . '<br />' . $sql);
+    // Insert into database
+	$sql =  "INSERT INTO optionalfeatures (opt_uuid, caption, name) VALUES ( ";
+	$sql .= "'$uuid', '$optional_caption', '$optional_name' )";
+	if ($verbose == "y"){echo $sql . "<br />\n\n";}
+	$db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
+  }
 
 function insert_video ($split){
     global $timestamp, $uuid, $verbose, $video_timestamp;
