@@ -6,7 +6,7 @@ wscript.echo "Customer specific audits (Chrome Enterprise Version etc.)"
  strValueName = "pv"
  display_name = "Google Chrome Business X64 (installed)"
  oReg.GetStringValue HKEY_LOCAL_MACHINE,strKeyPath,strValueName,Chrome_Version
- if Chrome_Version <> "" then
+ if xChrome_Version <> "" then
 	 form_input = "software^^^" & display_name       & "^^^" _
                    & Chrome_Version       & "^^^" _
                    & ""                 & "^^^" _

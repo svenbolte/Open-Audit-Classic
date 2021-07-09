@@ -1403,6 +1403,24 @@ If mem_size = 0 Then
 End If
 
 
+'''''''''''''''''''''''''''''''''''''''''''''
+'   Windows optional Features installed     '
+'''''''''''''''''''''''''''''''''''''''''''''
+comment = "Windows optional features installed"
+Echo(comment)
+On Error Resume Next
+Set colItems = objWMIService.ExecQuery("select * from Win32_OptionalFeature where installstate=1",,48)
+For Each objItem in colItems
+   form_input = "optionalfeatures^^^" & clean(objItem.Caption) & "^^^" & clean(objItem.Name) & "^^^"
+   entry form_input,comment,objTextFile,oAdd,oComment
+   form_input = ""
+   if online = "p" then
+    oIE.document.WriteLn "<tr bgcolor=""#F1F1F1""><td>OptFeature: </td><td>" & clean(objItem.Caption) & "</td></tr>"
+    oIE.document.WriteLn "<tr><td>Featurename: </td><td>" & clean(objItem.Name) & "</td></tr>"
+   end if
+Next
+
+
 
 '''''''''''''''''''''''''''
 '   Video Information     '

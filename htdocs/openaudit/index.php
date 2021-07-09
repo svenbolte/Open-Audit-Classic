@@ -90,22 +90,6 @@ $page_count = $page_count * $count_system;
 
 echo "<td id='CenterColumn'>\n";
 
-// Check to see if there is an update
-if (versionCheck(get_config("version"), $latest_version)) {
-  echo "<div class=\"main_each\">
-          <div style=\"float: right\">
-            <img src=\"images/emblem_important.png\" height=\"24\" width=\"24\" alt=\"\" />
-          </div>
-          <div style=\"float: left\">
-            <img src=\"images/emblem_important.png\" height=\"24\" width=\"24\" alt=\"\" />
-          </div>
-          <div class=\"indexheadlines\" align=\"center\">";
-  echo __("An update has been found.");
-  echo " <a href=\"upgrade.php\">";
-  echo __("Click here to upgrade!");
-  echo "</a></div><br></div>";
-}
-
 // ****** Display various sections *****************************************************
 if ($show_system_discovered == "y") 
 	DisplaySection('f1',__("Systems Discovered in the last ").$system_detected.__(" Days"),'RecentlyDiscoveredSystems','Systems','rss_new_systems.php');
