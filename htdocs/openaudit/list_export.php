@@ -56,8 +56,6 @@ if(is_file($include_filename)){
     if(!$result) {die( "<br>".__("Fatal Error").":<br><br>".$sql."<br><br>".mysqli_error($db)."<br><br>" );};
     $this_page_count = mysqli_num_rows($result);
 
-
-
 $csv_data = '';
 
 //Table head
@@ -71,16 +69,15 @@ $csv_data .= "\r\n";
 
 //Table body
 if ($myrow = mysqli_fetch_array($result)){
-    do{
+    do {
         foreach($query_array["fields"] as $field){
-            if($field["show"]!="n"){
+			if( $field["show"]!="n" && isset( $myrow[$field["name"]] ) ) {
                 $csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
-                //$csv_data .= "\t";
                 $csv_data .= ";";
             }
         }
         $csv_data .= "\r\n";
-    }while ($myrow = mysqli_fetch_array($result));
+    } while ($myrow = mysqli_fetch_array($result));
 }
 
 // set the filename if specified

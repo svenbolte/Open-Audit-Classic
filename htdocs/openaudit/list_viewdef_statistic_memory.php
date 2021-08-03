@@ -5,7 +5,7 @@ $query_array=array("headline"=>__("Statistic for Physical Memory"),
                                COUNT(*) count_item,
                                round( 100 / (
                                              SELECT count(*) FROM (select *, sum(memory_capacity) AS system_memory FROM memory GROUP BY memory_uuid
-                                             ) as per_mem ) * COUNT( * ), $round_to_decimal_places  ) AS percentage
+                                             ) as per_mem ) * COUNT( * ), 0 ) AS percentage
                            FROM (select *, sum(memory_capacity) AS system_memory FROM memory GROUP BY memory_uuid, memory_timestamp) AS full_system_memory, system
                            WHERE memory_timestamp = system_timestamp and system_uuid = memory_uuid
                            GROUP BY full_system_memory.system_memory
@@ -19,7 +19,7 @@ $query_array=array("headline"=>__("Statistic for Physical Memory"),
                                              "headline_addition"=>"%system_memory",
                                             ),
                                ),
-                   "fields"=>array("10"=>array("name"=>"full_system_memory.system_memory",
+                   "fields"=>array("10"=>array("name"=>"system_memory",
                                                "head"=>__("Physical Memory"),
                                                "show"=>"y",
                                                "link"=>"y",

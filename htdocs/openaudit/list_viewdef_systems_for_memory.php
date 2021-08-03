@@ -1,11 +1,12 @@
 <?php
 
+$menge = @$_GET["name"];
 $query_array=array("headline"=>__("List Systems with Memory"),
                    "sql"=>"SELECT * FROM system,
-                           (select *, sum(memory_capacity) AS total_memory FROM memory GROUP BY memory_uuid, memory_timestamp) AS full_system_memory
+						(select *, sum(memory_capacity) AS total_memory FROM memory GROUP BY memory_uuid, memory_timestamp) AS full_system_memory
                            WHERE full_system_memory.memory_uuid  = system_uuid
                            AND full_system_memory.memory_timestamp = system_timestamp
-                           AND full_system_memory.total_memory = '" . $_GET["name"] . "'
+                           AND full_system_memory.total_memory = '" .$menge . "'
                            ",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
@@ -28,6 +29,21 @@ $query_array=array("headline"=>__("List Systems with Memory"),
                                                "head"=>__("Hostname"),
                                                "show"=>"y",
                                                "link"=>"y",
+                                              ),
+                                   "35"=>array("name"=>"system_os_name",
+                                               "head"=>__("OS"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+                                   "36"=>array("name"=>"system_description",
+                                               "head"=>__("description"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+                                              ),
+                                   "38"=>array("name"=>"system_system_type",
+                                               "head"=>__("System Type"),
+                                               "show"=>"y",
+                                               "link"=>"n",
                                               ),
                                    "40"=>array("name"=>"total_memory",
                                                "head"=>__("Total Memory"),

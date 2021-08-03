@@ -3,7 +3,7 @@
 $query_array=array("headline"=>__("Statistic for Hard Disks"),
                    "sql"=>"
                            SELECT
-                               hard_drive_size,
+                               hard_drive_model,hard_drive_size,
                                COUNT(*) AS count_item,
                                ROUND( 100 / (
                                        SELECT count(*)
@@ -34,6 +34,11 @@ $query_array=array("headline"=>__("Statistic for Hard Disks"),
                                                "head"=>__("Hard Drive Size"),
                                                "show"=>"y",
                                                "link"=>"y",
+                                              ),
+									"11"=>array("name"=>"hard_drive_model",
+                                               "head"=>__("Type"),
+                                               "show"=>"y",
+                                               "link"=>"n",
                                               ),
                                    "20"=>array("name"=>"count_item",
                                                "head"=>__("Count"),

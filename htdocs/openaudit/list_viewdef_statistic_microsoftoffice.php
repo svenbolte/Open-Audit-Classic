@@ -8,7 +8,8 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions"),
                                round( 100 / (
                                        SELECT count(software_uuid) FROM software, system
                                        WHERE
-                                           software_name LIKE '%Microsoft Office%' AND
+                                           (software_name LIKE 'Microsoft Office%' or
+											software_name LIKE 'Microsoft 365%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
                                        )
@@ -17,9 +18,10 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions"),
                                FROM
                                    software, system
                                WHERE
-                                    software_name LIKE '%Microsoft Office%' AND
-                                    software_timestamp=system_timestamp AND
-                                    software_uuid=system_uuid
+                                           (software_name LIKE 'Microsoft Office%' or
+											software_name LIKE 'Microsoft 365%') AND
+                                           software_timestamp=system_timestamp AND
+                                           software_uuid=system_uuid
                                GROUP BY software_version
                                ",
                    "sort"=>"count_item",
