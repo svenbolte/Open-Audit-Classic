@@ -1,7 +1,10 @@
 <?php
-
+$GLOBALS["lang"]["Create DIA Network Diagram From List"]="DIA Netzwerkplan exportieren";
+$GLOBALS["lang"]["Create Inkscape (SVG) Picture From List"]="INKSCAPE Bild erzeugen";
+$GLOBALS["lang"]["Export this List to CSV"]="CSV Excel-Export";
 $GLOBALS["lang"]["Home"]="Startseite";
 $GLOBALS["lang"]["Help"]="Hilfe";
+$GLOBALS["lang"]["comment"]="Kommentar";
 $GLOBALS["lang"]["Help Tips&Tricks"]="Dokumentation";
 $GLOBALS["lang"]["Queries"]="Berichte";
 $GLOBALS["lang"]["List Hardware"]="Hardwareliste";
@@ -72,7 +75,11 @@ $GLOBALS["lang"]["Search in this View"]="Suche in dieser Sicht";
 $GLOBALS["lang"]["This Page was generated in"]="Diese Seite generierte sich in";
 $GLOBALS["lang"]["Seconds"]="Sekunden";
 $GLOBALS["lang"]["List all Windows Servers"]="alle Windows Server";
+$GLOBALS["lang"]["List all Systems Details"]="alle Windows Systeme detailliert";
 $GLOBALS["lang"]["List all Windows Workstations"]="alle Windows Workstations";
+$GLOBALS["lang"]["used"]="installiert";
+$GLOBALS["lang"]["purchased"]="gekauft";
+$GLOBALS["lang"]["difference"]="Saldo";
 $GLOBALS["lang"]["List all Laptops"]="alle Notebooks";
 $GLOBALS["lang"]["List all Software"]="Softwareliste";
 $GLOBALS["lang"]["Systems installed this Version of this Software"]="Systeme mit dieser Version dieser Software";
@@ -145,6 +152,11 @@ $GLOBALS["lang"]["Summary"]="Zusammenfassung";
 $GLOBALS["lang"]["System Name"]="Systemname";
 $GLOBALS["lang"]["Domain Role"]="Domain Role";
 $GLOBALS["lang"]["Registered User"]="Registrierter Benutzer";
+$GLOBALS["lang"]["Msoffice Versions"]="Office und Microsoft 365";
+$GLOBALS["lang"]["Keys"]="Lizenzschlüssel";
+$GLOBALS["lang"]["Printer Models"]="Drucker Modelle";
+$GLOBALS["lang"]["Java Versions"]="Java Versionen";
+$GLOBALS["lang"]["Add Licenses"]="Lizenzen zufügen";
 $GLOBALS["lang"]["Current User"]="aktueller Benutzer";
 $GLOBALS["lang"]["Chassis Type"]="Computer-Typ";
 $GLOBALS["lang"]["Model #"]="Modell-Nr.";
