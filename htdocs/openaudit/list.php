@@ -435,7 +435,7 @@ if ($myrow = mysqli_fetch_array($result)){
 								$logobild=$software_name;
 							}
 						} 
-						$logobild = preg_replace('/[^A-Za-z0-9\-]/', '', $logobild);
+						$logobild = preg_replace('/[^A-Za-z0-9\-_]/', '', $logobild);
 						// echo $logobild;
 					//if (strlen($logobild)>4) {$show_value = $logobild;}
 				}	
