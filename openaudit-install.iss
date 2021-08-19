@@ -4,7 +4,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.48x64-VC16, MySQLMariaDB 10.4.21x64, PHP/PEAR 8.0.9x64-thrsafe, phpMyAdmin 5.1.1x64, NMap 7.91, NPCap 1.50, Wordpress 5.8, WPKG 1.31*"
+#define Inhalte "Apache 2.4.48x64-VC16, MySQLMariaDB 10.4.21x64, PHP/PEAR 8.0.9x64-thrsafe, phpMyAdmin 5.1.1x64, NMap 7.92, NPCap 1.50, Wordpress 5.8, WPKG 1.31*"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -52,7 +52,7 @@ Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Flags: ignoreversion recursesub
 [Icons]
 Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: {app}\htdocs\openaudit\scripts; 
 Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"; 
-Name: "{group}\Open-Audit Datenbankersteinrichtung"; Filename: "http://localhost:888/openaudit/setup.php"; Tasks: desktopicon;  
+Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"; 
 Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; Tasks: desktopicon; WorkingDir: {app}\htdocs\openaudit\scripts; 
 Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon;  
 Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon;
@@ -64,7 +64,7 @@ Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64.exe"; Parameters: "/inst
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
 Filename: "{app}\nmap\npcap-1.50.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes NPCap installieren"
-Filename: "{app}\vcruntimes\openaudit-vc2013_redist_x86_nmap.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; Description: "VC Runtime 2013 x86 für NMAP installieren"; StatusMsg: "Installing VC2013/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
+Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x86.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; Description: "VC Runtime 2019 x86 für NMAP installieren"; StatusMsg: "Installing VC2019/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
 
 [UninstallRun]
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; 
@@ -77,9 +77,9 @@ var
 begin
   if (RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X64', 'Version', Version)) then
   begin
-    // Is the installed version at least 14.14 ? 
+    // Is the installed version at least 14.29 ? 
     Log('VC Redist Version check : found ' + Version);
-    Result := (CompareStr(Version, 'v14.14.26429.03')<0);
+    Result := (CompareStr(Version, 'v14.29.30133.0')<0);
   end
   else 
   begin
@@ -92,11 +92,11 @@ function VC2013RedistNeedsInstall: Boolean;
 var 
   Version: String;
 begin
-  if (RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\WOW6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\X86', 'Version', Version)) then
+  if (RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\X86', 'Version', Version)) then
   begin
-    // Is the installed version at least 12.0 ? 
+    // Is the installed version at least 14.29 ? 
     Log('VC Redist Version check : found ' + Version);
-    Result := (CompareStr(Version, 'v12.0.40664.00')<0);
+    Result := (CompareStr(Version, 'v14.29.30133.0')<0);
   end
   else 
   begin
