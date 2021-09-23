@@ -51,10 +51,13 @@ form { margin-bottom:0; }
 }
 	
 .headerbanner {
-  background-image:url('images/back_chipsatz.jpg');
-  background-size:cover;
-  border: 0px solid rgba(192,192,192,0.1);
-  margin:0px;
+border-radius: 3px;
+background-image: url(images/back_chipsatz.jpg);
+background-size: 100% 60px;
+border: 0px solid rgba(192,192,192,0.1);
+margin: 0px;
+object-fit: cover;
+background-repeat: no-repeat;
 }
 
 td.main_each {
