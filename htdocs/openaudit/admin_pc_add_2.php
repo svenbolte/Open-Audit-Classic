@@ -955,6 +955,8 @@ function insert_partition ($split){
         $partition_size              = trim($extended[11]);
         $partition_volume_name       = trim($extended[12]);
         $partition_used_space        = trim($extended[13]);
+        $partition_type		        = trim($extended[14]);
+        $partition_bitlocker	    = trim($extended[15]);
         if (is_null($partition_timestamp)){
           $sql = "SELECT MAX(partition_timestamp) FROM `partition` WHERE partition_uuid = '$uuid'";
           if ($verbose == "y"){echo $sql . "<br />\n\n";}
@@ -975,12 +977,12 @@ function insert_partition ($split){
           $sql  = "INSERT into `partition` (partition_uuid, partition_bootable, partition_boot_partition, ";
           $sql .= "partition_device_id, partition_disk_index, partition_index, ";
           $sql .= "partition_primary_partition, partition_caption, partition_file_system, ";
-          $sql .= "partition_free_space, partition_size, partition_volume_name, partition_used_space, ";
+          $sql .= "partition_free_space, partition_size, partition_volume_name, partition_used_space, partition_type, partition_bitlocker, ";
           $sql .= "partition_timestamp, partition_first_timestamp) VALUES (";
           $sql .= "'$uuid', '$partition_bootable', '$partition_boot_partition', ";
           $sql .= "'$partition_device_id', '$partition_disk_index', '$partition_index', ";
           $sql .= "'$partition_primary_partition', '$partition_caption', '$partition_file_system', ";
-          $sql .= "'$partition_free_space', '$partition_size', '$partition_volume_name','$partition_used_space', ";
+          $sql .= "'$partition_free_space', '$partition_size', '$partition_volume_name', '$partition_used_space', '$partition_type', '$partition_bitlocker', ";
           $sql .= "'$timestamp', '$timestamp')";
           if ($verbose == "y"){echo $sql . "<br />\n\n";}
           $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);

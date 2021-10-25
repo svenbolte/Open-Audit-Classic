@@ -281,7 +281,7 @@ function ConvertSpecialField($myrow, $field, $db, $page)
 			if($page=="list") {return determine_img($myrow["system_os_name"],$myrow[$field["name"]]);
 			} else {return $myrow[$field["name"]];}
 		case "other_type":
-			if($page=="list") {return "<img src=\"images/o_".str_replace(" ","_",$myrow[$field["name"]]).".png\" alt=\"\" border=\"0\" width=\"16\" height=\"16\"/>";
+			if($page=="list") {return "<img src=\"images/o_".str_replace(" ","_",$myrow[$field["name"]]).".png\" alt=\"".$myrow[$field["name"]]."\" title=\"".$myrow[$field["name"]]."\" width=\"16\" height=\"16\"/> ".$myrow[$field["name"]]."";
 			} else {return $myrow[$field["name"]];}
 		case "other_ip_address":
 			return ip_trans($myrow[$field["name"]]);
@@ -443,15 +443,15 @@ function determine_img($os,$system_type) {
 
     if (strpos($os, "Windows")!== false) {
         $image="desktop.png";
-        $title=determine_os($os);
+        $title=$system_type . ' | ' . determine_os($os);
     }
     if (strpos($os, "Server")!== false) {
         $image="server.png";
-        $title=determine_os($os);
+        $title=$system_type . ' | ' . determine_os($os);
     }
     if (strpos($system_type, "Notebook")!== false or strpos($system_type, "Portable")!== false or strpos($system_type, "Laptop")!== false) {
         $image="laptop.png";
-        $title=determine_os($os);
+        $title=$system_type . ' | ' . determine_os($os);
     }
 
     //Substring match
@@ -473,13 +473,11 @@ function determine_img($os,$system_type) {
 	foreach($systems_substr as $key => $val) {
         if(substr_count($os,$key)){
             $image="linux_".strtolower($val).".png";
-            $title=determine_os($os);
+            $title=$system_type . ' | ' . determine_os($os);
         }
     }
-
-    $ret = "<img src=\"images/".$image."\" width=\"16\" height=\"16\" alt=\"".$title."\" title=\"".$title."\" />";
+    $ret = "<img src=\"images/".$image."\" width=\"16\" height=\"16\" alt=\"".$title."\" title=\"".$title."\" /> ".$system_type;
     return $ret;
-
 }
 
 function determine_dia_img($os,$system_type) {
