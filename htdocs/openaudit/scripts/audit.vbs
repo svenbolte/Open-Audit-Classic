@@ -1713,17 +1713,19 @@ Next
     Set objEnumLogicalDisk = objWMIService.ExecQuery _
       ("Select " & strQueryFields & " from Win32_LogicalDisk where DriveType = 3", "WQL", 0)
     ' Get the DiskPartition's path
-    strQueryFields = "Bootable,BootPartition,DeviceID,DiskIndex,Index,PrimaryPartition"
+    strQueryFields = "Bootable,BootPartition,DeviceID,DiskIndex,Index,PrimaryPartition,Type"
     Set objEnumDiskPartition = objWMIService.ExecQuery _
       ("Select " & strQueryFields & " from Win32_DiskPartition", "WQL", 0)
-
-    Set objWMIServiceB = GetObject("winmgmts:\\" & strComputer & "root\CIMV2\Security\MicrosoftVolumeEncryption")
-    Set objEnumDiskBitlocker = objWMIServiceB.ExecQuery("Select ProtectionStatus from Win32_EncryptableVolume",,48)
-	  
 
     For Each objItem in objEnumLogicalDisk
       on error resume next
       partition_caption = objItem.Caption
+	  ' get Bitlocker status
+	  Set objWMIServiceB = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2\Security\MicrosoftVolumeEncryption")
+	  Set objEnumDiskBitlocker = objWMIServiceB.ExecQuery("Select ProtectionStatus from Win32_EncryptableVolume where driveletter='" & partition_caption & "'",,48)
+	  For Each blobjItem in objEnumDiskBitlocker
+		ldbitlocker=blobjItem.ProtectionStatus
+	  Next
       partition_file_system = objItem.FileSystem
       partition_free_space = 0
       partition_free_space = int(objItem.FreeSpace /1024 /1024)
@@ -1733,19 +1735,18 @@ Next
       partition_used_space = int(objItem.Size /1024 /1024) - int(objItem.FreeSpace /1024 /1024)
       partition_volume_name = objItem.VolumeName
       partition_percent = 0
-      
       partition_percent = round(((partition_size - partition_free_space) / partition_size) * 100 ,0)
      
     ' Associate with Device_ID in Win32_DiskPartition using objLogicalDiskToPartition
-
       For Each objDiskPartition in objEnumDiskPartition
-        ' This is expected to fail once in a while since we are
-        ' concatonating a possible path to avoid hitting the floppy
+        ' This is expected to fail once in a while since we are concatonating a possible path to avoid hitting the floppy
         On Error Resume Next
         ' Associate the two sets
         Set objLogicalDiskToPartition = objWMIService.Get _
          (Fixpath(objItem.Path_.relpath,objDiskPartition.path_.relpath), 0)
         If Err.Number = 0 Then
+		  partition_type = objDiskPartition.Type
+		    wscript.echo " Type: " & partition_type   'Neu, einbauen
           partition_bootable = objDiskPartition.Bootable
           if isnull(partition_bootable) then partition_bootable = "False" end if
           partition_boot_partition = objDiskPartition.BootPartition
@@ -1754,30 +1755,27 @@ Next
           partition_disk_index = objDiskPartition.DiskIndex
           partition_index = objDiskPartition.Index
           partition_primary_partition = objDiskPartition.PrimaryPartition
-          'wscript.echo objLogicalDiskToPartition.path_.relpath
           splitpath = split(objLogicalDiskToPartition.path_.relpath,"=")
-          LogicalDisk_DeviceID = ""
-          'LogicalDisk_DeviceID = splitpath(ubound(splitpath))
+		  LogicalDisk_DeviceID = ""
           LogicalDisk_DeviceID = splitpath(2)
           LogicalDisk_DeviceID = replace(LogicalDisk_DeviceID,"\","")
           LogicalDisk_DeviceID = replace(LogicalDisk_DeviceID,"""","")
-          'wscript.echo LogicalDisk_DeviceID & VBCRLF
 		  LogicalDisk_Bitlocker = objEnumDiskBitlocker.ProtectionStatus
-          ' wscript.echo "Bitlocker: " & LogicalDisk_Bitlocker & VBCRLF
+          wscript.echo " Bitlocker: " & ldbitlocker   ' Neu: einbauen
         Else
           Err.Clear
         End If
         On Error Resume Next
-      ' END Associate with Device_ID in Win32_DiskPartition using objLogicalDiskToPartition
       Next
-      form_input = "partition^^^" & partition_bootable & "^^^"  & partition_boot_partition & "^^^" _
-      & partition_device_id         & "^^^" & partition_disk_index        & "^^^" _
-      & partition_index             & "^^^" & partition_percent           & "^^^" _
-      & partition_primary_partition & "^^^" & partition_caption           & "^^^" _
-      & partition_file_system       & "^^^" & partition_free_space        & "^^^" _
-      & partition_size              & "^^^" & partition_volume_name       & "^^^" & partition_used_space & "^^^"
-      entry form_input,comment,objTextFile,oAdd,oComment
-      form_input = ""
+      ' END Associate with Device_ID in Win32_DiskPartition using objLogicalDiskToPartition
+	  form_input = "partition^^^" & partition_bootable & "^^^"  & partition_boot_partition & "^^^" _
+	  & partition_device_id         & "^^^" & partition_disk_index        & "^^^" _
+	  & partition_index             & "^^^" & partition_percent           & "^^^" _
+	  & partition_primary_partition & "^^^" & partition_caption           & "^^^" _
+	  & partition_file_system       & "^^^" & partition_free_space        & "^^^" _
+	  & partition_size              & "^^^" & partition_volume_name       & "^^^" & partition_used_space & "^^^" & partition_type & "^^^" & ldbitlocker & "^^^"
+	  entry form_input,comment,objTextFile,oAdd,oComment
+	  form_input = ""
     Next
 
 '''''''''''''''''''''''''''''''''
