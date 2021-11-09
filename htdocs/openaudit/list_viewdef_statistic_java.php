@@ -10,6 +10,7 @@ $query_array=array("headline"=>__("Statistic for Java Versions"),
                                        WHERE
                                            (software_name LIKE 'Java%' OR
                                            software_name LIKE 'J2SE%' OR
+                                           software_name LIKE '%JRE%' OR
 											software_name LIKE 'AdoptOpenJDK%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
@@ -21,6 +22,7 @@ $query_array=array("headline"=>__("Statistic for Java Versions"),
                                WHERE
                                     (software_name LIKE 'Java%' OR
                                     software_name LIKE 'J2SE%' OR
+                                    software_name LIKE '%JRE%' OR
 									software_name LIKE 'AdoptOpenJDK%') AND
                                     software_timestamp=system_timestamp AND
                                     software_uuid=system_uuid

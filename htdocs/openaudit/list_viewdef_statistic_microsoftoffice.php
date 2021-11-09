@@ -1,6 +1,6 @@
 <?php
 
-$query_array=array("headline"=>__("Statistic for Microsoft Office Versions"),
+$query_array=array("headline"=>__("Statistic for Microsoft Office Versions und Visio"),
                    "sql"=>"
                            SELECT
                                DISTINCT software_name, software_version,
@@ -9,6 +9,7 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions"),
                                        SELECT count(software_uuid) FROM software, system
                                        WHERE
                                            (software_name LIKE 'Microsoft Office%' or
+											software_name LIKE 'Microsoft Visio%' OR
 											software_name LIKE 'Microsoft 365%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
@@ -19,6 +20,7 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions"),
                                    software, system
                                WHERE
                                            (software_name LIKE 'Microsoft Office%' or
+											software_name LIKE 'Microsoft Visio%' OR
 											software_name LIKE 'Microsoft 365%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
