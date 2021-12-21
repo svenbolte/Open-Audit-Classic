@@ -15,4 +15,4 @@ echo Time to say good bye to Apache2.4 :(
 "C:\Program Files (x86)\xampplite\apache\bin\httpd" -k uninstall
 
 :exit
-pause
+rem pause

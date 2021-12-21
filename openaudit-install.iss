@@ -4,7 +4,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.51x64-VC16, MySQLMariaDB 10.4.21x64, PHP 8.0.12x64-thrsafe, phpMyAdmin 5.1.1x64, NMap 7.92, NPCap 1.55, Wordpress 5.8.1, WPKG 1.31*"
+#define Inhalte "Apache 2.4.52x64-VC16, MySQLMariaDB 10.4.22x64, PHP 8.0.14x64-thrsafe, phpMyAdmin 5.1.1x64, NMap 7.92, NPCap 1.55, Wordpress 5.8.2, WPKG 1.31*"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -29,7 +29,7 @@ OutputBaseFilename=openaudit-cl-setup
 SetupIconFile=C:\temp\xampplite\openaudit_logo.ico
 Compression=lzma2/Ultra
 SolidCompression=true
-WizardImageFile=C:\temp\xampplite\openaudit_logolarge.bmp
+WizardImageFile=C:\temp\xampplite\openaudit_logo.bmp
 WizardSmallImageFile=C:\temp\xampplite\openaudit_logo.bmp
 AppCopyright={#MyAppPublisher}
 ShowLanguageDialog=no
@@ -53,12 +53,13 @@ Name: {app}; Permissions: users-full
 Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: {app}\htdocs\openaudit\scripts; 
-Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"; 
-Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"; 
-Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; Tasks: desktopicon; WorkingDir: {app}\htdocs\openaudit\scripts; 
-Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon;  
-Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon;
+Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"
+Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"
+Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"
+Name: "{group}\Open-Audit Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
+Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
+Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon
+Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon
 
 [Run]
 Filename: "{sys}schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86)\xampplite\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: postinstall runasoriginaluser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
