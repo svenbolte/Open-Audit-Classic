@@ -4,7 +4,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.52x64-VC16, MySQLMariaDB 10.4.22x64, PHP 8.0.15x64-thrsafe, phpMyAdmin 5.1.1x64, NMap 7.92, NPCap 1.55, Wordpress 5.8.3, WPKG 1.31*"
+#define Inhalte "Apache 2.4.52x64-VC16, MySQLMariaDB 10.4.22x64, PHP 8.0.15x64-thrsafe, phpMyAdmin 5.1.1x64, NMap 7.92, NPCap 1.60, Wordpress 5.8.3, WPKG 1.31*"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -67,7 +67,7 @@ Filename: "{sys}schtasks.exe"; Parameters: "/create /XML ""C:\Program Files (x86
 Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64.exe"; Parameters: "/install /quiet /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Check: VC2017RedistNeedsInstall
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
-Filename: "{app}\nmap\npcap-1.55.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes NPCap installieren"
+Filename: "{app}\nmap\npcap-1.60.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes NPCap installieren"
 Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x86.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; Description: "VC Runtime 2019 x86 für NMAP installieren"; StatusMsg: "Installing VC2019/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
 
 [UninstallRun]
