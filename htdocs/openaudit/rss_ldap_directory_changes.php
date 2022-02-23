@@ -7,7 +7,7 @@ header('Content-type: application/rss+xml');
 
 //Variables
 $site_protocol = (isset($use_https) AND $use_https == "y") ? "https://" : "http://";
-$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"]  . dirname($_SERVER["SCRIPT_NAME"]) . "/";
+$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"] . ':' . $oaserver_port  . dirname($_SERVER["SCRIPT_NAME"]) . "/";
 
 $sitename = "LDAP Directory changes in the last ".$ldap_changes_days." Day(s)";
 $sitedescription = "LDAP Directory changes detected by Open Audit.";

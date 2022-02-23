@@ -945,14 +945,14 @@ $query_array=array("10"=>array("headline"=>__("Other Items Discovered in the las
                               ),
                    ),
 /********************************************************************************************************************************/
-                   "120"=>array("headline"=>__("XP SP2 without up to date AntiVirus"),
+                   "120"=>array("headline"=>__("windows systems without up to date AntiVirus"),
                                "td_width"=>array("130"),
                                "views"=>array(
                                               "10"=>array(
                                                     "sql"=>"
                                                             SELECT system_name, net_ip_address, system_uuid, virus_name, virus_uptodate
                                                             FROM system
-                                                            WHERE (virus_name = '' OR virus_uptodate = 'False') AND system_service_pack = '2.0' AND system_os_name LIKE 'Microsoft Windows XP%'
+                                                            WHERE (virus_name = '' OR virus_uptodate = 'False') AND system_os_name LIKE 'Microsoft Windows%'
                                                             ",
                                                     "sort"=>"system_name",
                                                     "show"=>$show_system_discovered,

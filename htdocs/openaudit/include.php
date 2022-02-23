@@ -69,19 +69,20 @@ if ($use_pass != "n") {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>OpenAudit Classic</title>
+    <title>Open-AudIT</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="#e1e1e1">
 	<meta name="msapplication-navbutton-color" content="#e1e1e1">
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
+		<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
     <link media="print" rel="stylesheet" type="text/css" href="defaultprint.css" />
 		<!--[if lt IE 7]><link media="screen" rel="stylesheet" type="text/css" href="iefix.css" /><![endif]-->
 		<!--[if lt IE 7]><link media="print" rel="stylesheet" type="text/css" href="iefix.css" /><![endif]-->
-	<script type='text/javascript' src="javascript/ajax.js"></script>
-	<script type='text/javascript' src="javascript/include.js"></script>
+		<script type='text/javascript' src="javascript/ajax.js"></script>
+		<script type='text/javascript' src="javascript/include.js"></script>
 
     <?php 
       // Used to only included pieces of jquery/jquery ui that the page needs.

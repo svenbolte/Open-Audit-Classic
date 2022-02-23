@@ -1,4 +1,4 @@
-﻿* { font-family:Arial,sans-serif; }
+﻿* { font-family:Arial,sans-serif; border-radius:3px }
 
 acronym,abbr {
 	text-decoration : none;
@@ -59,6 +59,9 @@ margin: 0px;
 object-fit: cover;
 background-repeat: no-repeat;
 }
+
+
+td {padding-top:3px}
 
 td.main_each {
 	border: none; 
@@ -178,7 +181,6 @@ ul#primary-nav li a:hover { color: #006060; }
 td.views_tablehead{
   padding-right:10px;
   font-weight:bold;
-  border-bottom: 1px solid #000000;
   text-align: left;
 }
 

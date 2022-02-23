@@ -19,7 +19,7 @@ else
 {
 $site_protocol = "http://";
 }
-$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"]  . dirname($_SERVER["SCRIPT_NAME"]) . "/";
+$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"] . ':' . $oaserver_port  . dirname($_SERVER["SCRIPT_NAME"]) . "/";
 
 $sitename = "New Other Items Detected in the Last ".$other_detected." Day(s)";
 $sitedescription = "New Other Items detected by Open Audit.";
