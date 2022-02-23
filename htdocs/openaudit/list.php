@@ -242,7 +242,7 @@ foreach($viewdef_array["fields"] as $field) {
 }
 
  //Button to Show and Hide the searchboxes
- $headline_1 .= "<td style=\"width:20px; border-bottom: 1px solid #000000;\">";
+ $headline_1 .= "<td style=\"width:20px\">";
  $headline_1 .= "<a href=\"#\" onclick=\"show_searchboxes();\" id=\"link_searchboxes\"><img src=\"".$image_searchboxes."\" id=\"arrows_searchboxes\" style=\"border:0px;\" width=\"20\" height=\"16\" alt=\"".$alt_searchboxes."\" title=\"".$alt_searchboxes."\" /></a>";
  $headline_1 .= "</td>";
 

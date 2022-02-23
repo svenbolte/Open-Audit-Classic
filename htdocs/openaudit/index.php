@@ -112,7 +112,7 @@ if ($show_detected_servers == "y")
 	DisplaySection('f13',__('Database Servers'),'DbServers','Systems');
 }
 if ($show_detected_xp_av == "y") 
-	DisplaySection('f11',__("XP SP2 without up to date AntiVirus"),'DetectedXpAv','Systems');
+	DisplaySection('f11',__("windows systems without up to date AntiVirus"),'DetectedXpAv','Systems');
 	
 if ($show_ldap_changes == 'y') DisplaySection('f15',__("LDAP Directory changes in the last ".$ldap_changes_days." days"),'AdInfo','Accounts','rss_ldap_directory_changes.php');
 if ($show_systems_audited_graph == 'y') DisplayAuditGraph();

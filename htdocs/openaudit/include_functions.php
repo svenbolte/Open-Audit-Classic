@@ -3,7 +3,7 @@
 Module:	include_functions.php
 
 Description:
-		General purpose functions used throughout the application.
+		General purpose functions used throughout the application. aswell defines Server-Port for OA-Calls, default 888
 
 Recent Changes:
 
@@ -24,6 +24,9 @@ Recent Changes:
 **********************************************************************************************************/
 require_once "application_class.php";
 require_once "include_config.php";
+
+// If webserver running on other port, please change server port here and in all audit.config files in the subdirs 
+$oaserver_port = '888';
 
 $enable_remote_management = 'y';
 
@@ -453,6 +456,10 @@ function determine_img($os,$system_type) {
         $image="laptop.png";
         $title=$system_type . ' | ' . determine_os($os);
     }
+	if (strpos($system_type, "Tablet-PC")!== false) {
+        $image="ultrabook.png";
+        $title=$system_type . ' | ' . determine_os($os);
+    }
 
     //Substring match
     $systems_substr=array( "CentOS"=>"CentOS",
@@ -511,6 +518,10 @@ function determine_dia_img($os,$system_type) {
     if (strpos($system_type, "Notebook")!== false or strpos($system_type, "Portable")!== false or strpos($system_type, "Laptop")!== false) {
         $image="laptop.png";
         $title=determine_os($os);
+    }
+	if (strpos($system_type, "Tablet-PC")!== false) {
+        $image="ultrabook.png";
+        $title=$system_type . ' | ' . determine_os($os);
     }
 
     //Substring match
@@ -598,6 +609,10 @@ function determine_inkscape_img($os,$system_type) {
     if (strpos($system_type, "Notebook")!== false or strpos($system_type, "Portable")!== false or strpos($system_type, "Laptop")!== false) {
         $image="laptop.png";
         $title=determine_os($os);
+    }
+	if (strpos($system_type, "Tablet-PC")!== false) {
+        $image="ultrabook.png";
+        $title=$system_type . ' | ' . determine_os($os);
     }
 
     //Substring match

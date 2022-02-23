@@ -13,7 +13,7 @@ else
 {
 $site_protocol = "http://";
 }
-$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"]  . dirname($_SERVER["SCRIPT_NAME"]) . "/";
+$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"] . ':' . $oaserver_port . dirname($_SERVER["SCRIPT_NAME"]) . "/";
 
 
 $sitename = "Software Detected Changes in the Last ".$days_software_detected." Day(s)";

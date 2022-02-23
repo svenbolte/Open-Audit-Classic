@@ -30,7 +30,7 @@ else
 {
 $site_protocol = "http://";
 }
-$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"]  . dirname($_SERVER["SCRIPT_NAME"]) . "/";
+$sitebaseurl = $site_protocol  . $_SERVER["SERVER_NAME"] . ':' . $oaserver_port . dirname($_SERVER["SCRIPT_NAME"]) . "/";
 
 $sitename = "Hard Disks Alerts Detected in the Last ".$hard_disk_alerts_days." Day(s)";
 $sitedescription = "Hard Disks Alerts detected by Open Audit.";
