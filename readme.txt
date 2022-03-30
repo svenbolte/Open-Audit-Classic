@@ -1,4 +1,4 @@
-﻿== OPEN-Audit Classic ==
+﻿== OPENAudit Classic ==
 
 Open-Audit Classic ist eine quelloffene Software, die auf einem Windows Server betrieben, per WMI-Anfragen alle Windows PCs und Server mit
 ihrer Hardware und Software und Konfiguration erfasst und in einer MySQL-Datenbank speichert.
@@ -12,7 +12,6 @@ https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/
 Aus dem Projekt werden nur Apache, Mysql (MariaDB), PHP und PHPMyadmin benötigt.
 
 Für das Inventarisieren von SNMP- und Netzwerkgeräten (Switches, Kameras, Webserver, IRMCs) wird das ebenfalls quelloffene NMAP mit WinPCAP benötigt
-Für eine auch häufig benötigte, einfache Softwareverteilung ist WPKG leicht zu implementieren.
 Der Ordner htdocs/ lässt sich auch optimal für eine Entwicklerinstallation von Wordpress verwenden oder für ein kleines Intranet.
 
 Ein optionales Setup-Paket lässt sich mit Innosetup erstellen. Es fügt diese Komponenten zu einem installierbaren Paket zusammen.
@@ -94,7 +93,6 @@ XAMPP-Komponenten:
 	phpMyAdmin
 NMap mit NPCap
 Wordpress (Oberfläche für Intranet-Blogseite)
-WPKG Softwareverteilung
 
 
 = Hinweise zu Einstellungen und Befehlszeilen-Optionen: =
@@ -124,12 +122,6 @@ Es gibt 2 Möglichkeiten, PCs zu erfassen, die nicht per WMI erreichbar sind:
 * Client installieren auf dem PC und als Aufgabe täglich scannen lassen (oa-clientside-scan)
 * Offline-Scan Ordner auf einen Stick, daten sammeln lassen und Textdatei importieren (offline-scan)
 Howto-Anleitungen im jeweiligen Unterordner unter /all-tools-scripts
-
-= Hinweise zu WPKG: =
-
-WPKG Verzeichnis muss als Netzwerkfreigabe WPKG im Lesezugriff für alle liegen \\meinserver\wpkg
-Client auf Zielsystemen installieren und Pfad von der wpkg.jsd auf das Share zeigen lassen
-Packages, profiles, hosts anlegen über die WebGUI und XML-Inhalte in die drei Dateien im WPKG Ordner exportieren.
 
 = Hinweise zu Wordpress: =
 
