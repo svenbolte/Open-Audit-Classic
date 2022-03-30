@@ -970,6 +970,8 @@ CREATE TABLE `partition` (
   `partition_volume_name` varchar(100) NOT NULL default '',
   `partition_free_space` int(11) unsigned NOT NULL default '1',
   `partition_used_space` int(11) unsigned NOT NULL default '1',
+  `partition_type` varchar(30) NOT NULL default '',
+  `partition_bitlocker` varchar(10) NOT NULL default '',
   `partition_size` int(11) unsigned NOT NULL default '1',
   `partition_timestamp` bigint(20) unsigned NOT NULL default '0',
   `partition_first_timestamp` bigint(20) unsigned NOT NULL default '0',
