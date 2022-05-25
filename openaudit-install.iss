@@ -58,8 +58,8 @@ Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/o
 Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon
 
 [Run]
-Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: postinstall runasoriginaluser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
-Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: postinstall runasoriginaluser; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
+Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: runascurrentuser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
+Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: runascurrentuser; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
 Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64.exe"; Parameters: "/install /quiet /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Check: VC2017RedistNeedsInstall
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
