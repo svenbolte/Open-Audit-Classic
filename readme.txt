@@ -1,4 +1,4 @@
-﻿== OPENAudit Classic ==
+﻿== OPEN-Audit Classic ==
 
 Open-Audit Classic ist eine quelloffene Software, die auf einem Windows Server betrieben, per WMI-Anfragen alle Windows PCs und Server mit
 ihrer Hardware und Software und Konfiguration erfasst und in einer MySQL-Datenbank speichert.
@@ -12,6 +12,7 @@ https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/
 Aus dem Projekt werden nur Apache, Mysql (MariaDB), PHP und PHPMyadmin benötigt.
 
 Für das Inventarisieren von SNMP- und Netzwerkgeräten (Switches, Kameras, Webserver, IRMCs) wird das ebenfalls quelloffene NMAP mit WinPCAP benötigt
+Für eine auch häufig benötigte, einfache Softwareverteilung ist WPKG leicht zu implementieren.
 Der Ordner htdocs/ lässt sich auch optimal für eine Entwicklerinstallation von Wordpress verwenden oder für ein kleines Intranet.
 
 Ein optionales Setup-Paket lässt sich mit Innosetup erstellen. Es fügt diese Komponenten zu einem installierbaren Paket zusammen.
@@ -31,57 +32,66 @@ Auch die Integration von NMAP und WinPCap wurde auf den aktuellen Stand gebracht
 Lizenz: GPLv3 --> GPL.txt im htdocs/openaudit Verzeichnis
 
 
-= Entwicklung: =
+= Entwicklung =
 
 Der Projekt-Fork ist unter Github zu finden. Beiträge und Weiterentwicklung jederzeit willkommen.
 
 
-= Installation =
-Mit dem beiliegenden Innosetup Skript und Innosetup ein Setup erzeugen oder von Hand wie folgt installieren:
+= Installation (automatisch) =
 
-Voraussetzungen: Apache benötigt die Visual C++ Runtimes 2015-19 (64-Bit) installiert. Diese kann bei Microsoft heruntergeladen werden.
-Auf einem Windows Server ab Version 2012 R2 :
-* xampp installieren
-* nmap und winpcap installieren 
-* Open-Audit Projektdateien unter htdocs/ kopieren
-* Datenbankersteinrichtung: http://localhost:888/openaudit/setup.php aufrufen und den Anweisungen folgen
-* htdocs/openaudit/scripts/pc-list-file.txt --> alle IP-Adressen aller Netze, die gescannt werden sollen, hier rein. Liste am Besten mit Excel erstellen
-* htdocs/openaudit/all-tools-scripts/jobs und batches: Aufgabe in den Taskplaer importieren
-* ./nmap/npcap09995.exe installieren auf dem Server (NMAP benötigt NPCAP auf der Netzwerkkarte des Servers installiert)
+openaudit-classic-install.zip entpacken und die enthaltene .exe ausführen
+Standard wird OHNE Wordpress installiert, bei Bedarf anschalten
+Standard wird nur der 11 Uhr Task importiert, bei Bedarf abkreuzen und ggf. den NMAP-Task aktivieren
 
-= Absichern =
-Die open-Audit-Oberfläche kann mit einem Login versehen werden, dazu in der Oberfläche http://localhost:888/openaudit auf
- Administrator/Konfiguration/Security das Oberflächenpasswort anschalten und Zugangsdaten eingeben
-PHPMyadmin sichern:
-./phpmyadmin/config.inc.php öffnen und die Zeile $cfg['Servers'][$i]['auth_type'] = 'config';
- statt config dort http setzen
+Hinweis: Kommt eine "Neustart Erforderlich" - Meldung, das SETUP abbrechen und neu starten. Ein Neustart für die VC-Runtimes ist definitiv NICHT erforderlich
+
+Nach Installation in die Aufgabenplanung und Domäne und User in die beiden Tasks eintragen.
 
 
-= Werkzeuge = 
+	= Installation (manuell, optional) =
 
---> htdocs/openaudit/all-tools-scripts
-	Offline Scan zum Inventarisieren ohne Netzwerk (howto.txt)
-	nmap-zweigstelle: Invenatisieren der IP-Geräte in Zweignetzen
-	jobs und batches: Ausführbare Aufgaben für täglichen Scan am Server  (audit und nmap)
+	Voraussetzungen: Apache benötigt die Visual C++ Runtimes 2015-19 (64-Bit) installiert. Diese kann bei Microsoft heruntergeladen werden.
+	Auf einem Windows Server ab Version 2012 R2 :
+	* xampp installieren
+	* nmap und winpcap installieren 
+	* Open-Audit Projektdateien unter htdocs/ kopieren
+	* htdocs/openaudit/scripts/pc-list-file.txt --> alle IP-Adressen aller Netze, die gescannt werden sollen, hier rein. Liste am Besten mit Excel erstellen
+	* htdocs/openaudit/all-tools-scripts/jobs und batches: Aufgabe in den Taskplaer importieren
 
- = Benötigte freie IP-Ports auf dem Server = 
- 
-888 <- HTTP Oberfläche Webserver. Die Software sollte nur im Intranet verwendet werden. Dafür reicht http aus.
-3306 <- Mysql Datenbank Port
+	Werkzeuge: --> htdocs/openaudit/all-tools-scripts
+			Offline Scan zum Inventarisieren ohne Netzwerk (howto.txt)
+			nmap-zweigstelle: Invenatisieren der IP-Geräte in Zweignetzen
+			jobs und batches: Ausführbare Aufgaben für täglichen Scan am Server  (audit und nmap)
 
-= Post-Installation (optional, nur im Fehlerfall) =
---> Stamm-Ordner ist: C:\Program Files (x86)\xampplite\htdocs\openaudit
-Nach der Installation auf Server 2016 müssen Apache und Mysql ggf. üder die CMD-Dateien 
-./apache/apache_installservice-win10.cmd
-./mysql/mysqli_installservice-win10.cmd
-von Hand (Ausführen als Administrator) initialisiert werden.
+	Benötigte freie IP-Ports auf dem Server:
+	888 <- HTTP Oberfläche Webserver. Die Software sollte nur im Intranet verwendet werden. Dafür reicht http aus.
+	3306 <- Mysql Datenbank Port
 
-Danach die "Datenbankersteinrichtung" vom Desktop starten und durchklicken.
-Die "pc_list_File.txt" auf dem Desktop bearbeiten und alle IP-Adressen aller Netze untereinander dort hin kopieren
-   (Man kann die Listen leicht mit Excel erstellen durch nach unten ziehen)
-./scripts/audit.config bearbeiten und in der NMAP Sektion das richtige Supnetz eintragen
-Die Geplanten Tasks (Aufgaben) für Scan und nmap scan installieren über die Aufgabenplanung.
-Aufgabe ausführen.
+
+= Post-Installations-Aufgaben =
+
+Täglichen Task auf korrekten Domänen_Admin und Domänennamen setzen:
+Im Taskplaner (Aufgabenplanung) unter Aufgabenbibliothek den Open Audit Task bearbeiten, Domäne und einen Domänen-Benutzer eintragen und abschicken
+Die Scans erfolgen dann täglich um 11:00 Uhr
+
+
+	= Fehlerbehebung Post-Installation (optional, nur im Fehlerfall) =
+	Stamm-Ordner ist: C:\Program Files (x86)\xampplite\htdocs\openaudit
+
+	./nmap/npcap09995.exe installieren auf dem Server (NMAP benötigt NPCAP auf der Netzwerkkarte des Servers installiert)
+
+	Nach der Installation auf Server 2016 müssen Apache und Mysql ggf. üder die CMD-Dateien 
+	./apache/apache_installservice-win10.cmd
+	./mysql/mysqli_installservice-win10.cmd
+	von Hand (Ausführen als Administrator) initialisiert werden.
+
+	Danach die "Datenbankersteinrichtung" vom Desktop starten und durchklicken.
+	Die "pc_list_File.txt" auf dem Desktop bearbeiten und alle IP-Adressen aller Netze untereinander dort hin kopieren
+	   (Man kann die Listen leicht mit Excel erstellen durch nach unten ziehen)
+	./scripts/audit.config bearbeiten und in der NMAP Sektion das richtige Supnetz eintragen
+	Die Geplanten Tasks (Aufgaben) für Scan und nmap scan installieren über die Aufgabenplanung.
+	Aufgabe ausführen.
+
 
 = Mögliche Bausteine =
 
@@ -92,7 +102,7 @@ XAMPP-Komponenten:
 	Mysql (MariaDB Open Source)
 	phpMyAdmin
 NMap mit NPCap
-Wordpress (Oberfläche für Intranet-Blogseite)
+Wordpress (Oberfläche für Intranet-Blogseite)* optional
 
 
 = Hinweise zu Einstellungen und Befehlszeilen-Optionen: =
@@ -126,7 +136,6 @@ Howto-Anleitungen im jeweiligen Unterordner unter /all-tools-scripts
 = Hinweise zu Wordpress: =
 
 Benutzt leere Mysql-Datenbank mit User "openaudit"
-
 
 = Kennwörter für Installation und Programmierung: =
 
