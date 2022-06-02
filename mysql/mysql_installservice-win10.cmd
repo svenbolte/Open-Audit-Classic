@@ -33,4 +33,5 @@ echo Try to start the MySQL deamon as service ...
 net start MySQL 
 
 :exit 
-pause
+@ping -n 6 localhost> nul
+rem pause

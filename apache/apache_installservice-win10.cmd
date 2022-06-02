@@ -14,4 +14,5 @@ echo Now we Start Apache2.4 :)
 net start Apache2.4
 
 :exit
-pause
+@ping -n 6 localhost> nul
+rem pause

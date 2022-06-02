@@ -17,4 +17,4 @@ echo Remove %windir%\my.ini
 del %windir%\my.ini
 
 :exit
-pause
+rem pause
