@@ -336,7 +336,7 @@ if ($myrow = mysqli_fetch_array($result)){
                 if(isset($get_array["file"])){
                     if(substr($get_array["file"],0,1)=="%"){
                         $value=substr($get_array["file"],1);
-                        $link_file=$$value;
+                        $link_file=@$$value;
                     }else{
                         $link_file=$get_array["file"];
                     }
@@ -420,7 +420,12 @@ if ($myrow = mysqli_fetch_array($result)){
 				// If this is not a calculated value, just show it
                $show_value = ConvertSpecialField($myrow, $field, $db, "list");
 			   if ($field["name"]=="software_comment") {
-					$show_value = "<acronym title='".$software_comment."'>".substr($software_comment,0,35)."</acronym>";
+					$show_value = "<div style='font-size:0.9em;max-width:300px' title='".$software_comment."'>".substr($software_comment,0,55)."</div>";
+					if (!empty($sv_bemerkungen)) {$show_value .= "<div title='".$sv_bemerkungen."' style='font-size:0.9em;max-width:300px' title='".$sv_bemerkungen."'>".substr($sv_bemerkungen,0,99)."</div>"; }
+
+				}
+			   if ($field["name"]=="sv_lizenztyp") {
+					$show_value = "<div style='font-size:0.9em;max-width:200px'>".$sv_lizenztyp."</div>";
 				}
 			    if ($field["name"]=="system_os_name" AND $system_os_name != "") { $software_name=$system_os_name; }
 			    if (isset($ms_keys_name)) { if ($ms_keys_name != "") { $software_name=$ms_keys_name; } }
@@ -493,7 +498,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo "<br /><a href=\"http://www.libreoffice.org/\"><img src=\"images/x-office-spreadsheet.png\" alt=\"".__("CSV Spreadsheet")."\" title=\"".__("Click Here for the latest version of LibreOffice")."\" style=\"border:0px;\" width=\"28\" height=\"28\" /></a><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
+     echo "<br><br><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
     // Export to DIA
@@ -541,7 +546,7 @@ if ($myrow = mysqli_fetch_array($result)){
   echo "</form>\n";
 }
 
-echo "</div></td>\n";
+echo "<p style='height:20px'></p></div></td>\n";
 // // include "include_right_column.php";
 include "include_export_modal.php"; 
 echo "</body>\n";

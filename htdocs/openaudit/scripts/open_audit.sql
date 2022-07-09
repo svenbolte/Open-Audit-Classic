@@ -610,7 +610,6 @@ CREATE TABLE  `ldap_users` (
   `ldap_users_usncreated` varchar(255) NOT NULL,
   `ldap_users_usnchanged` varchar(255) NOT NULL,
   `ldap_users_co` varchar(255) NOT NULL,
-
   `ldap_users_company` varchar(255) NOT NULL,
   `ldap_users_streetaddress` varchar(255) NOT NULL,
   `ldap_users_name` varchar(255) NOT NULL,
@@ -1201,6 +1200,22 @@ CREATE TABLE `softwapps` (
 	KEY `Index4` (`software_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `softwareversionen`;
+CREATE TABLE `softwareversionen` (
+		  `sv_datum` bigint(20) unsigned NOT NULL default '0',
+          `sv_rating` varchar(45) NOT NULL default '',
+          `sv_id` int(10) unsigned NOT NULL auto_increment,
+          `sv_product` varchar(255) NOT NULL default '',
+          `sv_version` varchar(50) NOT NULL default '1.0',
+          `sv_bemerkungen` varchar(2000) NOT NULL default '',
+          `sv_vorinstall` varchar(100) NOT NULL default '',
+          `sv_quelle` varchar(100) NOT NULL default '',
+          `sv_lizenztyp` varchar(100) NOT NULL default '',
+          `sv_lizenzgeber` varchar(255) NOT NULL default '',
+          `sv_lizenzbestimmungen` varchar(255) NOT NULL default '',
+          `sv_herstellerwebsite` varchar(255) NOT NULL default '',
+          PRIMARY KEY  (`sv_id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `software_group_members`;
 CREATE TABLE `software_group_members` (

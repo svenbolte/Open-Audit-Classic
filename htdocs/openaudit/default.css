@@ -44,7 +44,7 @@ form { margin-bottom:0; }
   }
 
 .main_each {
-  width:100%
+  width:100%;
   margin: 0px;
   padding: 3px;
   border: 1px solid transparent;
@@ -61,7 +61,7 @@ background-repeat: no-repeat;
 }
 
 
-td {padding-top:3px}
+td {padding-top:3px;padding-bottom:5px}
 
 td.main_each {
 	border: none; 
@@ -309,8 +309,7 @@ a.npb_ldap_logout{
 #right_col{	background: url(images/Shading3.png) repeat-x top left;}
 
 #CenterColumn{
-/*	display: block;*/
-/*	width: 95%;*/
+width: 100%
 }
 
 /* Format LDAP details page - Nick Brown */

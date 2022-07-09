@@ -22,7 +22,6 @@ Recent Changes:
 <head>
 <title>Open-AudIT Login</title>
 <link rel="stylesheet" type="text/css" href="ldap_login.css" />
-<link rel="stylesheet" type="text/css" href="iefix.css" />
 </head>
 <body>
 	<div class='npb_ldap_login_header'>

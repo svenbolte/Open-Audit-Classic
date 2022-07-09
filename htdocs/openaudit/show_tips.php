@@ -40,7 +40,7 @@ if(isset($license_text) AND $license_text!="") {
 } else {
 // If no license specified, use the gpl.txt file. 
 
-$license_text = "../../readme.txt";
+$license_text = "help.txt";
 // echo "<img src=\"images/gplv3-88x31.png\" alt=\"\" style=\"border:0px;\" width=\"48\" height=\"48\"  />\n";              
 }
 echo "<center><h4><a href=\"index.php\">Click to close.</a></h4></center>";

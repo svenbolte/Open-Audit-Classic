@@ -1,0 +1,137 @@
+= Installation (automatisch) =
+
+openaudit-classic-install.zip entpacken und die enthaltene .exe ausführen
+Standard wird OHNE Wordpress installiert, bei Bedarf anschalten
+Standard wird nur der 11 Uhr Task importiert, bei Bedarf abkreuzen und ggf. den NMAP-Task aktivieren
+
+Hinweis: Kommt eine "Neustart Erforderlich" - Meldung, das SETUP abbrechen und neu starten. Ein Neustart für die VC-Runtimes ist definitiv NICHT erforderlich
+
+Nach Installation in die Aufgabenplanung und Domäne und User in die beiden Tasks eintragen.
+
+
+	= Installation (manuell, optional) =
+
+	Voraussetzungen: Apache benötigt die Visual C++ Runtimes 2015-19 (64-Bit) installiert. Diese kann bei Microsoft heruntergeladen werden.
+	Auf einem Windows Server ab Version 2012 R2 :
+	* xampp installieren
+	* nmap und winpcap installieren 
+	* Open-Audit Projektdateien unter htdocs/ kopieren
+	* htdocs/openaudit/scripts/pc-list-file.txt --> alle IP-Adressen aller Netze, die gescannt werden sollen, hier rein. Liste am Besten mit Excel erstellen
+	* htdocs/openaudit/all-tools-scripts/jobs und batches: Aufgabe in den Taskplaer importieren
+
+	Werkzeuge: --> htdocs/openaudit/all-tools-scripts
+			Offline Scan zum Inventarisieren ohne Netzwerk (howto.txt)
+			nmap-zweigstelle: Invenatisieren der IP-Geräte in Zweignetzen
+			jobs und batches: Ausführbare Aufgaben für täglichen Scan am Server  (audit und nmap)
+
+	Benötigte freie IP-Ports auf dem Server:
+	888 <- HTTP Oberfläche Webserver. Die Software sollte nur im Intranet verwendet werden. Dafür reicht http aus.
+	3306 <- Mysql Datenbank Port
+
+
+= Post-Installations-Aufgaben =
+
+Täglichen Task auf korrekten Domänen_Admin und Domänennamen setzen:
+Im Taskplaner (Aufgabenplanung) unter Aufgabenbibliothek den Open Audit Task bearbeiten, Domäne und einen Domänen-Benutzer eintragen und abschicken
+Die Scans erfolgen dann täglich um 11:00 Uhr
+
+
+	= Fehlerbehebung Post-Installation (optional, nur im Fehlerfall) =
+	Stamm-Ordner ist: C:\Program Files (x86)\xampplite\htdocs\openaudit
+
+	./nmap/npcap09995.exe installieren auf dem Server (NMAP benötigt NPCAP auf der Netzwerkkarte des Servers installiert)
+
+	Nach der Installation auf Server 2016 müssen Apache und Mysql ggf. üder die CMD-Dateien 
+	./apache/apache_installservice-win10.cmd
+	./mysql/mysqli_installservice-win10.cmd
+	von Hand (Ausführen als Administrator) initialisiert werden.
+
+	Danach die "Datenbankersteinrichtung" vom Desktop starten und durchklicken.
+	Die "pc_list_File.txt" auf dem Desktop bearbeiten und alle IP-Adressen aller Netze untereinander dort hin kopieren
+	   (Man kann die Listen leicht mit Excel erstellen durch nach unten ziehen)
+	./scripts/audit.config bearbeiten und in der NMAP Sektion das richtige Supnetz eintragen
+	Die Geplanten Tasks (Aufgaben) für Scan und nmap scan installieren über die Aufgabenplanung.
+	Aufgabe ausführen.
+
+
+= Mögliche Bausteine =
+
+Openaudit
+XAMPP-Komponenten:
+	Apache
+	PHP
+	Mysql (MariaDB Open Source)
+	phpMyAdmin
+NMap mit NPCap
+Wordpress (Oberfläche für Intranet-Blogseite)* optional
+
+
+= Hinweise zu Einstellungen und Befehlszeilen-Optionen: =
+
+Die spitzen Klammern bitte nicht mit eingeben. sie sind nur Platzhalter für optionale Werte darin.
+Open-Audit Console aufrufen (Desktop Verknüpfung)
+
+cscript audit.vbs <ip> <domain\user> <passwort>
+	^ aus der Konsole aufrufen für Einzelscan eines Windows-PCs
+
+nmap-scan mit:    cscript nmap.vbs
+	^ scannt alle Geräte von 1 bis 254
+
+Einzelnes Gerät mit NMAP scannen (NMAP funktioniert nur jeweils für das Teilnetz, wo das Script aufgerufen wird
+und WinPCAP installiert ist (im NMAP-Verzeichnis enthalten).
+
+Möchte man auf einem Client-PC in der
+Zweigstelle NMAP einsammeln, benötigt man den NMAP-Ordner an der gleichen Stelle wie auf dem Server,
+zusätzlich den Openaudit Scripts-Ordner. Die Audit-config muss angepasst werden (Subnetz und Server-IP-Adresse).
+mit:   cscript nmap.vbs <nr>
+	^ <nr> ist die letzte Ziffer der IP (Hostnummer)
+
+
+= Vorbereitete Skripte/Clients/Offline-Scan: =
+
+Es gibt 2 Möglichkeiten, PCs zu erfassen, die nicht per WMI erreichbar sind:
+* Client installieren auf dem PC und als Aufgabe täglich scannen lassen (oa-clientside-scan)
+* Offline-Scan Ordner auf einen Stick, daten sammeln lassen und Textdatei importieren (offline-scan)
+Howto-Anleitungen im jeweiligen Unterordner unter /all-tools-scripts
+
+= Hinweise zu Wordpress: =
+
+Benutzt leere Mysql-Datenbank mit User "openaudit"
+
+= Kennwörter für Installation und Programmierung: =
+
+mysql: root / flocke   openaudit / flocke
+
+Zur Ersteinrichtung und zum Löschen der vorhandenen Datenbank: Admin / Delete/Create Database
+MySQL administrieren: PHPMyAdmin aufrufen aus dem Menü
+
+
+= Mehrere Datenbanken: =
+
+Mit http://localhost:888/openaudit/setup.php einrichten, dabei den Datenbanknamen verändern - zB openaudit10892
+Datenbanknamen müssen mit openaudit beginnen. Über die Oberfläche kann man dann jeweils die Defaultdatenbank für
+Einsicht und den automatischen Scan festlegen (immer nur eine Standarddatenbank jeweils wählbar)
+
+
+= WMI-Probleme lösen: =
+Openaudit - WMI: Access denied Fehler beheben: bei Arbeitsguppe: lokalen User, mit dem inventarisitert wird, zufügen mit allen Rechten bei Step1 und Step2
+
+Open Dcomcnfg
+Expand Component Service -> Computers -> My computer
+Go to the properties of My Computer
+Select the COM Security Tab
+Click on "Edit Limits" under Access Permissions, and ensure "Everyone" user group has "Local Access" and "Remote Access" permission.
+Click on the "Edit Limit" for the launch and activation permissions, and ensure "Everyone" user group has "Local Activation" and "Local Launch" permission.
+Highlight "DCOM Config" node, and right click "Windows Management and Instruments", and click Properties.
+<Please add the steps to check Launch and Activation Permissions, Access Permissions, Configuration Permissions based on the default of Windows Server 2008>
+ 
+Open WMImgmt.msc
+Go to the Properties of WMI Control
+Go to the Security Tab
+Select "Root" and open "Security"
+Ensure "Authenticated Users" has "Execute Methods", "Provider Right" and "Enable Account" right; ensure Administrators has all permission.
+ 
+Click Start, click Run, type gpedit.msc, and then click OK.
+Under Local Computer Policy, expand Computer Configuration, and then expand Windows Settings.
+Expand Security Settings, expand Local Policies, and then click User Rights Assignment.
+Verify that the SERVICE account is specifically granted Impersonate a client after authentication rights. 

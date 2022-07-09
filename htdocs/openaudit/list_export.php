@@ -60,7 +60,7 @@ $csv_data = '';
 
 //Table head
 foreach($viewdef_array["fields"] as $field) {
-    if($field["show"]!="n"){
+    if($field["show"]!="n" || $field["name"] =="sv_bemerkungen"){
         $csv_data .= '"'.convertToWindowsCharset($field["head"]).'"';
         $csv_data .= ";";
     }
@@ -71,7 +71,7 @@ $csv_data .= "\r\n";
 if ($myrow = mysqli_fetch_array($result)){
     do {
         foreach($query_array["fields"] as $field){
-			if( $field["show"]!="n" && isset( $myrow[$field["name"]] ) ) {
+			if( $field["show"]!="n" && isset( $myrow[$field["name"]] ) || $field["name"] =="sv_bemerkungen" ) {
                 $csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
                 $csv_data .= ";";
             }
