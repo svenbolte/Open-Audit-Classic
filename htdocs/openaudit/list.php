@@ -116,7 +116,7 @@ echo "<form method=\"post\" id=\"form_nav\" action=\"".htmlentities($MY_REQUEST_
       $show_page_count_to=$page_count+$count_system;
   }
 
-  echo "<table width=\"100%\"><tr><td rowspan=\"2\" class=\"contenthead\">\n";
+  echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
 
      //Is the headline a sql-query?
      if(isset($query_array["headline"]) AND is_array($query_array["headline"])){
@@ -169,7 +169,7 @@ echo "<form method=\"post\" id=\"form_nav\" action=\"".htmlentities($MY_REQUEST_
     echo "<img src=\"images/go-next-disabled.png\" alt=\"".__("Disabled")."\" title=\"".__("Disabled")."\" style=\"border:0px;\" width=\"16\" height=\"16\" />\n";
   }
 
-  echo "</td></tr><tr><td align=\"right\">\n";
+  echo "</td></tr><tr><td class=\"contenthead\" align=\"right\">\n";
 
   //Direct jumping to pages
   //Don't show if there is only one-page or show_all==1
@@ -420,13 +420,21 @@ if ($myrow = mysqli_fetch_array($result)){
 				// If this is not a calculated value, just show it
                $show_value = ConvertSpecialField($myrow, $field, $db, "list");
 			   if ($field["name"]=="software_comment") {
-					$show_value = "<div style='font-size:0.9em;max-width:300px' title='".$software_comment."'>".substr($software_comment,0,55)."</div>";
-					if (!empty($sv_bemerkungen)) {$show_value .= "<div title='".$sv_bemerkungen."' style='font-size:0.9em;max-width:300px' title='".$sv_bemerkungen."'>".substr($sv_bemerkungen,0,99)."</div>"; }
-
+					$show_value = "<div style='word-break: break-all;overflow:hidden;font-size:0.9em;max-width:350px' title='".$software_comment.' '.$sv_bemerkungen."'>".substr($software_comment.' '.$sv_bemerkungen,0,140);
+				$show_value .= "</div>";
 				}
 			   if ($field["name"]=="sv_lizenztyp") {
 					$show_value = "<div style='font-size:0.9em;max-width:200px'>".$sv_lizenztyp."</div>";
 				}
+
+			   if ($field["name"]=="sv_version") {
+					if ((float) $sv_version > (float) $software_version) $warncolor = "#f80000"; else $warncolor="#00cc00";
+					$show_value = "<div style='font-size:0.9em;max-width:100px;color:".$warncolor."'>".$sv_version."</div>";
+				}
+			   if ($field["name"]=="software_version") {
+					$show_value = "<div style='word-break: break-all;font-size:0.9em;max-width:100px'>".$software_version."</div>";
+				}
+
 			    if ($field["name"]=="system_os_name" AND $system_os_name != "") { $software_name=$system_os_name; }
 			    if (isset($ms_keys_name)) { if ($ms_keys_name != "") { $software_name=$ms_keys_name; } }
 

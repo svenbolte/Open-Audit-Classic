@@ -1,8 +1,16 @@
 <?php
 $query_array=array("headline"=>__("List all Software"),
-                   "sql"=>"SELECT count(software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, software_version, software_publisher, software_url, software_comment, software_first_timestamp FROM system, software  
-						LEFT JOIN softwareversionen ON LOWER(SUBSTRING_INDEX(software.software_name, ' ', 2)) LIKE (SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 2))  
-						where software_name NOT LIKE '%hotfix%' AND software_name NOT LIKE '%Service Pack%' AND software_name NOT LIKE '% Updater%' AND software_name NOT LIKE '%MUI (%' AND software_name NOT LIKE '%Proofing %' AND software_name NOT LIKE '%Language%' AND software_name NOT LIKE '%Korrektur%' AND software_name NOT LIKE '%linguisti%' AND software_name NOT REGEXP 'SP[1-4]{1,}' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' AND software_uuid = system_uuid AND software_timestamp = system_timestamp GROUP BY software_name, software_version ",
+                   "sql"=>"SELECT count(software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version, software_version, software_publisher, software_url, software_comment, software_first_timestamp
+						FROM system, software  
+						LEFT JOIN softwareversionen
+						ON  ( LOWER(SUBSTRING_INDEX(software.software_name, ' ', 2))
+						LIKE LOWER(SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 2)) )
+						OR ( LOWER(SUBSTRING_INDEX(software.software_name, ' ', 1))
+						LIKE LOWER(SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 1)) AND software.software_name NOT LIKE '%Microsoft%' )
+						WHERE software_name NOT LIKE '%hotfix%'
+						AND software_name NOT LIKE '%Service Pack%' 
+						AND software_name NOT LIKE '% Updater%'
+						AND software_name NOT LIKE '%MUI (%' AND software_name NOT LIKE '%Proofing %' AND software_name NOT LIKE '%Language%' AND software_name NOT LIKE '%Korrektur%' AND software_name NOT LIKE '%linguisti%' AND software_name NOT REGEXP 'SP[1-4]{1,}' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' AND software_uuid = system_uuid AND software_timestamp = system_timestamp GROUP BY software_name, software_version ",
                    "sort"=>"software_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"list.php",
@@ -38,26 +46,23 @@ $query_array=array("headline"=>__("List all Software"),
                                                "link"=>"y",
                                               ),
 
-                                   "40"=>array("name"=>"software_publisher",
-                                               "head"=>__("Publisher"),
+								   "33"=>array("name"=>"sv_version",
+                                               "head"=>__("Ver from DB"),
                                                "show"=>"y",
-                                               "link"=>"y",
-                                               "get"=>array("file"=>"%software_url",
-                                                            "title"=>__("External Link"),
-                                                            "target"=>"_BLANK",
-                                                           ),
+                                               "link"=>"n",
+											   "search"=>"n",
                                               ),
 
-								   "41"=>array("name"=>"software_comment",
-                                               "head"=>__("Comment"),
-                                               "show"=>"y",
+								   "41"=>array("name"=>"sv_bemerkungen",
+                                               "head"=>__("Anmerkungen"),
+                                               "show"=>"n",
                                                "link"=>"n",
 											   "search"=>"y",
                                               ),
 
-								   "42"=>array("name"=>"sv_bemerkungen",
-                                               "head"=>__("Anmerkungen"),
-                                               "show"=>"n",
+								   "42"=>array("name"=>"software_comment",
+                                               "head"=>__("Comment"),
+                                               "show"=>"y",
                                                "link"=>"n",
 											   "search"=>"y",
                                               ),
@@ -67,6 +72,16 @@ $query_array=array("headline"=>__("List all Software"),
                                                "show"=>"y",
                                                "link"=>"n",
 											   "search"=>"y",
+                                              ),
+
+                                   "46"=>array("name"=>"software_publisher",
+                                               "head"=>__("Publisher"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                               "get"=>array("file"=>"%software_url",
+                                                            "title"=>__("External Link"),
+                                                            "target"=>"_BLANK",
+                                                           ),
                                               ),
 
 								  "50"=>array("name"=>"software_first_timestamp",
