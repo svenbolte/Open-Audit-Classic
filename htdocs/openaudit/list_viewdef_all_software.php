@@ -1,19 +1,24 @@
 <?php
 $query_array=array("headline"=>__("List all Software"),
-                   "sql"=>"SELECT (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) AS swordct, count(software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version, software_version, software_publisher, software_url, software_comment, software_first_timestamp
-						FROM system, software  
+                   "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version, software_version, software_publisher, software_url, software_comment, software_first_timestamp
+						FROM  system, software
 						LEFT JOIN softwareversionen
-						ON ( ( (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) >= 2
-							AND LOWER(SUBSTRING_INDEX(software.software_name, ' ', 2))
-							LIKE LOWER(SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 2)) )
-						OR  ( (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) = 1
-							AND LOWER(SUBSTRING_INDEX(software.software_name, ' ', 1))
-							LIKE LOWER(SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 1)) )
+						ON (
+							 CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(software.software_name,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')      
+						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')
 						)
 						WHERE software_name NOT LIKE '%hotfix%'
 						AND software_name NOT LIKE '%Service Pack%' 
 						AND software_name NOT LIKE '% Updater%'
-						AND software_name NOT LIKE '%MUI (%' AND software_name NOT LIKE '%Proofing %' AND software_name NOT LIKE '%Language%' AND software_name NOT LIKE '%Korrektur%' AND software_name NOT LIKE '%linguisti%' AND software_name NOT REGEXP 'SP[1-4]{1,}' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' AND software_uuid = system_uuid AND software_timestamp = system_timestamp GROUP BY software_name, software_version ",
+						AND software_name NOT LIKE '%MUI
+						(%' AND software_name NOT LIKE '%Proofing %'
+						AND software_name NOT LIKE '%Language%'
+						AND software_name NOT LIKE '%Korrektur%'
+						AND software_name NOT LIKE '%linguisti%'
+						AND software_name NOT REGEXP 'SP[1-4]{1,}' 
+						AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' 
+						AND software_uuid = system_uuid AND software_timestamp = system_timestamp
+						GROUP BY software_name, software_version ",
                    "sort"=>"software_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"list.php",
