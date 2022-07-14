@@ -3,13 +3,13 @@ $query_array=array("headline"=>__("List all Software"),
                    "sql"=>"SELECT (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) AS swordct, count(software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version, software_version, software_publisher, software_url, software_comment, software_first_timestamp
 						FROM system, software  
 						LEFT JOIN softwareversionen
-						ON  ( ( (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) >= 2
+						ON ( ( (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) >= 2
 							AND LOWER(SUBSTRING_INDEX(software.software_name, ' ', 2))
 							LIKE LOWER(SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 2)) )
 						OR  ( (LENGTH(software.software_name) - LENGTH(REPLACE(software.software_name, ' ', '')) + 1) = 1
 							AND LOWER(SUBSTRING_INDEX(software.software_name, ' ', 1))
 							LIKE LOWER(SUBSTRING_INDEX(softwareversionen.sv_product, ' ', 1)) )
-						AND software.software_name NOT LIKE '%Microsoft%' )
+						)
 						WHERE software_name NOT LIKE '%hotfix%'
 						AND software_name NOT LIKE '%Service Pack%' 
 						AND software_name NOT LIKE '% Updater%'
@@ -24,7 +24,7 @@ $query_array=array("headline"=>__("List all Software"),
                                              "headline_addition"=>"%software_name",
                                             ),
                                ),
-                   "fields"=>array("10"=>array("name"=>"swordct",
+                   "fields"=>array("10"=>array("name"=>"software_count",
                                                "head"=>__("Count"),
                                                "show"=>"y",
                                                "link"=>"y",
