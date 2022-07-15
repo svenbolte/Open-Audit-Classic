@@ -7,9 +7,14 @@ $time_start = microtime_float();
 // set an initial 4 min extra timeout
 set_time_limit(240000);
 
-echo '</tr><tr><td>';
+echo '</tr><tr><td> Datei wird heruntergeladen vom Webserver...<br><br>';
 
 $filename = dirname(__FILE__).'/wordpresssoftware.csv';
+
+$url = 'https://6yztfx48o7fv2uhb.myfritz.net/dcounter/softwareverzeichnis.asp?action=woocom&search=&code=a5b584050977ca2ece290de786cc35f6';
+$source = file_get_contents($url);
+file_put_contents($filename, $source);
+
 echo $filename;
 $flag = true;
 $file = fopen($filename, "r");
