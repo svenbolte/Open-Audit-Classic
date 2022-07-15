@@ -18,7 +18,7 @@
     $sql = "SELECT other_id, other_ip_address, other_network_name, other_description, other_type, other_timestamp FROM other ORDER BY other_ip_address ";
     $result = mysqli_query($db,$sql);
     $bgcolor = "#FFFFFF";
-    echo "<td valign=\"top\">
+    echo "<td style=\"vertical-align:top;width:100%\">
           <div class=\"main_each\">";
 
     if ($myrow = mysqli_fetch_array($result)){
@@ -41,20 +41,20 @@
               }
             </script>
      
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+              <table width=\"100%\">
                 <tr>
                    <td class=\"contenthead\">".__("Delete other Equipments")."<br />&nbsp;</td>
                 </tr>
               </table>
              
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+              <table class=\"tftable\" width=\"100%\">
                 <tr>
                    <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected other equipments\" onclick=\"return confirm('Do you really want to DELETE all selected other equipments?')\"></td>
                    <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
                 </tr>
               </table>
 
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+              <table class=\"tftable\" width=\"100%\">
                 <tr>&nbsp;</tr>
                 <tr>
                    <td></td>

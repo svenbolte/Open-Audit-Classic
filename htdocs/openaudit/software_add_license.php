@@ -7,7 +7,7 @@ if (isset($_GET['software'])) {$software = $_GET['software'];} else {}
 if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 include "include.php";
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 $sql = "SELECT * from software_register WHERE software_reg_id = '" . $_GET["id"] . "'";
 $result = mysqli_query($db,$sql);

@@ -5,7 +5,7 @@ $software = "";
 $count = 0;
 include "include.php";
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 
 if (isset($_GET['id'])){$id = $_GET['id'];}else{header("Location: software_register.php");}
@@ -21,7 +21,7 @@ $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
     $name = $myrow["software_title"];
     
-    echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+    echo "<table   width=\"100%\">\n";
     echo "<tr><td class=\"contenthead\" colspan=\"2\">Software License Register Details for: </td></tr>\n";
     echo "<tr><td>" . $myrow["software_title"] . "</td></tr>\n";
     echo "<tr><td class=\"contenthead\"><br />Usage Details.</td></tr>\n";

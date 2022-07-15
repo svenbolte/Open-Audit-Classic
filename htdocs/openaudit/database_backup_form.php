@@ -10,7 +10,7 @@ $bgcolor = "#FFFFFF";
 set_time_limit(240);
 
 
-echo "<td valign=\"top\">$newline";
+echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
 echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
 
@@ -39,7 +39,7 @@ if (!file_exists($backup_dir)) {
 // Start of Backup Selection section
 
 echo "<form method=\"GET\" action=\"database_backup_sql.php\" name=\"database_backup\">";
-echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"content\">";
+echo "<table   class=\"content\">";
 //echo "<tr><td colspan=\"1\"><hr /></td></tr>";
 echo "<tr>\n";
 echo "<td>".__("Database").":</td>\n";

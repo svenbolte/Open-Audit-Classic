@@ -7,14 +7,14 @@ if (isset($_GET['software'])) {$software = $_GET['software'];} else {}
 if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 include "include.php";
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 $sql = "select * from software_register ORDER BY software_title";
 //$sql = "select * from software_register left outer join group_names on software_register.group_id = group_names.group_id ORDER BY group_names.group_id, software_title";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   $group_id = $myrow["group_id"];
-  echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
+  echo "<table  >\n";
   echo "<tr>\n";
   echo "  <td class=\"contenthead\">Software License Register.<br />&nbsp;</td>\n";
   echo "</tr>\n";

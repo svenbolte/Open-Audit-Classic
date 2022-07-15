@@ -7,14 +7,14 @@ $count = -1;
 if (isset($_GET['software'])) {$software = $_GET['software'];} else {}
 if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 echo "<p class=\"contenthead\">Software License Register.</p>";
 $db=GetOpenAuditDbConnection() or die("Could not connect");
 $sql = "SELECT * FROM software_register ORDER BY software_title";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"700\" class=\"content\">";
+  echo "<table   width=\"700\" class=\"content\">";
   echo "<tr>";
   echo "<td></td>";
   echo "<td><b>&nbsp;&nbsp;Package&nbsp;&nbsp;</b></td>";

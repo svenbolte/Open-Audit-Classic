@@ -28,7 +28,7 @@ $bgcolor = "#FFFFFF";
 set_time_limit(600);
 $backup = '';
 
-echo "<td valign=\"top\">$newline";
+echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
 echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
 echo "  <tr><td class=\"contenthead\">".__("Backing up the Database")."</td></tr>";

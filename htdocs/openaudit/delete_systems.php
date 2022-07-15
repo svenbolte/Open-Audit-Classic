@@ -177,7 +177,7 @@
     $sql = "SELECT system_uuid, net_ip_address, system_name, net_domain, system_os_name, system_system_type, system_timestamp FROM system ORDER BY system_name ";
     $result = mysqli_query($db,$sql);
     $bgcolor = "#FFFFFF";
-    echo "<td valign=\"top\">
+    echo "<td style=\"vertical-align:top;width:100%\">
           <div class=\"main_each\">";
 
     if ($myrow = mysqli_fetch_array($result)){
@@ -200,20 +200,20 @@
               }
             </script>
      
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+              <table width=\"100%\">
                 <tr>
                    <td class=\"contenthead\">".__("Delete Systems")."<br />&nbsp;</td>
                 </tr>
               </table>
              
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+              <table   width=\"100%\">
                 <tr>
                    <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected systems\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
                    <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
                 </tr>
               </table>
 
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+              <table class=\"tftable\" width=\"100%\">
                 <tr>&nbsp;</tr>
                 <tr>
                    <td></td>
@@ -244,7 +244,6 @@
       }
 
     echo "</div>\n";
-    echo __("This Page was generated in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").".";
     echo "</td>\n";
     // include "include_right_column.php";
 ?>

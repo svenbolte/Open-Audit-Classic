@@ -7,11 +7,11 @@ if (isset($_GET['software'])) {$software = $_GET['software'];} else {}
 if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 include "include.php";
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 echo "<div id=\"ajaxTest\"> </div>\n";
 #echo "<form name=\"nmap_form\" type=\"post\">\n";
-echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+echo "<table   width=\"100%\">\n";
 echo "<tr>\n";
 echo "  <td class=\"contenthead\" colspan=\"5\">Network Monitoring.<br />&nbsp;</td>\n";
 echo "</tr>\n";

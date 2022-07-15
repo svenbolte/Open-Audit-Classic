@@ -38,9 +38,9 @@ return $div_clean;
 }
 
   include "include.php";
-  echo "<td valign=\"top\">\n"; 
+  echo "<td style=\"vertical-align:top;width:100%\">\n"; 
   echo "<div class=\"main_each\">";
-  echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
+  echo "<table  >\n";
   echo "<tr>\n";
   echo "  <td class=\"contenthead\" colspan=\"3\">".__("Add Package to Software License Register").".<br />&nbsp;</td>\n";
   echo "</tr>\n";
@@ -72,7 +72,7 @@ return $div_clean;
       echo "<a href=\"#\" onclick=\"sendRequest('" . url_clean($myrow["software_name"]) . "');\"><img border=\"0\" src=\"images/button_success.png\" width=\"16\" height=\"16\" alt=\"\" /></a>";
       echo "</div>\n";
       echo "</td>\n";
-      echo "<td valign=\"top\">\n";
+      echo "<td style=\"vertical-align:top;width:100%\">\n";
       echo "</tr>";
     } while ($myrow = mysqli_fetch_array($result));
     echo "</table>\n";

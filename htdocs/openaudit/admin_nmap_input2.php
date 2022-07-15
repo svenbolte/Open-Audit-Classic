@@ -22,7 +22,7 @@ Recent Changes:
 
 $page = "add_pc";
 include "include.php";
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 
 echo "<p class=\"contenthead\">".__("NMap")."</p>\n";

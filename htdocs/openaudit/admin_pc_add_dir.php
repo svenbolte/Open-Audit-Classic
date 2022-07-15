@@ -12,9 +12,9 @@ set_time_limit(200);
     $tstart = $mtime;
 
 include "include.php";
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+echo "<table   width=\"100%\">\n";
 echo " <tr>\n  <td align=\"left\" class=\"contenthead\" >".__("Uploading files from Uploads directory").".<br />&nbsp;</td>\n";
 $count = 0;
 $dir = "uploads/";

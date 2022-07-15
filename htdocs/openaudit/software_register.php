@@ -10,7 +10,7 @@ $time_start = microtime_float();
 // set an initial 4 min extra timeout
 set_time_limit(240000);
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 #$sql =  "SELECT software_reg_id, software_title, count(software.software_name) AS number_used, sum(license_purchase_number) as number_purchased FROM ";
 #$sql .= "software_register, software, system, software_licenses WHERE ";
@@ -29,7 +29,7 @@ $sql .= "GROUP BY software_title";
 
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+  echo "<table   width=\"100%\">\n";
   echo "<tr>\n";
   echo "  <td class=\"contenthead\">Software License Register<br />&nbsp;</td>\n";
   echo "</tr>\n";

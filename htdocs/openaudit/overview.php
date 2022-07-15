@@ -5,7 +5,7 @@ $time_start = microtime_float();
 
 require("overview_viewdef.php");
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
   echo "<div class=\"main_each\">";
 
 //Table header
@@ -35,7 +35,7 @@ foreach($query_array as $view_master) {
                 if(isset($view["headline"])){
                     $body .= $view["headline"];
                 }
-                $body .= "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+                $body .= "<table   width=\"100%\">\n";
                 $body .= " <tr>\n";
 
                 $colgroup = "<colgroup>\n";
@@ -183,7 +183,7 @@ foreach($query_array as $view_master) {
     //Headline
     $buffer = "<div class=\"main_each\">";
 
-    $buffer .= "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" >\n";
+    $buffer .= "<table   width=\"100%\" >\n";
      $buffer .= "<tr\n>";
       $buffer .= "<td class=\"contenthead\" width=\"450\">\n";
        $buffer .= "<a href=\"javascript://\" onclick=\"switchUl('f".$view_count."');\">\n";

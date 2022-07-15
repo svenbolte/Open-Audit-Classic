@@ -179,7 +179,7 @@ $sql .= "WHERE system_timestamp < '" . adjustdate(0,0,-$days_systems_not_audited
 $sql .= "ORDER BY system_name ";
 $result = mysqli_query($db,$sql);
 $bgcolor = "#FFFFFF";
-echo "<td valign=\"top\">
+echo "<td style=\"vertical-align:top;width:100%\">
       <div class=\"main_each\">";
 
 if ($myrow = mysqli_fetch_array($result)){
@@ -202,20 +202,20 @@ if ($myrow = mysqli_fetch_array($result)){
           }
         </script>
  
-          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+          <table   width=\"100%\">
             <tr>
                <td class=\"contenthead\">".__("Delete Systems Not Audited in the last " ). $days_systems_not_audited .__(" days")."<br />&nbsp;</td>
             </tr>
           </table>
          
-          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+          <table   width=\"100%\">
             <tr>
                <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected systems\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
                <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
             </tr>
           </table>
 
-          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">
+          <table   width=\"100%\">
             <tr>&nbsp;</tr>
             <tr>
                <td></td>

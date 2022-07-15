@@ -87,6 +87,14 @@ td.contentsubtitle {
   color: #000000;
   font-weight:bold;}
 
+.tftable tr:nth-child(odd),.tftable2 tr:nth-child(4n+3),.tftable2 tr:nth-child(4n+4) {
+background:#fff
+}
+
+.tftable tr:nth-child(even),.tftable2 tr:nth-child(4n+5),.tftable2 tr:nth-child(4n+6) {
+background:rgba(192,192,192,0.1)
+}
+
 .navarrows {
   float: right;
   padding-right: 5px;

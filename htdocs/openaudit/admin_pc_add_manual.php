@@ -1,7 +1,7 @@
 <?php
 $page = "admin";
 include "include.php";
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 echo "<form action=\"" . $_SERVER["PHP_SELF"] . "\" method=\"post\">\n";
 echo "<p class=\"contenthead\">".__("Add a PC")."</p>\n";

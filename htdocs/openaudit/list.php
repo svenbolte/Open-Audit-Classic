@@ -101,7 +101,7 @@ $page_count=0;
         $alt_searchboxes=$searchboxes_array[1]["alt"];
     }
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 
 //IIS doesn't set $_SERVER["REQUEST_URI"] so need to use script name and query string instead
@@ -288,7 +288,7 @@ echo "</script>\n";
  echo "<input type=\"hidden\" name=\"headline_addition\" value=\"".$headline_addition."\" />\n";
 //echo "</form>\n";
 //echo "<form method=\"post\" name=\"form_search\" action=\"".htmlentities($_SERVER["REQUEST_URI"])."\" style=\"margin:0px;\">\n";
-echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+echo "<table   width=\"100%\">\n";
 
 echo "<tr>\n";
  echo $headline_1;
@@ -495,7 +495,7 @@ if ($myrow = mysqli_fetch_array($result)){
 
     // Export to CSV
 
-    echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
+    echo "<hr><form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
     if(isset($_REQUEST["pc"])){
@@ -507,7 +507,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo "<br><br><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
+     echo "<br><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
     // Export to DIA
@@ -528,7 +528,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo " <a href=\"http://live.gnome.org/Dia\" <img src=\"images/gnome-application-x-dia-diagram.png\" alt=\"".__("Dia Diagram")."\" title=\"".__("Click here for the latest version of DIA")."\" style=\"border:0px;\" width=\"28\" height=\"28\" /></a><a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
+     echo " <a href=\"https://live.gnome.org/Dia\" <img src=\"images/gnome-application-x-dia-diagram.png\" alt=\"".__("Dia Diagram")."\" title=\"".__("Click here for the latest version of DIA")."\" style=\"border:0px;\" width=\"28\" height=\"28\" /></a><a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
     // Export to Inkscape

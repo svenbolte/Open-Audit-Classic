@@ -2,7 +2,7 @@
 $page = "add_pc";
 include "include.php";
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 
 //echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n";
@@ -16,7 +16,7 @@ echo "<div class=\"main_each\">";
 //echo "<table width=\"100%\" border=\"0\">\n";
 //echo "<tr><td colspan=\"3\" class=\"main_each\"><img src=\"images/logo.png\" width=\"300\" height=\"48\" alt=\"\"/></td></tr>\n";
 //echo "<tr>\n";
-//echo "<td valign=\"top\">\n";
+//echo "<td style=\"vertical-align:top;width:100%\">\n";
 //echo "<div class=\"main_each\">\n";
 echo "<p class=\"contenthead\">".__("Add a PC")."</p>\n";
 echo "<form action=\"admin_pc_add_2.php\" method=\"post\">\n";

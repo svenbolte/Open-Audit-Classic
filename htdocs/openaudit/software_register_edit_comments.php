@@ -7,12 +7,12 @@ include "include.php";
 
 if (isset($_GET['id'])){$id = $_GET['id'];}else{header("Location: software_register.php?pc=");}
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 $sql = "select * from software_register WHERE software_reg_id = '$id'";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-    echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"700\" class=\"content\">";
+    echo "<table   width=\"700\" class=\"content\">";
     echo "<tr><td colspan=\"4\" class=\"contenthead\">Software License Register.<br />&nbsp;</td></tr>\n";
     echo "<tr>";
     echo "<td><b>&nbsp;&nbsp;Package&nbsp;&nbsp;</b></td>";
@@ -50,9 +50,9 @@ if ($myrow = mysqli_fetch_array($result)){
       echo "</tr>";
       echo "</table>";
 	  echo "<form action=\"software_register_edit_comments_2.php?id=$id\" method=\"post\">";
-	  echo "<table bgcolor=\"" . $bgcolor . "\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"700\" class=\"content\">";
+	  echo "<table bgcolor=\"" . $bgcolor . "\"   width=\"700\" class=\"content\">";
       echo "<tr>";
-      echo "<td valign=\"top\"><br /><textarea rows=\"4\" name=\"comments\" cols=\"60\">" . $myrow["software_comments"] . "</textarea></td>";
+      echo "<td style=\"vertical-align:top;width:100%\"><br /><textarea rows=\"4\" name=\"comments\" cols=\"60\">" . $myrow["software_comments"] . "</textarea></td>";
       echo "</tr>";
       echo "<tr>";
 	  echo "<td><input name=\"Submit\" value=\"Submit Comment\" type=\"submit\" /></td>";

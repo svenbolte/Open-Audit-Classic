@@ -3,14 +3,14 @@ $JQUERY_UI = array('core','dialog','tooltip');
 $page = "graphs";
 include "include.php";
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+echo "<table   width=\"100%\">\n";
 echo "<tr><td class=\"contenthead\" colspan=\"4\">".__("Partition Usage for") ." ". $myrow["net_ip_address"] . " - " . $myrow["system_name"] . "</td></tr>";
 $disk_letter_old = "";
 $sql = "SELECT * FROM graphs_disk WHERE disk_uuid = '$pc' ORDER BY disk_letter, disk_timestamp";
 $result = mysqli_query($db,$sql);
-echo "<tr><td valign=\"top\">";
+echo "<tr><td style=\"vertical-align:top;width:100%\">";
 if ($myrow = mysqli_fetch_array($result)){
   do {
     if ($myrow['disk_letter'] == $disk_letter_old){

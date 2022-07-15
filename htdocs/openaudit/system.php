@@ -51,7 +51,7 @@ if(isset($_REQUEST["pc"]) AND
     }
 }
 
-echo "<td valign=\"top\">\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
   echo "<div class=\"main_each\">";
 
   if(isset($query_array["name"]) AND $query_array["name"]!=""){
@@ -163,7 +163,7 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
         echo "  <input type=\"hidden\" name=\"user\" value=\"".$_REQUEST["user"]."\" />";
     }
     echo "</p>\n";
-    echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n";
+    echo "<table   width=\"100%\">\n";
 
     //IF Horizontal Table-Layout
     if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){
