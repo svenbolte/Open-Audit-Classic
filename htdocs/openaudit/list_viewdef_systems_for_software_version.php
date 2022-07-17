@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List Systems for Software/Version"),
-                   "sql"=>"SELECT distinct * FROM software, system where software_name = '" . $_GET["name"] . "' AND software_version = '" . $_GET['version'] . "' AND software_uuid = system_uuid AND software_timestamp = system_timestamp group by software_uuid,system_name",
+                   "sql"=>"SELECT distinct * FROM software, system where software_name = '" . @@$_GET["name"] . "' AND software_version = '" . @$_GET['version'] . "' AND software_uuid = system_uuid AND software_timestamp = system_timestamp group by software_uuid,system_name",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",

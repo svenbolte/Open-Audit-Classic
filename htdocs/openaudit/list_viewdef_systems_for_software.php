@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List Systems for Software"),
-                   "sql"=>"SELECT * FROM software, system where software_name = '" . $_GET["name"] . "' AND software_uuid = system_uuid AND software_timestamp = system_timestamp ",
+                   "sql"=>"SELECT * FROM software, system where software_name = '" . @$_GET["name"] . "' AND software_uuid = system_uuid AND software_timestamp = system_timestamp ",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",

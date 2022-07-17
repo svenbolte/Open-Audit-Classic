@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List Systems with BHO"),
-                   "sql"=>"SELECT * FROM browser_helper_objects bho, system sys WHERE bho_program_file = '" . mysqli_escape_string(urldecode($_GET["name"])) . "' and bho_uuid = system_uuid AND bho_timestamp = system_timestamp",
+                   "sql"=>"SELECT * FROM browser_helper_objects bho, system sys WHERE bho_program_file = '" . mysqli_escape_string(urldecode(@$_GET["name"])) . "' and bho_uuid = system_uuid AND bho_timestamp = system_timestamp",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",

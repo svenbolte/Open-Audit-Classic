@@ -2,7 +2,7 @@
 
 $query_array=array("headline"=>__("List Systems with Processor"),
                    "sql"=>"SELECT processor_id, processor_caption, processor_name, processor_socket_designation, net_ip_address, system_name, system_uuid
-                   FROM processor, system WHERE processor_name = '".$_GET["name"]."'
+                   FROM processor, system WHERE processor_name = '".@$_GET["name"]."'
                    AND processor_uuid = system_uuid AND processor_timestamp = system_timestamp ",
                    "sort"=>"system_name",
                    "dir"=>"ASC",

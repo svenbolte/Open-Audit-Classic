@@ -112,7 +112,7 @@ return $timestamp;
 
 function return_date_time($timestamp)
 {
-$timestamp = substr($timestamp, 6, 2) . "." . substr($timestamp, 4, 2) . "." . substr($timestamp, 0, 4) . "|" . substr($timestamp, 8, 2) . ":" . substr($timestamp, 10, 2);
+$timestamp = substr($timestamp, 6, 2) . "." . substr($timestamp, 4, 2) . "." . substr($timestamp, 0, 4) . " " . substr($timestamp, 8, 2) . ":" . substr($timestamp, 10, 2);
 return $timestamp;
 }
 

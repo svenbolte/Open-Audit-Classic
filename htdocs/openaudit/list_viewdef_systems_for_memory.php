@@ -1,6 +1,6 @@
 <?php
 
-$menge = @$_GET["name"];
+$menge = @@$_GET["name"];
 $query_array=array("headline"=>__("List Systems with Memory"),
                    "sql"=>"SELECT * FROM system,
 						(select *, sum(memory_capacity) AS total_memory FROM memory GROUP BY memory_uuid, memory_timestamp) AS full_system_memory

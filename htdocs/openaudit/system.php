@@ -496,7 +496,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
 
 
   echo "</div><br>\n";
-  echo __("This Page was generated in")." ".number_format((microtime_float()-$time_start),2)." ". __("seconds").".";
+  
 
  echo "</td>\n";
 // // include "include_right_column.php";

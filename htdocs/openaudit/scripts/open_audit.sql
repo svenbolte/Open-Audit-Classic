@@ -1213,6 +1213,7 @@ CREATE TABLE `softwareversionen` (
           `sv_lizenztyp` varchar(100) NOT NULL default '',
           `sv_lizenzgeber` varchar(255) NOT NULL default '',
           `sv_lizenzbestimmungen` varchar(255) NOT NULL default '',
+          `sv_instlocation` varchar(20) NOT NULL default '',
           `sv_herstellerwebsite` varchar(255) NOT NULL default '',
           PRIMARY KEY  (`sv_id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

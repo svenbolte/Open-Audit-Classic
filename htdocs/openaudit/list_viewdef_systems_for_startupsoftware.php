@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List Systems with Startup-Software"),
-                   "sql"=>"SELECT * FROM startup, system WHERE startup_caption = '" . $_GET["name"] . "' AND startup_uuid  = system_uuid AND startup_timestamp = system_timestamp ",
+                   "sql"=>"SELECT * FROM startup, system WHERE startup_caption = '" . @$_GET["name"] . "' AND startup_uuid  = system_uuid AND startup_timestamp = system_timestamp ",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",

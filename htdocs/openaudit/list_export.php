@@ -69,15 +69,36 @@ $csv_data .= "\r\n";
 
 //Table body
 if ($myrow = mysqli_fetch_array($result)){
-    do {
-        foreach($query_array["fields"] as $field){
-			if( $field["show"]!="n" && isset( $myrow[$field["name"]] ) || $field["name"] =="sv_bemerkungen" ) {
-                $csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
-                $csv_data .= ";";
-            }
+    $totals=0;
+	do {
+		foreach($query_array["fields"] as $field) {
+			if ( $field["head"]=="Anzahl") $totals += (int) $myrow[$field["name"]];
+			if ( $field["show"]!="n" && isset($myrow[$field["name"]] ) ) {
+				if ($field["name"]=='software_version' || $field["name"]=='sv_version') {
+					$csv_data .= '"=""'.convertToWindowsCharset($myrow[$field["name"]]).'"""';
+					$csv_data .= ';';
+				} else if ( (float) $myrow[$field["name"]] > 20000101000000) {
+					$csv_data .= '"'.return_date_time($myrow[$field["name"]]).'"';
+					$csv_data .= ';';
+				} else {
+					$csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
+					$csv_data .= ';';
+				}
+			} else if ( $field["show"]!="n" ) {
+                $csv_data .= '"";';
+			}
+			if ( $field["show"]=="n" && $field["name"]=="sv_bemerkungen") {
+				$csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
+				$csv_data .= ';';
+			}	
         }
         $csv_data .= "\r\n";
     } while ($myrow = mysqli_fetch_array($result));
+// SUM line
+$csv_data .= "\r\n";
+$csv_data .= '"'.$totals.'";"'.$result->num_rows.'";"Menge/Anzahl ungefiltert';
+$csv_data .= "\r\n";
+
 }
 
 // set the filename if specified

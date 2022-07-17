@@ -7,7 +7,19 @@ if ($myrow['system_os_type'] <> 'Linux'){
 $query_array=array("headline"=>array("name"=>__("Installed Software"),
                                      "sql"=>"SELECT `system_name` FROM `system` WHERE `system_uuid` = '" . $_REQUEST["pc"] . "'",
                                      ),
-                   "sql"=>"SELECT * FROM software, system WHERE system_uuid = '".$_REQUEST["pc"]."' AND software_name NOT LIKE '%hotfix%' AND software_name NOT LIKE '%Service Pack%' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' AND software_uuid = system_uuid AND software_timestamp = system_timestamp GROUP BY software_name, software_version ",
+                   "sql"=>"SELECT *,softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version
+							FROM system, software
+							LEFT JOIN softwareversionen
+							ON (
+								 CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(software.software_name,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')      
+							LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')
+							)
+							WHERE system_uuid = '".$_REQUEST["pc"]."' 
+							AND software_name NOT LIKE '%hotfix%' 
+							AND software_name NOT LIKE '%Service Pack%' 
+							AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' AND
+							software_uuid = system_uuid AND software_timestamp = system_timestamp 
+							GROUP BY software_name, software_version ",
                    "sort"=>"software_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"list.php",
@@ -30,13 +42,34 @@ $query_array=array("headline"=>array("name"=>__("Installed Software"),
                                                                         ),
                                                            ),
                                               ),
-                                   "20"=>array("name"=>"software_version",
+                                   "30"=>array("name"=>"software_version",
                                                "head"=>__("Version"),
                                                "show"=>"y",
                                                "link"=>"y",
                                               ),
 
-                                   "30"=>array("name"=>"software_publisher",
+								   "33"=>array("name"=>"sv_version",
+                                               "head"=>__("Ver from DB"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+											   "search"=>"n",
+                                              ),
+
+								   "41"=>array("name"=>"sv_bemerkungen",
+                                               "head"=>__("Anmerkungen"),
+                                               "show"=>"n",
+                                               "link"=>"n",
+											   "search"=>"y",
+                                              ),
+
+								   "42"=>array("name"=>"software_comment",
+                                               "head"=>__("Comment"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+											   "search"=>"y",
+                                              ),
+
+                                   "44"=>array("name"=>"software_publisher",
                                                "head"=>__("Publisher"),
                                                "show"=>"y",
                                                "link"=>"y",
@@ -45,7 +78,7 @@ $query_array=array("headline"=>array("name"=>__("Installed Software"),
                                                             "target"=>"_BLANK",
                                                            ),
                                               ),
-                                    "40"=>array("name"=>"software_first_timestamp",
+                                    "46"=>array("name"=>"software_first_timestamp",
                                                "head"=>__("First Audited"),
                                                "show"=>"y",
                                                "link"=>"n",

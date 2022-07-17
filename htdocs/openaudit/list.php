@@ -6,6 +6,12 @@ $time_start = microtime_float();
 // set an initial 4 min extra timeout
 set_time_limit(240000);
 
+//
+// Softwaredatenbank importieren
+//
+
+svversionenimport();
+
 $count_system_max="10000";
 
 // If you would like to have a new View, you have to modify 3 parts:
@@ -420,6 +426,7 @@ if ($myrow = mysqli_fetch_array($result)){
 				// If this is not a calculated value, just show it
                $show_value = ConvertSpecialField($myrow, $field, $db, "list");
 			   if ($field["name"]=="software_comment") {
+					if (!isset($sv_bemerkungen)) $sv_bemerkungen = '';
 					$show_value = "<div style='word-break: break-all;overflow:hidden;font-size:0.9em;max-width:350px' title='".$software_comment.' '.$sv_bemerkungen."'>".substr($software_comment.' '.$sv_bemerkungen,0,140);
 				$show_value .= "</div>";
 				}
@@ -490,6 +497,7 @@ if ($myrow = mysqli_fetch_array($result)){
       $rownumber ++;
     }while ($myrow = mysqli_fetch_array($result) and ($show_all or $rownumber < $count_system));
     echo "</table></form>\n";
+
     echo "<div>";
      echo "<table width=\"100%\"><tr>\n";
 
@@ -528,7 +536,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo " <a href=\"https://live.gnome.org/Dia\" <img src=\"images/gnome-application-x-dia-diagram.png\" alt=\"".__("Dia Diagram")."\" title=\"".__("Click here for the latest version of DIA")."\" style=\"border:0px;\" width=\"28\" height=\"28\" /></a><a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
+     echo " <a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
     // Export to Inkscape

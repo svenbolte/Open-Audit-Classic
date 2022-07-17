@@ -4,24 +4,10 @@ Module:	changedatabase.php
 **********************************************************************************************************/
 
 if (isset($_POST['language_post'])) $GLOBALS["language"] = $_POST['language_post'];
-include_once "include_lang.php";
+include "include.php";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Open-AudIT Setup</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <link rel="stylesheet" type="text/css" href="default.css" />
-  </head>
-  <body>
-  <div class="main_each">
-    <img src="images/logo.png" width="300" height="48" alt="" border="0"/>
-  </div>
-  <div style="float: left; width: 200px">
-  <div class="main_each">
-  </div>
-  </div>
-  <div style="padding-left: 200px; padding-top: 1px;"><div class="main_each"><div style="width: 550px">
+ <td width="100%">
+ <div class="main_each">
 <?php
 // Content below
   if(!isset($_POST['step'])) {
@@ -30,7 +16,7 @@ include_once "include_lang.php";
     step35SetupDB();
   }
 ?>
-  </div></div></div>
+  </div>
 </body>
 </html>
 

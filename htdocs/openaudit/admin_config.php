@@ -227,7 +227,7 @@ $use_script_only = ( $myrow['audit_settings_script_only']   ) ? 'y' : 'n';
 
 ?>
 <div id="npb_popupmenu_div" onmouseover="ClearHideMenu(event);" onmouseout="DynamicHide(event);"></div>
-<td class='CenterColumn'>
+<td style="width:100%">
 	<div class='npb_section_shadow'>
 		<div class='npb_section_content'>
 			<div class='npb_section_heading'>

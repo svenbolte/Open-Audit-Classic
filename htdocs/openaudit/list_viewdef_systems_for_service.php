@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List Systems with Service"),
-                   "sql"=>"SELECT * FROM service, system, service_details WHERE service_display_name = '" . $_GET["name"] . "' AND service_uuid  = system_uuid AND service_timestamp = system_timestamp AND sd_display_name = service_display_name ",
+                   "sql"=>"SELECT * FROM service, system, service_details WHERE service_display_name = '" . @$_GET["name"] . "' AND service_uuid  = system_uuid AND service_timestamp = system_timestamp AND sd_display_name = service_display_name ",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",

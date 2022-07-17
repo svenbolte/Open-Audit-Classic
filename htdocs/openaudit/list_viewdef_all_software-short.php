@@ -1,12 +1,7 @@
 <?php
 $query_array=array("headline"=>__("List all Software"),
-                   "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version, softwareversionen.sv_instlocation, software_version, software_publisher, software_url, software_comment, software_first_timestamp
+                   "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, software_version, software_url, software_comment, software_first_timestamp
 						FROM  system, software
-						LEFT JOIN softwareversionen
-						ON (
-							 CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(software.software_name,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')      
-						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')
-						)
 						WHERE software_name NOT LIKE '%hotfix%'
 						AND software_name NOT LIKE '%Service Pack%' 
 						AND software_name NOT LIKE '% Edge Update%'
@@ -54,36 +49,8 @@ $query_array=array("headline"=>__("List all Software"),
                                                "link"=>"y",
                                               ),
 
-								   "33"=>array("name"=>"sv_version",
-                                               "head"=>__("Ver from DB"),
-                                               "show"=>"y",
-                                               "link"=>"n",
-											   "search"=>"n",
-                                              ),
-
-								   "36"=>array("name"=>"sv_instlocation",
-                                               "head"=>__("SCX"),
-                                               "show"=>"y",
-                                               "link"=>"n",
-											   "sort"=>"y",
-                                              ),
-
-								   "41"=>array("name"=>"sv_bemerkungen",
-                                               "head"=>__("Anmerkungen"),
-                                               "show"=>"n",
-                                               "link"=>"n",
-											   "search"=>"y",
-                                              ),
-
 								   "42"=>array("name"=>"software_comment",
                                                "head"=>__("Comment"),
-                                               "show"=>"y",
-                                               "link"=>"n",
-											   "search"=>"y",
-                                              ),
-
-								   "44"=>array("name"=>"sv_lizenztyp",
-                                               "head"=>__("Lizenztyp"),
                                                "show"=>"y",
                                                "link"=>"n",
 											   "search"=>"y",

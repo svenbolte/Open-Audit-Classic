@@ -26,6 +26,45 @@ include_once "include_col_scheme.php";
 
 //die(var_dump($TheApp));
 
+// Funktion für Software-Versionen online download and import
+function svversionenimport() {
+	global $db;
+	echo '<div style="position:absolute;left:25%;top:25px;color:#ddd">';
+	$filename = dirname(__FILE__).'/wordpresssoftware.csv';
+	$url = 'https://6yztfx48o7fv2uhb.myfritz.net/dcounter/softwareverzeichnis.asp?action=woocom&search=&code=a5b584050977ca2ece290de786cc35f6';
+
+	if (file_exists($filename)) {
+		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
+		echo ' | '.time()-filemtime($filename).'s';
+		if (time() - filemtime($filename) > 300 ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
+			$source = file_get_contents($url);
+			if (!empty($source) && substr($source,0,18)=='Datum,Rating,Ldfnr' ) file_put_contents($filename, $source); else echo ' Downloadfehler, verwende alte Datei zum Import!';
+		}
+	}
+	// Datei worpresssoftware.csv in Datenbank einlesen
+	echo ' | '.$filename;
+	$flag = true;
+	$file = fopen($filename, "r");
+	// Tabelle vorher löschen
+	$sql_all = "truncate table softwareversionen";
+	$result_all = mysqli_query($db,$sql_all);
+	// Daten schreiben in Tabelle
+	while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+		if($flag) { $flag = false; continue; }
+		if (isset($emapData[0])) {
+			$emapData[5] = mb_convert_encoding($emapData[5], "HTML-ENTITIES", "UTF-8");
+			//iconv( "UTF-8", "latin1Windows-1252",  );
+			$sql_all = "INSERT into softwareversionen (sv_datum,sv_rating,sv_id,sv_product,sv_version,sv_bemerkungen,sv_vorinstall,sv_quelle,sv_lizenztyp,sv_lizenzgeber,sv_lizenzbestimmungen,sv_instlocation,sv_herstellerwebsite)
+	 values ('$emapData[0]','$emapData[1]','$emapData[2]','$emapData[3]','$emapData[4]','$emapData[5]','$emapData[6]','$emapData[7]','$emapData[8]','$emapData[9]','$emapData[10]','$emapData[11]','$emapData[12]')";
+			$result_all = mysqli_query($db,$sql_all);
+		}	
+	}
+	fclose($file);
+	echo ' importiert</div>';
+}	
+
+
+
 $page = GetVarOrDefaultValue($page);
 
 if ($page == "add_pc")
@@ -282,9 +321,5 @@ if ($pc > "0") {
     unset($topic_item["title"]);
     }
  echo "</ul>\n";
-
- include "include_right_column.php";
-
-  echo "</td>\n";
+ echo "</td>\n";
 ?>
-     
