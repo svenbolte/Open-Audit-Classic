@@ -10,7 +10,7 @@ set_time_limit(240000);
 // Softwaredatenbank importieren
 //
 
-svversionenimport();
+svversionenimport(300);
 
 $count_system_max="10000";
 

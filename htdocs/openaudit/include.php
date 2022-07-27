@@ -27,7 +27,7 @@ include_once "include_col_scheme.php";
 //die(var_dump($TheApp));
 
 // Funktion für Software-Versionen online download and import
-function svversionenimport() {
+function svversionenimport($aftertime) {
 	global $db;
 	echo '<div style="position:absolute;left:25%;top:25px;color:#ddd">';
 	$filename = dirname(__FILE__).'/wordpresssoftware.csv';
@@ -36,7 +36,7 @@ function svversionenimport() {
 	if (file_exists($filename)) {
 		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
 		echo ' | '.time()-filemtime($filename).'s';
-		if (time() - filemtime($filename) > 300 ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
+		if (time() - filemtime($filename) > (int) $aftertime ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
 			$source = file_get_contents($url);
 			if (!empty($source) && substr($source,0,18)=='Datum,Rating,Ldfnr' ) file_put_contents($filename, $source); else echo ' Downloadfehler, verwende alte Datei zum Import!';
 		}

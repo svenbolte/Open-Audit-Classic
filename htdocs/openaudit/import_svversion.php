@@ -7,7 +7,7 @@ $time_start = microtime_float();
 
 echo '</tr><tr><td> Datei wird heruntergeladen vom Webserver...und importiert, Status siehe oben.';
 
-svversionenimport();
+svversionenimport(30);
 
 echo '</td></tr></table></body></html>';
 
