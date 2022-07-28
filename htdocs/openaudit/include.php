@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**********************************************************************************************************
 Module:	include.php
 
@@ -26,6 +26,7 @@ include_once "include_col_scheme.php";
 
 //die(var_dump($TheApp));
 
+
 // Funktion für Software-Versionen online download and import
 function svversionenimport($aftertime) {
 	global $db;
@@ -36,8 +37,14 @@ function svversionenimport($aftertime) {
 	if (file_exists($filename)) {
 		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
 		echo ' | '.time()-filemtime($filename).'s';
+<<<<<<< Updated upstream
 		if (time() - filemtime($filename) > (int) $aftertime ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
 			$source = file_get_contents($url);
+=======
+		if (time() - filemtime($filename) > 300 ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
+			$arrContextOptions=array( "ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false, ), );  
+			$source = file_get_contents($url, false, stream_context_create($arrContextOptions));
+>>>>>>> Stashed changes
 			if (!empty($source) && substr($source,0,18)=='Datum,Rating,Ldfnr' ) file_put_contents($filename, $source); else echo ' Downloadfehler, verwende alte Datei zum Import!';
 		}
 	}
