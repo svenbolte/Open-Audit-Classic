@@ -2704,6 +2704,7 @@ Echo(comment)
         install_location = ""
         system_component = ""
         display_name = Outparams.SValue
+
         Inparams.Svaluename = "DisplayVersion"
         set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
         version = Outparams.SValue
@@ -2752,6 +2753,7 @@ Echo(comment)
         if online = "p" then
           software = software & display_name & vbcrlf
         end if
+
        form_input = "software^^^" & clean(display_name)      & " ^^^" _
                    & clean(version)           & " ^^^" _
                    & clean(install_location)  & " ^^^" _
@@ -2797,6 +2799,7 @@ Echo(comment)
         install_location = ""
         system_component = ""
         display_name = Outparams.SValue
+
         Inparams.Svaluename = "DisplayVersion"
         set Outparams = o64reg.ExecMethod_("GetStringValue", Inparams,,objCtx)
         version = Outparams.SValue
@@ -2845,6 +2848,7 @@ Echo(comment)
         if online = "p" then
           software = software & display_name & vbcrlf
         end if
+
        form_input = "software^^^" & clean(display_name)      & " ^^^" _
                    & clean(version)           & " ^^^" _
                    & clean(install_location)  & " ^^^" _
@@ -3255,7 +3259,7 @@ form_input = "software^^^" & display_name       & "^^^" _
                            & "Microsoft Corporation^^^" _
                            & ""                 & "^^^" _
                            & ""                 & "^^^" _
-                           & "http://msdn2.microsoft.com/en-us/data/default.aspx" & "^^^ "
+                           & "https://msdn2.microsoft.com/en-us/data/default.aspx" & "^^^ "
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 
@@ -3283,7 +3287,7 @@ form_input = "software^^^" & display_name       & "^^^" _
                            & "Microsoft Corporation^^^" _
                            & ""                 & "^^^" _
                            & ""                 & "^^^" _
-                           & "http://www.microsoft.com/windows/directx/" & "^^^ "
+                           & "https://www.microsoft.com/windows/directx/" & "^^^ "
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 
@@ -3300,7 +3304,7 @@ form_input = "software^^^Windows Media Player^^^" _
                   & "Microsoft Corporation^^^" _
                   & ""                 & "^^^" _
                   & ""                 & "^^^" _
-                  & "http://www.microsoft.com/windows/windowsmedia/default.aspx" & "^^^ "
+                  & "https://www.microsoft.com/windows/windowsmedia/default.aspx" & "^^^ "
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 
@@ -3317,7 +3321,7 @@ form_input = "software^^^Internet Explorer^^^" _
                   & "Microsoft Corporation^^^" _
                   & ""                 & "^^^" _
                   & ""                 & "^^^" _
-                  & "http://www.microsoft.com/windows/ie/community/default.mspx" & "^^^ "
+                  & "https://www.microsoft.com/windows/ie/community/default.mspx" & "^^^ "
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 
@@ -3333,22 +3337,40 @@ For Each objFile in colFiles
                 & "Microsoft Corporation^^^" _
                 & ""                             & "^^^" _
                 & ""                             & "^^^" _
-                & "http://support.microsoft.com/default.aspx?xmlid=fh;en-us;oex" & "^^^ "
+                & "https://support.microsoft.com/default.aspx?xmlid=fh;en-us;oex" & "^^^ "
   entry form_input,comment,objTextFile,oAdd,oComment
   form_input = ""
 Next
 
 
 ' Add the OS to the Software Register
+
+	if left(OSName,17) = "Microsoft Windows" then
+		Set oReg = wmiNameSpace.Get("StdRegProv")
+		winstrKeyPath = "SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+		winstrValueName = "BuildLabEx"
+		winstr3ValueName = "UBR"
+		winstr2ValueName = "ProductName"
+		oReg.GetStringValue HKEY_LOCAL_MACHINE,winstrKeyPath,winstrValueName,windo_Version
+		oReg.GetDWORDValue HKEY_LOCAL_MACHINE,winstrKeyPath,winstr3ValueName,win_subbuild
+		echo ("Winver" & windo_Version)
+		winsubbuild = "." & win_subbuild 
+		windetailbuild = windo_Version & " - "
+	else
+		winsubbuild = ""
+		windetailbuild = ""
+	end if
+
 form_input = "software^^^" & OSName             & "^^^" _
-                           & sys_version        & "^^^" _
+                           & sys_version & winsubbuild       & "^^^" _
                            & ""                 & "^^^" _
                            & ""                 & "^^^" _
                            & OSInstall          & "^^^" _
                            & "Microsoft Corporation^^^" _
                            & ""                 & "^^^" _
                            & ""                 & "^^^" _
-                           & "http://www.microsoft.com/windows/default.mspx" & "^^^ "
+                           & "https://www.microsoft.com/windows/default.mspx"& "^^^" _
+                           & windetailbuild          & "^^^ "
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 

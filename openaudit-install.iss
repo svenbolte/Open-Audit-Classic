@@ -53,6 +53,7 @@ Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdo
 Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"
 Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"
 Name: "{group}\Open-Audit Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
+Name: "{group}\Open-Audit Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
 Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
 Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon
 Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon

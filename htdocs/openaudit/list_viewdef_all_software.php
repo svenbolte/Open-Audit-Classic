@@ -1,17 +1,17 @@
 <?php
 $query_array=array("headline"=>__("List all Software"),
                    "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, softwareversionen.sv_lizenztyp, softwareversionen.sv_version, softwareversionen.sv_instlocation, software_version, software_publisher, software_url, software_comment, software_first_timestamp
-						FROM  system, software
+						FROM system, software
 						LEFT JOIN softwareversionen
 						ON (
-							 CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(software.software_name,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')      
-						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'9',''),'8',''),'7',''),'6',''),'5',''),'4',''),'3',''),'2',''),'1',''),'0',''),'.',''))) ,'%')
+							 CONCAT('%', LOWER(RTRIM(Replace(Replace(software.software_name,'(x64)',''),'.',''))) ,'%')      
+						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
 						)
 						WHERE software_name NOT LIKE '%hotfix%'
 						AND software_name NOT LIKE '%Service Pack%' 
 						AND software_name NOT LIKE '% Edge Update%'
-						AND software_name NOT LIKE '%MUI
-						(%' AND software_name NOT LIKE '%Proofing %'
+						AND software_name NOT LIKE '%MUI (%'
+						AND software_name NOT LIKE '%Proofing %'
 						AND software_name NOT LIKE '%Language%'
 						AND software_name NOT LIKE '%Korrektur%'
 						AND software_name NOT LIKE '%linguisti%'
