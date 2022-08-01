@@ -1,5 +1,5 @@
 body {
-  font: normal 80%  Verdana, arial, Sans ;
+  font: normal 80%  arial, sans-serif ;
   text-decoration: none;
   color: #777;
   margin: 5px;
@@ -7,7 +7,7 @@ body {
   padding-left: 0px; }
 
 .for_forms {
-  font: normal 100%  Verdana, arial, Sans ;
+  font: normal 100%  arial, sans-serif ;
   text-decoration: none;
   color: #777;
   margin: 5px;
@@ -40,9 +40,9 @@ td.contentsubtitle {
   padding-right: 5px;
   padding-left: 5px; }
 
-a { color: #3161A5; text-decoration: none; }
-a:visited { color: #3161A5; }
-a:hover { color: #FF0000; text-decoration: none; }
+a { color: #006060; text-decoration: none; }
+a:visited { color: #006060; }
+a:hover { color: #222222; text-decoration: none; }
 
 ul#primary-nav,
 ul#primary-nav ul {

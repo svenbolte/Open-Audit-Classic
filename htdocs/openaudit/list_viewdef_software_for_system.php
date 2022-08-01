@@ -54,6 +54,13 @@ $query_array=array("headline"=>array("name"=>__("Installed Software"),
                                                "link"=>"n",
 											   "search"=>"n",
                                               ),
+								   "36"=>array("name"=>"sv_instlocation",
+                                               "head"=>__("SCX"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+											   "sort"=>"y",
+                                              ),
+
 
 								   "41"=>array("name"=>"sv_bemerkungen",
                                                "head"=>__("Anmerkungen"),

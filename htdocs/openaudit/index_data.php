@@ -203,14 +203,19 @@ function GetSystemsAuditedGraph()
 	echo "<div id='graph'>";
 	
 	// iterate thru array and display results graph
-	foreach($dates as $dt => $cnt)
-	{
-		//echo $dt." ".$cnt."<p>";
+	foreach($dates as $dt => $cnt)	{
+		// echo $dt." ".$cnt;
 		$top=$img_height-($cnt*$scale);
-		$title=substr($dt,6,2)."/".substr($dt,4,2)."/".substr($dt,0,4)." ".$cnt." systems";
+		$title=substr($dt,6,2) . ".".substr($dt,4,2).".".substr($dt,0,4)." ".$cnt." systems";
 		echo "<img src=\"index_graphs_image.php?height=".$img_height."&width=".$img_col_width."&top=".$top."\"";
 		echo " width=\"".$img_col_width."\" height=\"".$img_height."\" title=\"".$title."\" />";
 	}
+	echo "<br>";
+	foreach($dates as $dt => $cnt)	{
+		// echo $dt." ".$cnt;
+		echo '<span style="display:inline-block;width:'.$img_col_width.'px">'.$cnt.'<br>'.substr($dt,6,2).'<br>'.substr($dt,4,2).'</span>';
+	}
+
 	echo "</div>";
 }
 

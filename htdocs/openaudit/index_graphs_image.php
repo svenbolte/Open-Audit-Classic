@@ -17,24 +17,21 @@ $border = 1;
 // create image
 $image = imagecreatetruecolor ($width, $height);
 $white = imagecolorallocate($image, 255, 255, 255);
-$orange = imagecolorallocate($image, 0,128, 0);
+$orange = imagecolorallocate($image, 0,96, 96);
 $edge = imagecolorallocate($image, 192,192,192 );
 
 imagefilledrectangle ($image, 0, 0, $width, $height, $white);
 imagecolortransparent($image, $white);
 
-if($height-$top>$border)
-{
+if($height-$top>$border) {
 	imagefilledrectangle ($image, 0 , $top, $width , $height, $edge);
 	DrawColorGradient($image, $border, $top + (2 * $border),$width - (2 * $border) -1,$height - $top - $border -1  ,$orange,$white,"v");
-}
-else
-{
+} else {
 	imagefilledrectangle ($image, 0 , $height-$border, $width , $height, $edge);
 }
-	
+
 imagepng($image);
-	
+
 
 // ****** DrawColorGradient *****************************************************
 function DrawColorGradient($im, $x1, $y1, $width, $height, $start_color, $end_color, $direction) 
@@ -50,9 +47,9 @@ function DrawColorGradient($im, $x1, $y1, $width, $height, $start_color, $end_co
 	
 	for ($i=0;$i<=$length;$i++) 
 	{ 
-		$red=$start_color[0]-floor($i*$color0); 
-		$green=$start_color[1]-floor($i*$color1); 
-		$blue=$start_color[2]-floor($i*$color2); 
+		$red=$start_color[0]; 
+		$green=$start_color[1]; 
+		$blue=$start_color[2]; 
 		$col= imagecolorallocate($im, $red, $green, $blue);
 		if($direction != "v") {imageline($im, $x1+$i, $y1, $x1+$i, $y1+$height, $col);}
 		else {imageline($im, $x1, $y1+$i, $x1+$width, $y1+$i, $col);}

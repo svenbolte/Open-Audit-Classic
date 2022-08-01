@@ -124,9 +124,19 @@ if ($show_hard_disk_alerts == "y")
 //******* Display Graph *****************************************************
 function DisplayAuditGraph()
 {
-
+	global $systems_audited_days;
+	
+	echo "<div class='npb_section_shadow'>";
+	echo "	<div class='npb_section_content'>";
+	echo "		<div class='npb_section_heading'>";
+	echo "			<a>Systems Audited in the last ".$systems_audited_days." Days</a>";
+	echo "		</div>";
+	echo "		<div class='npb_section_data' id='AuditedSystems'>";
+	echo "			<img class='npb_auditedsystems_hourglass' alt=' Retrieving...' src='images/hourglass-busy.gif'/>";
+	echo "		</div>";
+	echo "	</div>";
+	echo "</div>";
 }
-
 /******* Generic display section function *****************************************************
 	$SwitchID			- String	-	Unique element ID to be used by switchUl() function
 	$Display			-	String	-	Section description (heading) string to be displayed
