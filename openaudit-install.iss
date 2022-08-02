@@ -2,7 +2,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "Open-Audit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.54x64-VC16, MySQLMariaDB 10.4.25x64, PHP 8.0.21x64-thsafe, phpMyAdmin 5.2.0x64, NMap 7.92, NPCap 1.70, Wordpress 6.0.1, VCRuntimes aktuell"
+#define Inhalte "Apache 2.4.54x64-VC16, MySQLMariaDB 10.4.25x64, PHP 8.0.22x64-thsafe, phpMyAdmin 5.2.0x64, NMap 7.92, NPCap 1.70, Wordpress 6.0.1, VCRuntimes aktuell"
 
 [Setup]
 PrivilegesRequired=admin
@@ -53,7 +53,6 @@ Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdo
 Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"
 Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"
 Name: "{group}\Open-Audit Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
-Name: "{group}\Open-Audit Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
 Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
 Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon
 Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon
