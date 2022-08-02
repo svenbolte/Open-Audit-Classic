@@ -436,7 +436,7 @@ if ($myrow = mysqli_fetch_array($result)){
 
 			   if ($field["name"]=="sv_version") {
 					if (empty($software_version)) $software_version='9999.0';
-					if ( $sv_version > $software_version) $warncolor = "#f80000"; else $warncolor="#00cc00";
+					if ( version_compare($sv_version, $software_version,'>')) $warncolor = "#f80000"; else $warncolor="#00cc00";
 					$show_value = "<div style='font-size:0.9em;max-width:100px;color:".$warncolor."'>".$sv_version."</div>";
 				}
 			   if ($field["name"]=="software_version") {
