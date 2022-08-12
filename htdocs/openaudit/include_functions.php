@@ -304,6 +304,9 @@ function ConvertSpecialField($myrow, $field, $db, $page)
 		case "hard_drive_size":
 		case "partition_size":
 		case "partition_free_space":
+			return number_format(($myrow[$field["name"]])/1024, 1, ',', '.')."G";
+		case "partition_used_space":
+			return number_format(($myrow[$field["name"]])/1024, 1, ',', '.')."G";
 		case "total_memory":
 		case "pagefile_initial_size":
 		case "pagefile_max_size":

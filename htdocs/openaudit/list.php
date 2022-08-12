@@ -32,6 +32,13 @@ if(is_file($include_filename)){
     die("FATAL: Could not find view $include_filename");
 }
 
+// totals defined
+$total_system_memory = 0;
+$total_hard_drive_size = 0;
+$total_partition_size = 0;
+$total_partition_free_space = 0;
+$total_partition_used_space = 0;
+$total_system_lcpu = 0;
 
     //ORDER, SORT and LIMIT
     if (isset($_REQUEST['sort']) AND $_REQUEST['sort']!="") {$sort = $_REQUEST['sort'];} else {$sort = $query_array["sort"];}
@@ -68,9 +75,6 @@ $page_count=0;
 
     //Executing the Qeuery
     $sql=$sql_query."\n".$sql_sort."\n".$sql_limit;
-//    $result = mysqli_query($db,$sql);
-//    if(!$result) {die( "<br>".__("Fatal Error").":<br><br>".$sql."<br><br>".mysqli_error($db)."<br><br>" );};
-//    $this_page_count = mysqli_num_rows($result);
 
     //Getting the count of all available items
     $sql_all = $sql_query."\n".$sql_sort;
@@ -354,30 +358,28 @@ if ($myrow = mysqli_fetch_array($result)){
                     $field["link"]="n";
                 }
 
-                if(isset($field["link"]) AND $field["link"]=="y")
-								{
-									unset($link_query);
-									if (isset($get_array["var"])) {
-									 reset ($get_array["var"]);
-									 foreach ($get_array["var"] as $varname=>$value) {
-										$value = (isset($value)) ? $value : "";
-										if(substr($value,0,1)=="%")
-										{
-											$value = substr($value,1);
-											$value2 = (isset($$value)) ? $$value : "";
-										}
-										else {$value2 = $value;}
+                if(isset($field["link"]) AND $field["link"]=="y") {
+					unset($link_query);
+					if (isset($get_array["var"])) {
+					 reset ($get_array["var"]);
+					 foreach ($get_array["var"] as $varname=>$value) {
+						$value = (isset($value)) ? $value : "";
+						if(substr($value,0,1)=="%")
+						{
+							$value = substr($value,1);
+							$value2 = (isset($$value)) ? $$value : "";
+						}
+						else {$value2 = $value;}
 
-										if(!isset($link_query)) 
-										{$link_query = $varname."=".urlencode($value2)."&amp;";}
-										else{$link_query.= $varname."=".urlencode($value2)."&amp;";}
+						if(!isset($link_query)) 
+						{$link_query = $varname."=".urlencode($value2)."&amp;";}
+						else{$link_query.= $varname."=".urlencode($value2)."&amp;";}
 
-										//Don't show the link if one GET-variable is empty
-										if(!isset($value2) or $value2==""){$field["link"]="n";}
-									}
-								   }	
-								}
-                
+						//Don't show the link if one GET-variable is empty
+						if(!isset($value2) or $value2==""){$field["link"]="n";}
+					}
+				   }	
+				}
 
                 if(isset($link_query) AND $link_query!=""){
                     $url=parse_url($get_array["file"]);
@@ -402,27 +404,29 @@ if ($myrow = mysqli_fetch_array($result)){
                     $field["name"]=substr($field["name"],(strpos($field["name"],".")+1));
                 }
 
-                //Special field-converting
+                // numeric fields sums
+			   if ($field["name"]=="system_memory") { $total_system_memory += (int) $system_memory; }
+			   if ($field["name"]=="hard_drive_size") { $total_hard_drive_size += (int) $hard_drive_size; }
+			   if ($field["name"]=="partition_size") { $total_partition_size += (int) $partition_size; }
+			   if ($field["name"]=="partition_free_space") { $total_partition_free_space += (int) $partition_free_space; }
+			   if ($field["name"]=="partition_used_space") { $total_partition_used_space += (int) $partition_used_space; }
+			   if ($field["name"]=="system_lcpu") { $total_system_lcpu += (int) $system_lcpu; }
+				
+				//Special field-converting
 
-				if(isset($field["calculate"]) AND $field["calculate"]=="y"){
-				// Special field calculations here, for example warranty days. 
-				//
-			   if ($field["name"]=="partition_used_space") {
-					$show_value=($myrow["partition_size"] - $myrow["partition_free_space"]);	
-			   }				
-				
-				
-				if(isset($field["dell_warranty"]) AND $field["dell_warranty"]=="y"){
-				// allow another 10 seconds for this bit to complete
-				set_time_limit(240);
-				$show_value = $myrow["system_id_number"];
-				//
-				$this_dell_warranty_remaining = get_dell_warranty_days( $show_value);
-				// echo "..".$show_value."--" ;
-				$myrow ["dell_warranty"] = $this_dell_warranty_remaining ;
-				$show_value = $this_dell_warranty_remaining; 
+				if(isset($field["calculate"]) AND $field["calculate"]=="y") {
+					// Special field calculations here, for example warranty days. 
+					//
+					
+					if(isset($field["dell_warranty"]) AND $field["dell_warranty"]=="y") {
+						// allow another 10 seconds for this bit to complete
+						set_time_limit(240);
+						$show_value = $myrow["system_id_number"];
+						$this_dell_warranty_remaining = get_dell_warranty_days( $show_value);
+						$myrow ["dell_warranty"] = $this_dell_warranty_remaining ;
+						$show_value = $this_dell_warranty_remaining; 
 					}
-				}else{
+				} else {
 				// If this is not a calculated value, just show it
                $show_value = ConvertSpecialField($myrow, $field, $db, "list");
 			   if ($field["name"]=="software_comment") {
@@ -432,6 +436,15 @@ if ($myrow = mysqli_fetch_array($result)){
 				}
 			   if ($field["name"]=="sv_lizenztyp") {
 					$show_value = "<div style='font-size:0.9em;max-width:200px'>".$sv_lizenztyp."</div>";
+				}
+			   if ($field["name"]=="net_user_name") {
+					$show_value = "<div style='font-size:0.8em'>".$net_user_name."</div>";
+				}
+			   if ($field["name"]=="net_domain") {
+					$show_value = "<div style='font-size:0.9em'>".$net_domain."</div>";
+				}
+			   if ($field["name"]=="processor_name") {
+					$show_value = "<div style='font-size:0.8em'>".$processor_name."</div>";
 				}
 
 			   if ($field["name"]=="sv_version") {
@@ -493,17 +506,34 @@ if ($myrow = mysqli_fetch_array($result)){
         echo "<td>\n";
         echo "</td>\n";
         echo " </tr>\n";
-    //}while ($myrow = mysqli_fetch_array($result));
       $rownumber ++;
-    }while ($myrow = mysqli_fetch_array($result) and ($show_all or $rownumber < $count_system));
-    echo "</table></form>\n";
+    } while ($myrow = mysqli_fetch_array($result) and ($show_all or $rownumber < $count_system));
+    
 
-    echo "<div>";
-     echo "<table width=\"100%\"><tr>\n";
+	// Totals
+	
+	echo "<tr style=\"font-weight:bold\">";
+        foreach($query_array["fields"] as $field) {
+            if($field["show"]!="n") {
+				echo "<td>";
+				if ($field["name"]=="system_memory") echo number_format($total_system_memory/1024,1,",",".").'G';
+				if ($field["name"]=="hard_drive_size") echo number_format($total_hard_drive_size/1024,1,",",".").'G';
+				if ($field["name"]=="partition_size") echo number_format($total_partition_size/1024,1,",",".").'G';
+				if ($field["name"]=="partition_free_space") echo number_format($total_partition_free_space/1024,1,",",".").'G';
+				if ($field["name"]=="partition_used_space") echo number_format($total_partition_used_space/1024,1,",",".").'G';
+				if ($field["name"]=="system_lcpu") echo number_format($total_system_lcpu,0,",",".");
+				echo "</td>";
+			}
+		}
+	echo "</tr></table></form>\n";
+
 
     // Export to CSV
 
-    echo "<hr><form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
+    echo "<hr><div>";
+    echo "<table width=\"100%\"><tr>\n";
+
+    echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
     if(isset($_REQUEST["pc"])){
@@ -518,6 +548,7 @@ if ($myrow = mysqli_fetch_array($result)){
      echo "<br><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
+
     // Export to DIA
     
     if (isset($_REQUEST["view"])) {
@@ -539,7 +570,9 @@ if ($myrow = mysqli_fetch_array($result)){
      echo " <a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
+
     // Export to Inkscape
+
     echo "<form method=\"post\" id=\"form_export_inkscape\" action=\"list_export_inkscape.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
@@ -564,7 +597,6 @@ if ($myrow = mysqli_fetch_array($result)){
 }
 
 echo "<p style='height:20px'></p></div></td>\n";
-// // include "include_right_column.php";
 include "include_export_modal.php"; 
 echo "</body>\n";
 echo "</html>\n";

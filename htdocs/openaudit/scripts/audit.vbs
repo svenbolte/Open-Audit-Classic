@@ -1054,7 +1054,6 @@ For Each objItem in colItems
    system_lcpu = clean(objItem.NumberOfLogicalProcessors)
 Next
 
-
 if system_system_type = "1" then system_system_type = "Other" end if
 if system_system_type = "2" then system_system_type = "Unknown" end if
 if system_system_type = "3" then system_system_type = "Desktop" end if
@@ -1079,7 +1078,18 @@ if system_system_type = "21" then system_system_type = "Peripheral Chassis" end 
 if system_system_type = "22" then system_system_type = "Storage Chassis" end if
 if system_system_type = "23" then system_system_type = "Rack Mount Chassis" end if
 if system_system_type = "24" then system_system_type = "Sealed-Case PC"  end if
-if system_system_type = "31" then system_system_type = "Tablet-PC"  end if
+if system_system_type = "25" then system_system_type = "Multi-system chassis"  end if
+if system_system_type = "26" then system_system_type = "Compact PCI"  end if
+if system_system_type = "27" then system_system_type = "Advanced TCA"  end if
+if system_system_type = "28" then system_system_type = "Blade"  end if
+if system_system_type = "29" then system_system_type = "Blade Enclosure"  end if
+if system_system_type = "30" then system_system_type = "Tablet"  end if
+if system_system_type = "31" then system_system_type = "Convertible"  end if
+if system_system_type = "32" then system_system_type = "Detachable"  end if
+if system_system_type = "33" then system_system_type = "IoT Gateway"  end if
+if system_system_type = "34" then system_system_type = "Embedded PC"  end if
+if system_system_type = "35" then system_system_type = "Mini PC"  end if
+if system_system_type = "36" then system_system_type = "Stick PC"  end if
 
 form_input = "system02^^^" & trim(system_model) & "^^^" & system_name _
                   & "^^^" & system_num_processors & "^^^" & system_part_of_domain _

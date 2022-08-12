@@ -584,30 +584,42 @@ For Each objItem In colItems
   tm_daylight = clean(objItem.DaylightName)
 Next
 
-If system_system_type = "1" Then system_system_type = "Other" End If
-If system_system_type = "2" Then system_system_type = "Unknown" End If
-If system_system_type = "3" Then system_system_type = "Desktop" End If
-If system_system_type = "4" Then system_system_type = "Low Profile Desktop" End If
-If system_system_type = "5" Then system_system_type = "Pizza Box" End If
-If system_system_type = "6" Then system_system_type = "Mini Tower" End If
-If system_system_type = "7" Then system_system_type = "Tower" End If
-If system_system_type = "8" Then system_system_type = "Portable" End If
-If system_system_type = "9" Then system_system_type = "Laptop" End If
-If system_system_type = "10" Then system_system_type = "Notebook" End If
-If system_system_type = "11" Then system_system_type = "Hand Held" End If
-If system_system_type = "12" Then system_system_type = "Docking Station" End If
-If system_system_type = "13" Then system_system_type = "All in One" End If
-If system_system_type = "14" Then system_system_type = "Sub Notebook" End If
-If system_system_type = "15" Then system_system_type = "Space-Saving" End If
-If system_system_type = "16" Then system_system_type = "Lunch Box" End If
-If system_system_type = "17" Then system_system_type = "Main System Chassis" End If
-If system_system_type = "18" Then system_system_type = "Expansion Chassis" End If
-If system_system_type = "19" Then system_system_type = "SubChassis" End If
-If system_system_type = "20" Then system_system_type = "Bus Expansion Chassis" End If
-If system_system_type = "21" Then system_system_type = "Peripheral Chassis" End If
-If system_system_type = "22" Then system_system_type = "Storage Chassis" End If
-If system_system_type = "23" Then system_system_type = "Rack Mount Chassis" End If
-If system_system_type = "24" Then system_system_type = "Sealed-Case PC"  End If
+if system_system_type = "1" then system_system_type = "Other" end if
+if system_system_type = "2" then system_system_type = "Unknown" end if
+if system_system_type = "3" then system_system_type = "Desktop" end if
+if system_system_type = "4" then system_system_type = "Low Profile Desktop" end if
+if system_system_type = "5" then system_system_type = "Pizza Box" end if
+if system_system_type = "6" then system_system_type = "Mini Tower" end if
+if system_system_type = "7" then system_system_type = "Tower" end if
+if system_system_type = "8" then system_system_type = "Portable" end if
+if system_system_type = "9" then system_system_type = "Laptop" end if
+if system_system_type = "10" then system_system_type = "Notebook" end if
+if system_system_type = "11" then system_system_type = "Hand Held" end if
+if system_system_type = "12" then system_system_type = "Docking Station" end if
+if system_system_type = "13" then system_system_type = "All in One" end if
+if system_system_type = "14" then system_system_type = "Sub Notebook" end if
+if system_system_type = "15" then system_system_type = "Space-Saving" end if
+if system_system_type = "16" then system_system_type = "Lunch Box" end if
+if system_system_type = "17" then system_system_type = "Main System Chassis" end if
+if system_system_type = "18" then system_system_type = "Expansion Chassis" end if
+if system_system_type = "19" then system_system_type = "SubChassis" end if
+if system_system_type = "20" then system_system_type = "Bus Expansion Chassis" end if
+if system_system_type = "21" then system_system_type = "Peripheral Chassis" end if
+if system_system_type = "22" then system_system_type = "Storage Chassis" end if
+if system_system_type = "23" then system_system_type = "Rack Mount Chassis" end if
+if system_system_type = "24" then system_system_type = "Sealed-Case PC"  end if
+if system_system_type = "25" then system_system_type = "Multi-system chassis"  end if
+if system_system_type = "26" then system_system_type = "Compact PCI"  end if
+if system_system_type = "27" then system_system_type = "Advanced TCA"  end if
+if system_system_type = "28" then system_system_type = "Blade"  end if
+if system_system_type = "29" then system_system_type = "Blade Enclosure"  end if
+if system_system_type = "30" then system_system_type = "Tablet"  end if
+if system_system_type = "31" then system_system_type = "Convertible"  end if
+if system_system_type = "32" then system_system_type = "Detachable"  end if
+if system_system_type = "33" then system_system_type = "IoT Gateway"  end if
+if system_system_type = "34" then system_system_type = "Embedded PC"  end if
+if system_system_type = "35" then system_system_type = "Mini PC"  end if
+if system_system_type = "36" then system_system_type = "Stick PC"  end if
 
 form_input = "system02^^^" & Trim(system_model) & "^^^" & system_name _
                   & "^^^" & system_num_processors & "^^^" & system_part_of_domain _

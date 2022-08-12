@@ -96,7 +96,7 @@ if ($myrow = mysqli_fetch_array($result)){
     } while ($myrow = mysqli_fetch_array($result));
 // SUM line
 $csv_data .= "\r\n";
-$csv_data .= '"'.$totals.'";"'.$result->num_rows.'";"Menge/Anzahl ungefiltert';
+$csv_data .= '"'.$totals.'";"'.$result->num_rows.'";"Anzahl"';
 $csv_data .= "\r\n";
 
 }

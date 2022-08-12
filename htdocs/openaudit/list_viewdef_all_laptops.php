@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List all Laptops"),
-                   "sql"=>"SELECT * FROM `system` WHERE (system_system_type = 'Laptop' OR system_system_type = 'Expansion Chassis' OR system_system_type = 'Notebook' or system_system_type = 'Sub Notebook' OR system_system_type = 'Portable' OR system_system_type = 'Docking Station' OR system_system_type = 'Peripheral Chassis')",
+                   "sql"=>"SELECT * FROM `system` WHERE (system_system_type = 'Laptop' OR system_system_type = 'Expansion Chassis' OR system_system_type = 'Convertible' OR system_system_type = 'Tablet' OR system_system_type = 'Detachable' OR system_system_type = 'Notebook' or system_system_type = 'Sub Notebook' OR system_system_type = 'Portable' OR system_system_type = 'Docking Station' OR system_system_type = 'Peripheral Chassis')",
                    "table"=>"system",
                    "sort"=>"system_name",
                    "dir"=>"ASC",
@@ -51,11 +51,23 @@ $query_array=array("headline"=>__("List all Laptops"),
                                                "show"=>$show_type,
                                                "align"=>"center",
                                               ),
+                                   "92"=>array("name"=>"system_vendor",
+                                               "head"=>__("Vendor"),
+                                               "show"=>"y",
+                                              ), 
+                                   "94"=>array("name"=>"system_model",
+                                               "head"=>__("Model"),
+                                               "show"=>"y",
+                                              ),           
+                                   "96"=>array("name"=>"system_id_number",
+                                               "head"=>__("Serial #"),
+                                               "show"=>"y",
+                                              ),
+
                                    "100"=>array("name"=>"system_description",
                                                "head"=>__("Description"),
                                                "show"=>$show_description,
                                               ),
-
 
                                   ),
                   );

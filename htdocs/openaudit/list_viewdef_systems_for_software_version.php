@@ -34,11 +34,10 @@ $query_array=array("headline"=>__("List Systems for Software/Version"),
                                                "show"=>"y",
                                                "link"=>"y",
                                               ),
-                                              /*
                                    "60"=>array("name"=>"system_os_name",
                                                "head"=>__("OS"),
                                                "show"=>$show_os,
-                                              ),*/
+                                              ),
                                    "70"=>array("name"=>"system_timestamp",
                                                "head"=>__("Date Audited"),
                                                "show"=>$show_date_audited,
