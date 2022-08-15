@@ -37,9 +37,9 @@ UninstallDisplayIcon={app}\openaudit_logo.ico
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "Desktop-Verknüpfungen erstellen"; GroupDescription: "{cm:AdditionalIcons}";
+Name: "desktopicon"; Description: "Desktop-VerknÃ¼pfungen erstellen"; GroupDescription: "{cm:AdditionalIcons}";
 Name: "Aufgabepcscan"; Description: "P: Importieren der PC-Scan Aufgabe"; Flags: checkedonce;
-Name: "AufgabeNMAPScan"; Description: "N: Aufgabe für NMAP-Scan importieren"; Flags: unchecked;
+Name: "AufgabeNMAPScan"; Description: "N: Aufgabe fÃ¼r NMAP-Scan importieren"; Flags: unchecked;
 
 [Dirs]
 Name: {app}; Permissions: users-full
@@ -51,11 +51,12 @@ Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Components: nuropenaudit; Exclu
 [Icons]
 Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"
 Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"
-Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"
+Name: "{group}\ZENMap Gui fÃ¼r NMap"; Filename: "{app}\nmap\zenmap.exe"
 Name: "{group}\Open-Audit Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
+Name: "{group}\Open-Audit Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts oeffnen"
 Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
-Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon
-Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon
+Name: "{commondesktop}\Open-Audit OberflÃ¤che"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon
+Name: "{commondesktop}\PC-IP-Listendatei Ã¤ndern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon
 
 [Run]
 Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: runascurrentuser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
@@ -63,8 +64,8 @@ Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htd
 Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x64.exe"; Parameters: "/install /quiet /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Check: VC2017RedistNeedsInstall
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
-Filename: "{app}\nmap\npcap-1.70.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes NPCap installieren"
-Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x86.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; Description: "VC Runtime 2019 x86 für NMAP installieren"; StatusMsg: "Installing VC2019/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
+Filename: "{app}\nmap\npcap-1.70.exe"; Flags: shellexec postinstall runascurrentuser; Description: "fÃ¼r NMAP benÃ¶tigtes NPCap installieren"
+Filename: "{app}\vcruntimes\openaudit-vc2019_redist.x86.exe"; Parameters: "/q /norestart"; Flags: waituntilterminated shellexec postinstall; Description: "VC Runtime 2019 x86 fÃ¼r NMAP installieren"; StatusMsg: "Installing VC2019/x86 Redist for NMAP"; Check: VC2013RedistNeedsInstall
 
 [Types]
 Name: typical; Description: "Typical"; Flags: iscustom;
@@ -72,7 +73,7 @@ Name: custom; Description: "Custom";
 
 [Components]
 Name: nuropenaudit; Description: Nur Openaudit installieren; ExtraDiskSpaceRequired: 180000; Types: typical; Flags:exclusive;
-Name: mitwordpress; Description: Openaudit und Wordpress für Intranet installieren; ExtraDiskSpaceRequired: 200000; Types: custom; Flags:exclusive;
+Name: mitwordpress; Description: Openaudit und Wordpress fÃ¼r Intranet installieren; ExtraDiskSpaceRequired: 200000; Types: custom; Flags:exclusive;
 
 [UninstallRun]
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; RunOnceId: "DELAPACHE"
