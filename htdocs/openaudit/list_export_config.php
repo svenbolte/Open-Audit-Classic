@@ -34,7 +34,7 @@ $application = "";
 if (isset($_GET['application'])and ($_GET['application'] <>"")) {
     $application=$_GET['application'];
 } else {
-    $application="auidit.vbs";
+    $application="audit.vbs";
 }
 
 // Currently we can only do a "this machine" audit, not a domain audit.

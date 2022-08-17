@@ -8,7 +8,7 @@
 
 this_config_url = "%host_url%"
 if (left(this_config_url,1) = "%") then
-this_config_url = "http://openaudit/openaudit/list_export_config.php"
+	this_config_url = "http://localhost:888/openaudit/list_export_config.php"
 end if
 '
 '
@@ -581,14 +581,14 @@ If send_email Then
     'objEmail.Sender   = email_sender
     objEmail.Subject = "Open-AudIT - Audit Results."
     objEmail.Textbody =  email_failed
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") = email_server
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = email_port
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = email_auth
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusername") = email_user_id
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendpassword") = email_user_pwd
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpusessl") = email_use_ssl
-    objEmail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = email_timeout
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/sendusing") = 2
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/smtpserver") = email_server
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/smtpserverport") = email_port
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = email_auth
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/sendusername") = email_user_id
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/sendpassword") = email_user_pwd
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/smtpusessl") = email_use_ssl
+    objEmail.Configuration.Fields.Item ("https://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = email_timeout
     objEmail.Configuration.Fields.Update
     if use_audit_log = "y" then 
         objEmail.AddAttachment this_file
@@ -1756,7 +1756,7 @@ Next
          (Fixpath(objItem.Path_.relpath,objDiskPartition.path_.relpath), 0)
         If Err.Number = 0 Then
 		  partition_type = objDiskPartition.Type
-		    wscript.echo " Type: " & partition_type   'Neu, einbauen
+		  echo( " Type: " & partition_type )  ' Neu
           partition_bootable = objDiskPartition.Bootable
           if isnull(partition_bootable) then partition_bootable = "False" end if
           partition_boot_partition = objDiskPartition.BootPartition
@@ -1771,7 +1771,7 @@ Next
           LogicalDisk_DeviceID = replace(LogicalDisk_DeviceID,"\","")
           LogicalDisk_DeviceID = replace(LogicalDisk_DeviceID,"""","")
 		  LogicalDisk_Bitlocker = objEnumDiskBitlocker.ProtectionStatus
-          wscript.echo " Bitlocker: " & ldbitlocker   ' Neu: einbauen
+          Echo( " Bitlocker: " & ldbitlocker )  ' Neu
         Else
           Err.Clear
         End If
@@ -5050,6 +5050,7 @@ if online = "yesxml" then
        objHTTP.Send "add=" + escape(Deconstruct(form_total + vbcrlf))
      end if
    end if
+	 Echo( "*** Open-Audit-Ziel-URL : " & url)
 	 if (Err.Number <> 0 or objHTTP.status <> 200) then
 		 Echo("Unable to send XML to server using " & XmlObj & " - HTTP Response: " & objHTTP.status & " (" & objHTTP.statusText & ") - Error " & Err.Number & " " & Err.Description)
 	 else
