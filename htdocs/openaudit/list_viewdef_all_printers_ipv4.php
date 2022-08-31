@@ -1,10 +1,10 @@
 <?php
 /**********************************************************************************************************
-Module:	list_viewdef_all_printers.php
-		
+Module:	list_viewdef_all_network_printers.php
+	
 **********************************************************************************************************/
-$query_array=array("headline"=>__("List All Printers"),
-                   "sql"=>"SELECT * FROM other, system WHERE other_type = 'printer' AND (other_linked_pc = system_uuid OR other_linked_pc = '') AND other_timestamp = system_timestamp ",
+$query_array=array("headline"=>__("List All Printers/Networks with IP v4 Portname"),
+                   "sql"=>"SELECT * FROM other, system WHERE other_type = 'printer' AND (other_linked_pc = system_uuid OR other_linked_pc = '') AND other_timestamp = system_timestamp and other_p_port_name LIKE '%.%.%.%' ",
                    "sort"=>"other_network_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",
@@ -60,11 +60,11 @@ $query_array=array("headline"=>__("List All Printers"),
                                                "show"=>"y",
                                                "link"=>"n",
                                               ),
-									"90"=>array("name"=>"other_first_timestamp",
+                                   "90"=>array("name"=>"other_first_timestamp",
                                                "head"=>__("First Audit"),
                                                "show"=>"y",
                                                "link"=>"n",
                                               ),
-                                    ),
+                                  ),
                   );
 ?>
