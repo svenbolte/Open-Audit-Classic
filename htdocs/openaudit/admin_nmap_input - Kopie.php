@@ -31,6 +31,7 @@ echo "<p class=\"contenthead\">".__("NMap")."</p>\n";
 //
 $device_type="unknown";
 $running="unknown";
+$moreinfo="";
 $ip_address="000.000.000.000";
 $manufacturer="unknown";
 $mac="00:00:00:00:00:00";
@@ -74,8 +75,8 @@ if (isset($_POST["submit"])){
     if (substr($split, 0, 13) == "Service Info:") {
 	  // OK - we have a hit.
       $temp = substr($split, strpos($split, ":") + 1);
-      $temp2 = str_replace("Device:","",$temp);
-      $servinfo .= ltrim(rtrim($temp2));
+      $temp = str_replace("Device:","",$temp);
+      $servinfo .= ltrim(rtrim($temp));
       echo "Service Info: " . $servinfo . "<br />";
     }
     if (substr($split, 0, 11) == "OS details:") {
@@ -186,8 +187,8 @@ if (isset($_POST["submit"])){
       }
     }
   } // End of for each
-  if ($device_type == "") {$device_type = "unknown";}
-  if ($device_type = "unknown") {$device_type = $servinfo;}
+  if ($device_type == ""){$device_type = "unknown";}
+  if ($device_type = "unknown"){$device_type = $servinfo;}
   if ($running == "") {$running = "unknown";}
   if ($running = "unknown") {$running = $osdetails;}
   if (substr_count($device_type, "general purpose") > "0"){
@@ -197,7 +198,7 @@ if (isset($_POST["submit"])){
     if (substr_count($running, "MAC") > "0")     { $device_type = "os_mac";}
     if (substr_count($running, "AIX") > "0")     { $device_type = "os_unix";}
     if (substr_count($running, "SCO UnixWare") > "0"){ $device_type = "os_unix";}
-  } else {}
+  }
 
     if (isset($mac) AND $mac <> "00:00:00:00:00:00"){
     // First check the network_card table
@@ -259,10 +260,13 @@ if (isset($_POST["submit"])){
 
   if ($process == "other_mac"){
     $sql  = "UPDATE other SET other_ip_address = '". ip_trans_to($ip_address) . "', ";
+    $sql .= "other_description = '$running', ";
+    $sql .= "other_type = '$device_type', ";
+    $sql .= "other_purchase_order_number = '$uptimeguess | $osdetails | $servinfo', ";
     $sql .= "other_mac_address = '$mac', other_timestamp = '$timestamp' ";
     $sql .= "WHERE other_id = '$uuid'";
     $result = mysqli_query($db,$sql) or die ('Insert Failed: <br />' . $sql . '<br />' . mysqli_error($db));
-    //$uuid = mysqli_insert_id();
+    //$uuid = mysqli_insert_id($db);
     $process = "update_other";
     echo $sql . "<br />\n";
   } else {}

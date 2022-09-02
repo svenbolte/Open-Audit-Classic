@@ -34,6 +34,9 @@ $running="unknown";
 $ip_address="000.000.000.000";
 $manufacturer="unknown";
 $mac="00:00:00:00:00:00";
+$uptimeguess="";
+$servinfo="";
+$osdetails="";
 //
 $timestamp = date("YmdHis");
 $uuid = "";
@@ -64,8 +67,27 @@ $result = mysqli_query($db,$sql);
     if (substr($split, 0, 8) == "Running:") {
       // OK - we have a hit.
       $temp = explode(":", $split);
-      $running = ltrim(rtrim($temp[1]));
+      $moreinfo = ltrim(rtrim($temp[1]));
       echo "Running: " . $running . "<br />";
+    }
+    if (substr($split, 0, 13) == "Service Info:") {
+	  // OK - we have a hit.
+      $temp = substr($split, strpos($split, ":") + 1);
+      $temp2 = str_replace("Device:","",$temp);
+      $servinfo .= ltrim(rtrim($temp2));
+      echo "Service Info: " . $servinfo . "<br />";
+    }
+    if (substr($split, 0, 11) == "OS details:") {
+	  // OK - we have a hit.
+      $temp = substr($split, strpos($split, ":") + 1);
+	  $osdetails = ltrim(rtrim($temp));
+      echo "OS details: " . $osdetails . "<br />";
+    }
+    if (substr($split, 0, 13) == "Uptime guess:") {
+      // OK - we have a hit.
+      $temp = substr($split, strpos($split, ":") + 1);
+	  $uptimeguess = ltrim(rtrim($temp));
+      echo "Uptime Guess: " . $uptimeguess . "<br />";
     }
     if (substr($split, 0, 20) == "Interesting ports on") {
       // OK - we have a hit.
@@ -163,8 +185,10 @@ $result = mysqli_query($db,$sql);
       }
     }
   } // End of for each
-  if ($device_type == ""){$device_type = "unknown";}
-  if ($running == ""){$running = "unknown";}
+  if ($device_type == "") {$device_type = "unknown";}
+  if ($device_type = "unknown") {$device_type = $servinfo;}
+  if ($running == "") {$running = "unknown";}
+  if ($running = "unknown") {$running = $osdetails;}
   if (substr_count($device_type, "general purpose") > "0"){
     if (substr_count($running, "Linux") > "0")   { $device_type = "os_linux";}
     if (substr_count($running, "Windows") > "0") { $device_type = "os_windows"; echo "Windows.<br />";}
@@ -221,13 +245,13 @@ $result = mysqli_query($db,$sql);
   if ($uuid == "" and $mac <> "00:00:00:00:00:00") {
     // Insert into other table
     $sql  = "INSERT INTO other (other_network_name, other_ip_address, other_mac_address, ";
-    $sql .= "other_description, other_manufacturer, other_type, ";
+    $sql .= "other_description, other_manufacturer, other_type, other_purchase_order_number, ";
     $sql .= "other_timestamp, other_first_timestamp) VALUES (";
     $sql .= "'$name','" . ip_trans_to($ip_address) . "','$mac',";
-    $sql .= "'$running','$manufacturer','$device_type',";
+    $sql .= "'$running','$manufacturer','$device_type','$uptimeguess | $osdetails | $servinfo',";
     $sql .= "'$timestamp','$timestamp')";
     $result = mysqli_query($db,$sql) or die ('Insert Failed: <br />' . $sql . '<br />' . mysqli_error($db));
-    $uuid = mysqli_insert_id();
+    $uuid = mysqli_insert_id($db);
     $process = "new_other";
     echo $sql . "<br />";
   } else {}

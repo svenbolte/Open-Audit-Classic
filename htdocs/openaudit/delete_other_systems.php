@@ -66,12 +66,13 @@
                 </tr>\n";
       do {
           $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-          echo "<tr style=\"bgcolor:" . $bgcolor . ";\">
+          if (strlen($myrow["other_type"]) > 20) {$typebild="router";} else {$typebild = str_replace(" ","_",$myrow["other_type"]);}
+		  echo "<tr style=\"bgcolor:" . $bgcolor . ";\">
                    <td width=\"5%\"><input type=\"checkbox\" name=" . $myrow["other_id"] . " id=" . $myrow["other_id"] . " value=" . $myrow["other_id"] . "></td>
                    <td><a href=\"system.php?other=".$myrow["other_id"]."&amp;view=other_system\">" . ip_trans($myrow["other_ip_address"]) . "</a></td>
                    <td>" . $myrow["other_network_name"] . "</td>
                    <td>" . $myrow["other_description"] . "</td>
-                   <td><img src=\"images/o_" .str_replace(" ","_",$myrow["other_type"]). ".png\" alt=\"\" border=\"0\" width=\"16\" height=\"16\"  /></td>
+                   <td><img src=\"images/o_" .$typebild. ".png\" alt=\"\" border=\"0\" width=\"16\" height=\"16\"  /></td>
                    <td>" . return_date_time($myrow["other_timestamp"]) . "</td>
                 </tr>\n";
         } while ($myrow = mysqli_fetch_array($result));

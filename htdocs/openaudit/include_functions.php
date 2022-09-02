@@ -284,7 +284,9 @@ function ConvertSpecialField($myrow, $field, $db, $page)
 			if($page=="list") {return determine_img($myrow["system_os_name"],$myrow[$field["name"]]);
 			} else {return $myrow[$field["name"]];}
 		case "other_type":
-			if($page=="list") {return "<img src=\"images/o_".str_replace(" ","_",$myrow[$field["name"]]).".png\" alt=\"".$myrow[$field["name"]]."\" title=\"".$myrow[$field["name"]]."\" width=\"16\" height=\"16\"/> ".$myrow[$field["name"]]."";
+			if($page=="list") {
+				if (strlen($myrow[$field["name"]]) > 20) {$typebild="router";} else {$typebild = str_replace(" ","_",$myrow[$field["name"]]);}
+				return " <img src=\"images/o_".$typebild.".png\" alt=\"".$myrow[$field["name"]]."\" title=\"".$myrow[$field["name"]]."\" width=\"16\" height=\"16\"/> ".$myrow[$field["name"]]."";
 			} else {return $myrow[$field["name"]];}
 		case "other_ip_address":
 			return ip_trans($myrow[$field["name"]]);

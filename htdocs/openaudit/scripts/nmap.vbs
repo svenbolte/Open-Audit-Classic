@@ -72,7 +72,7 @@ for ip = nmap_ip_start to nmap_ip_end
     if nmap_srv_ver_scan = "y" then
     nmap = nmap & "-sV --version-intensity " & nmap_srv_ver_int & " "
     end if
-    nmap = nmap & "-O -v -oN " & sTempFile & " " & nmap_subnet
+    nmap = nmap & "-O -T4 	-v -oN " & sTempFile & " " & nmap_subnet
     '
     '
     scan = nmap & ip
@@ -119,6 +119,7 @@ for ip = nmap_ip_start to nmap_ip_end
        objHTTP.Send "add=" + escape(Deconstruct(form_total + vbcrlf))
      end if
    end if
+	 Echo( "*** NMAP-Ziel-URL : " & url)
 	 if (Err.Number <> 0 or objHTTP.status <> 200) then
 		 Echo("Unable to send XML to server using " & XmlObj & " - HTTP Response: " & objHTTP.status & " (" & objHTTP.statusText & ") - Error " & Err.Number & " " & Err.Description)
 	 else
@@ -126,11 +127,9 @@ for ip = nmap_ip_start to nmap_ip_end
 	 end if
      Err.clear
 
-
-
-
   on error goto 0
-   wscript.echo strtext
+
+   Echo(strtext)
    url = nmap_ie_form_page
    Err.clear
    XmlObj = "ServerXMLHTTP"
@@ -144,6 +143,7 @@ for ip = nmap_ip_start to nmap_ip_end
 '   else
 '     objHTTP.Send escape(Deconstruct(strText + vbcrlf))
 '   end if
+	 Echo( "*** NMAP-Ziel-URL-2 : " & url)
 	 if (Err.Number <> 0 or objHTTP.status <> 200) then
 		 Echo("Unable to send XML to server using " & XmlObj & " - HTTP Response: " & objHTTP.status & " (" & objHTTP.statusText & ") - Error " & Err.Number & " " & Err.Description)
 	 else

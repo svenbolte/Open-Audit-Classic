@@ -1,6 +1,6 @@
 #define MyAppName "Open-Audit Classic"
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
-#define MyAppPublisher "Open-Audit Classic"
+#define MyAppPublisher "OpenAudit Classic GPL3 Projekt"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
 #define Inhalte "Apache 2.4.54x64-VC16, MySQLMariaDB 10.4.26x64, PHP 8.0.23x64-thsafe, phpMyAdmin 5.2.0x64, NMap 7.92, NPCap 1.71, Wordpress 6.0.2, VCRuntimes aktuell"
 
@@ -49,14 +49,16 @@ Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Components: mitwordpress; Flags
 Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Components: nuropenaudit; Excludes: "wordpress"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"
-Name: "{group}\WPKG-Softwareverteilung"; Filename: "{app}\wpkg\"
+Name: "{group}\OpenAudit cl Oberfläche lokal"; Filename: "http://localhost:888/openaudit"
+Name: "{group}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"
+Name: "{group}\OpenAudit cl Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
+Name: "{group}\OpenAudit cl Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
+Name: "{group}\PC-IP-Listfile.txt manuell ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt";  Comment: "nur im Notfall, lässt sich besser über Oberfläche erzeugen"
 Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"
-Name: "{group}\Open-Audit Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
-Name: "{group}\Open-Audit Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
-Name: "{commondesktop}\Open-Audit Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
-Name: "{commondesktop}\Open-Audit Oberfläche"; Filename: "http://localhost:888/openaudit"; Tasks: desktopicon
-Name: "{commondesktop}\PC-IP-Listendatei ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt"; Tasks: desktopicon
+Name: "{commondesktop}\OpenAudit cl Oberfläche"; Filename: "http://{code:GetComputerName}:888/openaudit"; Tasks: desktopicon; Comment: "Netzwerkverknüpfung zum Open-Audit-Server"
+Name: "{commondesktop}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
+Name: "{commondesktop}\PC-List-File erzeugen"; Filename: "http://{code:GetComputerName}:888/openaudit/export-ipliste-4-openaudit.php"; Tasks: desktopicon; Comment: "Netzwerke eingeben und Liste erzeugen"
+Name: "{commondesktop}\Aufgabenplanung"; Filename: "%windir%\system32\taskschd.msc /s"; Tasks: desktopicon; Comment: "OpenAudit PC-Scan und optional NMAP Scan bearbeiten"
 
 [Run]
 Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: runascurrentuser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
@@ -80,6 +82,12 @@ Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; Ru
 Filename: "{app}\mysql\mysql_uninstallservice-win10.cmd"; Flags: shellexec; RunOnceId: "DELMYSQL"
 
 [Code]
+// Rechnernamen, auf dem installiert wird, herausfinden
+function GetComputerName(Param: string): string;
+begin
+  Result := GetComputerNameString;
+end; 
+
 function VC2017RedistNeedsInstall: Boolean;
 var 
   Version: String;
