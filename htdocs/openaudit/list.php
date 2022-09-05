@@ -532,7 +532,6 @@ if ($myrow = mysqli_fetch_array($result)){
 
     echo "<hr><div>";
     echo "<table width=\"100%\"><tr>\n";
-
     echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
@@ -545,7 +544,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo "<br><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
+     echo "<br><a href=\"#\" class=\"get-view-csv\"><i class=\"fa fa-download\"></i> ".__("Export this List to CSV")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
 
