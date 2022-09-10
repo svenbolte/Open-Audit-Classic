@@ -80,6 +80,8 @@ Name: mitwordpress; Description: Openaudit und Wordpress für Intranet installier
 [UninstallRun]
 Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; RunOnceId: "DELAPACHE"
 Filename: "{app}\mysql\mysql_uninstallservice-win10.cmd"; Flags: shellexec; RunOnceId: "DELMYSQL"
+Filename: "{sys}\schtasks.exe"; Parameters: "/delete /f /TN Openaudit-PCScan"; RunOnceId: "DELSCANTASK"
+Filename: "{sys}\schtasks.exe"; Parameters: "/delete /f /TN Openaudit-NMAPScan"; RunOnceId: "DELNMAPTASK"
 
 [Code]
 // Rechnernamen, auf dem installiert wird, herausfinden
