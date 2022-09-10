@@ -1,12 +1,45 @@
 Falls mal ein Rechner nicht über WMI erreichbar ist (Access denied), 
 kann man den Client installieren und ihn die Daten am Server abliefern lassen.
 
+* dazu das Paket "OpenAudit Classic Offline- und Clientside Scans" aus dem Internet herunterladen und entpacken
+
+Methode 1: mit Setup  (Unterordner OA-Clientside-Scan)
+------------------------------------------------------
+
+* "openaudit-clientscan-setup.exe" ausführen und auf dem zu erfassenden PC installieren (erfordert Adminrechte)
+
+* Die Datei "audit.config" mit dem Editor öffnen und in der Zeile
+
+    audit_host="http://openaudit:888"
+	
+  statt "openaudit" den Servernamen oder die IP-Adresse des OpenAudit Classic Servers eintragen
+  (alternativ: Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit")
+
+* In die Windows Aufgabenplanzung, die Aufgabe "Openaudit-Clientside-Scan" bearbeiten und 
+  und einen administrativen Benutzer auswählen zur Ausführung
+
+
+oder Methode 2 (von Hand):
+--------------------------
+
 * Den Inhalt des Openaudit Server-Ordners: 
-C:/Program Files (x86)/xampplite/htdocs/openaudit/all-tools-scripts/oa-clientside-scan
-auf den Rechner kopieren (z.B. nach c:/anwend/oa-clientside-scan)
+"C:/Program Files (x86)/xampplite/htdocs/openaudit/all-tools-scripts/oa-clientside-scan"
+auf den Rechner kopieren (z.B. auf den Desktop)
 
-* Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit"
- (oder in der audit.config der korrekte Name eingetragen werden).
+* Die Datei "audit.config" mit dem Editor öffnen und in der Zeile
 
-* Die Aufgabe "openaudit-pcscan.xml" in die Windows Aufgabenplanung importieren
- (sie startet bei jeder Anmeldung am PC im Hintergrund und liefert an http://openaudit:888 ab)
+    audit_host="http://openaudit:888"
+	
+  statt "openaudit" den Servernamen oder die IP-Adresse des OpenAudit Classic Servers eintragen
+  (alternativ: Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit")
+
+* Die Aufgabe "openaudit-clientscan.xml" in die Windows Aufgabenplanung importieren
+  und einen administrativen Benutzer auswählen zur Ausführung
+ (sie startet täglich um 11:00 Uhr liefert an den OpenAudit Classic Server ab)
+
+oder OFFLINE-SCAN (nur falls Clientdside-Scans nicht funktionieren)
+-------------------------------------------------------------------
+
+* Dazu den Ordner /offline-scan auf dem zu erfassenden Rechner auf den Desktop kopieren
+
+* Readme: "openauditoffline-howto.txt" lesen und Anweisungen befolgen
