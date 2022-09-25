@@ -36,7 +36,7 @@ $manufacturer="unknown";
 $mac="00:00:00:00:00:00";
 $uptimeguess="";
 $servinfo="";
-$osdetails="";
+$osdetails="unknown";
 //
 $timestamp = date("YmdHis");
 $uuid = "";
@@ -185,8 +185,9 @@ $result = mysqli_query($db,$sql);
       }
     }
   } // End of for each
+
   if ($device_type == "") {$device_type = "unknown";}
-  if ($device_type = "unknown") {$device_type = $servinfo;}
+  if ($servinfo != "") {$device_type = $servinfo;}
   if ($running == "") {$running = "unknown";}
   if ($running = "unknown") {$running = $osdetails;}
   if (substr_count($device_type, "general purpose") > "0"){

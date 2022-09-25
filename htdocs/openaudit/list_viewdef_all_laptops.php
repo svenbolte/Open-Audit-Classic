@@ -69,6 +69,7 @@ $query_array=array("headline"=>__("List all Laptops"),
                                                "show"=>$show_description,
                                               ),
 
+
                                   ),
                   );
 ?>

@@ -4,8 +4,8 @@ $query_array=array("headline"=>__("List all Software"),
 						FROM system, software
 						LEFT JOIN softwareversionen
 						ON (
-							 CONCAT( LOWER(RTRIM(Replace(Replace(software.software_name,'(x64)',''),'.',''))) ,'%')      
-						LIKE CONCAT( LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
+							 CONCAT('%', LOWER(RTRIM(Replace(Replace(software.software_name,'(x64)',''),'.',''))) ,'%')      
+						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
 						)
 						WHERE software_name NOT LIKE '%hotfix%'
 						AND software_name NOT LIKE '%Service Pack%' 

@@ -35,8 +35,8 @@ $ip_address="000.000.000.000";
 $manufacturer="unknown";
 $mac="00:00:00:00:00:00";
 $uptimeguess="";
-$servinfo="";
-$osdetails="";
+$servinfo="unknown";
+$osdetails="unknown";
 //
 $timestamp = date("YmdHis");
 $uuid = "";
@@ -186,8 +186,9 @@ if (isset($_POST["submit"])){
       }
     }
   } // End of for each
+
   if ($device_type == "") {$device_type = "unknown";}
-  if ($device_type = "unknown") {$device_type = $servinfo;}
+  if ($servinfo != "") {$device_type = $servinfo;}
   if ($running == "") {$running = "unknown";}
   if ($running = "unknown") {$running = $osdetails;}
   if (substr_count($device_type, "general purpose") > "0"){

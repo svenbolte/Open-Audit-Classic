@@ -42,7 +42,7 @@ return $div_clean;
   echo "<div class=\"main_each\">";
   echo "<table  >\n";
   echo "<tr>\n";
-  echo "  <td class=\"contenthead\" colspan=\"3\">".__("Add Package to Software License Register").".<br />&nbsp;</td>\n";
+  echo "  <td class=\"contenthead\" colspan=\"3\">".__("Add Package to Software License Register")."</td>\n";
   echo "</tr>\n";
   echo "<tr>\n";
   echo "<td colspan=\"3\"><div id=\"ajaxTest\"><br /> </div></td>\n";
