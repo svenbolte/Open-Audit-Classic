@@ -12,16 +12,17 @@ set_time_limit(240000);
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-#$sql =  "SELECT software_reg_id, software_title, count(software.software_name) AS number_used, sum(license_purchase_number) as number_purchased FROM ";
-#$sql .= "software_register, software, system, software_licenses WHERE ";
-#$sql .= "software_reg_id = license_software_id AND ";
-#$sql .= "software_title = software_name AND ";
-#$sql .= "software_uuid = system_uuid AND ";
-#$sql .= "software_timestamp = system_timestamp ";
-#$sql .= "GROUP BY software_title";
 
-$sql = "SELECT software_reg_id, software_title, count(software.software_name) AS number_used, software_comments FROM ";
-$sql .= "software_register, software, system WHERE ";
+$sql = "SELECT software_reg_id, software_title, count(software.software_name) AS number_used, software_comments, ";
+
+$sql .= "(SELECT license_purchase_vendor FROM software_licenses WHERE ";
+$sql .= "	software_register.software_reg_id = software_licenses.license_software_id LIMIT 1 OFFSET 1) AS licpvend, ";
+$sql .= "(SELECT license_comments FROM software_licenses WHERE ";
+$sql .= "	software_register.software_reg_id = software_licenses.license_software_id LIMIT 1 OFFSET 1) AS licpcomm, ";
+$sql .= "(SELECT license_purchase_type FROM software_licenses WHERE ";
+$sql .= "	software_register.software_reg_id = software_licenses.license_software_id LIMIT 1 OFFSET 1) AS licptype ";
+
+$sql .= "FROM software_register, software, system WHERE ";
 $sql .= "software_title = software_name AND ";
 $sql .= "software_uuid = system_uuid AND ";
 $sql .= "software_timestamp = system_timestamp ";
@@ -31,14 +32,17 @@ $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   echo "<table   width=\"100%\">\n";
   echo "<tr>\n";
-  echo "  <td class=\"contenthead\">Software License Register<br />&nbsp;</td>\n";
+  echo "  <td colspan=4 class=\"contenthead\">Software License Register - manage licenses</td>\n";
   echo "</tr>\n";
   echo "<tr>\n";
   echo "<td style=\"max-width:30%;\"><b>Package&nbsp;&nbsp;</b></td>\n";
   echo "<td align=\"center\" ><b>&nbsp;&nbsp;Purchased&nbsp;&nbsp;</b></td>\n";
   echo "<td align=\"center\" ><b>&nbsp;&nbsp;Used&nbsp;&nbsp;</b></td>\n";
   echo "<td align=\"center\" ><b>&nbsp;&nbsp;Audit&nbsp;&nbsp;</b></td>\n";
-  echo "<td style=\"min-width:60%;\"><b>&nbsp;&nbsp;Comments&nbsp;&nbsp;</b></td>\n";
+  echo "<td><b>Lic-Type</b></td>\n";
+  echo "<td><b>Lic-Vendor</b></td>\n";
+  echo "<td><b>Lic-Comments</b></td>\n";
+  echo "<td><b>Comments</b></td>\n";
   echo "<td align=\"center\" ><b>&nbsp;&nbsp;Remove&nbsp;&nbsp;</b></td>\n";
   echo "</tr>\n";
   do {    $sql2  = "SELECT sum(license_purchase_number) as number_purchased FROM ";
@@ -47,7 +51,6 @@ if ($myrow = mysqli_fetch_array($result)){
     $sql2 .= "software_reg_id = '" . $myrow['software_reg_id'] . "'";
     $result2 = mysqli_query($db,$sql2);
     $myrow2 = mysqli_fetch_array($result2);
-    
     
     $number_purchased = $myrow2["number_purchased"];
     $number_used = $myrow["number_used"];
@@ -62,15 +65,14 @@ if ($myrow = mysqli_fetch_array($result)){
     $count = $count + 1;
     $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
 	echo " <tr style=\"background-color:" . $bgcolor . ";\">\n";
-    echo "<td style=\"max-width:300px;\">";
+    echo "<td ><nobr>";
 
 	if (strpos($myrow["software_title"]," ")!=0) {$logobild = substr($myrow["software_title"],0,strpos($myrow["software_title"]," "));} else {$logobild=$myrow["software_title"];}
-	 // if (strlen($logobild)>4) {$show_value = $logobild;}
 	if (is_file("softwarelogos/".$logobild.".png")){
 	   echo "<img src=\"softwarelogos/".$logobild.".png\" style=\"border:0px;\" alt=\"\" /> ";
 	}
 	
-	echo "<a href=\"software_register_details.php?id=" . $myrow["software_reg_id"] . "\">" . $myrow["software_title"] . "</a>&nbsp;&nbsp;</td>";
+	echo "<a href=\"software_register_details.php?id=" . $myrow["software_reg_id"] . "\">" . $myrow["software_title"] . "</a>&nbsp;</nobr></td>";
     if ($number_purchased == -1) {
       echo "<td align=\"center\">Free</td>";
     } else {
@@ -82,13 +84,16 @@ if ($myrow = mysqli_fetch_array($result)){
     } else {
       echo "<td align=\"center\">" . $font . $number_audit . "</font></td>";
     }
-    echo "<td align=\"left\" style=\"min-width:600px;\">". $myrow['software_comments'] . "</td>\n";
+    echo "<td align=\"left\" ><nobr>". $myrow['licptype'] . "</nobr></td>\n";
+    echo "<td align=\"left\" ><nobr>". $myrow['licpvend'] . "</nobr></td>\n";
+    echo "<td align=\"left\" ><nobr>". $myrow['licpcomm'] . "</nobr></td>\n";
+    echo "<td align=\"left\" style=\"width:30%;min-width:30%\" >". $myrow['software_comments'] . "</td>\n";
     echo "<td align=\"center\"><div id=\"s" . $myrow['software_reg_id'] . "\">\n";
     echo "<a href=\"#\" onclick=\"sendRequest('" . url_clean($myrow["software_reg_id"]) . "');\"><img border=\"0\" src=\"images/button_fail.png\" width=\"16\" height=\"16\" alt=\"\" /></a>";
     echo "</div></td>\n"; 
     echo "</tr>";
   } while ($myrow = mysqli_fetch_array($result));
-  echo "</table>";
+  echo "</table><br><hr><b>Anzahl: ".($count + 1)."</b>";
 } else {
   echo "<p class=\"content\">No Packages in database.</p>"; 
 }

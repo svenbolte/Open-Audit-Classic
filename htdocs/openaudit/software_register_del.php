@@ -9,7 +9,11 @@ if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<p class=\"contenthead\">Software License Register.</p>";
+  echo "<table  >\n";
+  echo "<tr>\n";
+  echo "  <td class=\"contenthead\" colspan=\"3\">".__("Delete Package from Software License Register")."</td>\n";
+  echo "</tr>\n";
+
 $db=GetOpenAuditDbConnection() or die("Could not connect");
 $sql = "SELECT * FROM software_register ORDER BY software_title";
 $result = mysqli_query($db,$sql);

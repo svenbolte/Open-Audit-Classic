@@ -117,11 +117,11 @@ if ($use_pass != "n") {
 	<meta name="theme-color" content="#e1e1e1">
 	<meta name="msapplication-navbutton-color" content="#e1e1e1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
-    <link media="print" rel="stylesheet" type="text/css" href="defaultprint.css" />
-		<script type='text/javascript' src="javascript/ajax.js"></script>
-		<script type='text/javascript' src="javascript/include.js"></script>
-
+	<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
+	<link rel="stylesheet" href="/openaudit/fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" media="print" type="text/css" href="defaultprint.css" />
+	<script type='text/javascript' src="javascript/ajax.js"></script>
+	<script type='text/javascript' src="javascript/include.js"></script>
     <?php 
       // Used to only included pieces of jquery/jquery ui that the page needs.
       if(isset($JQUERY_UI)){
@@ -193,7 +193,7 @@ echo "</div>\n";
   <tr>
     <td style="width:170px;" rowspan="12" valign="top" id="nav">
       <ul id="primary-nav">
-		<li><a href="index.php"><?php echo __("Home"); ?></a></li>
+		<li><a href="index.php"><i class="fa fa-lg fa-home"></i> <?php echo strtoupper(__("Home")); ?></a></li>
 <?php
 if ($pc > "0") {
 	// This query has less joins and is syntactically simpler than previous - 17/04/2009	[Nick Brown]
@@ -242,7 +242,8 @@ if ($pc > "0") {
         if(isset($topic_item["childs"]) AND is_array($topic_item["childs"])){
           echo "<span><img src=\"images/spacer.gif\" height=\"16\" width=\"0\" alt=\"\" />…</span>";
         }
-        echo "<img src=\"".$topic_item["image"]."\" style=\"border:0px;\" alt=\"\" />&nbsp;";
+        echo '<i class="fa '.$topic_item["image"].'"></i> ';
+		//echo "<img src=\"".$topic_item["image"]."\" alt=\"\" />&nbsp;";
         echo __($topic_item["name"]);
         echo "</a>\n";
 
@@ -255,7 +256,7 @@ if ($pc > "0") {
             if (isset($topic_item["title"])) {
               echo " title=\"".$topic_item["title"]."\"";
             }
-            echo "><img src=\"".$child_item["image"]."\" style=\"border:0px;\" alt=\"\" />&nbsp;";
+            echo "><img src=\"".$child_item["image"]."\" />&nbsp;";
             echo __($child_item["name"]);
             echo "</a></li>\n";
           }
@@ -272,9 +273,6 @@ if ($pc > "0") {
     require_once("include_menu_array.php");
     reset ($menue_array["misc"]);
 
-	//    while (list($key, $value) = each($array)) {
-	//	  foreach($array as $key => $value) {
-
 	foreach($menue_array["misc"] as $key_1 => $topic_item) {
         echo "<li class=\"".$topic_item["class"]."\">";
          echo "<a href=\"".$topic_item["link"]."\"";
@@ -283,7 +281,11 @@ if ($pc > "0") {
           }
          echo ">";
           if(isset($topic_item['image']) AND $topic_item["image"]!=""){
-              echo "<img src=\"".$topic_item["image"]."\" width=\"16\" height=\"16\" style=\"border:0px;\" alt=\"\" />&nbsp;";
+			  if (strstr($topic_item["image"], 'fa-')) {
+				  echo '<i class="fa fa-lg '.$topic_item["image"].'"></i> ';
+			  } else {
+				  echo "<img src=\"".$topic_item["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
+			  }		
           }
           echo __($topic_item["name"]);
          echo "</a>";
@@ -297,7 +299,11 @@ if ($pc > "0") {
                   if(isset($child_item["childs"]) AND is_array($child_item["childs"])){
                       echo "<span>…</span>";
                   }
-                  echo "<img src=\"".$child_item["image"]."\"  width=\"16\" height=\"16\" style=\"border:0px;\" alt=\"\" />&nbsp;";
+			  if (strstr($child_item["image"], 'fa-')) {
+				  echo '<i class="fa '.$child_item["image"].'"></i> ';
+			  } else {	  
+                  echo "<img src=\"".$child_item["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
+			  }		
                   echo __($child_item["name"]);
                  echo "</a>";
 
@@ -307,7 +313,11 @@ if ($pc > "0") {
 					foreach ($child_item["childs"] as $key_3=>$child_item_2) {
                         echo "<li>";
                          echo "<a href=\"".$child_item_2["link"]."\" title=\"".$child_item_2["title"]."\">";
-                          echo "<img src=\"".$child_item_2["image"]."\"  width=\"16\" height=\"16\" style=\"border:0px;\" alt=\"\" />&nbsp;";
+						 if (strstr($child_item_2["image"], 'fa-')) {
+							echo '<i class="fa '.$child_item_2["image"].'"></i> ';
+						  } else {	  
+                            echo "<img src=\"".$child_item_2["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
+						  }		
                           echo __($child_item_2["name"]);
                          echo "</a>";
                         echo "</li>\n";

@@ -2,6 +2,12 @@
 
 $query_array=array("headline"=>__("Software License Register"),
                    "sql"=>"SELECT software_reg_id, software_title, count(software.software_name) AS number_used, software_comments,
+						(SELECT license_purchase_vendor FROM software_licenses WHERE 
+							software_register.software_reg_id = software_licenses.license_software_id LIMIT 1 OFFSET 1) AS licpvend,
+						(SELECT license_comments FROM software_licenses WHERE 
+							software_register.software_reg_id = software_licenses.license_software_id LIMIT 1 OFFSET 1) AS licpcomm,
+						(SELECT license_purchase_type FROM software_licenses WHERE 
+							software_register.software_reg_id = software_licenses.license_software_id LIMIT 1 OFFSET 1) AS licptype,
 						IFNULL((SELECT sum(license_purchase_number) as number_purchased FROM 
 							software_licenses WHERE 
 							software_register.software_reg_id = software_licenses.license_software_id),0) AS purchased,
@@ -33,6 +39,21 @@ $query_array=array("headline"=>__("Software License Register"),
                                                "head"=>__("Produkt"),
                                                "show"=>"y",
                                                "link"=>"y",
+                                              ),
+                                   "22"=>array("name"=>"licptype",
+                                               "head"=>__("Type"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+                                              ),
+                                   "24"=>array("name"=>"licpcomm",
+                                               "head"=>__("LicComm"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+                                              ),
+                                   "26"=>array("name"=>"licpvend",
+                                               "head"=>__("LicVendor"),
+                                               "show"=>"y",
+                                               "link"=>"n",
                                               ),
                                    "30"=>array("name"=>"number_used",
                                                "head"=>__("used"),

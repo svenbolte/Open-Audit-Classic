@@ -470,11 +470,25 @@ if ($myrow = mysqli_fetch_array($result)){
 							}
 						} 
 						$logobild = preg_replace('/[^A-Za-z0-9\-_]/', '', $logobild);
-						// echo $logobild;
-					//if (strlen($logobild)>4) {$show_value = $logobild;}
 				}	
 				if (($field["name"]=="software_name" or $field["head"]=="Software" or $field["name"]=="system_os_name") and is_file("softwarelogos/".$logobild.".png")){
 				   $show_value = "<img src=\"softwarelogos/".$logobild.".png\" style=\"border:0px;\" alt=\"\" /> ".$software_name;
+				}
+
+				if (isset($software_title)) {
+					if (strpos($software_title," ")!=0) {
+							$logobild = substr($software_title,0,strpos($software_title," "));
+						}else{
+							if (strpos($software_title,".")!=0) {
+								$logobild = substr($software_title,0,strpos($software_title,"."));
+							}else{
+								$logobild=$software_title;
+							}
+						} 
+						$logobild = preg_replace('/[^A-Za-z0-9\-_]/', '', $logobild);
+				}	
+				if (($field["name"]=="software_title") and is_file("softwarelogos/".$logobild.".png")){
+				   $show_value = "<img src=\"softwarelogos/".$logobild.".png\" style=\"border:0px;\" alt=\"\" /> ".$software_title;
 				}
 								
 				}
@@ -532,7 +546,6 @@ if ($myrow = mysqli_fetch_array($result)){
 
     echo "<hr><div>";
     echo "<table width=\"100%\"><tr>\n";
-
     echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
@@ -545,7 +558,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo "<br><a href=\"#\" class=\"get-view-csv\"> ".__("Export this List to CSV")."</a>\n";
+     echo "<br><a href=\"#\" class=\"get-view-csv\"><i class=\"fa fa-download\"></i> ".__("Export this List to CSV")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
 

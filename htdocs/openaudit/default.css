@@ -50,7 +50,7 @@ margin-bottom:0
 
 .for_forms {
 color:#777;
-font:normal 100% arial,sans-serif;
+font:normal 100% Arial,sans-serif;
 margin:5px;
 padding:0;
 text-decoration:none
@@ -248,8 +248,7 @@ ul#primary-nav,ul#primary-nav ul {
 background-color:#fff;
 border-radius:3px;
 box-shadow: #3c40434d 0 1px 2px 0, #3c404326 0 1px 3px 1px;
-color:#000;
-margin:0;
+margin:2px;
 padding:0;
 position:relative;
 width:160px;
@@ -262,9 +261,8 @@ position:relative
 }
 
 ul#primary-nav li a {
-color:#000;
 display:block;
-margin:0;
+margin:2px;
 padding:5px;
 padding-right:0;
 text-decoration:none
@@ -456,7 +454,7 @@ text-align:left
 
 div.ldap_details div {
 color:#444;
-font:bold 120% Arial,arial,Sans;
+font:bold 120% Arial,Arial,Sans;
 text-decoration:none
 }
 
