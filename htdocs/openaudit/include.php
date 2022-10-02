@@ -40,6 +40,16 @@ function svversionenimport($aftertime) {
 		if (time() - filemtime($filename) > (int) $aftertime ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
 			$arrContextOptions=array( "ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false, ), );  
 			$source = file_get_contents($url, false, stream_context_create($arrContextOptions));
+
+			// --- Alternative Methode ---
+			// $ch = curl_init($url);
+			// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			// $source = curl_exec($ch);
+			// curl_close($ch);
+
 			if (!empty($source) && substr($source,0,18)=='Datum,Rating,Ldfnr' ) file_put_contents($filename, $source); else echo ' Downloadfehler, verwende alte Datei zum Import!';
 		}
 	}

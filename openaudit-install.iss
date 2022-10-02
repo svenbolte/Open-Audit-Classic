@@ -2,7 +2,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "OpenAudit Classic GPL3 Projekt"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.54x64-VC16, MySQLMariaDB 10.4.26x64, PHP 8.0.23x64-thsafe, phpMyAdmin 5.2.0x64, NMap 7.93, NPCap 1.71, Wordpress 6.0.2, VCRuntimes aktuell"
+#define Inhalte "Apache 2.4.54x64-VC16, MySQLMariaDB 10.4.26x64, PHP 8.0.24x64-thsafe, phpMyAdmin 5.2.0x64, NMap 7.93, NPCap 1.71, Wordpress 6.0.2, VCRuntimes aktuell"
 
 [Setup]
 PrivilegesRequired=admin
@@ -58,7 +58,7 @@ Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap.exe"
 Name: "{commondesktop}\OpenAudit cl Oberfläche"; Filename: "http://{code:GetComputerName}:888/openaudit"; Tasks: desktopicon; Comment: "Netzwerkverknüpfung zum Open-Audit-Server"
 Name: "{commondesktop}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
 Name: "{commondesktop}\PC-List-File erzeugen"; Filename: "http://{code:GetComputerName}:888/openaudit/export-ipliste-4-openaudit.php"; Tasks: desktopicon; Comment: "Netzwerke eingeben und Liste erzeugen"
-Name: "{commondesktop}\Aufgabenplanung"; Filename: "%windir%\system32\taskschd.msc /s"; Tasks: desktopicon; Comment: "OpenAudit PC-Scan und optional NMAP Scan bearbeiten"
+Name: "{commondesktop}\Aufgabenplanung"; Filename: "%windir%\system32\taskschd.msc"; Parameters: "/s"; Tasks: desktopicon; Comment: "OpenAudit PC-Scan und optional NMAP Scan bearbeiten"
 
 [Run]
 Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit PC Inventar taeglich.xml"" /TN Openaudit-PCScan"; Flags: runascurrentuser; Description: "PC Scan Aufgabe importieren"; Tasks: Aufgabepcscan
