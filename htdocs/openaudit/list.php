@@ -562,13 +562,9 @@ if ($myrow = mysqli_fetch_array($result)){
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
 
-    // Export to DIA
-    
-    if (isset($_REQUEST["view"])) {
-    // Check to be sure that we are looking at something which we can make a diagram of
-    $pos= (strpos($_REQUEST["view"], "systems") or strpos($_REQUEST["view"], "laptops") or strpos($_REQUEST["view"], "servers") or strpos($_REQUEST["view"], "workstations") or strpos($_REQUEST["view"], "for_gateway") or strpos($_REQUEST["view"], "networked") or strpos($_REQUEST["view"], "hosts") or strpos($_REQUEST["view"], "printers") or strpos($_REQUEST["view"], "port") or strpos($_REQUEST["view"], "_all"));
-    if ($pos === true) {
-    echo "<form method=\"post\" id=\"form_export_dia\" action=\"list_export_dia.php\">\n";
+    // Export to xlsx using simple xlsx php class
+
+    echo "<form method=\"post\" id=\"form_export_xlsx\" action=\"list_export_xlsx.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
     if(isset($_REQUEST["pc"])){
@@ -576,32 +572,80 @@ if ($myrow = mysqli_fetch_array($result)){
      }
      if(isset($_REQUEST["other"])){
          echo "<input type=\"hidden\" name=\"other\" value=\"".$_REQUEST["other"]."\" />\n";
-     } 
+     }
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo " <a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
+	echo "<a href=\"#\" class=\"get-view-xlsx\"><i class=\"fa fa-file-excel-o\"></i> ".__("Export Excel XLSX")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
 
-    // Export to Inkscape
 
-    echo "<form method=\"post\" id=\"form_export_inkscape\" action=\"list_export_inkscape.php\">\n";
-    echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
-    echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
-    if(isset($_REQUEST["pc"])){
-         echo "<input type=\"hidden\" name=\"pc\" value=\"".$_REQUEST["pc"]."\"/>\n";
-     }
-     if(isset($_REQUEST["other"])){
-         echo "<input type=\"hidden\" name=\"other\" value=\"".$_REQUEST["other"]."\" />\n";
-     }
-     if(isset($_REQUEST["monitor"])){
-         echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
-     }
-     echo " <a href=\"http://www.inkscape.org/\" <img src=\"images/inkscape.png\" alt=\"".__("Inkscape Drawing")."\" title=\"".__("Click here for the latest version of Inkscape")."\" style=\"border:0px;\" width=\"28\" height=\"28\" /></a><a href=\"#\" onclick=\"document.forms['form_export_inkscape'].submit();\"> ".__("Create Inkscape (SVG) Picture From List")."</a>\n";
-    echo "</form>\n";
-                } else{}
-        } else{}
+    
+    if (isset($_REQUEST["view"])) {
+		
+		// Check to be sure that we are looking at something which we can make a diagram of
+		$pos= (strpos($_REQUEST["view"], "systems") or strpos($_REQUEST["view"], "laptops") or strpos($_REQUEST["view"], "servers") or strpos($_REQUEST["view"], "workstations") or strpos($_REQUEST["view"], "for_gateway") or strpos($_REQUEST["view"], "networked") or strpos($_REQUEST["view"], "hosts") or strpos($_REQUEST["view"], "printers") or strpos($_REQUEST["view"], "port") or strpos($_REQUEST["view"], "_all"));
+		if ($pos === true) {
+
+			// Export to RDCMan (create RDG)
+
+			echo "<form method=\"post\" id=\"form_export_rdg\" action=\"list_export_rdg.php\">\n";
+			echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
+			echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
+			if(isset($_REQUEST["pc"])){
+				 echo "<input type=\"hidden\" name=\"pc\" value=\"".$_REQUEST["pc"]."\"/>\n";
+			 }
+			 if(isset($_REQUEST["other"])){
+				 echo "<input type=\"hidden\" name=\"other\" value=\"".$_REQUEST["other"]."\" />\n";
+			 } 
+			 if(isset($_REQUEST["monitor"])){
+				 echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
+			 }
+			echo " <a target=\"_blank\" href=\"https://docs.microsoft.com/en-us/sysinternals/downloads/rdcman\" alt=\"".__("RDCMAN RDG Group")."\" title=\"".__("Remote Desktop Conn Manager")."\" /><i class=\"fa fa-desktop\"></i></a>\n";
+			echo " <a href=\"#\" onclick=\"document.forms['form_export_rdg'].submit();\"> ".__("Create RDG for RDCMan")."</a>\n";
+			echo "</form>\n";
+			echo " &nbsp; &nbsp; \n";
+
+			// Export to DIA
+
+			echo "<form method=\"post\" id=\"form_export_dia\" action=\"list_export_dia.php\">\n";
+			echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
+			echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
+			if(isset($_REQUEST["pc"])){
+				 echo "<input type=\"hidden\" name=\"pc\" value=\"".$_REQUEST["pc"]."\"/>\n";
+			 }
+			 if(isset($_REQUEST["other"])){
+				 echo "<input type=\"hidden\" name=\"other\" value=\"".$_REQUEST["other"]."\" />\n";
+			 } 
+			 if(isset($_REQUEST["monitor"])){
+				 echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
+			 }
+			echo " <a target=\"_blank\" href=\"http://dia-installer.de/index.html.de\" alt=\"".__("DIA Diagram")."\" title=\"".__("Click here for the latest version of DIA")."\" /><i class=\"fa fa-object-group\"></i></a>";
+			echo " <a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
+			echo "</form>\n";
+			echo " &nbsp; &nbsp; \n";
+
+			// Export to Inkscape
+
+			echo "<form method=\"post\" id=\"form_export_inkscape\" action=\"list_export_inkscape.php\">\n";
+			echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
+			echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";
+			if(isset($_REQUEST["pc"])){
+				 echo "<input type=\"hidden\" name=\"pc\" value=\"".$_REQUEST["pc"]."\"/>\n";
+			 }
+			 if(isset($_REQUEST["other"])){
+				 echo "<input type=\"hidden\" name=\"other\" value=\"".$_REQUEST["other"]."\" />\n";
+			 }
+			 if(isset($_REQUEST["monitor"])){
+				 echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
+			 }
+
+			echo " <a target=\"_blank\" href=\"http://www.inkscape.org/\" alt=\"".__("Inkscape Drawing")."\" title=\"".__("Click here for the latest version of Inkscape")."\" /><i class=\"fa fa-line-chart\"></i></a>";
+			echo " <a href=\"#\" onclick=\"document.forms['form_export_inkscape'].submit();\"> ".__("Create Inkscape (SVG) Picture From List")."</a>\n";
+			echo "</form>\n";
+		} else{}
+    } else{}
 } else {
 
   echo "<tr><td colspan=\"4\">".__("No Results")."</td></tr>\n";

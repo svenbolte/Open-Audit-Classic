@@ -1,26 +1,35 @@
 Falls mal ein Rechner nicht über WMI erreichbar ist (Access denied), 
-kann man den Client installieren und ihn die Daten am Server abliefern lassen.
+bitte diesen Client installieren und ihn die Daten am Server abliefern lassen.
 
 Methode 1: mit Setup
 --------------------
 
-* openaudit-clientscan-setup.exe ausführen und auf dem PC installieren (erfordert Adminrechte)
+1) openaudit-clientscan-setup.exe ausführen und auf dem PC installieren (erfordert Adminrechte)
 
-* Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit"
-
-
-Methode 2 (von Hand):
----------------------
-
-* Den Inhalt des Openaudit Server-Ordners: 
-"C:/Program Files (x86)/xampplite/htdocs/openaudit/all-tools-scripts/oa-clientside-scan"
-auf den Rechner kopieren (z.B. auf den Desktop)
-
-* Die Datei "audit.config" mit dem Editor öffnen und in der Zeile
+2) Die Datei "audit.config" mit dem Editor öffnen und in der Zeile
 
     audit_host="http://openaudit:888"
 	
   statt "openaudit" den Servernamen oder die IP-Adresse des OpenAudit Classic Servers eintragen	
 
-* Die Aufgabe "openaudit-clientscan.xml" in die Windows Aufgabenplanung importieren
+oder 2) Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit"
+
+3) Aufgabenplanung öffnen und beim geplanten Task "Openaudit Clientscan" einen Domänen-Admin oder Admin-Benutzer eintragen.
+
+
+Methode 2 (von Hand):
+---------------------
+
+1) Den Inhalt des Openaudit Server-Ordners: 
+"C:/Program Files (x86)/xampplite/htdocs/openaudit/all-tools-scripts/oa-clientside-scan"
+auf den Rechner kopieren (z.B. auf den Desktop)
+
+2) Die Datei "audit.config" mit dem Editor öffnen und in der Zeile
+
+    audit_host="http://openaudit:888"
+	
+  statt "openaudit" den Servernamen oder die IP-Adresse des OpenAudit Classic Servers eintragen	
+
+3) Die Aufgabe "openaudit-clientscan.xml" in die Windows Aufgabenplanung importieren
+  und den Benutzer auf einen Domänen-Admin umstellen.
  (sie startet täglich um 11:00 Uhr liefert an den OpenAudit Classic Server ab)

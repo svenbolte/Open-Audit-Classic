@@ -203,6 +203,7 @@ $(document).ready(function() {
   $('a.get-system-pdf').click(function () { ExportPageToPdf('n'); return false; });
   $('a.get-view-pdf').click(function ()   { ExportPageToPdf('y'); return false; });
   $('a.get-view-csv').click(function ()   { ExportPageToCsv();    return false; });
+  $('a.get-view-xlsx').click(function ()   { ExportPageToXlsx();    return false; });
 
   // Try to keep the modal centered. Doesn't seem to work in IE?
   $(document).scroll(function() {
@@ -243,6 +244,24 @@ function ExportPageToCsv() {
   $('#export-file-ext').html('.csv');
   $(".pdf-sidemenu-select").hide();
   $("#export-dialog").dialog('option','title','Export CSV');
+  $("#export-dialog").dialog('open');
+  return false;
+}
+
+/**********************************************************************************************************
+Function Name:
+  ExportPageToXlsX
+Description:
+  Called when the 'Export Page to XLSX' links are pressed
+Arguments:	None
+Returns:	[Boolean] False
+**********************************************************************************************************/
+function ExportPageToXlsx() {
+  $('#export-page').val('list_export_xlsx.php');
+  $('#export-page-form').val('n');
+  $('#export-file-ext').html('.xlsx');
+  $(".pdf-sidemenu-select").hide();
+  $("#export-dialog").dialog('option','title','Export Excel xlsx');
   $("#export-dialog").dialog('open');
   return false;
 }
