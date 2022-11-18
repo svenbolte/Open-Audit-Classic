@@ -108,10 +108,12 @@ if ($myrow = mysqli_fetch_array($result)) {
 			if($field["show"]!="n") {
 				if ( $field["head"]=="Rechnername" || $field["head"]=="Hostname" ) { 
             //
+			$netipadr = preg_replace('/\b0+(?=\d)/', '', $myrow["net_ip_address"]);
+
             echo '      <server>
         <properties>
           <displayName>'.$myrow[$field["name"]].'</displayName>
-          <name>'.$myrow["net_ip_address"].'</name>
+          <name>'.$netipadr.'</name>
           <comment>'.$myrow["system_os_name"].' '.$myrow["net_domain"].' '.$myrow["system_vendor"].' '.$myrow["system_model"].' RAM:'.$myrow["system_memory"].'</comment>
         </properties>
       </server>
