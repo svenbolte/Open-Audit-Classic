@@ -251,13 +251,14 @@ box-shadow: #3c40434d 0 1px 2px 0, #3c404326 0 1px 3px 1px;
 margin:2px;
 padding:0;
 position:relative;
-width:160px;
+width:155px;
 z-index:1
 }
 
 ul#primary-nav li {
 list-style:none;
-position:relative
+position:relative;
+margin-bottom:3px
 }
 
 ul#primary-nav li a {
@@ -279,14 +280,14 @@ height:1%
 
 ul#primary-nav ul {
 display:none;
-left:159px;
+left:145px;
 position:absolute;
 top:0;
 width:250px
 }
 
 ul#primary-nav li ul li a {
-padding:2px 5px
+padding:3px
 }
 
 ul#primary-nav li:hover ul ul,ul#primary-nav li:hover ul ul ul,ul#primary-nav li.over ul ul,ul#primary-nav li.over ul ul ul {

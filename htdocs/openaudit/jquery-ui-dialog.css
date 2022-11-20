@@ -1,5 +1,3 @@
-/* Dialog
-----------------------------------*/
 .ui-dialog { position: relative; padding: .2em; width: 300px; }
 .ui-dialog .ui-dialog-titlebar { padding: .5em .3em .3em 1em; position: relative;  }
 .ui-dialog .ui-dialog-title { float: left; margin: .1em 0 .2em; } 
@@ -11,6 +9,5 @@
 .ui-dialog .ui-dialog-buttonpane button { float: right; margin: .5em .4em .5em 0; cursor: pointer; padding: .2em .6em .3em .6em; line-height: 1.4em; width:auto; overflow:visible; }
 .ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
 .ui-draggable .ui-dialog-titlebar { cursor: move; }
-/* Added the below non-standard dialog classes to easier format a dialog - CS */
 .ui-dialog-content-label { float: left; text-align: right; width: 150px; margin-right: 10px; margin-bottom: 3px; margin-top: 6px; clear: left; }
 .ui-dialog-content-button { margin-top: 3px; margin-bottom: 3px; }

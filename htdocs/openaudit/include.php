@@ -190,8 +190,8 @@ if ($page <> "setup"){
 <?php
 // Search box
 echo "<div id=\"inforechts\"><form action=\"search.php\" method=\"get\">\n";
-echo "<input size=\"25\" placeholder=\"search keyword\" name=\"search_field\" />\n";
-echo "<input value=\"Go\" type=\"submit\" />\n";
+echo "<input size=\"25\" placeholder=\"Suchbegriff\" name=\"search_field\" />\n";
+echo "<input style=\"margin-top:0;font-family: FontAwesome\" value=\"&#xf002;\" type=\"submit\" />\n";
 echo "</form>";
 echo "</div>\n";
 
@@ -252,8 +252,7 @@ if ($pc > "0") {
         if(isset($topic_item["childs"]) AND is_array($topic_item["childs"])){
           echo "<span><img src=\"images/spacer.gif\" height=\"16\" width=\"0\" alt=\"\" />…</span>";
         }
-        echo '<i class="fa '.$topic_item["image"].'"></i> ';
-		//echo "<img src=\"".$topic_item["image"]."\" alt=\"\" />&nbsp;";
+        echo '<i class="fa '.$topic_item["image"].'"></i>&nbsp;';
         echo __($topic_item["name"]);
         echo "</a>\n";
 
@@ -266,7 +265,15 @@ if ($pc > "0") {
             if (isset($topic_item["title"])) {
               echo " title=\"".$topic_item["title"]."\"";
             }
-            echo "><img src=\"".$child_item["image"]."\" />&nbsp;";
+
+			 if (strstr($child_item["image"], 'fa-')) {
+				echo '><i class="fa '.$child_item["image"].'"></i> &nbsp;';
+			  } else {	  
+				echo "><img src=\"".$child_item["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
+			  }		
+
+
+            // echo "><img src=\"".$child_item["image"]."\" />&nbsp;";
             echo __($child_item["name"]);
             echo "</a></li>\n";
           }
@@ -281,8 +288,8 @@ if ($pc > "0") {
 }
     //Normal Menu-Entries
     require_once("include_menu_array.php");
-    reset ($menue_array["misc"]);
 
+	reset ($menue_array["misc"]);
 	foreach($menue_array["misc"] as $key_1 => $topic_item) {
         echo "<li class=\"".$topic_item["class"]."\">";
          echo "<a href=\"".$topic_item["link"]."\"";
@@ -292,7 +299,7 @@ if ($pc > "0") {
          echo ">";
           if(isset($topic_item['image']) AND $topic_item["image"]!=""){
 			  if (strstr($topic_item["image"], 'fa-')) {
-				  echo '<i class="fa fa-lg '.$topic_item["image"].'"></i> ';
+				  echo '<i class="fa fa-lg '.$topic_item["image"].'"></i> &nbsp;';
 			  } else {
 				  echo "<img src=\"".$topic_item["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
 			  }		
@@ -301,7 +308,8 @@ if ($pc > "0") {
          echo "</a>";
         echo "<ul>\n";
 
-        if (isset($topic_item["childs"]) and is_array($topic_item["childs"])){
+        // Child Einträge
+		if (isset($topic_item["childs"]) and is_array($topic_item["childs"])) {
             @reset ($topic_item["childs"]);
 			foreach($topic_item["childs"] as $key_2 => $child_item) {
                 echo "<li>";
@@ -309,22 +317,22 @@ if ($pc > "0") {
                   if(isset($child_item["childs"]) AND is_array($child_item["childs"])){
                       echo "<span>…</span>";
                   }
-			  if (strstr($child_item["image"], 'fa-')) {
-				  echo '<i class="fa '.$child_item["image"].'"></i> ';
-			  } else {	  
-                  echo "<img src=\"".$child_item["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
-			  }		
+				  if (strstr($child_item["image"], 'fa-')) {
+					  echo '<i class="fa '.$child_item["image"].'"></i> &nbsp;';
+				  } else {	  
+					  echo "<img src=\"".$child_item["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
+				  }		
                   echo __($child_item["name"]);
                  echo "</a>";
-
-                 if(isset($child_item["childs"]) AND is_array($child_item["childs"])){
+				 
+                 if(isset($child_item["childs"]) AND is_array($child_item["childs"])) {
                     echo "<ul>\n";
                     @reset ($child_item["childs"]);
 					foreach ($child_item["childs"] as $key_3=>$child_item_2) {
                         echo "<li>";
                          echo "<a href=\"".$child_item_2["link"]."\" title=\"".$child_item_2["title"]."\">";
 						 if (strstr($child_item_2["image"], 'fa-')) {
-							echo '<i class="fa '.$child_item_2["image"].'"></i> ';
+							echo '<i class="fa '.$child_item_2["image"].'"></i> &nbsp;';
 						  } else {	  
                             echo "<img src=\"".$child_item_2["image"]."\" style=\"width:16px;height:16px;border:0\" alt=\"\" />&nbsp;";
 						  }		

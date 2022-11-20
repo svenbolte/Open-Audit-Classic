@@ -33,7 +33,7 @@
       <option value="report_full">Full</option>
       <option value="report">Partial</option>
     </select><br/>
-    <label class="ui-dialog-content-label">Export Method:</label>
+    <label class="ui-dialog-content-label export-method">Export Method:</label>
     <select id="export-select-method" class="ui-widget ui-dialog-content-button">
       <option value="download">Download</option>
       <option value="email">Email</option>

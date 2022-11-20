@@ -473,7 +473,7 @@ function CheckedIfYes(&$var)
 							<input type='checkbox' id='ldap_connection_use_ssl' onclick='CheckOpenSslStatus(this);'/>&nbsp;&nbsp;(requires independent configuration of OpenSSL)<br />
 							<button type="button" onclick="TestLdapConnection();">Test Connection</button>
 							<button type="button" onclick="SaveLdapConnection();">Save</button>
-							<button type="button" onclick="CloseConnectionDivs();">Cancel</button>
+							<button type="button" onclick="CloseConnectionDivs();">Abbruch</button>
 						</div>
 					</fieldset>	
 				</div>
@@ -487,8 +487,8 @@ function CheckedIfYes(&$var)
 						<input type="text" id='ldap_path_dn' size='50'/><br />
 						<label for="ldap_path_audit">Include in audit:</label>
 						<input type="checkbox" id='ldap_path_audit'/><br />
-						<button type="button" onclick="SaveLdapPath();">Save</button>
-						<button type="button" onclick="CloseConnectionDivs();">Cancel</button>
+						<button type="button" onclick="SaveLdapPath();">Speichern</button>
+						<button type="button" onclick="CloseConnectionDivs();">Abbruch</button>
 					</fieldset>	
 				</div>
 
@@ -531,8 +531,8 @@ function CheckedIfYes(&$var)
 							<label for="smtp_connection_email">Test Email:</label>
 							<input type="text" size="20" value="" id="smtp_connection_email"/><br />
 							<button type="button" onclick="TestSmtpConnection();">Test Email</button>
-							<button type="button" onclick="SaveSmtpConnection();">Save</button>
-							<button type="button" onclick="CloseConnectionDivs();">Cancel</button>
+							<button type="button" onclick="SaveSmtpConnection();">Speichern</button>
+							<button type="button" onclick="CloseConnectionDivs();">Abbruch</button>
 						</div>
 					</fieldset>
 				</div>

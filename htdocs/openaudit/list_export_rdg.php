@@ -39,8 +39,43 @@ if(is_file($include_filename)){
  header("Content-Type: application/vnd.dia-win-remote");
  header("Content-Disposition: inline; filename=\"Open-Audit_".$_REQUEST["view"]."_rdcman.rdg\"");
 
+//Create Objects
+
+//Table body. This section creates a list of network objects and distributes them across the page
+// The exact number across each page depends on the page size and layout.
 //
-// Setup the format of the .dia page. This is VERY crude, we should create functions to allow proper control of all elements on the page,
+
+$server_liste = '';
+if ($myrow = mysqli_fetch_array($result)) {
+
+    do {
+		foreach($query_array["fields"] as $field) {
+			if($field["show"]!="n") {
+				if ( $field["head"]=="Rechnername" || $field["head"]=="Hostname" ) { 
+            //
+			$netipadr = preg_replace('/\b0+(?=\d)/', '', $myrow["net_ip_address"]);
+
+			$meine_domain = $myrow["net_domain"];
+			$server_liste .= '      <server>
+        <properties>
+          <displayName>'.$myrow[$field["name"]].'</displayName>
+          <name>'.$netipadr.'</name>
+          <comment>'.$myrow["system_os_name"].' '.$myrow["net_domain"].' '.$myrow["system_vendor"].' '.$myrow["system_model"].' RAM:'.$myrow["system_memory"].'</comment>
+        </properties>
+      </server>
+			' . "\n";
+			//
+				}
+			}			
+            
+		} // For Schleife Ende
+	
+    } while ($myrow = mysqli_fetch_array($result));
+
+}
+
+//
+// Setup the format of the .rdg page. This is VERY crude, we should create functions to allow proper control of all elements on the page,
 // and a setup page to allow contorl over this ... OOPS (AJH)
 //
 	$dia_page_setup_1 = '<?xml version="1.0" encoding="utf-8"?>
@@ -55,7 +90,7 @@ if(is_file($include_filename)){
       <profileName scope="Local">Custom</profileName>
       <userName>administrator</userName>
       <password />
-      <domain>domaenehier</domain>
+      <domain>'.$meine_domain.'</domain>
     </logonCredentials>
     <connectionSettings inherit="None">
       <connectToConsole>True</connectToConsole>
@@ -93,40 +128,11 @@ if(is_file($include_filename)){
         <name>z-importiert</name>
       </properties>
 	';
-	echo $dia_page_setup_1;
-
-//Create Objects
-
-//Table body. This section creates a list of network objects and distributes them across the page
-// The exact number across each page depends on the page size and layout.
 //
 
-if ($myrow = mysqli_fetch_array($result)) {
+echo $dia_page_setup_1;
+echo $server_liste;
 
-    do {
-		foreach($query_array["fields"] as $field) {
-			if($field["show"]!="n") {
-				if ( $field["head"]=="Rechnername" || $field["head"]=="Hostname" ) { 
-            //
-			$netipadr = preg_replace('/\b0+(?=\d)/', '', $myrow["net_ip_address"]);
-
-            echo '      <server>
-        <properties>
-          <displayName>'.$myrow[$field["name"]].'</displayName>
-          <name>'.$netipadr.'</name>
-          <comment>'.$myrow["system_os_name"].' '.$myrow["net_domain"].' '.$myrow["system_vendor"].' '.$myrow["system_model"].' RAM:'.$myrow["system_memory"].'</comment>
-        </properties>
-      </server>
-			';
-			//
-				}
-			}			
-            
-		} // For Schleife Ende
-	
-    } while ($myrow = mysqli_fetch_array($result));
-
-}
 
 // Close Layer and Document
 echo '    </group>

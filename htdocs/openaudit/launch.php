@@ -36,9 +36,11 @@ SWITCH($application){
         //Supports RDP VNC and UltraVNC
         $buffer=file("launch_filedef_".$application.".txt");
         $buffer=implode("",$buffer);
-        //Replacing Hostname
-        //$fqdn = $hostname.
+        //Replacing Hostname   (ohne fqdn)
+        $fqdn = $hostname;
         $buffer=str_replace ( "NAME", $fqdn, $buffer );
+		// Replacing domain
+        $buffer=str_replace ( "MYDOMAIN", $domain, $buffer );
 
         //Send to Browser
         header("Content-type: application/force-download");

@@ -243,6 +243,8 @@ function ExportPageToCsv() {
   $('#export-page-form').val('n');
   $('#export-file-ext').html('.csv');
   $(".pdf-sidemenu-select").hide();
+  $("#export-select-method").show();
+  $(".export-method").show();
   $("#export-dialog").dialog('option','title','Export CSV');
   $("#export-dialog").dialog('open');
   return false;
@@ -261,6 +263,8 @@ function ExportPageToXlsx() {
   $('#export-page-form').val('n');
   $('#export-file-ext').html('.xlsx');
   $(".pdf-sidemenu-select").hide();
+  $("#export-select-method").hide();
+  $(".export-method").hide();
   $("#export-dialog").dialog('option','title','Export Excel xlsx');
   $("#export-dialog").dialog('open');
   return false;

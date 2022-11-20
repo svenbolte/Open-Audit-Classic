@@ -558,7 +558,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-     echo "<br><a href=\"#\" class=\"get-view-csv\"><i class=\"fa fa-download\"></i> ".__("Export this List to CSV")."</a>\n";
+     echo "<br><a href=\"#\" class=\"get-view-csv\"><i class=\"fa fa-lg fa-file-text-o\"></i> ".__("Export this List to CSV")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
 
@@ -576,7 +576,7 @@ if ($myrow = mysqli_fetch_array($result)){
      if(isset($_REQUEST["monitor"])){
          echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
      }
-	echo "<a href=\"#\" class=\"get-view-xlsx\"><i class=\"fa fa-file-excel-o\"></i> ".__("Export Excel XLSX")."</a>\n";
+	echo "<a href=\"#\" class=\"get-view-xlsx\"><i class=\"fa fa-lg fa-file-excel-o\"></i> ".__("XLSX Export Excel")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
 
@@ -602,7 +602,7 @@ if ($myrow = mysqli_fetch_array($result)){
 			 if(isset($_REQUEST["monitor"])){
 				 echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
 			 }
-			echo " <a target=\"_blank\" href=\"https://docs.microsoft.com/en-us/sysinternals/downloads/rdcman\" alt=\"".__("RDCMAN RDG Group")."\" title=\"".__("Remote Desktop Conn Manager")."\" /><i class=\"fa fa-desktop\"></i></a>\n";
+			echo " <a target=\"_blank\" href=\"https://docs.microsoft.com/en-us/sysinternals/downloads/rdcman\" alt=\"".__("RDCMAN RDG Group")."\" title=\"".__("Remote Desktop Conn Manager")."\" /><i class=\"fa fa-lg fa-desktop\"></i></a>\n";
 			echo " <a href=\"#\" onclick=\"document.forms['form_export_rdg'].submit();\"> ".__("Create RDG for RDCMan")."</a>\n";
 			echo "</form>\n";
 			echo " &nbsp; &nbsp; \n";
@@ -621,7 +621,7 @@ if ($myrow = mysqli_fetch_array($result)){
 			 if(isset($_REQUEST["monitor"])){
 				 echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
 			 }
-			echo " <a target=\"_blank\" href=\"http://dia-installer.de/index.html.de\" alt=\"".__("DIA Diagram")."\" title=\"".__("Click here for the latest version of DIA")."\" /><i class=\"fa fa-object-group\"></i></a>";
+			echo " <a target=\"_blank\" href=\"http://dia-installer.de/index.html.de\" alt=\"".__("DIA Diagram")."\" title=\"".__("Click here for the latest version of DIA")."\" /><i class=\"fa fa-lg fa-object-group\"></i></a>";
 			echo " <a href=\"#\" onclick=\"document.forms['form_export_dia'].submit();\"> ".__("Create DIA Network Diagram From List")."</a>\n";
 			echo "</form>\n";
 			echo " &nbsp; &nbsp; \n";
@@ -641,7 +641,7 @@ if ($myrow = mysqli_fetch_array($result)){
 				 echo "<input type=\"hidden\" name=\"monitor\" value=\"".$_REQUEST["monitor"]."\" />\n";
 			 }
 
-			echo " <a target=\"_blank\" href=\"http://www.inkscape.org/\" alt=\"".__("Inkscape Drawing")."\" title=\"".__("Click here for the latest version of Inkscape")."\" /><i class=\"fa fa-line-chart\"></i></a>";
+			echo " <a target=\"_blank\" href=\"http://www.inkscape.org/\" alt=\"".__("Inkscape Drawing")."\" title=\"".__("Click here for the latest version of Inkscape")."\" /><i class=\"fa fa-lg fa-line-chart\"></i></a>";
 			echo " <a href=\"#\" onclick=\"document.forms['form_export_inkscape'].submit();\"> ".__("Create Inkscape (SVG) Picture From List")."</a>\n";
 			echo "</form>\n";
 		} else{}
