@@ -492,7 +492,7 @@ class SimpleXLSXGen {
                 $row = '';
                 $CUR_COL = 0;
                 $RH = 0; // row height
-                foreach( $r as $v ) {
+                if (is_array($r) || is_object($r)) foreach( $r as $v ) {
                     $CUR_COL++;
                     if ( !isset($COL[ $CUR_COL ])) {
                         $COL[ $CUR_COL ] = 0;

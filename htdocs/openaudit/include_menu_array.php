@@ -245,6 +245,12 @@ $menue_array = array(
                             ),
               ),
 
+      "63" => array("name"=>"CSV2XLSX", "image"=>"fa-recycle",
+                    "link"=>"/openaudit/csvxls.php",
+                    "class"=>"menuparent",
+                    "title"=>"CSV-Dateien in Excel konvertieren (Batch)",
+              ),
+
       "65" => array("name"=>"PHPMyAdmin", "image"=>"fa-database",
                     "link"=>"/phpmyadmin",
                     "class"=>"menuparent",
