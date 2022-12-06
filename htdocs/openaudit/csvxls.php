@@ -2,6 +2,14 @@
 // PHP Tool zum Convertieren von CSV-Dateien mit verschienenen Delimitern nach UTF-8 und EXCEL (xlsx)
 // sammelt alle .csv im Ordner "./in" auf und erstellt jeweils eine xlsx Datei im "./out" Ordner
 
+
+function delete_files($fmask) {
+	$csvroot = realpath($_SERVER['DOCUMENT_ROOT']).dirname($_SERVER['PHP_SELF']);
+	array_map('unlink', glob($csvroot.'/in/*.'.$fmask));
+	header("Location: csvxls.php"); 
+	exit();
+}
+
 function utf8_converter($array) {
     array_walk_recursive($array, function(&$item, $key){
         if(!mb_detect_encoding($item, 'utf-8', true)){
@@ -41,16 +49,20 @@ function csvToArray($csv) {
 }
 
 // Main program
-require_once 'simplexlsxgen.php';
+if (isset($_GET['delete_files'])) delete_files('csv');
 
+require_once 'simplexlsxgen.php';
 include_once("include.php");
+
+$csvroot = realpath($_SERVER['DOCUMENT_ROOT']).dirname($_SERVER['PHP_SELF']);
 echo '</tr><tr><td>';
 echo '<h2>Batch: CSV-Dateien nach XLSX konvertieren</h2>';
-echo '<p>.csv Dateien in den Ordner openaudit/in legen, dann dieses Skript ausführen, Excel-Dateien aus openaudit/out Ordner entnehmen.</p>';
-
+echo '<ol style="line-height:22px"><li>.csv Dateien in den Ordner <b>'.$csvroot.'/in</b> legen,</li><li><a href="csvxls.php">diese Seite neu laden</a>,</li><li>.xslx Excel-Dateien aus Ordner <b>'.$csvroot.'/out</b> entnehmen oder über Links unten herunterladen.</li>';
+echo '<li><i class="fa fa-trash" style="color:tomato"></i> <a href="csvxls.php?delete_files=1">Import-Ordner leeren</a></li></ol>';
 $xlsdir='./in/';
 if ($handle = opendir($xlsdir)) {
 	$ctr=0;
+	echo '<table class="tftable">';
 	while (false !== ($file = readdir($handle))) {
 		if ($file != "." && $file != ".." && strtolower(substr($file, strrpos($file, '.') + 1)) == 'csv') {
 			// do something with $filename
@@ -62,12 +74,14 @@ if ($handle = opendir($xlsdir)) {
 				$xlsx->saveAs('./out/'.$withoutExt.'.xlsx'); // or saveAs('filename.xlsx') or $xlsx_content = (string) $xlsx 
 
 			}	
+			$Serverbaseurl = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['SERVER_NAME'].':888' . substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], "/"));
 			$filedate = date('d.m.Y', filemtime($xlsdir.'/'.$file) );
 			$ctr++;
-			echo '<pre>Konvertiert: #'.$ctr.' &nbsp; '.$file.' &nbsp; '.$withoutExt. '.xlsx &nbsp; '.$filedate.'</pre>';
+			echo '<tr><td style="padding:8px">Konvertiert: #'.$ctr.'</td><td style="padding:8px">'.$file.'</td><td style="padding:8px"><a href="'.$Serverbaseurl.'/out/'.$withoutExt.'.xlsx">'.$withoutExt. '.xlsx</a></td><td style="padding:8px">'.$filedate.'</td></tr>';
 		}
 	}
 	closedir($handle);
+	echo '</table>';
 }
 
 echo '</td></tr></table></body></html>';
