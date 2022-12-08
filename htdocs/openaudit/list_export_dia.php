@@ -140,13 +140,13 @@ if ($myrow = mysqli_fetch_array($result)){
             //
             
             //
-            if (($field["head"]=="Hostname")or ($field["head"]=="Network Name")){
+            if (($field["head"]=="Hostname") or ($field["head"]=="Hostname") or ($field["head"]=="Rechnername")or ($field["head"]=="Network Name")){
 
             if (!isset($dia_image_folder) ){
             $dia_image_folder = ".\\";
             } else{}
             //
-            if ($field["head"]=="Hostname") {
+            if ($field["head"]=="Hostname" or ($field["head"]=="Rechnername")) {
             //
             $dia_image_icon = determine_dia_img($myrow["system_os_name"],$myrow[$field["name"]]);
             //

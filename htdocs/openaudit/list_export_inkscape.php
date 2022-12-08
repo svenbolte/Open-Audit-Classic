@@ -129,21 +129,21 @@ if ($myrow = mysqli_fetch_array($result)){
            // Add an additional 100ms to our time
            set_time_limit(100);
             //
-            if (($field["head"]=="Hostname")or ($field["head"]=="Network Name")){
+			if (($field["head"]=="Hostname") or ($field["head"]=="Rechnername") or ($field["head"]=="Network Name")){
 
-            if (!isset($inkscape_image_folder) ){
-            $inkscape_image_folder = ".\\";
-            } else{}
+            //if (!isset($inkscape_image_folder) ){
+			$csvroot = realpath($_SERVER['DOCUMENT_ROOT']).dirname($_SERVER['PHP_SELF']);
+			$Serverbaseurl = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['SERVER_NAME'].':888' . substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], "/"));
+            $inkscape_image_folder = $Serverbaseurl . '\\images\\';
+            // } else{}
             //
-            if ($field["head"]=="Hostname") {
-            //
+            if ($field["head"]=="Hostname" or ($field["head"]=="Rechnername")) {
 
-            $inkscape_image_icon = determine_inkscape_img($myrow["system_os_name"],$myrow[$field["name"]]);
+				$inkscape_image_icon = determine_inkscape_img($myrow["system_os_name"],$myrow[$field["name"]]);
             //
             $inkscape_this_image = $inkscape_image_folder.$inkscape_image_icon;
-            //
             $inkscape_current_obj_text[0]="  ".$myrow[$field["name"]]."\n\n";
-           // $inkscape_current_obj_text="  ".$myrow[$field["name"]]."\n\n"."ip: ".$myrow["net_ip_address"]."\n"."\n"."User: ".$myrow["net_user_name"]."\n"."Domain: ".$myrow["net_domain"]."\n"."Vendor: ".$myrow["system_vendor"]."\n"."Model: ".$myrow["system_model"]."\n"."Memory: ".$myrow["system_memory"]." Mb";
+            // $inkscape_current_obj_text="  ".$myrow[$field["name"]]."\n\n"."ip: ".$myrow["net_ip_address"]."\n"."\n"."User: ".$myrow["net_user_name"]."\n"."Domain: ".$myrow["net_domain"]."\n"."Vendor: ".$myrow["system_vendor"]."\n"."Model: ".$myrow["system_model"]."\n"."Memory: ".$myrow["system_memory"]." Mb";
            
            if ($inkscape_show_system_net_ip_address ){
            $inkscape_current_obj_text[1]="ip: ".$myrow["net_ip_address"]."\n";
@@ -191,7 +191,7 @@ if ($myrow = mysqli_fetch_array($result)){
             } else {}
 
             if ($inkscape_show_system_net_ip_address == "y"){
-           $inkscape_current_obj_text[2]="ip: ".$myrow["other_ip_address"]."\n";
+           $inkscape_current_obj_text[2]="IP: ".$myrow["other_ip_address"]."\n";
             } else {}
             
             if ($inkscape_show_other_mac_address== "y"){
@@ -274,7 +274,7 @@ if ($myrow = mysqli_fetch_array($result)){
             $inkscape=$inkscape.'      <text'.$inkscape_newline;
             $inkscape=$inkscape.'         x="'.$inkscape_current_object_x.'"'.$inkscape_newline;
             $inkscape=$inkscape.'         y="'.$inkscape_current_object_y.'"'.$inkscape_newline;
-            $inkscape=$inkscape.'         style="font-size:'.$inkscape_obj_text_font_height[$textline].'px;text-align:center;text-anchor:middle"'.$inkscape_newline;
+            $inkscape=$inkscape.'         style="font-family:sans-serif;font-size:'.$inkscape_obj_text_font_height[$textline].'px;text-align:left"'.$inkscape_newline;
             $inkscape=$inkscape.'         id="text'.(($inkscape_current_image_object_id *20)+$inkscape_current_image_object_id_offset).'"'.$inkscape_newline;
             // Next ID
              $inkscape_current_image_object_id_offset =  $inkscape_current_image_object_id_offset + 1; 
@@ -307,11 +307,6 @@ if ($myrow = mysqli_fetch_array($result)){
        
             // move to next Object  
             $inkscape_current_object_id += 3;
-            //    
-           
-            //$inkscape_current_object_id += 1;
-
-            //$inkscape_current_object_id += 1;
            
                 }                                                                       
             // $inkscape_current_object_id += 4.0;

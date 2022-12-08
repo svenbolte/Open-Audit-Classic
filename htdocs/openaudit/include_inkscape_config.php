@@ -50,8 +50,8 @@ $inkscape_object_start_y = 30.5;
 $inkscape_object_start_id = 0;
 
 // Object Spacing incriments (set one or other of x/y to a positive value, to space out horizontaly or vertically)
-$inkscape_object_spacing_x=70;
-$inkscape_object_spacing_y=70;
+$inkscape_object_spacing_x=150;
+$inkscape_object_spacing_y=150;
 //$inkscape_object_spacing_y=2;
 // Config for starting point for first object
 $inkscape_object_num_columns=1;
@@ -64,7 +64,7 @@ $inkscape_text_other_object_text= '"$myrow[$field[\"name\"]].\"\n\".$myrow[\"oth
 // Page Setup next... (FIXME this should probably be an array (AJH))
 //
 $inkscape_background_name="background";
-$inkscape_background_colour="#FFFFFF";
+$inkscape_background_colour="#eee";
 // 
 $inkscape_pagebreak_colour="#000099";
 $inkscape_paper="paper";
@@ -96,7 +96,7 @@ $inkscape_grid_width_x="1";
 $inkscape_grid_width_y="1";
 $inkscape_grid_visible_x="1";
 $inkscape_grid_visible_y="1";
-$inkscape_grid_lines_colour="#D8E5E5";
+$inkscape_grid_lines_colour="#006060";
 $inkscape_guides="guides";
 $inkscape_guides_hguides="hguides";
 $inkscape_guides_vguides="vguides";
@@ -140,22 +140,22 @@ $inkscape_obj_text_0_pos_y=2.85;
 //  Work in progress, to set the individual field font height (other attributes would be good)
 $inkscape_show_maxfields=16; // Max 16
 // Any more than 16 Would seem a trifle excessive ;)
-$inkscape_obj_text_font_height[0]=5;
-$inkscape_obj_text_font_height[1]=3;
-$inkscape_obj_text_font_height[2]=2;
-$inkscape_obj_text_font_height[3]=2;
-$inkscape_obj_text_font_height[4]=2;
-$inkscape_obj_text_font_height[5]=2;
-$inkscape_obj_text_font_height[6]=2;
-$inkscape_obj_text_font_height[7]=3;
-$inkscape_obj_text_font_height[8]=2;
-$inkscape_obj_text_font_height[9]=2;
-$inkscape_obj_text_font_height[10]=2;
-$inkscape_obj_text_font_height[11]=2;
-$inkscape_obj_text_font_height[12]=2;
-$inkscape_obj_text_font_height[13]=2;
-$inkscape_obj_text_font_height[14]=2;
-$inkscape_obj_text_font_height[15]=2;
+$inkscape_obj_text_font_height[0]=10;
+$inkscape_obj_text_font_height[1]=9;
+$inkscape_obj_text_font_height[2]=9;
+$inkscape_obj_text_font_height[3]=9;
+$inkscape_obj_text_font_height[4]=9;
+$inkscape_obj_text_font_height[5]=9;
+$inkscape_obj_text_font_height[6]=9;
+$inkscape_obj_text_font_height[7]=9;
+$inkscape_obj_text_font_height[8]=9;
+$inkscape_obj_text_font_height[9]=9;
+$inkscape_obj_text_font_height[10]=9;
+$inkscape_obj_text_font_height[11]=9;
+$inkscape_obj_text_font_height[12]=9;
+$inkscape_obj_text_font_height[13]=9;
+$inkscape_obj_text_font_height[14]=9;
+$inkscape_obj_text_font_height[15]=9;
 
 $inkscape_obj_text_spacing=1.2; //Single Spaging =1 but this can lead to the text overlaying Double spacing = 2 default = 1.2
 //
