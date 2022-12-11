@@ -545,7 +545,7 @@ if ($myrow = mysqli_fetch_array($result)){
 
     // Export to CSV
 
-    echo "<hr><div>";
+    echo "<div>";
     echo "<table width=\"100%\"><tr>\n";
     echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";

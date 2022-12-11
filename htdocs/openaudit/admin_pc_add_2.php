@@ -204,17 +204,24 @@ if ($software_audit == "n") {
 echo "No software audit - timestamps updated.<br />";
 } else {}
 
-// Add to audit table for this uuid
-$sql = "INSERT INTO system_audits (system_audits_uuid, system_audits_timestamp, system_audits_username) VALUES ('$uuid','$timestamp','$user_name')";
-if ($verbose == "y"){echo $sql . "<br />\n\n";}
+$sql = "SELECT count(system_audits_uuid) AS timestamp FROM system_audits WHERE system_audits_uuid = '$uuid'";
 $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql);
-$sql = "";
+$myrow = mysqli_fetch_array($result);
+if ($verbose == "y"){echo $myrow[0]. "Datensätze<br />\n\n";};
+
+if ($myrow[0] == 0) {
+	// Add to audit table for this uuid
+	$sql = "INSERT INTO system_audits (system_audits_uuid, system_audits_timestamp, system_audits_username) VALUES ('$uuid','$timestamp','$user_name')";
+	if ($verbose == "y"){echo $sql . "<br />\n\n";}
+	$db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql);
+	$sql = "";
 
 // Insert an entry in the System table
 $sql = "INSERT INTO system (system_uuid, system_first_timestamp) VALUES ('$uuid','$timestamp')";
 if ($verbose == "y"){echo $sql . "<br />\n\n";}
 $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql);
 $sql = "";
+}	
 
 // Insert an entry in the System table
 $sql = "UPDATE system SET system_timestamp = '$timestamp' WHERE system_uuid = '$uuid'";

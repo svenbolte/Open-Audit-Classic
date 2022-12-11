@@ -1,7 +1,17 @@
 <?php
 
 $query_array=array("headline"=>__("List all Software with Hosts"),
-                   "sql"=>"SELECT software_name, software_version, software_publisher, system_name, net_user_name, system_uuid FROM software, system where software_name NOT LIKE '%hotfix%' AND software_name NOT LIKE '%Service Pack%' AND software_name NOT LIKE '%MUI (%' AND software_name NOT LIKE '%Proofing %' AND software_name NOT LIKE '%Language%' AND software_name NOT LIKE '%Korrektur%' AND software_name NOT LIKE '%linguisti%' AND software_name NOT REGEXP 'SP[1-4]{1,}' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' AND software_uuid = system_uuid AND software_timestamp = system_timestamp ",
+                   "sql"=>"SELECT software_name, software_version, software_publisher, softwareversionen.sv_version, softwareversionen.sv_instlocation, system_name, net_user_name, system_uuid
+					 	FROM system, software 
+						LEFT JOIN softwareversionen
+						ON (
+							 CONCAT('%', LOWER(RTRIM(Replace(Replace(software.software_name,'(x64)',''),'.',''))) ,'%')      
+						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
+						) 
+				   WHERE software_name NOT LIKE '%hotfix%'
+				   AND software_name NOT LIKE '%Service Pack%'
+				   AND software_name NOT LIKE '%MUI (%' AND software_name NOT LIKE '%Proofing %' AND software_name NOT LIKE '%Language%' AND software_name NOT LIKE '%Korrektur%' AND software_name NOT LIKE '%linguisti%' AND software_name NOT REGEXP 'SP[1-4]{1,}' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' 
+				   AND software_uuid = system_uuid AND software_timestamp = system_timestamp ",
                    "sort"=>"software_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"list.php",
@@ -33,6 +43,21 @@ $query_array=array("headline"=>__("List all Software with Hosts"),
                                                "show"=>"y",
                                                "link"=>"y",
                                               ),
+
+								   "33"=>array("name"=>"sv_version",
+                                               "head"=>__("Ver from DB"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+											   "search"=>"n",
+                                              ),
+
+								   "36"=>array("name"=>"sv_instlocation",
+                                               "head"=>__("SCX"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+											   "sort"=>"y",
+                                              ),
+
                                    "40"=>array("name"=>"system_name",
                                                "head"=>__("Hostname"),
                                                "show"=>"y",
