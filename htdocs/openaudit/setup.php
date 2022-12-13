@@ -312,6 +312,15 @@ function step35SetupDB() {
     echo __("Creating the database... ");
     $result = mysqli_query($db,$sql) or die('Could not create db: ' . mysqli_error($db));
     echo __("Success!") ."<br />";
+
+    $sql = "DROP USER '" . $_POST['mysqli_new_user'] . "'@";
+    if ($_POST['bindlocal'] = 'y') {
+      $sql .= "'localhost' ";
+    } else {
+      $sql .= "'%' ";
+    }
+    $result = mysqli_query($db,$sql) or die('Could not drop user: ' . mysqli_error($db));
+
     $sql = "CREATE USER '" . $_POST['mysqli_new_user'] . "'@";
     if ($_POST['bindlocal'] = 'y') {
       $sql .= "'localhost' ";
@@ -319,8 +328,9 @@ function step35SetupDB() {
       $sql .= "'%' ";
     }
     $sql .= "IDENTIFIED BY '" . $_POST['mysqli_new_pass'] . "'";
-    echo __("Creating the user... ");
-    $result = mysqli_query($db,$sql) ;//or die('Could not create the user: ' . mysqli_error($db));
+	
+	echo __("Creating the user... ". $_POST['mysqli_new_user']);
+    $result = mysqli_query($db,$sql) or die('Could not create the user: ' . mysqli_error($db));
     echo __("Success!") . "<br />";
     $sql = "GRANT SELECT , INSERT , UPDATE , DELETE , CREATE , DROP , INDEX , ALTER , CREATE TEMPORARY TABLES";
     $sql .= " , CREATE VIEW , SHOW VIEW , CREATE ROUTINE, ALTER ROUTINE, EXECUTE ";
@@ -331,7 +341,7 @@ function step35SetupDB() {
       $sql .= "'%'";
     }
     echo __("Granting user priveleges... ");
-    $result = mysqli_query($db,$sql) or die('Could not grant priveleges: ' . mysqli_error($db));
+    $result = mysqli_query($db,$sql) or die('Could not grant privileges: ' . mysqli_error($db));
     echo __("Success!") . "<br />";
     echo __("Switching connection to new user... ");
     mysqli_close($db);
@@ -348,7 +358,8 @@ function step35SetupDB() {
     $sql = stripslashes($contents);
     $sql2 = explode(";", $sql);
     foreach ($sql2 as $sql3) {
-      $result = mysqli_query($db,$sql3 . ";");
+		// echo $sql3.'<br>*<br>';
+      if (!empty($sql3)) $result = mysqli_query($db,$sql3 . ";");
     }
     echo __("Success!") . "<br />";
     mysqli_close($db);
