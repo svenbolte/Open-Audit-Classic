@@ -3,7 +3,7 @@
 $query_array=array("headline"=>array("name"=>__("Uninstalled Software"),
                                      "sql"=>"SELECT `system_name` FROM `system` WHERE `system_uuid` = '" . $_REQUEST["pc"] . "'",
                                      ),
-                   "sql"=>"SELECT software_name, software_first_timestamp, software_timestamp, system_name
+                   "sql"=>"SELECT software_name, software_version, software_first_timestamp, software_timestamp, system_name
 				    FROM software, system 
 					WHERE software_uuid = system_uuid 
 					AND software_uuid = '".$_REQUEST["pc"]."' 
