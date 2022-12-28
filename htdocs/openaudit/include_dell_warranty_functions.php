@@ -138,8 +138,8 @@ return $days_left;
 
 function file_get_contents_utf8($fn) {
      $content = file_get_contents($fn);
-      return mb_convert_encoding($content, 'UTF-8',
-          mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
+      return htmlentities($content);
+	  // mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
 }
 
 function get_days_left($time_in_sec) {
@@ -147,8 +147,6 @@ function get_days_left($time_in_sec) {
         $formated_time = $time_day;
     return $formated_time;
 }
-
-
 
 
 /**

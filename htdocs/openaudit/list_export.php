@@ -5,16 +5,11 @@ include_once("include_lang.php");
 
 // Umlaute für Excel
 function convertToWindowsCharset($string) {
-  $charset =  mb_detect_encoding(
-    $string,
-    "UTF-8, ISO-8859-1, ISO-8859-15",
-    true
-  );
- 
-  $string =  mb_convert_encoding($string, "Windows-1252", $charset);
+  $charset = mb_detect_encoding($string ?? '',"UTF-8, ISO-8859-1, ISO-8859-15",true);
+  $string = mb_convert_encoding($string ?? '', "Windows-1252", $charset);
+  $string = html_entity_decode($string ?? '');
   return $string;
 }
-
 
 // If they selected to email the report, this page is called via AJAX, so set some headers
 // then check if SMTP is enabled
@@ -113,8 +108,9 @@ $csv_data .= "\r\n";
 $filename = (isset($_GET["filename"])) ? $_GET["filename"] . '-' . $_GET["view"] . '.csv' : 'export-' . $_GET["view"] .'.csv';
 
 if (!isset($_GET["email_list"])){
-  header("Content-Type: application/vnd.ms-excel");
-  header("Content-Disposition: attachment; filename=\"$filename\"");
+ header("Content-type: application/vnd.ms-excel");
+ header("Content-Disposition: attachment; filename=\"$filename\"");
+  echo "\xEF\xBB\xBF"; //UTF-8 BOM
   exit("$csv_data");
 }
 else {

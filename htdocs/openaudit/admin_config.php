@@ -337,6 +337,7 @@ echo "<label>".__("Show Full LDAP details").":</label>\n<input type='checkbox' n
 echo "<br />\n";
 echo "<label>".__("Show Friendly Field Names").":</label>\n<input type='checkbox' name='human_readable_ldap_fields_post' value='y'".CheckedIfYes($human_readable_ldap_fields);
 echo "<br />\n";
+if (empty($image_link_ldap_attribute)) $image_link_ldap_attribute='';
 echo "<label>".__("Attribute for Image Linking").":</label>\n<input type='text' name='image_link_ldap_attribute_post' size='24' value=\"$image_link_ldap_attribute\"/>";
 echo "<br />\n";
 

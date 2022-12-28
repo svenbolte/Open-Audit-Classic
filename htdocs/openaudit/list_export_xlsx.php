@@ -6,25 +6,6 @@ include_once("include_functions.php");
 include_once("include_lang.php");
 require_once ("simplexlsxgen.php");
 
-
-//// ---------- Testing samples --------------------
-// $books = [
-//    ['disk size', 'title', 'author', 'publisher', 'ctry' ],
-//    [618260307, '<wraptext>On The Hobbit is a beasty kind of</wraptext>', 'J. R. R. Tolkien', 'Houghton Mifflin', 'USA'],
-//	[],
-//    ['<style bgcolor="#cccccc"><b>Totals</b>', '<style bgcolor="#cccccc"><b>' . 349045 . '</b>', '<style bgcolor="#cccccc"><b>Einzeln</b>', '<style bgcolor="#cccccc"><b>' . 3408 . '</b>']
-// ];
-//  print_r($books);
-
-// $inp = '"Hund"^^^"Katze"^^^"Maus"';
-// $books2 = array();
-// $books2[] = explode("^^^",$inp);
-// print_r($books2);
-
-// $xlsx = Shuchkin\SimpleXLSXGen::fromArray( $books );
-// $xlsx->downloadAs('books.xlsx'); // or saveAs('books.xlsx') or $xlsx_content = (string) $xlsx 
-// die;
-
 //MySQL-Connect
 $db=GetOpenAuditDbConnection() or die('Could not connect: ' . mysqli_error($db));
 mysqli_select_db($db,$mysqli_database);
@@ -55,7 +36,6 @@ $xlsx_data = array();
 foreach($viewdef_array["fields"] as $field) {
     if($field["show"]!="n" || $field["name"] =="sv_bemerkungen"){
         $csv_data .= '"'.$field["head"].'"';
-		//$csv_data .= ''.convertToWindowsCharset($field["head"]).'';
         $csv_data .= ";";
     }
 }
@@ -73,7 +53,6 @@ if ($myrow = mysqli_fetch_array($result)){
 	do {
 		$csv_data = '';
 		foreach($query_array["fields"] as $field) {
-			   
 			if ($field["head"]=="RAM") { $total_system_memory += (int) $myrow[$field["name"]]; }
 			if ($field["head"]=="Größe C") { $total_hard_drive_size += (int) $myrow[$field["name"]]; }
 			if ($field["head"]=="l cpu") { $sumlcpu += (int) $myrow[$field["name"]]; }
@@ -93,7 +72,7 @@ if ($myrow = mysqli_fetch_array($result)){
                 $csv_data .= '""^^^';
 			}
 			if ( ($field["show"]=="n" && $field["name"]=="sv_bemerkungen") || $field["name"]=="software_comment" ) {
-				$csv_data .= html_entity_decode($myrow[$field["name"]]);
+				$csv_data .= html_entity_decode($myrow[$field["name"]] ?? '');
 				$csv_data .= '^^^';
 			}	
         }
