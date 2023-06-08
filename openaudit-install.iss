@@ -2,7 +2,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "OpenAudit Classic GPL3 Projekt"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.57x64-VS17, MySQLMariaDB 10.6.13x64, PHP 8.2.6x64-thsafe, phpMyAdmin 5.2.1x64, NMap 7.94, NPCap 1.75(für nmap), Wordpress 6.2.2, VC17Runtimes aktuell"
+#define Inhalte "Apache 2.4.57x64-VS17, MySQLMariaDB 10.6.14x64, PHP 8.2.7x64-thsafe, phpMyAdmin 5.2.1x64, NMap 7.94, NPCap 1.75(für nmap), Wordpress 6.2.2, VC17Runtimes aktuell"
 
 [Setup]
 PrivilegesRequired=admin
@@ -54,7 +54,7 @@ Name: "{group}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\ht
 Name: "{group}\OpenAudit cl Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
 Name: "{group}\OpenAudit cl Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
 Name: "{group}\PC-IP-Listfile.txt manuell ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt";  Comment: "nur im Notfall, lässt sich besser über Oberfläche erzeugen"
-Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap\bin\pythonw.exe" Parameters: "-c ""from zenmapGUI.App import run;run()""";
+Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap\bin\pythonw.exe"; Parameters: "-c ""from zenmapGUI.App import run;run()""";
 Name: "{commondesktop}\OpenAudit cl Oberfläche"; Filename: "http://{code:GetComputerName}:888/openaudit"; Tasks: desktopicon; Comment: "Netzwerkverknüpfung zum Open-Audit-Server"
 Name: "{commondesktop}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
 Name: "{commondesktop}\PC-List-File erzeugen"; Filename: "http://{code:GetComputerName}:888/openaudit/export-ipliste-4-openaudit.php"; Tasks: desktopicon; Comment: "Netzwerke eingeben und Liste erzeugen"
