@@ -51,7 +51,7 @@ Source: "C:\temp\xampplite\*"; DestDir: "{app}"; Components: nuropenaudit; Exclu
 [Icons]
 Name: "{group}\OpenAudit cl Oberfläche lokal"; Filename: "http://localhost:888/openaudit"
 Name: "{group}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"
-Name: "{group}\OpenAudit cl Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe /k pushd {app}\htdocs\openaudit\scripts\"; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
+Name: "{group}\OpenAudit cl Konsole (Admin)"; Filename: "%windir%\system32\cmd.exe"; Parameters: "/k pushd ""{app}\htdocs\openaudit\scripts\"""; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "mit elevated rights"
 Name: "{group}\OpenAudit cl Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""C:\Program Files (x86)\xampplite\htdocs\openaudit\scripts"" "; WorkingDir: "{app}\htdocs\openaudit\scripts"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
 Name: "{group}\PC-IP-Listfile.txt manuell ändern"; Filename: "{app}\htdocs\openaudit\scripts\pc_list_file.txt";  Comment: "nur im Notfall, lässt sich besser über Oberfläche erzeugen"
 Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap\bin\pythonw.exe"; Parameters: "-c ""from zenmapGUI.App import run;run()""";
