@@ -4,9 +4,9 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions und V
                    "sql"=>"
                            SELECT
                                DISTINCT software_name, software_version,
-                               COUNT( * ) AS count_item,
+                               COUNT( software_name ) AS count_item,
                                round( 100 / (
-                                       SELECT count(software_uuid) FROM software, system
+                                       SELECT count(software_name) FROM software, system
                                        WHERE
                                            (software_name LIKE 'Microsoft Office%' or
 											software_name LIKE 'Microsoft Visio%' OR
@@ -24,7 +24,7 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions und V
 											software_name LIKE 'Microsoft 365%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
-                               GROUP BY software_version
+                               GROUP BY software_name
                                ",
                    "sort"=>"count_item",
                    "dir"=>"DESC",

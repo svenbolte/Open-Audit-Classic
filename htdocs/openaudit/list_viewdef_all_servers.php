@@ -1,9 +1,19 @@
 <?php
 
+// 						AND system_timestamp = processor_timestamp 
+
 $query_array=array("headline"=>__("List all Windows Servers"),
                    "sql"=>"SELECT * FROM `system`, `processor`, `hard_drive` WHERE
-						(system_os_name LIKE '%Server%') 
-						AND system_uuid = hard_drive_uuid AND system_uuid = processor_uuid AND hard_drive_uuid = processor_uuid AND system_timestamp = processor_timestamp AND system_timestamp = hard_drive_timestamp AND processor_device_id = 'CPU0' AND hard_drive_index = 0 ",
+                          (system_os_name LIKE '%Server%') 
+                            AND system_uuid = hard_drive_uuid
+                            AND system_uuid = processor_uuid
+                            AND hard_drive_uuid = processor_uuid 
+                            AND system_timestamp = hard_drive_timestamp 
+                            AND processor_device_id = 'CPU0'
+                            AND hard_drive_index = 0
+ 						",
+
+
                    "sort"=>"system_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"system.php",

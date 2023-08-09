@@ -1,11 +1,15 @@
 <?php
 
-$query_array=array("headline"=>__("List all Systems Details"),
+// (system_system_type = 'Other' OR system_system_type = 'Unknown' OR system_system_type = 'Desktop' OR system_system_type = 'Low Profile Desktop' OR system_system_type = 'Pizza Box' OR system_system_type = 'Mini Tower' OR system_system_type = 'Tower' OR system_system_type = 'All in One' OR system_system_type = 'Space-Saving' OR system_system_type = 'Lunch Box' OR system_system_type = 'Sealed-Case PC'
+//						 OR system_system_type = 'Embedded PC' OR system_system_type = 'Mini PC' OR system_system_type = 'Stick PC' )
+
+$query_array=array("headline"=>__("List all Windows Clients (PCs, Laptops)"),
                    "sql"=>"SELECT * FROM `system`, `processor`, `hard_drive` WHERE system_uuid = hard_drive_uuid
-				   AND system_uuid = processor_uuid
+					AND system_os_name NOT LIKE '%Server%'
+					AND system_uuid = processor_uuid
 				   AND hard_drive_uuid = processor_uuid 
-				   AND system_timestamp = hard_drive_timestamp 
 					AND system_timestamp = processor_timestamp 
+				   AND system_timestamp = hard_drive_timestamp 
 				   AND processor_device_id = 'CPU0' 
 				   AND hard_drive_index = 0 ",
                    "sort"=>"system_name",
@@ -16,21 +20,14 @@ $query_array=array("headline"=>__("List all Systems Details"),
                                              "view"=>"summary",
                                             ),
                                ),
-                   "fields"=>array(
+                   "fields"=>array("10"=>array("name"=>"system_uuid",
+                                               "head"=>__("UUID"),
+                                               "show"=>"n",
+                                              ),
                                    "20"=>array("name"=>"net_ip_address",
                                                "head"=>__("IP"),
                                                "show"=>"y",
                                                "link"=>"y",
-                                              ),
-                                   "21"=>array("name"=>"",
-                                               "head"=>__("4C"),
-                                               "show"=>"y",
-                                               "link"=>"n",
-                                              ),
-                                   "22"=>array("name"=>"",
-                                               "head"=>__("Todo"),
-                                               "show"=>"y",
-                                               "link"=>"n",
                                               ),
                                    "30"=>array("name"=>"system_name",
                                                "head"=>__("Hostname"),
@@ -108,11 +105,7 @@ $query_array=array("headline"=>__("List all Systems Details"),
                                                "head"=>__("OS-Version"),
                                                "show"=>"y",
                                               ),
-								  "169"=>array("name"=>"system_uuid",
-                                               "head"=>__("UUID"),
-                                               "show"=>"y",
-                                              ),
-							  "170"=>array("name"=>"system_timestamp",
+								  "170"=>array("name"=>"system_timestamp",
                                                "head"=>__("Date Audited"),
                                                "show"=>$show_date_audited,
                                               ),

@@ -130,6 +130,7 @@ $menue_array = array(
                                     "10"=>array("name"=>"All Systems More Info", "link"=>"./list.php?view=all_systems_more", "image"=>"fa-sitemap", "title"=>"All Audited Systems More Info",),
                                     "12"=>array("name"=>"All Partitions", "link"=>"./list.php?view=all_partition_space", "image"=>"fa-list-ol", "title"=>"All Partitions",),
                                     "20"=>array("name"=>"All Servers", "link"=>"./list.php?view=all_servers", "image"=>"fa-server", "title"=>"All Servers",),
+                                    "22"=>array("name"=>"All Win-Clients", "link"=>"./list.php?view=all_win_clients", "image"=>"fa-desktop", "title"=>"All Win-PCs-Laptops",),
                                     "30"=>array("name"=>"All Win-Workstations", "link"=>"./list.php?view=all_win_workstations", "image"=>"fa-desktop", "title"=>"All Win-Workstations",),
                                     "40"=>array("name"=>"All Laptops", "link"=>"./list.php?view=all_laptops", "image"=>"fa-laptop", "title"=>"All Laptops",),
 									"50"=>array("name"=>"All Audited Systems", "link"=>"./list.php?view=all_systems", "image"=>"fa-sitemap", "title"=>"All Audited Systems",),
