@@ -5,10 +5,12 @@ Module:	changedatabase.php
 
 if (isset($_POST['language_post'])) $GLOBALS["language"] = $_POST['language_post'];
 include "include.php";
-?>
- <td width="100%">
- <div class="main_each">
-<?php
+
+echo "<td style=\"vertical-align:top;width:100%\">\n";
+echo "<div class=\"main_each\">";
+echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+echo __("Change Databasse") . '</td></tr><tr><td>';
+
 // Content below
   if(!isset($_POST['step'])) {
     step33SetupDB();
@@ -30,7 +32,6 @@ if (isset($_POST['bindlocal']))  {$bindlocal = $_POST['bindlocal'];}  else { $bi
 
 function step33SetupDB() {
 ?>
-  <span class="contenthead"><?php echo __("Change Databasse") ?></span>
   <p><?php echo __("Select name of database from the list:") ?></p>
   <hr />
   <?php 

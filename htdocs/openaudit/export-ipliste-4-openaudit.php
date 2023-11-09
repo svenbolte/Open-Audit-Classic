@@ -24,7 +24,11 @@ $outfile = dirname(__DIR__, 1).'\openaudit\scripts\pc_list_file.txt';
     else
         $ip = 'UNKNOWN';
 	
-echo '</tr><tr><td style="padding-left:50px"> <h2>Openaudit IP-Liste erzeugen</h2>';
+echo "<td style=\"vertical-align:top;width:100%\">\n";
+echo "<div class=\"main_each\">";
+echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+echo 'Openaudit IP-Liste erzeugen</td></tr><tr><td>';
+
 $trimmed = implode(".", array_slice(explode(".", $ip), 0, 3)).'.0/24';
 echo '<p>Ihre IP-Adresse ist: <code>'.$ip.'</code> im Netzwerk: <code>' .$trimmed.'</code></p>';
 

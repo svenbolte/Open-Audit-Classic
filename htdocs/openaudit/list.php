@@ -119,14 +119,14 @@ $MY_REQUEST_URI = $_SERVER["SCRIPT_NAME"] . "?" .  $_SERVER["QUERY_STRING"];
 
 echo "<form method=\"post\" id=\"form_nav\" action=\"".htmlentities($MY_REQUEST_URI)."\" style=\"margin:0px;\">\n";
 
-  //Calculating the page-count-vars in headline
-  if( ($page_count+$count_system)>$all_page_count OR (isset($show_all) AND $show_all==1)){
-      $show_page_count_to=$all_page_count;
-  }else{
-      $show_page_count_to=$page_count+$count_system;
-  }
+//Calculating the page-count-vars in headline
+if( ($page_count+$count_system)>$all_page_count OR (isset($show_all) AND $show_all==1)){
+  $show_page_count_to=$all_page_count;
+} else {
+  $show_page_count_to=$page_count+$count_system;
+}
 
-  echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+echo '<table width="100%" style="padding-bottom:5px"><tr><td class="contenthead">';
 
      //Is the headline a sql-query?
      if(isset($query_array["headline"]) AND is_array($query_array["headline"])){
@@ -179,8 +179,6 @@ echo "<form method=\"post\" id=\"form_nav\" action=\"".htmlentities($MY_REQUEST_
     echo "<img src=\"images/go-next-disabled.png\" alt=\"".__("Disabled")."\" title=\"".__("Disabled")."\" style=\"border:0px;\" width=\"16\" height=\"16\" />\n";
   }
 
-  echo "</td></tr><tr><td class=\"contenthead\" align=\"right\">\n";
-
   //Direct jumping to pages
   //Don't show if there is only one-page or show_all==1
   //if( ($all_page_count>=$count_system OR $count_system==$count_system_max) AND (isset($show_all) AND $show_all!=1) ){
@@ -208,7 +206,8 @@ echo "<form method=\"post\" id=\"form_nav\" action=\"".htmlentities($MY_REQUEST_
       echo "<input type=\"button\" name=\"tmp_submit\" value=\">\" style=\"width:16px;\" onclick=\"set_form_field('page_count', (document.forms['form_nav'].elements['page_count_tmp'].value-1)); submit_form();\" />\n";
   }
 
-  echo "</td></tr></table>\n";
+  echo "</td></tr>";
+  echo "</table>\n";
 
 //Table header
 $headline_1=" ";
@@ -223,7 +222,7 @@ foreach($viewdef_array["fields"] as $field) {
         $field_height = "";
         if ( isset($field["width"]) AND $field["width"] <> "") {$field_width = " style=\"width:".$field["width"].";\"";}
         if (isset($field["height"]) AND $field["height"] <> "") {$field_height = " height=\"".$field["height"]."\"";}
-        $headline_1 .= "<td  class=\"views_tablehead\">";
+        $headline_1 .= "<td class=\"views_tablehead\">";
         if(!isset($field["sort"]) OR (isset($field["sort"]) AND $field["sort"]!="n")){
             $headline_1 .= "<a href=\"#\" onclick=\"set_form_field('sort', '".$field["name"]."'); set_form_field('dir', '".$new_dir."'); set_form_field('page_count', '0'); submit_form();\" title=\"".__("Sort by").": ".$field["head"].", ".__("Direction").": ".__($new_dir)."\">";
         }
@@ -291,14 +290,12 @@ echo "<script type=\"text/javascript\">\n";
  echo "//-->\n";
 echo "</script>\n";
 
- echo "<input type=\"hidden\" name=\"dir\" value=\"".$dir."\" />\n";
- echo "<input type=\"hidden\" name=\"sort\" value=\"".$sort."\" />\n";
- echo "<input type=\"hidden\" name=\"page_count\" value=\"".$page_count."\" />\n";
- echo "<input type=\"hidden\" name=\"show_all\" value=\"".$show_all."\" />\n";
- echo "<input type=\"hidden\" name=\"headline_addition\" value=\"".$headline_addition."\" />\n";
-//echo "</form>\n";
-//echo "<form method=\"post\" name=\"form_search\" action=\"".htmlentities($_SERVER["REQUEST_URI"])."\" style=\"margin:0px;\">\n";
-echo "<table   width=\"100%\">\n";
+echo "<input type=\"hidden\" name=\"dir\" value=\"".$dir."\" />\n";
+echo "<input type=\"hidden\" name=\"sort\" value=\"".$sort."\" />\n";
+echo "<input type=\"hidden\" name=\"page_count\" value=\"".$page_count."\" />\n";
+echo "<input type=\"hidden\" name=\"show_all\" value=\"".$show_all."\" />\n";
+echo "<input type=\"hidden\" name=\"headline_addition\" value=\"".$headline_addition."\" />\n";
+echo "<table width=\"100%\">\n";
 
 echo "<tr>\n";
  echo $headline_1;
@@ -307,8 +304,6 @@ echo "</tr>\n";
   echo "<tr style=\"width:100%\">\n";
    echo $headline_2;
   echo "</tr>\n";
-
-//echo "</form>\n";
 
 //Table body
 $rownumber=0;
@@ -395,7 +390,7 @@ if ($myrow = mysqli_fetch_array($result)){
                 $field_align = "";
                 echo "  <td ";
                  if (isset($field["align"])) { echo "align=\"".$field["align"]."\""; }
-                 echo "style=\"padding-right:10px;\">";
+                 echo ">";
 
                 $show_value=" ";
 
@@ -523,7 +518,6 @@ if ($myrow = mysqli_fetch_array($result)){
         echo " </tr>\n";
       $rownumber ++;
     } while ($myrow = mysqli_fetch_array($result) and ($show_all or $rownumber < $count_system));
-    
 
 	// Totals
 	
@@ -542,10 +536,9 @@ if ($myrow = mysqli_fetch_array($result)){
 		}
 	echo "</tr></table></form>\n";
 
-
     // Export to CSV
 
-    echo "<div>";
+    echo '<div style="position:absolute;top:110px;left:186px">';
     echo "<table width=\"100%\"><tr>\n";
     echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
@@ -580,9 +573,7 @@ if ($myrow = mysqli_fetch_array($result)){
 	echo "<a href=\"#\" class=\"get-view-xlsx\"><i class=\"fa fa-lg fa-file-excel-o\"></i> ".__("XLSX Export Excel")."</a>\n";
     echo "</form>\n";
     echo " &nbsp; &nbsp; \n";
-
-
-    
+  
     if (isset($_REQUEST["view"])) {
 		
 		// Check to be sure that we are looking at something which we can make a diagram of
@@ -647,6 +638,8 @@ if ($myrow = mysqli_fetch_array($result)){
 			echo "</form>\n";
 		} else{}
     } else{}
+	echo '</div>';
+
 } else {
 
   echo "<tr><td colspan=\"4\">".__("No Results")."</td></tr>\n";
@@ -654,7 +647,6 @@ if ($myrow = mysqli_fetch_array($result)){
   echo "</form>\n";
 }
 
-echo "<p style='height:20px'></p></div></td>\n";
 include "include_export_modal.php"; 
 echo "</body>\n";
 echo "</html>\n";

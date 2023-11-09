@@ -30,7 +30,7 @@ include_once "include_col_scheme.php";
 // Funktion für Software-Versionen online download and import
 function svversionenimport($aftertime) {
 	global $db;
-	echo '<div style="position:absolute;left:25%;top:25px;color:#ddd">';
+	echo '<div class="messagebox" style="position:absolute;left:5px;top:500px">';
 	$filename = dirname(__FILE__).'/wordpresssoftware.csv';
 	$url = 'https://6yztfx48o7fv2uhb.myfritz.net/dcounter/softwareverzeichnis.asp?action=woocom&search=&code=a5b584050977ca2ece290de786cc35f6';
 
@@ -185,9 +185,7 @@ if ($page <> "setup"){
   $version = "0.1.00";
 }
 ?>
-<table width="100%">
-  <tr>
-    <td class="headerbanner main_each" colspan="3"><a href="index.php"><img class="logo" src="images/logo.png" alt=""/></a>
+<div class="headerbanner"><a href="index.php"><img class="logo" src="images/logo.png" alt=""/></a>
 <?php
 // Search box
 echo "<div id=\"inforechts\"><form action=\"search.php\" method=\"get\">\n";
@@ -199,8 +197,9 @@ echo "</div>\n";
 	if (isset($use_ldap_login) and ($use_ldap_login == 'y')) 
 	{echo "<a class='npb_ldap_logout' href=\"ldap_logout.php\">".__("Logout ").$_SESSION["username"]." [".$_SESSION["role"]."]</a>";}
 ?>		
-    </td>
-  </tr>
+ </div>
+ 
+  <table width="100%">
   <tr>
     <td style="width:170px;" rowspan="12" valign="top" id="nav">
       <ul id="primary-nav">

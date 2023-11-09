@@ -57,8 +57,12 @@ require_once 'simplexlsxgen.php';
 include_once("include.php");
 
 $csvroot = realpath($_SERVER['DOCUMENT_ROOT']).dirname($_SERVER['PHP_SELF']);
-echo '</tr><tr><td>';
-echo '<h2>Batch: CSV-Dateien nach XLSX konvertieren</h2>';
+
+	echo "<td style=\"vertical-align:top;width:100%\">\n";
+	echo "<div class=\"main_each\">";
+	echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+	echo 'Batch: CSV-Dateien nach XLSX konvertieren</td></tr><tr><td>';
+
 echo '<ol style="line-height:22px"><li>.csv Dateien in den Ordner <b>'.$csvroot.'/in</b> legen,</li><li><a href="csvxls.php">diese Seite neu laden</a>,</li><li>.xslx Excel-Dateien aus Ordner <b>'.$csvroot.'/out</b> entnehmen oder über Links unten herunterladen.</li>';
 echo '<li><i class="fa fa-trash" style="color:tomato"></i> <a href="csvxls.php?delete_files=1">Import-Ordner leeren</a></li></ol>';
 $xlsdir='./in/';

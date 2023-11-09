@@ -6,8 +6,13 @@ if (isset($_GET['resize'])) $resize = ($_GET['resize']); else $resize = .4; // F
 if (isset($_GET['url'])) { $shoturl = ($_GET['url']); } else {
 	include_once("include.php");
 	$shoturl='https://github.com/svenbolte';
-	echo '</tr><tr><td>';
-	echo '<h2>Browser-Thumbnail erstellen</h2><form method="get"><p>URL <input type="text" name="url" value="'.$shoturl.'" size="70">';
+
+	echo "<td style=\"vertical-align:top;width:100%\">\n";
+	echo "<div class=\"main_each\">";
+	echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+	echo 'Browser-Thumbnail erstellen</td></tr><tr><td>';
+
+	echo '<form method="get"><p>URL <input type="text" name="url" value="'.$shoturl.'" size="70">';
 	echo '</p><p>Size [0.4 ... 2] <input type="number" value="0.4" step="0.2" min="0.4" max="2" name="resize"> <input type="submit" value="Download Thumbnail"></p></form>';
 	echo '</td></tr></table></body></html>';
 	exit;

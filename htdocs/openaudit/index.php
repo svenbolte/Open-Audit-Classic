@@ -88,7 +88,7 @@ $page_next = $page_count + 1;
 $page_current = $page_count;
 $page_count = $page_count * $count_system;
 
-echo "<td id='CenterColumn'>\n";
+echo '<td id="CenterColumn" class="main_each" style="margin-top:6px;background-color:#ffffffaa">';
 
 // ****** Display various sections *****************************************************
 if ($show_system_discovered == "y") 
