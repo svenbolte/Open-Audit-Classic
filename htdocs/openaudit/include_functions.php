@@ -37,6 +37,14 @@ function return_unknown($something)
   return $something;
 }
 
+function get_headerbanner() {
+	?>
+	<div class="headerbanner"><div style="display:inline-block;width:430px;backdrop-filter:blur(8px)">
+	<a style="padding:1em;font-size:3em;color:#000;line-height:1.6em;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff" href="index.php">OpenAudit Classic</a>
+	</div>
+	<?php
+}
+
 function ip_trans($ip)
 {
 // check that the string is valid for an IP, it must have at least one . in it
@@ -1139,7 +1147,7 @@ function GetLdapConnectionsFromDb()
 		}
 		while ($myrow = mysqli_fetch_array($result));
 	}
-	mysqli_close();
+	mysqli_close($db);
 	return $ldap_connections;
 }
 

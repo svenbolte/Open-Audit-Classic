@@ -1,5 +1,5 @@
 <?php
-$bgcolor = "#FFFFFF";
-$bg1 = "#00606022";
-$bg2 = "#FFFFFF";
+$bgcolor = "#FFF";
+$bg1 = "#0662";
+$bg2 = "#FFF2";
 ?>

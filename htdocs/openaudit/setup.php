@@ -10,9 +10,10 @@ Recent Changes:
 
 **********************************************************************************************************/
 
-include "include_config.php";
-if (isset($_POST['language_post'])) $GLOBALS["language"] = $_POST['language_post'];
+include_once "include_config.php";
 include_once "include_lang.php";
+include_once "include_functions.php";
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,10 +23,12 @@ include_once "include_lang.php";
     <link rel="stylesheet" type="text/css" href="default.css" />
   </head>
   <body>
-  <div class="main_each">
-    <img src="images/logo.png" width="300" height="48" alt="" border="0"/>
+<?php
+	get_headerbanner();
+?>
   </div>
-  <div style="float: left; width: 200px">
+
+  <div style="float:left;width:200px">
   <div class="main_each">
 <?php
   if(!isset($_POST['step']) or ($_POST['step'] == 1)) {
@@ -312,15 +315,6 @@ function step35SetupDB() {
     echo __("Creating the database... ");
     $result = mysqli_query($db,$sql) or die('Could not create db: ' . mysqli_error($db));
     echo __("Success!") ."<br />";
-
-    $sql = "DROP USER '" . $_POST['mysqli_new_user'] . "'@";
-    if ($_POST['bindlocal'] = 'y') {
-      $sql .= "'localhost' ";
-    } else {
-      $sql .= "'%' ";
-    }
-    $result = mysqli_query($db,$sql) or die('Could not drop user: ' . mysqli_error($db));
-
     $sql = "CREATE USER '" . $_POST['mysqli_new_user'] . "'@";
     if ($_POST['bindlocal'] = 'y') {
       $sql .= "'localhost' ";
@@ -328,9 +322,8 @@ function step35SetupDB() {
       $sql .= "'%' ";
     }
     $sql .= "IDENTIFIED BY '" . $_POST['mysqli_new_pass'] . "'";
-	
-	echo __("Creating the user... ". $_POST['mysqli_new_user']);
-    $result = mysqli_query($db,$sql) or die('Could not create the user: ' . mysqli_error($db));
+    echo __("Creating the user... ");
+    $result = mysqli_query($db,$sql) ;//or die('Could not create the user: ' . mysqli_error($db));
     echo __("Success!") . "<br />";
     $sql = "GRANT SELECT , INSERT , UPDATE , DELETE , CREATE , DROP , INDEX , ALTER , CREATE TEMPORARY TABLES";
     $sql .= " , CREATE VIEW , SHOW VIEW , CREATE ROUTINE, ALTER ROUTINE, EXECUTE ";
@@ -341,7 +334,7 @@ function step35SetupDB() {
       $sql .= "'%'";
     }
     echo __("Granting user priveleges... ");
-    $result = mysqli_query($db,$sql) or die('Could not grant privileges: ' . mysqli_error($db));
+    $result = mysqli_query($db,$sql) or die('Could not grant priveleges: ' . mysqli_error($db));
     echo __("Success!") . "<br />";
     echo __("Switching connection to new user... ");
     mysqli_close($db);
@@ -358,8 +351,7 @@ function step35SetupDB() {
     $sql = stripslashes($contents);
     $sql2 = explode(";", $sql);
     foreach ($sql2 as $sql3) {
-		// echo $sql3.'<br>*<br>';
-      if (!empty($sql3)) $result = mysqli_query($db,$sql3 . ";");
+      $result = mysqli_query($db,$sql3 . ";");
     }
     echo __("Success!") . "<br />";
     mysqli_close($db);

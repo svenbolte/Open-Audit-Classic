@@ -26,7 +26,6 @@ include_once "include_col_scheme.php";
 
 //die(var_dump($TheApp));
 
-
 // Funktion für Software-Versionen online download and import
 function svversionenimport($aftertime) {
 	global $db;
@@ -184,9 +183,9 @@ if ($page <> "setup"){
 } else {
   $version = "0.1.00";
 }
-?>
-<div class="headerbanner"><a href="index.php"><img class="logo" src="images/logo.png" alt=""/></a>
-<?php
+
+get_headerbanner();
+
 // Search box
 echo "<div id=\"inforechts\"><form action=\"search.php\" method=\"get\">\n";
 echo "<input size=\"25\" placeholder=\"Suchbegriff\" name=\"search_field\" />\n";

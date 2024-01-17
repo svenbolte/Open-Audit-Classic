@@ -16,22 +16,26 @@ Recent Changes:
 	Added additional potential LDAP configuration error situations to be displayed - now as a table
 	
 **********************************************************************************************************/
+include_once "include_config.php";
+include_once "include_lang.php";
+include_once "include_functions.php";
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Open-AudIT Login</title>
-<link rel="stylesheet" type="text/css" href="ldap_login.css" />
-</head>
-<body>
-	<div class='npb_ldap_login_header'>
-		<a href='index.php'><img class='logo' alt='Open Audit Logo' src='images/logo.png'/></a>
-	</div>
+  <head>
+    <title>Open-AudIT Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" type="text/css" href="default.css" />
+  </head>
+  <body>
+<?php
+	get_headerbanner();
+?>
+  </div>
 
 	<div class='npb_ldap_login'>
-		<img alt='Key' src='images/Key.png'/>
 		<h2 class='npb_ldap_login'>LDAP Config Error</h2>
-
 		<form action="./index.php" method='post'>
 			<p>You have enabled LDAP security but LDAP is not correctly configured:</p>
 			<table><tr><th>Possible Issue</th><th>Probable Cause</th></tr>

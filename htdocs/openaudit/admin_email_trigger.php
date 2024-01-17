@@ -103,10 +103,8 @@ if ( isset($_POST['timestamp']) && isset($_POST['schedule_id']) && is_numeric($_
   $template = ( !empty($schedules[$id]["email_template"]) ) ?
     $schedules['id']['email_template'] :
     './emails/audit_log.html';
-  $logo     = ( !empty($schedules[$id]["email_logo"]) ) ?
-    './emails/images/' . $schedules[$id]['email_logo'] :
-    './images/logo.png';
-  $image    = array( 'Path' => $logo, 'Variable' => '{img_logo}' );
+  $logo     = '';
+  $image    = '';
   $html     = ParseEmailTemplate($variables,$template);
 
   $result = SendHtmlEmail($subject,$html,$to,$email,null,$image);

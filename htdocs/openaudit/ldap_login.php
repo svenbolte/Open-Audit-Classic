@@ -91,23 +91,18 @@ if (isset($_POST['username']))
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<head>
-	<title>Open-AudIT Login</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="pragma" content="no-cache">
-	<link rel="stylesheet" type="text/css" href="ldap_login.css" />
-</head>
-
-<body onload='document.getElementById("username").focus()'>
-
-	<div class='npb_ldap_login_header'>
-		<a href="index.php"><img src="images/logo.png"/></a>
-	</div>
-
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Open-AudIT Setup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" type="text/css" href="default.css" />
+  </head>
+	<body onload='document.getElementById("username").focus()'>
+<?php
+	get_headerbanner();
+?>
+  </div>
 	<div class='npb_ldap_login'>
-	<img src="images/Key.png"/>
 	<h2 class='npb_ldap_login'>Please Login</h2>
 
 	<form action="<?php $_SERVER['SCRIPT_NAME']; ?>" method="POST">
