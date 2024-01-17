@@ -14,6 +14,11 @@ Die Oberfläche ist komplett in PHP geschrieben und liegt in dieser Form vollumf
 5) Windows Aufgabe(n) starten
 
 
+= SSL-Zertifikat =
+
+Nach zwei Jahren muss das SSL Zertifikat erneuert werden. Dazu im Ordner xampplite/apache die Datei makecert2.cmd ausführen.
+Die neuen zertifikate sind dann unter ./ssl.crt und müssen in die Browser importiert werden als Benutzer / Vertrauenswürdige Stammzertifizierungsstellen
+
 = Entstehungsgeschichte =
 
 in den 2000er Jahren wurde OpenAudit als GPLv3 lizensierte Open Source Software erstellt und war als Quellcode verfügbar.
@@ -26,7 +31,6 @@ Berücksichtigt wurden Anpassungen auf neue PHP-Versionen, MySQL und Apache, hä
 Auch die Integration von NMAP und WinPCap wurde auf den aktuellen Stand gebracht.
 
 Lizenz: GPLv3 --> GPL.txt im htdocs/openaudit Verzeichnis
-
 
 = Entwicklung =
 

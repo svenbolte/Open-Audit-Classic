@@ -59,4 +59,5 @@ echo Das Zertifikat wurde erstellt.
 echo The certificate was provided.
 echo.
 
-pause
+@ping -n 6 localhost> nul
+rem pause
