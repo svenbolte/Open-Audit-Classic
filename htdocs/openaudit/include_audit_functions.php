@@ -332,7 +332,7 @@ function Get_Manage_Configs() {
   $configs = GetAuditConfigurationsFromDb();
   echo "<div id=\"cfg-holder\">";
   if (!is_null($configs)) {
-    echo "<table id=\"config-table\" summary=\"Audit Configurations\">
+    echo "<table class=\"tftable\"  id=\"config-table\" summary=\"Audit Configurations\">
       <thead>
     	  <tr>
             <th scope=\"row\" colspan=\"5\"><center>Audit Configurations</center></th>
@@ -403,7 +403,7 @@ function Get_Manage_Schedules() {
 
   echo "<div id=\"sched-holder\">";
   if ( !is_null($schedules) ) {
-    echo "<table id=\"sched-table\" summary=\"Audit Schedules\">
+    echo "<table class=\"tftable\"  id=\"sched-table\" summary=\"Audit Schedules\">
       <thead>
     	  <tr>
             <th scope=\"row\" colspan=\"7\"><center>Audit Schedules</center></th>

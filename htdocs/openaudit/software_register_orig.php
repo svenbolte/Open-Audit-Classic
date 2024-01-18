@@ -14,7 +14,7 @@ $sql = "select * from software_register ORDER BY software_title";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   $group_id = $myrow["group_id"];
-  echo "<table  >\n";
+  echo "<table class=\"tftable\"   >\n";
   echo "<tr>\n";
   echo "  <td class=\"contenthead\">Software License Register.<br />&nbsp;</td>\n";
   echo "</tr>\n";
@@ -29,7 +29,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if ($group_id != $myrow['group_id']) {
     echo "<tr><td colspan=\"4\">&nbsp;</td></tr>\n";
     echo "<tr><td colspan=\"4\">Group: " . $myrow["group_name"] . "</td></tr>\n";
-    $bgcolor = "#FFFFFF";
+     
     $group_id = $myrow['group_id'];
     } else {}
     $sql3 = "SELECT SUM(license_purchase_number) AS number_purchased FROM software_licenses WHERE license_software_id = '" . $myrow["software_reg_id"] . "'";
@@ -55,10 +55,7 @@ echo $sql4 . "<br />\n";
     if ($number_audit > "0") { $font = "<font color=\"green\">";}
       
     $count = $count + 1;
-    if ($bgcolor == $bg1) {
-      $bgcolor = "#FFFFFF"; }
-    else { $bgcolor = $bg1; }
-    echo "<tr style=\"background-color:".$bgcolor."\">";
+    echo "<tr>";
     echo "<td><a href=\"software_register_details.php?id=" . $myrow["software_reg_id"] . "\">" . $myrow["software_title"] . "</a>&nbsp;&nbsp;</td>";
     //echo "<td align=\"center\">" . $number_purchased . "</td>";
     if ($number_purchased == -1) {

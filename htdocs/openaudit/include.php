@@ -22,7 +22,7 @@ include_once "include_config.php";
 include_once "include_lang.php";
 include_once "include_functions.php";
 include "include_dell_warranty_functions.php"; // Added by Andrew Hull to allow us to grab Dell Warranty details from the Dell website
-include_once "include_col_scheme.php";
+
 
 //die(var_dump($TheApp));
 
@@ -129,7 +129,7 @@ if ($use_pass != "n") {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
 	<link rel="stylesheet" href="/openaudit/fonts/css/font-awesome.min.css" />
-    <link rel="stylesheet" media="print" type="text/css" href="defaultprint.css" />
+	<link rel="stylesheet" media="print" type="text/css" href="defaultprint.css" />
 	<script type='text/javascript' src="javascript/ajax.js"></script>
 	<script type='text/javascript' src="javascript/include.js"></script>
     <?php 
@@ -198,7 +198,7 @@ echo "</div>\n";
 ?>		
  </div>
  
-  <table width="100%">
+  <table class=\"tftable\"  width="100%">
   <tr>
     <td style="width:170px;" rowspan="12" valign="top" id="nav">
       <ul id="primary-nav">

@@ -11,7 +11,7 @@ echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 echo "<div id=\"ajaxTest\"> </div>\n";
 #echo "<form name=\"nmap_form\" type=\"post\">\n";
-echo "<table   width=\"100%\">\n";
+echo "<table class=\"tftable\"    width=\"100%\">\n";
 echo "<tr>\n";
 echo "  <td class=\"contenthead\" colspan=\"5\">Network Monitoring.<br />&nbsp;</td>\n";
 echo "</tr>\n";
@@ -31,8 +31,8 @@ mysqli_select_db($db,$mysqli_database) or die("Could not select database");
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   do{
-    if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-    echo "<tr style=\"background-color:".$bgcolor."\">\n";
+    
+    echo "<tr>\n";
     echo " <td>" . $myrow['system_name'] . "</td>\n";
     echo " <td align=\"center\"><input type=\"text\" id=\"ip_" . $myrow['system_uuid'] . "\" name=\"ip_" . $myrow['system_uuid'] . "\" value=\"" . ip_trans($myrow['net_ip_address']) . "\" size=\"12\" /></td>\n";
     echo " <td align=\"center\">\n";

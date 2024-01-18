@@ -11,7 +11,7 @@ require_once "include_audit_functions.php";
 <body>
 <td valign="top">
 <div class="main_each">
-  <table width="100%" border="0" style="height: 70px">
+  <table class=\"tftable\"  width="100%" border="0" style="height: 70px">
     <tr><td rowspan="2" class="contenthead">Edit Commands</td></tr>
   </table>
   <label>Command Name</label>
@@ -22,7 +22,7 @@ require_once "include_audit_functions.php";
     <img src="images/add.png" onClick="addToCommands('cmd_table')" id="add-img"/>
   </div><br>
   <form action="javascript:submitCommands();" method="post" id="form_cmd">
-    <table id="cmd_table">
+    <table class=\"tftable\"  id="cmd_table">
     <?php 
       $db=GetOpenAuditDbConnection();;
       @get_command_info($db);

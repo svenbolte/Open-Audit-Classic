@@ -125,7 +125,7 @@
       <label>On these days...</label>
       <br />
       <br />
-      <table border="0" id="table_weekly" class="form-table">
+      <table class=\"tftable\"  border="0" id="table_weekly" class="form-table">
         <tr><td><input type="checkbox" name="check_weekly" value="mon" <?php CheckWeekMonth($wk_days,"mon"); ?> />Monday</td>
             <td><input type="checkbox" name="check_weekly" value="tue" <?php CheckWeekMonth($wk_days,"tue"); ?> />Tuesday</td>
             <td><input type="checkbox" name="check_weekly" value="wed" <?php CheckWeekMonth($wk_days,"wed"); ?> />Wednesday</td>
@@ -144,7 +144,7 @@
       </select><br /><br />
       <label>On these months...</label><br />
       <br />
-      <table border="0" class="form-table" id="table_monthly">
+      <table class=\"tftable\"  border="0" class="form-table" id="table_monthly">
         <tr><td><input type="checkbox" name="check_monthly" value="jan" <?php CheckWeekMonth($months,"jan"); ?> />January</td>
             <td><input type="checkbox" name="check_monthly" value="feb" <?php CheckWeekMonth($months,"feb"); ?> />February</td>
             <td><input type="checkbox" name="check_monthly" value="mar" <?php CheckWeekMonth($months,"mar"); ?> />March</td>

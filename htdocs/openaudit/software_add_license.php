@@ -14,7 +14,7 @@ $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
   ?>
   <form action="software_add_license_2.php" method="post">
-  <table width="40%" border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  width="40%" border="0" cellpadding="0" cellspacing="0" class="content">
     <tr><td class="contenthead">Add Software License for:</td></tr>
     <tr><td><?php echo $myrow["software_title"]; ?><br />&nbsp;</td></tr>
     <tr><td>Date Purchased:  </td><td><input type="text" name="date_purchased" size="20" />&nbsp;(yyyy-mm-dd)</td></tr>

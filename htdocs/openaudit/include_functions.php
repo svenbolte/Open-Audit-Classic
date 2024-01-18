@@ -39,8 +39,8 @@ function return_unknown($something)
 
 function get_headerbanner() {
 	?>
-	<div class="headerbanner"><div style="display:inline-block;width:430px;backdrop-filter:blur(8px)">
-	<a style="padding:1em;font-size:3em;color:#000;line-height:1.6em;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff" href="index.php">OpenAudit Classic</a>
+	<div class="headerbanner"><div style="display:inline-block;backdrop-filter:blur(8px)">
+	<a style="padding-left:6px;font-size:2.5em;color:#000;line-height:1em;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff" href="index.php">OpenAudit Classic</a>
 	</div>
 	<?php
 }
@@ -142,15 +142,6 @@ function alternate_tr_class(&$current_class)
 {
 	$current_class = ($current_class == 'npb_highlight_row') ? '' : 'npb_highlight_row';
 	return $current_class;
-}
-
-
-function change_row_color($bgcolor,$bg1,$bg2)
-{
-  if ($bgcolor == $bg1) {
-    $bgcolor = $bg2; }
-  else { $bgcolor = $bg1; }
-  return $bgcolor;
 }
 
 function modify_config($name, $value) {
@@ -774,21 +765,12 @@ return
 eregi('^([a-z0-9])+([.a-z0-9_-])*@([a-z0-9_-])+(.[a-z0-9_-]+)*.([a-z]{2,6})$', $value);
 }
 
-function microtime_float()
-{
+function microtime_float() {
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
 }
-/* This is performed by change_row_color($bgcolor,$bg1,$bg2) (AJH)
-function swap_background($bgcolor)
-{
-//        if (!isset($bgcolor)){$bgcolor = "#FFFFFF";}
-        if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-        return $bgcolor;
-}
-*/
-function WakeOnLan($hostname, $mac,$socket_number,$this_error)
-{
+
+function WakeOnLan($hostname, $mac,$socket_number,$this_error) {
 
 $address_bytes = explode(':', $mac);
 //Convert mac address to string of six bytes.

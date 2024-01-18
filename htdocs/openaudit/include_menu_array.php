@@ -258,12 +258,6 @@ $menue_array = array(
                     "title"=>"Mysql Admin-Oberfläche aufrufen",
               ),
 
-      "67" => array("name"=>"Browser-Thumbs", "image"=>"fa-thumbs-up",
-                    "link"=>"/openaudit/hdl-browsershots.php",
-                    "class"=>"menuparent",
-                    "title"=>"Thumbnails aus Internetseiten erstellen und Resizen",
-              ),
-
       "68" => array("name"=>"Wordpress-BLOG", "image"=>"fa-wordpress",
                     "link"=>"/wordpress",
                     "class"=>"menuparent",

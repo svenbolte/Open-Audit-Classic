@@ -9,7 +9,7 @@ if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-  echo "<table  >\n";
+  echo "<table class=\"tftable\"   >\n";
   echo "<tr>\n";
   echo "  <td class=\"contenthead\" colspan=\"3\">".__("Delete Package from Software License Register")."</td>\n";
   echo "</tr>\n";
@@ -18,7 +18,7 @@ $db=GetOpenAuditDbConnection() or die("Could not connect");
 $sql = "SELECT * FROM software_register ORDER BY software_title";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table   width=\"700\" class=\"content\">";
+  echo "<table class=\"tftable\"    width=\"700\" class=\"content\">";
   echo "<tr>";
   echo "<td></td>";
   echo "<td><b>&nbsp;&nbsp;Package&nbsp;&nbsp;</b></td>";
@@ -43,10 +43,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if ($number_audit == "0") { $font = "<font color=\"blue\">";}
     if ($number_audit > "0") { $font = "<font color=\"green\">";}
     $count = $count + 1;
-    if ($bgcolor == "#F1F1F1") {
-      $bgcolor = "#FFFFFF"; }
-    else { $bgcolor = "#F1F1F1"; }
-    echo "<tr style=\"background-color:".$bgcolor."\">";
+    echo "<tr>";
     echo "<td><a href=\"software_register_del_2.php?id=" . $myrow["software_reg_id"] . "&amp;sub=no\" onclick=\"return confirm('Do you really want to DELETE this Package and all its associated purchases ?','software_register_del_2.php?id=" . $myrow["software_reg_id"] . "')\">";
     echo "<input name=\"Submit\" value=\"Delete\" type=\"submit\" /></a></td>";
     echo "<td><a href=\"software_register_details.php?id=" . $myrow["software_reg_id"] . "\">" . $myrow["software_title"] . "</a>&nbsp;&nbsp;</td>";

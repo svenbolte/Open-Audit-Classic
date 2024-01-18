@@ -12,7 +12,7 @@ echo "<div class=\"main_each\">";
 $sql = "select * from software_register WHERE software_reg_id = '$id'";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-    echo "<table   width=\"700\" class=\"content\">";
+    echo "<table class=\"tftable\"    width=\"700\" class=\"content\">";
     echo "<tr><td colspan=\"4\" class=\"contenthead\">Software License Register.<br />&nbsp;</td></tr>\n";
     echo "<tr>";
     echo "<td><b>&nbsp;&nbsp;Package&nbsp;&nbsp;</b></td>";
@@ -50,7 +50,7 @@ if ($myrow = mysqli_fetch_array($result)){
       echo "</tr>";
       echo "</table>";
 	  echo "<form action=\"software_register_edit_comments_2.php?id=$id\" method=\"post\">";
-	  echo "<table bgcolor=\"" . $bgcolor . "\"   width=\"700\" class=\"content\">";
+	  echo "<table class=\"tftable\"  width=\"700\" class=\"content\">";
       echo "<tr>";
       echo "<td style=\"vertical-align:top;width:100%\"><br /><textarea rows=\"4\" name=\"comments\" cols=\"60\">" . $myrow["software_comments"] . "</textarea></td>";
       echo "</tr>";
@@ -59,9 +59,6 @@ if ($myrow = mysqli_fetch_array($result)){
 	  echo "</tr>";
       echo "</table>";
 	  echo "</form>";
-      if ($bgcolor == $bg1) {
-        $bgcolor = "#FFFFFF"; }
-      else { $bgcolor = $bg1; }
     } while ($myrow = mysqli_fetch_array($result));
 } else {}
 
@@ -69,7 +66,7 @@ if ($myrow = mysqli_fetch_array($result)){
 $sql = "SELECT * FROM software_licenses WHERE license_comments <> 'OA initial license' AND license_software_id = '" . $_GET["id"] . "'";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table>\n";
+  echo "<table class=\"tftable\" >\n";
   echo "<tr>\n";
   echo "  <td colspan=\"7\" class=\"contenthead\"><br />Software Licenses Purchased.</td>\n";
   echo "</tr>\n";
@@ -92,7 +89,7 @@ if ($myrow = mysqli_fetch_array($result)){
     echo "  <td align=\"center\"><a href=\"software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "\" onclick=\"return confirm('Do you really want to DELETE this license ?','software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "')\">Delete</a></td>\n";
     echo "  <td>" . $myrow["license_comments"] . "</td>\n";
     echo "</tr>\n";
-    if ($bgcolor == $bg1) { $bgcolor = "#FFFFFF"; } else { $bgcolor = $bg1; }
+    if ($bgcolor == $bg1) {   } else { $bgcolor = $bg1; }
   } while ($myrow = mysqli_fetch_array($result));
   echo "</table>";
 } else {}

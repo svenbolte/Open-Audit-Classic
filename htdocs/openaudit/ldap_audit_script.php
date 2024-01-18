@@ -29,7 +29,7 @@ Change Control:
 include "include_config.php";
 include "include_lang.php";
 include "include_functions.php";
-include "include_col_scheme.php";
+
 
 // May need to ask admin to define AD environment size to ensure correct memory setting ?
 // $ad_sizing=1; /* Up to 100 accounts - 8MB */

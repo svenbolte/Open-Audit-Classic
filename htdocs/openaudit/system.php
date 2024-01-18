@@ -59,7 +59,7 @@ echo "<td style=\"vertical-align:top;width:100%\">\n";
  
           
 
-      echo "<table width=\"100%\" border=\"0\" style=\"height: 30px\"><tr><td class=\"contenthead\">\n";
+      echo "<table class=\"tftable\"  width=\"100%\" border=\"0\" style=\"height: 30px\"><tr><td class=\"contenthead\">\n";
          //Is the headline a sql-query?
          if(isset($query_array["name"]) AND is_array($query_array["name"])){
              echo htmlspecialchars($query_array["name"]["name"]);
@@ -109,7 +109,7 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
     $this_page_count = mysqli_num_rows($result);
 
 
-        echo "<table border=\"0\" style=\"height: 70px\">\n";
+        echo "<table class=\"tftable\"  border=\"0\" style=\"height: 70px\">\n";
          echo "<tr>\n";
           //Image
           if(isset($viewdef_array["image"]) AND $viewdef_array["image"]!=""){
@@ -163,7 +163,7 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
         echo "  <input type=\"hidden\" name=\"user\" value=\"".$_REQUEST["user"]."\" />";
     }
     echo "</p>\n";
-    echo "<table   width=\"100%\">\n";
+    echo "<table class=\"tftable\"    width=\"100%\">\n";
 
     //IF Horizontal Table-Layout
     if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){
@@ -177,7 +177,6 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
     }
 
     //Reset Background
-    $bgcolor=$bg2;
     if ($myrow = mysqli_fetch_array($result)){
         do{
             //Convert the array-values to local variables
@@ -187,7 +186,7 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
 
             //IF Horizontal Table-Layout
             if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){
-                $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+                // tabellierung über tftable css
                 echo "<tr>\n";
             }
 
@@ -221,12 +220,12 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
                     //IF Horizontal Table-Layout
                     if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){
                         if(!isset($field["align"])) $field["align"]="left";
-                        echo "<td style=\"background-color:" . $bgcolor . ";\" align=\"".$field["align"]."\" class=\"system_tablebody_left\" >\n";
+                        echo "<td align=\"".$field["align"]."\" class=\"system_tablebody_left\" >\n";
                          echo $show_value;
                         echo "</td>\n";
                     }else{
-                        $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-                        echo "<tr style=\"background-color:" . $bgcolor . ";\" >\n";
+                        // tabellierung über tftable css
+                        echo "<tr>\n";
                          if (!isset($field["align"])) { $field["align"] = "left"; }
                          echo "<td align=\"".$field["align"]."\" class=\"system_tablebody_left\" >";
                            echo $field["head"];
@@ -374,7 +373,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
 				
             //Links to Manufacturer
             if(isset($myrow["system_vendor"]) AND $myrow["system_vendor"]!="" AND ($viewname=="summary" OR $viewname=="chassis")){
-                $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+                // tabellierung über tftable css
                 echo "<tr style=\"background-color:" . $bgcolor . ";\" >\n";
                  echo "<td>\n";
                   echo __("Links to Manufacturer");
@@ -426,8 +425,8 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
 					 
                  echo "</td>\n";
                         //
-                $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-                echo "<tr style=\"background-color:" . $bgcolor . ";\" >\n";
+                // tabellierung über tftable css
+                echo "<tr>\n";
                  echo "<td>\n";
                   echo __("What does it look like");
                   echo ": &nbsp;";
@@ -442,12 +441,12 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
             }
             //IF Horizontal Table-Layout
             if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){}else{
-                $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+                // tabellierung über tftable css
                 echo "<tr style=\"background-color:$bgcolor;\"><td class=\"system_tablebody_right\" colspan=\"2\">&nbsp;</td></tr>\n";
             }
         }while ($myrow = mysqli_fetch_array($result));
     } else {
-        echo "<tr style=\"bgcolor:$bg1;\">\n";
+        echo "<tr>\n";
          echo "<td style=\"padding-right:10px;\" colspan=\"20\">";
           echo __("No Results");
          echo "</td>\n";
@@ -486,8 +485,8 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
 
     //IF Horizontal Table-Layout
     if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){
-        $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-        echo "<tr style=\"background-color:$bgcolor\"><td class=\"system_tablebody_right\" colspan=\"10\">&nbsp;</td></tr>\n";
+        // tabellierung über tftable css
+        echo "<tr><td class=\"system_tablebody_right\" colspan=\"10\">&nbsp;</td></tr>\n";
     }
 
     echo "</table>";

@@ -82,7 +82,7 @@ function step1ChooseLanguage() {
   <span class="contenthead"><?php __("Setup") ?></span>
   <p><?php echo __("Welcome to the setup for Open-AudIT!") ?></p>
   <form method="post" action="setup.php" name="admin_config">
-  <table border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr>
     <td><?php echo __("Choose your language:") ?></td>
     <td><select size="1" name="language_post" class="for_forms">
@@ -183,12 +183,12 @@ function step31SetupDB() {
  
   <form method="post" action="setup.php" name="admin_config">
   
-      <table border="0" cellpadding="0" cellspacing="0" class="content">
+      <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><input type="radio" name="rootacc_database" value="y" checked="checked" /></td><td><?php echo __("I have Root access to database.") ?></td></tr>
   <tr><td>&nbsp;</td><td><?php echo __("CAUTION: you have to have root access to this database.") ?></td></tr>
   </table>
   <hr />
-  <table border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><input type="radio" name="rootacc_database" value="n"   /></td><td><?php echo __("I do not have root access to database. Just create tables.") ?></td></tr>
   <tr><td>&nbsp;</td><td><?php echo __("Recommended for on-line hosting.") ?></td></tr>
   </table>
@@ -217,36 +217,36 @@ function step33SetupDB() {
 
   echo "<form method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\" name=\"setup.php\">";
  ?>
- <table border="0" cellpadding="0" cellspacing="0" class="content">
+ <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><?php echo __("MySQL Server") ?>:&nbsp;</td><td><input type="text" name="mysqli_server_post" size="12" value="localhost" class="for_forms"/></td></tr>
   <tr><td><?php echo __("MySQL Username") ?>:&nbsp;</td><td><input type="text" name="mysqli_user_post" size="12" value="root" class="for_forms" /></td></tr>
   <tr><td><?php echo __("MySQL Password") ?>:&nbsp;</td><td><input type="password" name="mysqli_password_post" size="12" value="flocke" class="for_forms" /></td></tr>
   </table>
   <hr />
   <?php echo __("Database for Open-AudIT") ?>:<br />
-  <table border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><?php echo __("Database Name") ?>:&nbsp;</td><td><input type="text" name="mysqli_new_db" size="12" value="openaudit" class="for_forms" /></td></tr>
   </table>
   
-   <table border="0" cellpadding="0" cellspacing="0" class="content">
+   <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><input type="checkbox" name="drop_database" value="n"  /></td><td><?php echo __("Delete database if it exists.") ?></td></tr>
   <tr><td>&nbsp;</td><td><?php echo __("CAUTION: This will delete ALL data in this database.") ?></td></tr>
   </table>
   <hr />
   <?php echo __("Credentials for Open-AudIT database") ?>:<br />
-  <table border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><?php echo __("New Username") ?>:&nbsp;</td><td><input type="text" name="mysqli_new_user" maxlength="16" size="12" value="openaudit" class="for_forms" /></td></tr>
    
 
   <tr><td><?php echo __("New Password") ?>:&nbsp;</td><td><input type="password" name="mysqli_new_pass" size="12" value="flocke" class="for_forms" /></td></tr>
   </table>
 
-  <table border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><input type="checkbox" name="drop_user" value="n"  /></td><td><?php echo __("Delete user if it exists.") ?></td></tr>
   <tr><td>&nbsp;</td><td><?php echo __("CAUTION: This will also remove all permissions for this user.") ?></td></tr>
   </table>
 
-<table border="0" cellpadding="0" cellspacing="0" class="content">
+<table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><input type="checkbox" name="bindlocal" value="y" checked="checked" /></td><td><?php echo __("Bind user to localhost.") ?></td></tr>
   <tr><td>&nbsp;</td><td><?php echo __("This option will allow this user to only connect from the localhost. It is recommended that you leave this checked unless your MySQL server is not on the same server as your web server.") ?></td></tr>
   </table>
@@ -275,14 +275,14 @@ function step34SetupDB() {
 
   echo "<form method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\" name=\"setup.php\">";
  ?>
- <table border="0" cellpadding="0" cellspacing="0" class="content">
+ <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><?php echo __("MySQL Server") ?>:&nbsp;</td><td><input type="text" name="mysqli_server_post" size="12" value="localhost" class="for_forms"/></td></tr>
   <tr><td><?php echo __("MySQL Username") ?>:&nbsp;</td><td><input type="text" name="mysqli_new_user" size="12" value="root" class="for_forms" /></td></tr>
   <tr><td><?php echo __("MySQL Password") ?>:&nbsp;</td><td><input type="password" name="mysqli_new_pass" size="12" value="" class="for_forms" /></td></tr>
   </table>
   <hr />
   <?php echo __("Database for Open-AudIT") ?>:<br />
-  <table border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
   <tr><td><?php echo __("Database Name") ?>:&nbsp;</td><td><input type="text" name="mysqli_new_db" size="12" value="openaudit" class="for_forms" /></td></tr>
   </table>
   

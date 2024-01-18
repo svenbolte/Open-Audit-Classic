@@ -39,7 +39,7 @@ $db=GetOpenAuditDbConnection() or die('Could not connect: ' . mysqli_error($db))
   $sql  = "SELECT system_name, net_ip_address, system_uuid, system_first_timestamp FROM system ";
   $sql .= "WHERE system_first_timestamp > '" . adjustdate(0,0,-$system_detected) . "000000' ORDER BY system_name";
   $result = mysqli_query($db,$sql);
-  $bgcolor = "#FFFFFF";
+   
 
 
    echo  '<rss version="2.0">'."\n";

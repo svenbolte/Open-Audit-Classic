@@ -5,7 +5,7 @@ include "include.php";
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table   width=\"100%\">\n";
+echo "<table class=\"tftable\"    width=\"100%\">\n";
 echo "<tr><td class=\"contenthead\" colspan=\"4\">".__("Partition Usage for") ." ". $myrow["net_ip_address"] . " - " . $myrow["system_name"] . "</td></tr>";
 $disk_letter_old = "";
 $sql = "SELECT * FROM graphs_disk WHERE disk_uuid = '$pc' ORDER BY disk_letter, disk_timestamp";

@@ -81,7 +81,7 @@ echo __(' LDAP details for '). $info[0][$image_link_ldap_attribute][0]." [".$lda
 	<hr />
 </div>
 <!-- LDAP details table -->
-<table>
+<table class=\"tftable\" >
 <tr><th><?php echo __("Attribute");?></th><th><?php echo __("Value");?></th></tr>
 
 <?php

@@ -82,10 +82,10 @@ if ($bd){
 } else {
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
-     	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
+        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+     	
         echo "<p>"; 
-        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
 }
 
 
@@ -97,10 +97,10 @@ if ($bd){
 } else {
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
-     	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
+        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+     	
         echo "<p>"; 
-        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
 }
 
 
@@ -119,7 +119,7 @@ $entries = ldap_get_entries($ad, $result);
 echo "<div class=\"main_each\">\n";
 
 echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
 
 $num_found = $entries["count"];
 
@@ -128,10 +128,10 @@ if ($num_found == 0 ){
 
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
-     	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
+        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+     	
         echo "<p>"; 
-        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("Not found in ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr><td><b>".__("Not found in ".$ldap_base_dn.".")."</b></td></tr>";
 
 } else {
 
@@ -139,34 +139,24 @@ for ($computer_record_number = 0; $computer_record_number<$num_found; $computer_
 //echo "Next User:<br>";
 
 $record_number = $computer_record_number+1;
-//      echo "<tr><td colspan=\"2\"><hr /></td></tr>\n";
-
-//      echo "<td><img src='images/users_l.png' width='64' height='64' alt='' />".__("Details Like <b>".$name."</b></td><td>")." $record_number of $num_found </td>";
       echo "<td><img src='images/users_l.png' width='64' height='64' alt='' />";
-
-//      echo "<td><img src='images/o_terminal_server.png' width='64' height='64' alt='' />";
-    	$bgcolor == "#FFFFFF";	
-//      if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-	  echo "<tr style=\"background-color:".$bgcolor."\"><td><h3>" . $entries[$computer_record_number]["name"][0] . "</h3></td><td></td></tr>";
-      if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-//	  echo "<tr style=\"background-color:".$bgcolor."\"><td><b>Telephone:</td><td>" . $entries[$computer_record_number]["telephonenumber"][0] . "</a></b></td></tr>";	
-	  if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
- 	  echo "<tr style=\"background-color:".$bgcolor."\"><td>" .__("Full Account Details"). "</td><td></td></tr>";      
+	  echo "<tr><td><h3>" . $entries[$computer_record_number]["name"][0] . "</h3></td><td></td></tr>";
+ 	  echo "<tr><td>" .__("Full Account Details"). "</td><td></td></tr>";      
       for ($computer_record_field_number=0; $computer_record_field_number<$entries[$computer_record_number]["count"]; $computer_record_field_number++){
       $data =$entries[$computer_record_number][$computer_record_field_number];
 
       for ($computer_record_field_number_data=0; $computer_record_field_number_data<$entries[$computer_record_number][$data]["count"]; $computer_record_field_number_data++) {
       if  (isEmailAddress($entries[$computer_record_number][$data][$computer_record_field_number_data])){
           // If its a valid email address, highlight it, and add a URL mailto:
-      if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }	
-     echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__($data).":</b></td><td><a href='mailto:" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "'>" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "</a></td></tr>";
+      	
+     echo "<tr><td><b>".__($data).":</b></td><td><a href='mailto:" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "'>" . $entries[$computer_record_number][$data][$computer_record_field_number_data] . "</a></td></tr>";
      }
      else 
      {
             // Else just show it. 
-      	  if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
-          echo "<tr style=\"background-color:".$bgcolor."\"><td>".__($data).":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
-//         echo "<tr style=\"background-color:".$bgcolor."\"><td>".$data.":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
+      	  
+          echo "<tr><td>".__($data).":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
+//         echo "<tr><td>".$data.":</td><td>" .$entries[$computer_record_number][$data][$computer_record_field_number_data]. "</td></tr>";
 
 }    
      }
@@ -183,10 +173,10 @@ $record_number = $computer_record_number+1;
 
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
-     	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
+        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+     	
         echo "<p>"; 
-        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("LDAP Not configured. Please set this up in Admin> Config")."</b></td></tr>";
+        echo "<tr><td><b>".__("LDAP Not configured. Please set this up in Admin> Config")."</b></td></tr>";
 
 
 //        echo "<tr>".__("LDAP Not configured. Please set this up in Admin> Config")."</tr>";
@@ -195,10 +185,10 @@ $record_number = $computer_record_number+1;
 } else {
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
-     	if ($bgcolor == "#F1F1F1") { $bgcolor = "#FFFFFF"; } else { $bgcolor = "#F1F1F1"; }
+        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+     	
         echo "<p>"; 
-        echo "<tr style=\"background-color:".$bgcolor."\"><td><b>".__("Bind failure attempting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
+        echo "<tr><td><b>".__("Bind failure attempting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
 }
 
 echo "</table>";

@@ -26,7 +26,7 @@ $outfile = dirname(__DIR__, 1).'\openaudit\scripts\pc_list_file.txt';
 	
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+echo "<table class=\"tftable\"  width=\"100%\"><tr><td class=\"contenthead\">\n";
 echo 'Openaudit IP-Liste erzeugen</td></tr><tr><td>';
 
 $trimmed = implode(".", array_slice(explode(".", $ip), 0, 3)).'.0/24';
@@ -213,7 +213,7 @@ Netzwerkmaske:	<select name="in_ip_netmask" id="in_ip_netmask" onchange="update_
 </form>
 <figure class="wp-block-table table table-responsive table-striped table-condensed">
 <style>.tftable td {padding:8px}</style>
-<table class="tftable" style="padding:8px;font-size:1.2em">
+<table class=\"tftable\"  class="tftable" style="padding:8px;font-size:1.2em">
 <tbody>
 <tr>
 <th></th>

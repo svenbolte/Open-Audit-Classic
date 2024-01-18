@@ -308,7 +308,7 @@
       <br />
       <br />
       <center>
-      <table id="mysqli_query_options">
+      <table class=\"tftable\"  id="mysqli_query_options">
         <?php Get_mysqli_Queries($db,$id); ?>
       </table>
       </center>

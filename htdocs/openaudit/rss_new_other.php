@@ -40,7 +40,7 @@ $db=GetOpenAuditDbConnection() or die('Could not connect: ' . mysqli_error($db))
   $sql .= "other_first_timestamp > '" . adjustdate(0,0,-$other_detected) . "000000') ORDER BY other_ip_address";
   $result = mysqli_query($db,$sql);
 
-  $bgcolor = "#FFFFFF";
+   
 
   echo  '<rss version="2.0">'."\n";
    echo '<channel>'."\n";

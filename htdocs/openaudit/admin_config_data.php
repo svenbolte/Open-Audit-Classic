@@ -28,7 +28,7 @@ include "application_class.php";
 include "include_config.php";
 include "include_lang.php";
 include "include_functions.php";
-include "include_col_scheme.php";
+
 error_reporting(0);
 
 // Set up SQL connection 
@@ -77,7 +77,7 @@ function GetLdapConnectionsHtml($db)
 	$result = mysqli_query($db,$sql);
 	
 	// Display results table
-	$response = "<table>";
+	$response = "<table class=\"tftable\" >";
 	$response .= "<tr><th>LDAP Connections</th><th>LDAP Paths</th></tr>";
 	if ($myrow = mysqli_fetch_array($result))
 	{
@@ -720,7 +720,7 @@ function GetSmtpConnectionHtml($db)
 	$result = mysqli_query($db,$sql);
 	
 	// Display results table
-	$response = "<table>";
+	$response = "<table class=\"tftable\" >";
 	$response .= "<tr><th>SMTP Connection</th><th><center>SMTP Port</center></th> <th><center>Authentication</center></th><th><center>SSL Enabled</center></th></tr>";
 	if ($myrow = mysqli_fetch_array($result))
 	{

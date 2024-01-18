@@ -176,7 +176,7 @@
 
     $sql = "SELECT system_uuid, net_ip_address, system_name, net_domain, system_os_name, system_system_type, system_timestamp FROM system ORDER BY system_name ";
     $result = mysqli_query($db,$sql);
-    $bgcolor = "#FFFFFF";
+     
     echo "<td style=\"vertical-align:top;width:100%\">
           <div class=\"main_each\">";
 
@@ -200,20 +200,20 @@
               }
             </script>
      
-              <table width=\"100%\">
+              <table class=\"tftable\"  width=\"100%\">
                 <tr>
                    <td class=\"contenthead\">".__("Delete Systems")."<br />&nbsp;</td>
                 </tr>
               </table>
              
-              <table   width=\"100%\">
+              <table class=\"tftable\"    width=\"100%\">
                 <tr>
                    <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected systems\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
                    <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
                 </tr>
               </table>
 
-              <table class=\"tftable\" width=\"100%\">
+              <table class=\"tftable\"  class=\"tftable\" width=\"100%\">
                 <tr>&nbsp;</tr>
                 <tr>
                    <td></td>
@@ -225,8 +225,8 @@
                    <td class=\"contentsubtitle\">".__("Date Audited")."</td>
                 </tr>\n";
       do {
-          $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-          echo "<tr style=\"bgcolor:" . $bgcolor . ";\">
+          // tabellierung über tftable css
+          echo "<tr  >
                    <td width=\"5%\"><input type=\"checkbox\" name=\"" . $myrow["system_uuid"] . "\" id=\"" . $myrow["system_uuid"] . "\" value=\"" . $myrow["system_uuid"] . "\"></td>
                    <td><a href=\"system.php?pc=".$myrow["system_uuid"]."&amp;view=summary\">" . ip_trans($myrow["net_ip_address"]) . "</a></td>
                    <td><a href=\"system.php?pc=".$myrow["system_uuid"]."&amp;view=summary\">" . $myrow["system_name"] . "</a></td>

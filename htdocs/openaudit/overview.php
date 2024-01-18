@@ -35,7 +35,7 @@ foreach($query_array as $view_master) {
                 if(isset($view["headline"])){
                     $body .= $view["headline"];
                 }
-                $body .= "<table   width=\"100%\">\n";
+                $body .= "<table class=\"tftable\"    width=\"100%\">\n";
                 $body .= " <tr>\n";
 
                 $colgroup = "<colgroup>\n";
@@ -64,7 +64,7 @@ foreach($query_array as $view_master) {
                         $$key=$val;
                     }
 
-                    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+                    // tabellierung über tftable css
                     $body .= " <tr>\n";
                     foreach($view["fields"] as $field) {
 
@@ -148,7 +148,7 @@ foreach($query_array as $view_master) {
                             }
 
                             if(!isset($field["align"])) $field["align"]=" ";
-                            $body .= " <td bgcolor=\"" . $bgcolor . "\" style=\"padding-right:10px;\" align=\"".$field["align"]."\">\n";
+                            $body .= " <td style=\"padding-right:10px;\" align=\"".$field["align"]."\">\n";
                              if(isset($field["link"]) AND $field["link"]=="y"){
                                  if(!isset($get_array["target"])) $get_array["target"]="_TOP";
                                  if(!isset($get_array["title"])) $get_array["title"]=" ";
@@ -162,15 +162,15 @@ foreach($query_array as $view_master) {
                             $body .= " </td>\n";
                         }
                     }
-                    $body .= " <td style=\"background-color:" . $bgcolor . "\">&nbsp;</td>\n";
+                    $body .= " <td  >&nbsp;</td>\n";
                     $body .= " </tr>\n";
 
                 }while ($myrow = mysqli_fetch_array($result));
 
-                $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+                // tabellierung über tftable css
                 if(!isset($field_align)) $field_align=" ";
                 $body .= "<tr>\n";
-                 $body .= "<td bgcolor=\"" . $bgcolor . "\" $field_align style=\"padding-right:10px;\" colspan=\"10\">\n";
+                 $body .= "<td $field_align style=\"padding-right:10px;\" colspan=\"10\">\n";
                   $body .= "&nbsp;";
                  $body .= "</td>\n";
                 $body .= "</tr>\n";
@@ -183,7 +183,7 @@ foreach($query_array as $view_master) {
     //Headline
     $buffer = "<div class=\"main_each\">";
 
-    $buffer .= "<table   width=\"100%\" >\n";
+    $buffer .= "<table class=\"tftable\"    width=\"100%\" >\n";
      $buffer .= "<tr\n>";
       $buffer .= "<td class=\"contenthead\" width=\"450\">\n";
        $buffer .= "<a href=\"javascript://\" onclick=\"switchUl('f".$view_count."');\">\n";

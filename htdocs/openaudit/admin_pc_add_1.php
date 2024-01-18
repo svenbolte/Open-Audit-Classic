@@ -4,11 +4,11 @@ include "include.php";
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table width=\"100%\"><tr><td class=\"contenthead\">\n";
+echo "<table class=\"tftable\"  width=\"100%\"><tr><td class=\"contenthead\">\n";
 echo __("Add a PC") . '</td></tr><tr><td>';
 
 echo "<form action=\"admin_pc_add_2.php\" method=\"post\">\n";
-echo "<table>\n";
+echo "<table class=\"tftable\" >\n";
 //echo "<tr><td>System Name:&nbsp;</td><td><input type=\"text\" name=\"systemname\" size=\"30\" /></td></tr>\n";
 //echo "<tr><td>Status:&nbsp;</td><td><input type=\"text\" name=\"comment\" size=\"30\" /></td></tr>\n";
 //echo "<tr><td>UserName:&nbsp;</td><td><input type=\"text\" name=\"user_name\" size=\"30\" /></td></tr>\n";

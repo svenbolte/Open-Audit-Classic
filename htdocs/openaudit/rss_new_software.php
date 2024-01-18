@@ -38,7 +38,7 @@ $db=GetOpenAuditDbConnection() or die('Could not connect: ' . mysqli_error($db))
       $sql .= "AND sw.software_timestamp = sys.system_timestamp ";
       $sql .= "AND sw.software_uuid = sys.system_uuid ";
       $result = mysqli_query($db,$sql);
-      $bgcolor = "#FFFFFF";
+       
 
    echo  '<rss version="2.0">'."\n";
    echo '<channel>'."\n";

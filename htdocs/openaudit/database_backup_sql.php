@@ -23,14 +23,14 @@ $time_start = microtime_float();
 
 $newline = "\r\n";
 $page = "database_backup_sql.php";
-$bgcolor = "#FFFFFF";
+ 
 // This is a bit crude... FIXME I need to find a more interactive method for this, rather than just leaving the script for 10 mins, and then timing out if no result.
 set_time_limit(600);
 $backup = '';
 
 echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
-echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
+echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
 echo "  <tr><td class=\"contenthead\">".__("Backing up the Database")."</td></tr>";
 echo "  <tr><td colspan=\"3\">&nbsp;</td></tr>";
 echo "<tr>";
@@ -92,11 +92,11 @@ while($tabs = mysqli_fetch_row($tables)):
 
     $table_len=strlen($backup)-$file_len;
     $file_len=strlen($backup);
-    echo "<tr style=\"background-color:".$bgcolor."\">
+    echo "<tr>
            <td>$tabs[0]</td><td>".$table_len." ".__("Bytes")."</td>
            <td align=\"center\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>
           </tr>";
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+   // tabellierung über tftable css
    while($all = mysqli_fetch_assoc($res)):
        $str = str_replace("CREATE TABLE `$tabs[0]` (", "", $all['Create Table']);
        $str = str_replace(",", ", ".$newline."", $str);
@@ -126,48 +126,48 @@ echo "  <tr><td colspan=\"3\"><hr /></td></tr>\n";
 
 if (is_writable($backup_filename)) {
 
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+   // tabellierung über tftable css
    if (!$handle = fopen($backup_filename, 'w+')) {
-         echo "<tr><td colspan=\"3\" style=\"background-color:" . $bgcolor . "\">".__("Could not open file (").$backup_filename.")</td></tr>\n";
+         echo "<tr><td colspan=\"3\"  >".__("Could not open file (").$backup_filename.")</td></tr>\n";
          exit;
    }else{
        echo "<tr>\n";
-        echo "<td style=\"background-color:" . $bgcolor . "\">".__("Create File")." '".$backup_filename."'</td>\n";
-        echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
-        echo "<td align=\"center\" style=\"background-color:" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
+        echo "<td  >".__("Create File")." '".$backup_filename."'</td>\n";
+        echo "<td  ></td>\n";
+        echo "<td align=\"center\"  ><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
        echo "</tr>\n";
    }
 
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+   // tabellierung über tftable css
    // Write $somecontent to our opened file.
    if (fwrite($handle, $backup) === FALSE) {
-       echo "<tr><td colspan=\"3\" style=\"background-color:" . $bgcolor . "\">".__("Could not write to file (").$backup_filename.")</td></tr>\n";
+       echo "<tr><td colspan=\"3\"  >".__("Could not write to file (").$backup_filename.")</td></tr>\n";
        exit;
    }else{
        echo "<tr>\n";
-        echo "<td style=\"background-color:" . $bgcolor . "\">".__("Write File")." '".$backup_filename."'</td>\n";
-        echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
-        echo "<td align=\"center\" style=\"background-color:" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
+        echo "<td  >".__("Write File")." '".$backup_filename."'</td>\n";
+        echo "<td  ></td>\n";
+        echo "<td align=\"center\"  ><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
        echo "</tr>\n";
    }
    $database_length = strlen($backup);
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+   // tabellierung über tftable css
 
    echo "<tr>\n";
-    echo "<td style=\"background-color:" . $bgcolor . "\">".__("Success, wrote ").$database_length." ".__("bytes to file")."</td>\n";
-    echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
-    echo "<td align=\"center\" style=\"background-color:" . $bgcolor . "\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
+    echo "<td  >".__("Success, wrote ").$database_length." ".__("bytes to file")."</td>\n";
+    echo "<td  ></td>\n";
+    echo "<td align=\"center\"  ><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
    echo "</tr>\n";
 
    fclose($handle);
 
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-   echo "<tr style=\"background-color:".$bgcolor."\"><td colspan=\"3\">&nbsp;</td></tr>\n";
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-   echo "<tr style=\"background-color:".$bgcolor."\"><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>\n";
+   // tabellierung über tftable css
+   echo "<tr><td colspan=\"3\">&nbsp;</td></tr>\n";
+   // tabellierung über tftable css
+   echo "<tr><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>\n";
    echo "<tr>";
     echo "<td>".__("Database Backed up in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").". </td>\n";
-    echo "<td style=\"background-color:" . $bgcolor . "\"></td>\n";
+    echo "<td  ></td>\n";
     echo "<td align=\"center\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
    echo "</tr>\n";
 } else {

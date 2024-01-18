@@ -17,7 +17,7 @@ $backup_name = $_GET['backup_name'];
   //echo __("If you are not sure how to complete this tasks, please check the")." <a href=\"http://www.open-audit.org/phpbb2/\">".__("Forums")."</a> ".__("in the FAQ section").".<br />\n";
   //echo "</p>\n";
   echo "        <form name=\"setup\" action=\"database_restore_sql.php\" method=\"post\" >\n";
-  echo "        <table   width=\"100%\">\n";
+  echo "        <table class=\"tftable\"    width=\"100%\">\n";
   echo "          <tr>\n";
   echo "            <td class=\"contenthead\" colspan=\"2\">".__("Restore Database")."</td>\n";
   echo "          </tr>\n";
@@ -41,7 +41,7 @@ $backup_name = $_GET['backup_name'];
 $backup_name = $_POST['backup_name'];
 $filename = "./backup/".$backup_name.".sql";
 
-  echo "        <table   width=\"100%\">\n";
+  echo "        <table class=\"tftable\"    width=\"100%\">\n";
 
   echo "  <tr><td class=\"contenthead\">".__("Restoring the Database")."</td></tr>";
 

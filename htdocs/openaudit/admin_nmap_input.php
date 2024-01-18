@@ -327,7 +327,7 @@ if (isset($_POST["submit"])){
   else {
 
   echo "<form action=\"admin_nmap_input.php\" method=\"post\">\n";
-  echo "<table>\n";
+  echo "<table class=\"tftable\" >\n";
   echo "<tr><td colspan=\"2\"><textarea rows=\"20\" name=\"add\" cols=\"90\" class=\"for_forms\"></textarea></td></tr>\n";
   echo "<tr><td colspan=\"2\"><input name=\"submit\" value=\"".__("Save")."\" type=\"submit\" /></td></tr>\n";
   echo "</table>\n";

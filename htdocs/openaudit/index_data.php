@@ -19,7 +19,7 @@ set_time_limit(60);
 include "include_config.php";
 include "include_lang.php";
 include "include_functions.php";
-include "include_col_scheme.php";
+
 
 // Set up SQL connection 
 $db=GetOpenAuditDbConnection();;
@@ -54,7 +54,7 @@ function GetLdapInfo($id)
 	$tr_class='npb_highlight_row';
 	
 	echo "<div class='npb_content_data' id='".$id."' style='display: none;'>";	
-	echo "<table>";
+	echo "<table class=\"tftable\" >";
 
 	$sql ="
 	SELECT * FROM (
@@ -237,7 +237,7 @@ function GetDiscoveredSystemsData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";
@@ -277,7 +277,7 @@ function GetOtherDiscoveredData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";
@@ -341,7 +341,7 @@ function GetSystemsNotAuditedData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";
@@ -384,7 +384,7 @@ function GetPartitionUsageData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";
@@ -441,7 +441,7 @@ function GetDetectedSoftwareData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";
@@ -500,7 +500,7 @@ function GetWebServersAsService(&$total, &$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{	
 		echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -537,7 +537,7 @@ function GetWebServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
     echo "	<th>".__("IP Address")."</th>";
     echo "  <th>".__("Hostname")."</th>";
@@ -578,7 +578,7 @@ function GetWebServersNmapAsOtherSystem(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -636,7 +636,7 @@ function GetFtpServersAsService(&$total, &$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
 		echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -672,7 +672,7 @@ function GetFtpServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
     echo "	<th>".__("IP Address")."</th>";
     echo "	<th>".__("Hostname")."</th>";
@@ -711,7 +711,7 @@ function GetFtpServersNmapAsOtherSystem(&$total, &$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -767,7 +767,7 @@ function GetTelnetServersAsService(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -803,7 +803,7 @@ function GetTelnetServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -841,7 +841,7 @@ function GetTelnetServersNmapAsOtherSystem(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -897,7 +897,7 @@ function GetEmailServersAsService(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -933,7 +933,7 @@ function GetEmailServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -971,7 +971,7 @@ function GetEmailServersNmapAsOtherSystem(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";	
+		echo "<table class=\"tftable\" >";	
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1026,7 +1026,7 @@ function GetVncServersAsService(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
 		echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1063,7 +1063,7 @@ function GetVncServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1102,7 +1102,7 @@ function GetVncServersNmapAsOtherSystem(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1157,7 +1157,7 @@ function GetRdpServersAsService(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
 		echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1193,7 +1193,7 @@ function GetRdpServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1231,7 +1231,7 @@ function GetRdpServersNmapAsOtherSystem(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1287,7 +1287,7 @@ function GetDbServersAsService(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
 		echo "<p>".__("Windows")." ".__("Services")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 		echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1323,7 +1323,7 @@ function GetDbServersNmapAsAuditedSystem(&$total,&$tr_class)
   if ($myrow = mysqli_fetch_array($result))
 	{
   	echo "<p>".__("Nmap discovered on Audited PC")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1361,7 +1361,7 @@ function GetDbServersNmapAsOtherSystem(&$total,&$tr_class)
 	if ($myrow = mysqli_fetch_array($result))
 	{
     echo "<p>".__("Nmap discovered on Other equipment")."</p>";
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
     echo "<tr>";
 		echo "	<th>".__("IP Address")."</th>";
 		echo "	<th>".__("Hostname")."</th>";
@@ -1401,7 +1401,7 @@ function GetDetectedXpAvData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";
@@ -1446,7 +1446,7 @@ function GetHardDisksAlertsData($id)
 	
 	if ($myrow = mysqli_fetch_array($result))
 	{
-		echo "<table>";
+		echo "<table class=\"tftable\" >";
 	  echo "  <tr>";
 		echo "		<th>".__("IP Address")."</td>";
 		echo "  	<th>".__("Hostname")."</td>";

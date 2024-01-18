@@ -20,12 +20,12 @@ $page_next = $page_count + 1;
 $page_current = $page_count;
 $page_count = $page_count * $count_system;
 
-echo "<table   width=\"100%\">\n";
+echo "<table class=\"tftable\"    width=\"100%\">\n";
 echo " <tr>\n  <td align=\"left\" class=\"contenthead\" >".__("System Search Results")."<br />&nbsp;</td>\n";
 //include "include_list_buttons.php";
 echo " </tr>\n</table>\n";
 
-echo "<table   width=\"100%\">";
+echo "<table class=\"tftable\"    width=\"100%\">";
 echo "<tr>\n";
 echo "  <td width=\"150\"><b>&nbsp;".__("IP Address")."</b></td>\n";
 echo "  <td width=\"130\"><b>&nbsp;".__("Hostname")."</b></td>\n";
@@ -66,7 +66,7 @@ if ($search != "") {
         if (strpos(strtoupper($myrow["bios_manufacturer"]), $search) !== false){$search_field = "Bios Manufacturer"; $search_result = $myrow["bios_manufacturer"];}
         if (strpos(strtoupper($myrow["bios_serial_number"]), $search) !== false){$search_field = "Bios Serial"; $search_result = $myrow["bios_serial_number"];}
         if (strpos(strtoupper($myrow["bios_asset_tag"]), $search) !== false){$search_field = "Asset Tag"; $search_result = $myrow["bios_asset_tag"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -115,7 +115,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if (strpos(strtoupper($myrow["system_serial_number"]), $search) !== false){$search_field = "Serial Number"; $search_result = $myrow["system_serial_number"];}
     if (strpos(strtoupper($myrow["system_version"]), $search) !== false){$search_field = "System Version"; $search_result = $myrow["system_version"];}
     if (strpos(strtoupper($myrow["system_windows_directory"]), $search) !== false){$search_field = "Windows Directory"; $search_result = $myrow["system_windows_directory"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -148,7 +148,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if (strpos(strtoupper($myrow["monitor_manufacturer"]), $search) !== false){$search_field = "Monitor Manufacturer"; $search_result = $myrow["monitor_manufacturer"];}
     if (strpos(strtoupper($myrow["monitor_model"]), $search) !== false){$search_field = "Monitor Model"; $search_result = $myrow["monitor_model"];}
     if (strpos(strtoupper($myrow["monitor_serial"]), $search) !== false){$search_field = "Monitor Serial"; $search_result = $myrow["monitor_serial"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -174,7 +174,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if (strpos(strtoupper($myrow["software_publisher"]), $search) !== false){$search_field = "Software Publisher"; $search_result = $myrow["software_publisher"] . " - " . $myrow["software_name"];}
     if (strpos(strtoupper($myrow["software_name"]), $search) !== false){$search_field = "Software Name"; $search_result = $myrow["software_name"];}
     if (strpos(strtoupper($myrow["software_version"]), $search) !== false){$search_field = "Software Version"; $search_result = $myrow["software_version"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -197,7 +197,7 @@ if ($myrow = mysqli_fetch_array($result)){
   do {
     if(!isset($myrow["software_name"])) $myrow["software_name"]=" ";
     if (strpos(strtoupper($myrow["usb_description"]), $search) !== false){$search_field = "USB Description"; $search_result = $myrow["usb_description"] . " - " . $myrow["software_name"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -222,7 +222,7 @@ if ($myrow = mysqli_fetch_array($result)){
   do {
     if(!isset($myrow["software_name"])) $myrow["software_name"]=" ";
     if (strpos(strtoupper($myrow["video_description"]), $search) !== false){$search_field = "Video Description"; $search_result = $myrow["video_description"] . " - " . $myrow["software_name"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -254,7 +254,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if (strpos(strtoupper($myrow["service_name"]), $search) !== false){$search_field = "Service Name"; $search_result = $myrow["service_name"];}
     if (strpos(strtoupper($myrow["service_display_name"]), $search) !== false){$search_field = "Service Full Name"; $search_result = $myrow["service_display_name"];}
     if (strpos(strtoupper($myrow["sd_description"]), $search) !== false){$search_field = "Service Description"; $search_result = $myrow["sd_description"]." [".__("Service Started")."=".$myrow["service_started"]."]";}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]),  $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -281,7 +281,7 @@ $result = mysqli_query($db,$sql);
         if (strpos(strtoupper($myrow["system_man_description"]), $search) !== false){$search_field = "Manual Description"; $search_result = $myrow["system_man_description"];}
         if (strpos(strtoupper($myrow["system_man_location"]), $search) !== false){$search_field = "Manual Location"; $search_result = $myrow["system_man_location"];}
         if (strpos(strtoupper($myrow["system_man_serial_number"]), $search) !== false){$search_field = "System Serial Number"; $search_result = $myrow["system_man_serial_number"];}
-        $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+        // tabellierung über tftable css
         $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
    } while ($myrow = mysqli_fetch_array($result));
 }
@@ -298,7 +298,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if (strpos(strtoupper($myrow["other_mac_address"]), $search) !== false){$search_field = "Device MAC Address"; $search_result = $myrow["other_mac_address"];}
     if (strpos(strtoupper($myrow["other_description"]), $search) !== false){$search_field = "Device Description"; $search_result = $myrow["other_description"];}
     if (strpos(strtoupper($myrow["other_manufacturer"]), $search) !== false){$search_field = "Device Manufacturer"; $search_result = $myrow["other_manufacturer"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["other_network_name"], $myrow["other_id"], ip_trans($myrow["other_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 
@@ -322,7 +322,7 @@ if ($myrow = mysqli_fetch_array($result)){
       {if (strpos(strtoupper($myrow["net_ip_address"]), $search_padded) !== false)
         {$search_field = "IP Address"; $search_result = ip_trans($myrow["net_ip_address"]);}
     }
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 
@@ -346,7 +346,7 @@ if ($myrow = mysqli_fetch_array($result)){
       {if (strpos(strtoupper($myrow["other_ip_address"]), $search_padded) !== false)
         {$search_field = "Device IP Address"; $search_result = ip_trans($myrow["other_ip_address"]);}
     }
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["other_network_name"], $myrow["other_id"], ip_trans($myrow["other_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 
@@ -382,7 +382,7 @@ if ($myrow = mysqli_fetch_array($result)){
     if (strpos(strtoupper($myrow["net_driver_version"]), $search) !== false){$search_field = "Network Driver Version"; $search_result = $myrow["net_driver_version"];}
     if (strpos(strtoupper($myrow["net_driver_date"]), $search) !== false){$search_field = "Network Driver Date"; $search_result = $myrow["net_driver_date"];}
   
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
  } else {} 
@@ -399,7 +399,7 @@ if ($myrow = mysqli_fetch_array($result)){
   do {
     if (strpos(strtoupper($myrow["motherboard_manufacturer"]), $search) !== false){$search_field = "Motherboard manufacturer"; $search_result = $myrow["motherboard_manufacturer"];}
     if (strpos(strtoupper($myrow["motherboard_product"]), $search) !== false){$search_field = "Motherboard Product"; $search_result = $myrow["motherboard_product"];}
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    // tabellierung über tftable css
     $result_set[] = array($myrow["system_name"], $myrow["system_uuid"], ip_trans($myrow["net_ip_address"]), $search_field, $search_result);
   } while ($myrow = mysqli_fetch_array($result));
 } else {}
@@ -412,9 +412,8 @@ if(isset($result_set) AND $result_set) {
   $count = count ($result_set);
   for ($i=0; $i<$count; $i++){
     $countmore=count($result_set[0]);
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-    echo '<tr style="background-color:'.$bgcolor.'">';
-    echo '<tr style="background-color:'.$bgcolor.'">';
+    // tabellierung über tftable css
+    echo '<tr>';
     echo "<td>&nbsp;" . $result_set[$i][2] . "&nbsp;</td>";
     $result_type = substr($result_set[$i][3],0,6);
     if ($result_type == "Device"){

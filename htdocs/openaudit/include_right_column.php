@@ -17,7 +17,7 @@
         $i=0;
         echo "<br />";
         echo "<a href=\"system.php?pc=$pc&amp;view=summary\">\n<b>" . $name . "</b></a>\n";
-        echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
+        echo "<table class=\"tftable\"  cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
         require_once("include_menu_array.php");
         reset ($menue_array["machine"]);
 		foreach($menue_array["machine"] as $key_1 => $topic_item) {

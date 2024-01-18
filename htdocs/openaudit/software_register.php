@@ -30,7 +30,7 @@ $sql .= "GROUP BY software_title";
 
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table   width=\"100%\">\n";
+  echo "<table class=\"tftable\"    width=\"100%\">\n";
   echo "<tr>\n";
   echo "  <td colspan=4 class=\"contenthead\">Software License Register - manage licenses</td>\n";
   echo "</tr>\n";
@@ -63,8 +63,8 @@ if ($myrow = mysqli_fetch_array($result)){
     if ($number_audit > "0") { $font = "<font color=\"green\">";}
       
     $count = $count + 1;
-    $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-	echo " <tr style=\"background-color:" . $bgcolor . ";\">\n";
+    // tabellierung über tftable css
+	echo '<tr>';
     echo "<td ><nobr>";
 
 	if (strpos($myrow["software_title"]," ")!=0) {$logobild = substr($myrow["software_title"],0,strpos($myrow["software_title"]," "));} else {$logobild=$myrow["software_title"];}

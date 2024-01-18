@@ -52,7 +52,7 @@ $db=GetOpenAuditDbConnection() or die('Could not connect: ' . mysqli_error($db))
   $sql .= "AND (hard_drive_status <> 'OK' OR hard_drive_predicted_failure = 'Yes') ";
   $sql .= "ORDER BY system_name, hard_drive_index";
   $result = mysqli_query($db,$sql);
-  $bgcolor = "#FFFFFF";
+   
 
 
    echo  '<rss version="2.0">'."\n";

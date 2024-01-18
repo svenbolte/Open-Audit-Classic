@@ -15,14 +15,14 @@ $time_start = microtime_float();
 
 $newline = "\r\n";
 $page = "database_backup.php";
-$bgcolor = "#FFFFFF";
+ 
 // This is a bit crude... FIXME I need to find a more interactive method for this, rather than just leaving the script for 5 mins, and then timing out if no result. 
 set_time_limit(300); 
 $backup = '';
 
 echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
-echo "<table border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
+echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
 echo "  <tr><td class=\"contenthead\">".__("Backing up the Database")."</td></tr>";
 echo "  <tr><td colspan=\"3\"><hr /></td></tr>";
 echo "<tr><td>".__("The following tables were found")."</td><td>".__("Length")."</td><td>".__("Connectable")."</td></tr>";
@@ -71,8 +71,8 @@ while($tabs = mysqli_fetch_row($tables)):
     
     $table_len=strlen($backup)-$file_len;
     $file_len=strlen($backup);
-    echo "<tr style=\"background-color:".$bgcolor."\"><td>$tabs[0]</td><td>".$table_len." ".__("Bytes")."</td><td><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td></tr>";
-   $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+    echo "<tr><td>$tabs[0]</td><td>".$table_len." ".__("Bytes")."</td><td><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td></tr>";
+   // tabellierung über tftable css
    while($all = mysqli_fetch_assoc($res)):
        $str = str_replace("CREATE TABLE `$tabs[0]` (", "", $all['Create Table']);
        $str = str_replace(",", ", ".$newline."", $str);
@@ -107,15 +107,15 @@ if (is_writable($backup_filename)) {
        exit;
    }
   $database_length = strlen($backup);
-//      $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
+//      // tabellierung über tftable css
    echo "  <tr><td colspan=\"3\"><hr /></td></tr>";
-   echo "<tr style=\"background-color:".$bgcolor."\"><td class=\"contentsubtitle\">".__("Success, wrote ").$database_length." ".__("bytes to file").$backup_filename."</td><td></td><td></td></tr>";
+   echo "<tr><td class=\"contentsubtitle\">".__("Success, wrote ").$database_length." ".__("bytes to file").$backup_filename."</td><td></td><td></td></tr>";
   
    fclose($handle);
 
    
-//     $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-   echo "<tr style=\"background-color:".$bgcolor."\"><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>";
+//     // tabellierung über tftable css
+   echo "<tr><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>";
    echo "<tr><td>".__("Database Backed up in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").". </td></tr>";
 } else {
    echo "<tr><td>".__("The file $backup_filename is not writable")."</td></tr>";

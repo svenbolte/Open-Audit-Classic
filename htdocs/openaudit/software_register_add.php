@@ -40,7 +40,7 @@ return $div_clean;
   include "include.php";
   echo "<td style=\"vertical-align:top;width:100%\">\n"; 
   echo "<div class=\"main_each\">";
-  echo "<table  >\n";
+  echo "<table class=\"tftable\"   >\n";
   echo "<tr>\n";
   echo "  <td class=\"contenthead\" colspan=\"3\">".__("Add Package to Software License Register")."</td>\n";
   echo "</tr>\n";
@@ -63,8 +63,8 @@ return $div_clean;
     echo "    <td align=\"center\"><b>Tick to Add</b></td>\n";
     echo "  </tr>\n";
     do {
-  	  $bgcolor = change_row_color($bgcolor,$bg1,$bg2);
-	  echo " <tr style=\"background-color:" . $bgcolor . ";\">\n";
+  	  // tabellierung über tftable css
+	  echo '<tr>';
       echo "  <td align=\"center\">" . $myrow["count(software_name)"] . "</td>\n";
       echo "  <td>&nbsp;&nbsp;" . $myrow["software_name"] . "</td>\n";
       echo "<td align=\"center\">";
@@ -72,7 +72,6 @@ return $div_clean;
       echo "<a href=\"#\" onclick=\"sendRequest('" . url_clean($myrow["software_name"]) . "');\"><img border=\"0\" src=\"images/button_success.png\" width=\"16\" height=\"16\" alt=\"\" /></a>";
       echo "</div>\n";
       echo "</td>\n";
-      echo "<td style=\"vertical-align:top;width:100%\">\n";
       echo "</tr>";
     } while ($myrow = mysqli_fetch_array($result));
     echo "</table>\n";

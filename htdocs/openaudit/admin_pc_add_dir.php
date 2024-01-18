@@ -14,7 +14,7 @@ set_time_limit(200);
 include "include.php";
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table   width=\"100%\">\n";
+echo "<table class=\"tftable\"    width=\"100%\">\n";
 echo " <tr>\n  <td align=\"left\" class=\"contenthead\" >".__("Uploading files from Uploads directory").".<br />&nbsp;</td>\n";
 $count = 0;
 $dir = "uploads/";
