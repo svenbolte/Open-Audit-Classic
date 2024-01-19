@@ -58,7 +58,6 @@ Name: "{group}\PC-IP-Listfile.txt manuell ändern"; Filename: "{app}\htdocs\opena
 Name: "{group}\ZENMap Gui für NMap"; Filename: "{app}\nmap\zenmap\bin\pythonw.exe"; Parameters: "-c ""from zenmapGUI.App import run;run()""";
 Name: "{group}\SSL-Zertifikat erneuern"; Filename: "{app}\apache/makecert2.cmd"; Comment: "openssl Zertifikat für 2 Jahre"
 Name: "{commondesktop}\OpenAudit cl Oberfläche"; Filename: "http://{code:GetComputerName}:888/openaudit"; Tasks: desktopicon; Comment: "Netzwerkverknüpfung zum Open-Audit-Server"
-Name: "{commondesktop}\OpenAudit cl Oberfläche"; Filename: "http://{code:GetComputerName}:888/openaudit"; Tasks: desktopicon; Comment: "Netzwerkverknüpfung zum Open-Audit-Server"
 Name: "{commondesktop}\OpenAudit cl Konsole"; Filename: "cmd.exe"; WorkingDir: "{app}\htdocs\openaudit\scripts"; Comment: "als angemeldeter User"; Tasks: desktopicon
 Name: "{commondesktop}\PC-List-File erzeugen"; Filename: "http://{code:GetComputerName}:888/openaudit/export-ipliste-4-openaudit.php"; Tasks: desktopicon; Comment: "Netzwerke eingeben und Liste erzeugen"
 Name: "{commondesktop}\Aufgabenplanung"; Filename: "%windir%\system32\taskschd.msc"; Parameters: "/s"; Tasks: desktopicon; Comment: "OpenAudit Aufgaben auf Domain-admin umstellen: PC-Scan und optional NMAP Scan bearbeiten"
@@ -68,6 +67,7 @@ Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htd
 Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\htdocs\openaudit\all-tools-scripts\jobsundbatches\Open-Audit NMAP Inventar taeglich.xml"" /TN Openaudit-NMAPScan"; Flags: runascurrentuser; Description: "NMAP Scan Aufgabe importieren"; Tasks: AufgabeNMAPScan
 Filename: "{app}\vcruntimes\vc_redist.x64.exe"; Parameters: "/install /quiet /norestart"; Flags: waituntilterminated shellexec; StatusMsg: "Installing VC2019/X64 Redist for Apache"; Check: VC2017RedistNeedsInstall
 Filename: "{app}\apache\makecert2.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache SSL Zertifikat auf Openaudit Server ausstellen"
+Filename: "{app}\apache\oa-importcert.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Zertifikat in Browser importieren"
 Filename: "{app}\apache\apache_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "Apache ab Win10 als Dienst und starten"
 Filename: "{app}\mysql\mysql_installservice-win10.cmd"; Flags: shellexec postinstall runascurrentuser; Description: "MySQL ab Win10 als Dienst und starten"
 Filename: "{app}\nmap\npcap-1.78.exe"; Flags: shellexec postinstall runascurrentuser; Description: "für NMAP benötigtes NPCap installieren"
