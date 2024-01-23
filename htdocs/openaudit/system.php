@@ -374,7 +374,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
             //Links to Manufacturer
             if(isset($myrow["system_vendor"]) AND $myrow["system_vendor"]!="" AND ($viewname=="summary" OR $viewname=="chassis")){
                 // tabellierung über tftable css
-                echo "<tr style=\"background-color:" . $bgcolor . ";\" >\n";
+                echo "<tr>\n";
                  echo "<td>\n";
                   echo __("Links to Manufacturer");
                   echo ": &nbsp;";
@@ -442,7 +442,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
             //IF Horizontal Table-Layout
             if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){}else{
                 // tabellierung über tftable css
-                echo "<tr style=\"background-color:$bgcolor;\"><td class=\"system_tablebody_right\" colspan=\"2\">&nbsp;</td></tr>\n";
+                echo "<tr><td class=\"system_tablebody_right\" colspan=\"2\">&nbsp;</td></tr>\n";
             }
         }while ($myrow = mysqli_fetch_array($result));
     } else {
@@ -452,7 +452,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
          echo "</td>\n";
         echo "</tr>\n";
 
-        echo "<tr style=\"background-color:$bg2\"><td style=\"padding-right:10px;\" colspan=\"2\">&nbsp;</td></tr>\n";
+        echo "<tr><td style=\"padding-right:10px;\" colspan=\"2\">&nbsp;</td></tr>\n";
     }
 
      //Edit- and Submit-Button

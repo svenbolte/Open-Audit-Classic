@@ -89,7 +89,6 @@ if ($myrow = mysqli_fetch_array($result)){
     echo "  <td align=\"center\"><a href=\"software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "\" onclick=\"return confirm('Do you really want to DELETE this license ?','software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "')\">Delete</a></td>\n";
     echo "  <td>" . $myrow["license_comments"] . "</td>\n";
     echo "</tr>\n";
-    if ($bgcolor == $bg1) {   } else { $bgcolor = $bg1; }
   } while ($myrow = mysqli_fetch_array($result));
   echo "</table>";
 } else {}
