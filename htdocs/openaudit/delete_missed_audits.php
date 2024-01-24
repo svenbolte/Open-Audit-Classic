@@ -1,7 +1,7 @@
 <?php
 $page = "";
 include "include.php";
-$time_start = microtime_float();
+
 
 if (!empty($_POST['Perform'])) {
   foreach($_POST as $id) {
@@ -202,20 +202,20 @@ if ($myrow = mysqli_fetch_array($result)){
           }
         </script>
  
-          <table class=\"tftable\"    width=\"100%\">
+          <table class=\"tftable\"    >
             <tr>
                <td class=\"contenthead\">".__("Delete Systems Not Audited in the last " ). $days_systems_not_audited .__(" days")."<br />&nbsp;</td>
             </tr>
           </table>
          
-          <table class=\"tftable\"    width=\"100%\">
+          <table class=\"tftable\"    >
             <tr>
                <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected systems\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
                <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
             </tr>
           </table>
 
-          <table class=\"tftable\"    width=\"100%\">
+          <table class=\"tftable\"    >
             <tr>&nbsp;</tr>
             <tr>
                <td></td>
@@ -248,5 +248,5 @@ if ($myrow = mysqli_fetch_array($result)){
 echo "</div>\n";
 
 echo "</td>\n";
-// include "include_right_column.php";
+
 ?>

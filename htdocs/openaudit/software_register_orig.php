@@ -80,7 +80,7 @@ echo $sql4 . "<br />\n";
 
 echo "</div>\n";
 echo "</td>\n";
-// include "include_right_column.php";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>

@@ -30,8 +30,11 @@ include "include.php";
 $software = GetGETOrDefaultValue("software","");
 $sort = GetGETOrDefaultValue("sort","system_name");
 
-
-echo "<td id='CenterColumn'>\n";
+echo "<td style=\"vertical-align:top;width:100%\">\n";
+echo "<div class=\"main_each\">";
+echo "<table ><tr><td class=\"contenthead\">\n";
+echo __("Tipps & Tricks").'</td></tr></table>';
+echo '<table ><tr><td>';
 
 // Now show the specified License in an iframe.
 if(isset($license_text) AND $license_text!="") {
@@ -43,11 +46,10 @@ if(isset($license_text) AND $license_text!="") {
 $license_text = "help.txt";
 // echo "<img src=\"images/gplv3-88x31.png\" alt=\"\" style=\"border:0px;\" width=\"48\" height=\"48\"  />\n";              
 }
-echo "<center><h4><a href=\"index.php\">Click to close.</a></h4></center>";
 
 echo "<iframe class=\"main_each\" SRC=\"".$license_text."\" width=\"90%\" height=\"600\" framespacing=0 frameborder=no border=0 scrolling=auto name=license_frame longdesc=\"http://www.gnu.org/licenses/licenses.html#GPL\"></iframe>";
 
-echo "<br><center>Versions and Tps&Tricks: (".$license_text.") </center><br>";
+echo "<br><center>Versions and Tips&Tricks: (".$license_text.") </center><br>";
 
 if(isset($license_text) AND $license_text="gpl.txt") {
 echo "<img src=\"images/gplv3-88x31.png\" alt=\"\" style=\"border:0px;\" width=\"88\" height=\"31\"  />\n";              
@@ -58,8 +60,5 @@ echo "<img src=\"images/gplv3-88x31.png\" alt=\"\" style=\"border:0px;\" width=\
 }
 
 //gplv3-88x31.png
-echo "</td>\n";
-
-// Now put in the RH menu.
-// include "include_right_column.php";
+echo "</td></tr></table>\n";
 ?>

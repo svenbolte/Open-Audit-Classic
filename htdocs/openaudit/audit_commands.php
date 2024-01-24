@@ -11,7 +11,7 @@ require_once "include_audit_functions.php";
 <body>
 <td valign="top">
 <div class="main_each">
-  <table class=\"tftable\"  width="100%" border="0" style="height: 70px">
+  <table class=\"tftable\"   border="0" style="height: 70px">
     <tr><td rowspan="2" class="contenthead">Edit Commands</td></tr>
   </table>
   <label>Command Name</label>
@@ -35,6 +35,6 @@ require_once "include_audit_functions.php";
   </form>
 </div>
 </td>
-<?php // include "include_right_column.php"; ?>
+<?php  ?>
 </body>
 </html>

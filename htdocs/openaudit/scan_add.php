@@ -11,7 +11,7 @@ echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
 echo "<div id=\"ajaxTest\"> </div>\n";
 #echo "<form name=\"nmap_form\" type=\"post\">\n";
-echo "<table class=\"tftable\"    width=\"100%\">\n";
+echo "<table class=\"tftable\"    >\n";
 echo "<tr>\n";
 echo "  <td class=\"contenthead\" colspan=\"5\">Network Monitoring.<br />&nbsp;</td>\n";
 echo "</tr>\n";
@@ -67,7 +67,7 @@ echo "</table>";
 #echo "</form>\n";
 echo "</div>";
 echo "</td>";
-// include "include_right_column.php";
+
 
 ?>
 <script language="javascript" TYPE="text/javascript">

@@ -8,7 +8,7 @@ include "include.php";
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table class=\"tftable\"  width=\"100%\"><tr><td class=\"contenthead\">\n";
+echo "<table ><tr><td class=\"contenthead\">\n";
 echo __("Change Databasse") . '</td></tr><tr><td>';
 
 // Content below
@@ -38,13 +38,13 @@ function step33SetupDB() {
 
   echo "<form method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\" name=\"changedatabasephp\">";
  ?>
- <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
+ <table class="content">
   <input type="hidden" name="mysqli_server_post" size="12" value="localhost" class="for_forms"/>
   <input type="hidden" name="mysqli_user_post" size="12" value="root" class="for_forms" />
   <input type="hidden" name="mysqli_password_post" size="12" value="flocke" class="for_forms" />
 
   <br />
-  <table class=\"tftable\"  border="0" cellpadding="0" cellspacing="0" class="content">
+  <table class="content">
   <tr><td><?php echo __("Database Name") ?>:&nbsp;</td><td><input type="text" readonly name="mysqli_new_db" size="12" value="openaudit" class="for_forms" />
     <select size="1" name="dbselect" class="for_forms" onchange="document.changedatabasephp.mysqli_new_db.value=document.changedatabasephp.dbselect.value";>
 	<?php

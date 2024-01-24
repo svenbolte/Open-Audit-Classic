@@ -9,11 +9,11 @@ if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-  echo "<table class=\"tftable\"   >\n";
-  echo "<tr>\n";
-  echo "  <td class=\"contenthead\" colspan=\"3\">".__("Delete Package from Software License Register")."</td>\n";
-  echo "</tr>\n";
 
+	echo "<table ><tr><td class=\"contenthead\">\n";
+	echo __("Delete Package from Software License Register").'</td></tr></table>';
+	echo '<table class="tftable" >';
+  
 $db=GetOpenAuditDbConnection() or die("Could not connect");
 $sql = "SELECT * FROM software_register ORDER BY software_title";
 $result = mysqli_query($db,$sql);
@@ -58,7 +58,7 @@ if ($myrow = mysqli_fetch_array($result)){
 }
 echo "</div>\n";
 echo "</td>\n";
-// include "include_right_column.php";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>

@@ -1,7 +1,7 @@
 <?php
 $JQUERY_UI = array('core','dialog','tooltip');
 include_once("include.php");
-$time_start = microtime_float();
+
 
 // If you would like to have a new View, you have to modify 3 parts:
 // -> include_menu_array.php: $menue_array
@@ -56,10 +56,7 @@ echo "<td style=\"vertical-align:top;width:100%\">\n";
 
   if(isset($query_array["name"]) AND $query_array["name"]!=""){
 
- 
-          
-
-      echo "<table class=\"tftable\"  width=\"100%\" border=\"0\" style=\"height: 30px\"><tr><td class=\"contenthead\">\n";
+      echo "<table  style=\"height: 30px\"><tr><td class=\"contenthead\">\n";
          //Is the headline a sql-query?
          if(isset($query_array["name"]) AND is_array($query_array["name"])){
              echo htmlspecialchars($query_array["name"]["name"]);
@@ -109,8 +106,7 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
     $this_page_count = mysqli_num_rows($result);
 
 
-        echo "<table class=\"tftable\"  border=\"0\" style=\"height: 70px\">\n";
-         echo "<tr>\n";
+        echo '<table ><tr>';
           //Image
           if(isset($viewdef_array["image"]) AND $viewdef_array["image"]!=""){
               echo "<td class=\"contentsubtitle\" style=\"width: 60px;\">\n";
@@ -163,7 +159,7 @@ foreach ($query_array["views"] as $viewname=>$viewdef_array) {
         echo "  <input type=\"hidden\" name=\"user\" value=\"".$_REQUEST["user"]."\" />";
     }
     echo "</p>\n";
-    echo "<table class=\"tftable\"    width=\"100%\">\n";
+    echo "<table class=\"tftable\"    >\n";
 
     //IF Horizontal Table-Layout
     if(isset($viewdef_array["table_layout"]) AND $viewdef_array["table_layout"]=="horizontal"){
@@ -498,7 +494,7 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
   
 
  echo "</td>\n";
-// // include "include_right_column.php";
+// 
 include "include_export_modal.php"; 
 echo "</body>\n";
 echo "</html>\n";

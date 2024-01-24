@@ -1224,7 +1224,7 @@ function DisplayError($error_msg)
 	
 	echo "<td><div class='error'><img src='images/emblem_important.png'/>";
 	echo $error_msg."</div></td>";
-	// include "include_right_column.php";
+	
 	die;
 }
 function base36_convert($numstring)

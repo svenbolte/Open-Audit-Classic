@@ -194,6 +194,6 @@
   <span id="form_result_fail"></span>
 </div>
 </td>
-<?php // include "include_right_column.php"; ?>
+<?php  ?>
 </body>
 </html>

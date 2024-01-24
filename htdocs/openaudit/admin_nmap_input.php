@@ -22,10 +22,12 @@ Recent Changes:
 
 $page = "add_pc";
 include "include.php";
+
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
+echo "<table ><tr><td class=\"contenthead\">\n";
+echo __("Add a NMAP Scanned device") . '</td></tr><tr><td>';
 
-echo "<p class=\"contenthead\">".__("NMap")."</p>\n";
 //
 // Avoid undeclared vars warnings (AJH).
 //
@@ -327,7 +329,7 @@ if (isset($_POST["submit"])){
   else {
 
   echo "<form action=\"admin_nmap_input.php\" method=\"post\">\n";
-  echo "<table class=\"tftable\" >\n";
+  echo "<table>\n";
   echo "<tr><td colspan=\"2\"><textarea rows=\"20\" name=\"add\" cols=\"90\" class=\"for_forms\"></textarea></td></tr>\n";
   echo "<tr><td colspan=\"2\"><input name=\"submit\" value=\"".__("Save")."\" type=\"submit\" /></td></tr>\n";
   echo "</table>\n";

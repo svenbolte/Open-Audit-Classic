@@ -95,7 +95,7 @@ if ($myrow = mysqli_fetch_array($result)){
 
 echo "</div>\n";
 echo "</td>\n";
-// include "include_right_column.php";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>

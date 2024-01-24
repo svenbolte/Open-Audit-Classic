@@ -382,7 +382,7 @@
     ?>
 </div>
 </td>
-<?php // include "include_right_column.php"; ?>
+<?php  ?>
 <div id="dialog-test-results">
   <div id="dialog-test-text"></div>
 </div>

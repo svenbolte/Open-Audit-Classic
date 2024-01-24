@@ -40,14 +40,11 @@ return $div_clean;
   include "include.php";
   echo "<td style=\"vertical-align:top;width:100%\">\n"; 
   echo "<div class=\"main_each\">";
-  echo "<table class=\"tftable\"   >\n";
-  echo "<tr>\n";
-  echo "  <td class=\"contenthead\" colspan=\"3\">".__("Add Package to Software License Register")."</td>\n";
-  echo "</tr>\n";
-  echo "<tr>\n";
-  echo "<td colspan=\"3\"><div id=\"ajaxTest\"><br /> </div></td>\n";
-  echo "</tr>\n";
-
+  echo '<table >';
+  echo "<tr><td class=\"contenthead\" colspan=\"3\">".__("Add Package to Software License Register")."</td></tr></table>";
+  echo '<table class="tftable" >';
+  echo "<div id=\"ajaxTest\"></div>";
+  
   $sql = "SELECT count(software_name), software_name FROM software ";
   $sql .= "INNER JOIN system ON (software_uuid = system_uuid AND ";
   $sql .= "software_timestamp = system_timestamp ) ";
@@ -80,7 +77,7 @@ return $div_clean;
   }
 echo "</div>\n";
 echo "</td>\n";
-// // include "include_right_column.php";
+// 
 ?>
 <script language="javascript" TYPE="text/javascript">
 

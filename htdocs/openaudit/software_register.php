@@ -6,7 +6,7 @@ $count = -1;
 if (isset($_GET['software'])) {$software = $_GET['software'];} else {}
 if (isset($_GET['sort'])) {$sort = $_GET['sort'];} else {$sort= "system_name";}
 include "include.php";
-$time_start = microtime_float();
+
 // set an initial 4 min extra timeout
 set_time_limit(240000);
 
@@ -30,10 +30,10 @@ $sql .= "GROUP BY software_title";
 
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table class=\"tftable\"    width=\"100%\">\n";
-  echo "<tr>\n";
-  echo "  <td colspan=4 class=\"contenthead\">Software License Register - manage licenses</td>\n";
-  echo "</tr>\n";
+
+	echo "<table ><tr><td class=\"contenthead\">\n";
+	echo 'Software License Register - manage licenses</td></tr></table>';
+	echo '<table class="tftable" >';
   echo "<tr>\n";
   echo "<td style=\"max-width:30%;\"><b>Package&nbsp;&nbsp;</b></td>\n";
   echo "<td align=\"center\" ><b>&nbsp;&nbsp;Purchased&nbsp;&nbsp;</b></td>\n";
@@ -103,7 +103,7 @@ echo "</div><br>\n";
 
 echo "</td>\n";
 
-// include "include_right_column.php";
+
 
 ?>
 <script language="javascript" TYPE="text/javascript">

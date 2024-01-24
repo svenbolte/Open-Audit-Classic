@@ -82,7 +82,7 @@ if ($bd){
 } else {
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+        echo "<table class=\"tftable\"    class=\"content\">";
      	
         echo "<p>"; 
         echo "<tr><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
@@ -97,7 +97,7 @@ if ($bd){
 } else {
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+        echo "<table class=\"tftable\"    class=\"content\">";
      	
         echo "<p>"; 
         echo "<tr><td><b>".__("User or Password invalid when attemting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
@@ -119,7 +119,7 @@ $entries = ldap_get_entries($ad, $result);
 echo "<div class=\"main_each\">\n";
 
 echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+echo "<table class=\"tftable\"    class=\"content\">";
 
 $num_found = $entries["count"];
 
@@ -128,7 +128,7 @@ if ($num_found == 0 ){
 
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+        echo "<table class=\"tftable\"    class=\"content\">";
      	
         echo "<p>"; 
         echo "<tr><td><b>".__("Not found in ".$ldap_base_dn.".")."</b></td></tr>";
@@ -173,7 +173,7 @@ $record_number = $computer_record_number+1;
 
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+        echo "<table class=\"tftable\"    class=\"content\">";
      	
         echo "<p>"; 
         echo "<tr><td><b>".__("LDAP Not configured. Please set this up in Admin> Config")."</b></td></tr>";
@@ -185,7 +185,7 @@ $record_number = $computer_record_number+1;
 } else {
         echo "<div class=\"main_each\">\n";
         echo "<form action=\"call_users_details.php?sub=no\" method=\"post\">";
-        echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+        echo "<table class=\"tftable\"    class=\"content\">";
      	
         echo "<p>"; 
         echo "<tr><td><b>".__("Bind failure attempting to connect to ".$ldap_base_dn.".")."</b></td></tr>";
@@ -195,7 +195,7 @@ echo "</table>";
 
 echo "</td>\n";
 
-// include "include_right_column.php";
+
 
 echo "</body>\n</html>\n";
 

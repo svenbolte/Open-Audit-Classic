@@ -44,7 +44,7 @@ require "include_audit_functions.php";
   <br />
   </div>
 </td>
-<?php // include "include_right_column.php"; ?>
+<?php  ?>
 <div id="log-dialog"><div id="log-box"></div></div>
 <div id="confirm-dialog">
   <p><span class="ui-icon ui-icon-alert confirm-icon"></span><span id="confirm-text"></span></p>

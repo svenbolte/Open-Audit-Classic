@@ -12,7 +12,7 @@ set_time_limit(240);
 
 echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
-echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
+echo "<table>$newline";
 
 echo "  <tr><td class=\"contenthead\">".__("Backup the Database")."</td></tr>";
 echo "  <tr><td colspan=\"1\"><hr /></td></tr>";
@@ -39,7 +39,7 @@ if (!file_exists($backup_dir)) {
 // Start of Backup Selection section
 
 echo "<form method=\"GET\" action=\"database_backup_sql.php\" name=\"database_backup\">";
-echo "<table class=\"tftable\"    class=\"content\">";
+echo "<table class=\"content\">";
 //echo "<tr><td colspan=\"1\"><hr /></td></tr>";
 echo "<tr>\n";
 echo "<td>".__("Database").":</td>\n";
@@ -72,7 +72,7 @@ echo "</td>";
 echo "</table>\n";
 
 
-// // include "include_right_column.php";
+// 
 
 echo "</body>\n</html>\n";
 

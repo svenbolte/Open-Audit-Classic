@@ -10,7 +10,7 @@ include "include.php";
 //    list($usec, $sec) = explode(" ", microtime());
 //    return ((float)$usec + (float)$sec);
 //}
-$time_start = microtime_float();
+
 
 
 $newline = "\r\n";
@@ -22,7 +22,7 @@ $backup = '';
 
 echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
-echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
+echo "<table>$newline";
 echo "  <tr><td class=\"contenthead\">".__("Backing up the Database")."</td></tr>";
 echo "  <tr><td colspan=\"3\"><hr /></td></tr>";
 echo "<tr><td>".__("The following tables were found")."</td><td>".__("Length")."</td><td>".__("Connectable")."</td></tr>";
@@ -116,14 +116,14 @@ if (is_writable($backup_filename)) {
    
 //     // tabellierung über tftable css
    echo "<tr><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>";
-   echo "<tr><td>".__("Database Backed up in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").". </td></tr>";
+   echo "<tr><td>".__("Database Backed up"). "</td></tr>";
 } else {
    echo "<tr><td>".__("The file $backup_filename is not writable")."</td></tr>";
 }
 
 echo "</tr></td></table>\n";
 
-// include "include_right_column.php";
+
 
 echo "</body>\n</html>\n";
 

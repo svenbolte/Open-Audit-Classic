@@ -2,7 +2,7 @@
 // wake_on_lan.php sends WOL packet to mac address specified in database.
 // Accepts hostname, mac and socket number, requires hostname and mac.
 include_once("include.php");
-$time_start = microtime_float();
+
 
 $count_system_max="10000";
 
@@ -13,7 +13,7 @@ if (isset($_GET["socket_number"])) {$socket_number=$_GET["socket_number"];} else
 // Set the Search Button action
 echo "<div class=\"main_each\">";
 echo "<form action=\"search.php?sub=no\" method=\"post\">";
-echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" class=\"content\">";
+echo "<table class=\"tftable\"    class=\"content\">";
 
 
 $this_error = '';
@@ -35,18 +35,11 @@ $result = WakeOnLan($hostname,$mac,$socket_number,$this_error);
         echo "<tr><td>".__("Result").":</td><td>" .$result. "</td></tr>";
 // tabellierung über tftable css
         echo "<tr><td>".__("NOTE:  Wake on LAN only works on the local LAN and not between networks.").":</td><td></td></tr>";           
-//      Show Target Timing
-// tabellierung über tftable css
-        echo "<tr><td>".__("This Page was generated in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").".<td></td></td></tr>";
 
 echo "</div>\n";
-
 echo "</table>";
-
 echo "</td>\n";
-
 echo "</td>\n";
-// include "include_right_column.php";
 echo "</body>\n";
 echo "</html>\n";
 ?>

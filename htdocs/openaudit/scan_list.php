@@ -9,7 +9,7 @@ include "include.php";
 
 echo "<td style=\"vertical-align:top;width:100%\">\n";
 echo "<div class=\"main_each\">";
-echo "<table class=\"tftable\"    width=\"100%\">\n";
+echo "<table class=\"tftable\"    >\n";
 echo "<tr>\n";
 echo "  <td class=\"contenthead\">Network Monitoring.<br />&nbsp;</td>\n";
 echo "</tr>\n";
@@ -42,7 +42,7 @@ if ($myrow = mysqli_fetch_array($result)){
 echo "</table>";
 echo "</div>";
 echo "</td>";
-// include "include_right_column.php";
+
 echo "</body>";
 echo "</html>";
 ?>

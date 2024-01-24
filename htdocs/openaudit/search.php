@@ -20,12 +20,12 @@ $page_next = $page_count + 1;
 $page_current = $page_count;
 $page_count = $page_count * $count_system;
 
-echo "<table class=\"tftable\"    width=\"100%\">\n";
+echo "<table class=\"tftable\"    >\n";
 echo " <tr>\n  <td align=\"left\" class=\"contenthead\" >".__("System Search Results")."<br />&nbsp;</td>\n";
 //include "include_list_buttons.php";
 echo " </tr>\n</table>\n";
 
-echo "<table class=\"tftable\"    width=\"100%\">";
+echo "<table class=\"tftable\"    >";
 echo "<tr>\n";
 echo "  <td width=\"150\"><b>&nbsp;".__("IP Address")."</b></td>\n";
 echo "  <td width=\"130\"><b>&nbsp;".__("Hostname")."</b></td>\n";
@@ -434,7 +434,7 @@ else {
 echo "</table>\n";
 echo "</div>\n";
 echo "</td>\n";
-// include "include_right_column.php";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>

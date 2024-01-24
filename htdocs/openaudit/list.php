@@ -2,7 +2,7 @@
 
 $JQUERY_UI = array('core','dialog','tooltip');
 include_once("include.php");
-$time_start = microtime_float();
+
 // set an initial 4 min extra timeout
 set_time_limit(240000);
 
@@ -126,7 +126,7 @@ if( ($page_count+$count_system)>$all_page_count OR (isset($show_all) AND $show_a
   $show_page_count_to=$page_count+$count_system;
 }
 
-echo '<table width="100%" style="padding-bottom:6px"><tr><td class="contenthead">';
+echo '<table  style="padding-bottom:1em"><tr><td class="contenthead">';
 
      //Is the headline a sql-query?
      if(isset($query_array["headline"]) AND is_array($query_array["headline"])){
@@ -295,7 +295,7 @@ echo "<input type=\"hidden\" name=\"sort\" value=\"".$sort."\" />\n";
 echo "<input type=\"hidden\" name=\"page_count\" value=\"".$page_count."\" />\n";
 echo "<input type=\"hidden\" name=\"show_all\" value=\"".$show_all."\" />\n";
 echo "<input type=\"hidden\" name=\"headline_addition\" value=\"".$headline_addition."\" />\n";
-echo "<table class=\"tftable\"  width=\"100%\">\n";
+echo "<table class=\"tftable\"  >\n";
 
 echo "<tr>\n";
  echo $headline_1;
@@ -539,7 +539,7 @@ if ($myrow = mysqli_fetch_array($result)){
     // Export to CSV
 
     echo '<div style="position:absolute;top:110px;left:186px">';
-    echo "<table class=\"tftable\"  width=\"100%\"><tr>\n";
+    echo "<table class=\"tftable\"  ><tr>\n";
     echo "<form method=\"post\" id=\"form_export\" action=\"list_export.php\">\n";
     echo "<input type=\"hidden\" name=\"sql\" value=\"".urlencode($sql)."\" />\n";
     echo "<input type=\"hidden\" name=\"view\" value=\"".$_REQUEST["view"]."\"/>\n";

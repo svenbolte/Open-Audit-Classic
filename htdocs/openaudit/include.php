@@ -198,7 +198,7 @@ echo "</div>\n";
 ?>		
  </div>
  
-  <table class=\"tftable\"  width="100%">
+  <table class=\"tftable\"  >
   <tr>
     <td style="width:170px;" rowspan="12" valign="top" id="nav">
       <ul id="primary-nav">

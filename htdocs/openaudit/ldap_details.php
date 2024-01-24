@@ -98,7 +98,7 @@ foreach ($info[0] as $key => $value)
 	}
 }
 echo "</table></div></td>";
-// include "include_right_column.php";
+
 
 /**********************************************************************************************************
 Function Name:

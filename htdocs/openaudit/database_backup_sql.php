@@ -19,7 +19,7 @@ if (isset($GET['add_drop_tables'])) {
 //    list($usec, $sec) = explode(" ", microtime());
 //    return ((float)$usec + (float)$sec);
 //}
-$time_start = microtime_float();
+
 
 $newline = "\r\n";
 $page = "database_backup_sql.php";
@@ -30,10 +30,10 @@ $backup = '';
 
 echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
-echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
+echo "<table>$newline";
 echo "  <tr><td class=\"contenthead\">".__("Backing up the Database")."</td></tr>";
-echo "  <tr><td colspan=\"3\">&nbsp;</td></tr>";
-echo "<tr>";
+echo "  <tr><td colspan=\"3\">&nbsp;</td></tr></table>";
+echo '<table class="tftable"><tr>';
  echo "<td class=\"views_tablehead\">".__("Tables")."</td>\n";
  echo "<td class=\"views_tablehead\">".__("Size")."</td>\n";
  echo "<td class=\"views_tablehead\">".__("Backup")."</td>\n";
@@ -166,7 +166,7 @@ if (is_writable($backup_filename)) {
    // tabellierung über tftable css
    echo "<tr><td class=\"contentsubtitle\">".__("Backup Completed")."</td><td></td><td></td></tr>\n";
    echo "<tr>";
-    echo "<td>".__("Database Backed up in")." ".number_format((microtime_float()-$time_start),2)." ". __("Seconds").". </td>\n";
+    echo "<td>".__("Database Backed up ").". </td>\n";
     echo "<td  ></td>\n";
     echo "<td align=\"center\"><img src=\"images/button_success.png\" width=\"16\" height=\"16\" /></td>\n";
    echo "</tr>\n";
@@ -176,7 +176,7 @@ if (is_writable($backup_filename)) {
 
 echo "</tr></td></table>\n";
 
-// // include "include_right_column.php";
+// 
 
 echo "</body>\n</html>\n";
 

@@ -31,6 +31,7 @@ include_once "include_functions.php";
   <div style="float:left;width:200px">
   <div class="main_each">
 <?php
+
   if(!isset($_POST['step']) or ($_POST['step'] == 1)) {
     echo "  <b>" . __("1. Choose language") . "</b><br />\n";
   } else {
@@ -53,6 +54,10 @@ include_once "include_functions.php";
   </div>
   <div style="padding-left: 200px; padding-top: 1px;"><div class="main_each"><div style="width: 550px">
 <?php
+
+echo "<table ><tr><td class=\"contenthead\">\n";
+echo "<tr><td>";
+
 // Content below
   if(!isset($_POST['step']) or ($_POST['step'] == 1)) {
     step1ChooseLanguage();
@@ -260,9 +265,9 @@ function step33SetupDB() {
 }
 
 /// Step 3.4
-if (isset($_POST['drop_database']))  {$drop_database = $_POST['drop_database'];}  else { $drop_database = "n";}
-if (isset($_POST['drop_user']))  {$drop_user = $_POST['drop_user'];}  else { $drop_user = "n";}
-if (isset($_POST['bindlocal']))  {$bindlocal = $_POST['bindlocal'];}  else { $bindlocal = "n";}
+if (isset($_POST['drop_database']))  {$drop_database = "y";}  else { $drop_database = "n";}
+if (isset($_POST['drop_user']))  {$drop_user = "y";}  else { $drop_user = "n";}
+if (isset($_POST['bindlocal']))  {$bindlocal = "y";}  else { $bindlocal = "n";}
 // <form method="post" action="setup.php" name="admin_config">
 
 function step34SetupDB() {
@@ -303,28 +308,39 @@ function step35SetupDB() {
     echo __("Connecting to the MySQL Server... ");
     $db = @mysqli_connect($_POST['mysqli_server_post'],$_POST['mysqli_user_post'],$_POST['mysqli_password_post']) or die('Could not connect: ' . mysqli_error($db));
     echo __("Success!") . "<br />";
-    // Added drop existing database code (AJH)
+    
+	// Added drop existing database code (AJH)
     if ($_POST['drop_database'] = 'y'){
-    $sql = "DROP DATABASE IF EXISTS`" . $_POST['mysqli_new_db'] . "` ";
-    echo __("Dropping existing database... ");
-    $result = mysqli_query($db,$sql) or die('Could not drop existing db: ' . mysqli_error($db));
-    echo __("Success!") ."<br />";
+		$sql = "DROP DATABASE IF EXISTS`" . $_POST['mysqli_new_db'] . "` ";
+		echo __("Dropping existing database... ");
+		$result = mysqli_query($db,$sql) or die('Could not drop existing db: ' . mysqli_error($db));
+		echo __("Success!") ."<br />";
     }
     //
-    $sql = "CREATE DATABASE `" . $_POST['mysqli_new_db'] . "` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
+    $sql = "CREATE DATABASE IF NOT EXISTS `" . $_POST['mysqli_new_db'] . "` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
     echo __("Creating the database... ");
     $result = mysqli_query($db,$sql) or die('Could not create db: ' . mysqli_error($db));
     echo __("Success!") ."<br />";
-    $sql = "CREATE USER '" . $_POST['mysqli_new_user'] . "'@";
-    if ($_POST['bindlocal'] = 'y') {
+
+   // User löschen, falls da
+   if ($_POST['drop_user'] = 'y') {
+		$sql = "DROP USER IF EXISTS `" . $_POST['mysqli_new_user'] . "` ";
+		echo __("Dropping existing user... ".$_POST['mysqli_new_user']);
+		$result = mysqli_query($db,$sql) or die('Could not drop existing user: ' . mysqli_error($db));
+		echo __("Success!") ."<br />";
+   }
+	// User anlegen
+    $sql = "CREATE USER IF NOT EXISTS '" . $_POST['mysqli_new_user'] . "'@";
+	if ($_POST['bindlocal'] = 'y') {
       $sql .= "'localhost' ";
     } else {
       $sql .= "'%' ";
     }
     $sql .= "IDENTIFIED BY '" . $_POST['mysqli_new_pass'] . "'";
-    echo __("Creating the user... ");
-    $result = mysqli_query($db,$sql) ;//or die('Could not create the user: ' . mysqli_error($db));
+	echo __("Creating the user... ");
+	$result = mysqli_query($db,$sql) or die('Could not create the user: ' . mysqli_error($db));
     echo __("Success!") . "<br />";
+
     $sql = "GRANT SELECT , INSERT , UPDATE , DELETE , CREATE , DROP , INDEX , ALTER , CREATE TEMPORARY TABLES";
     $sql .= " , CREATE VIEW , SHOW VIEW , CREATE ROUTINE, ALTER ROUTINE, EXECUTE ";
     $sql .= "ON `" . $_POST['mysqli_new_db'] . "`.* TO '" . $_POST['mysqli_new_user'] . "'@";
@@ -350,8 +366,9 @@ function step35SetupDB() {
     fclose($handle);
     $sql = stripslashes($contents);
     $sql2 = explode(";", $sql);
-    foreach ($sql2 as $sql3) {
-      $result = mysqli_query($db,$sql3 . ";");
+	
+	foreach ($sql2 as $sql3) {
+	  if (!empty($sql3)) $result = mysqli_query($db,$sql3 . ";");
     }
     echo __("Success!") . "<br />";
     mysqli_close($db);

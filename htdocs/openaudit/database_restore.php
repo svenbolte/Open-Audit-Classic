@@ -14,7 +14,7 @@ set_time_limit(240);
 
 echo "<td style=\"vertical-align:top;width:100%\">$newline";
 echo "<div class=\"main_each\">$newline";
-echo "<table class=\"tftable\"  border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\" >$newline";
+echo "<table>$newline";
 echo "  <tr><td class=\"contenthead\">".__("Restore the Database")."</td></tr>";
 echo "  <tr><td colspan=\"1\"><hr /></td></tr>";
 echo "<tr><td>".__("Select a backup")."</td>";
@@ -52,7 +52,7 @@ echo "<tr><td><input type=\"submit\" value=\"".__("Restore")."\" name=\"submit_b
 //End of restore section
 echo "</tr></td></table>\n";
 
-// // include "include_right_column.php";
+// 
 
 echo "</body>\n</html>\n";
 

@@ -5,7 +5,7 @@ include_once("include_functions.php");
 include_once("include_lang.php");
 include_once("include_dia_config.php");
 
-//$time_start = microtime_float();
+//
 
 
 //MySQL-Connect

@@ -21,11 +21,11 @@ $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
     $name = $myrow["software_title"];
     
-    echo "<table class=\"tftable\"    width=\"100%\">\n";
+    echo "<table>\n";
     echo "<tr><td class=\"contenthead\" colspan=\"2\">Software License Register Details for: </td></tr>\n";
     echo "<tr><td>" . $myrow["software_title"] . "</td></tr>\n";
     echo "<tr><td class=\"contenthead\"><br />Usage Details.</td></tr>\n";
-	echo '<tr>';
+	echo '</table><table class="tftable"><tr>';
     echo "<td width=\"25%\"><b>Package Name&nbsp;&nbsp;</b></td>\n";
     echo "<td width=\"25%\" align=\"center\"><b>&nbsp;&nbsp;Purchased&nbsp;&nbsp;</b></td>\n";
     echo "<td width=\"25%\" align=\"center\"><b>&nbsp;&nbsp;Used&nbsp;&nbsp;</b></td>\n";
@@ -82,7 +82,7 @@ if ($myrow = mysqli_fetch_array($result)){
 $sql = "SELECT * FROM software_licenses WHERE license_comments <> 'OA initial license' AND license_software_id = '" . $_GET["id"] . "'";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table class=\"tftable\"  width=\"100%\">\n";
+  echo "<table class=\"tftable\"  >\n";
   echo "<tr>\n";
   echo "  <td colspan=\"7\" class=\"contenthead\">Software Licenses Purchased.</td>\n";
   echo "</tr>\n";
@@ -121,9 +121,9 @@ if ($myrow = mysqli_fetch_array($result)){
       
       $result = mysqli_query($db,$sql);
       if ($myrow = mysqli_fetch_array($result)){
-        echo "<table class=\"tftable\"  width=\"100%\" class=\"content\">\n";
+        echo "<table class=\"content\">\n";
         echo "<tr><td class=\"contenthead\" colspan=\"3\"><br />Systems with \"" . $name . "\" installed.</td></tr>\n";
-        echo "<tr><td>&nbsp;&nbsp;<b>IP Address</b></td><td>&nbsp;&nbsp;<b>Name</b></td><td>&nbsp;&nbsp;<b>Description</b></td><td>&nbsp;&nbsp;<b>Current User</b></td></tr>\n";
+        echo '</table><table class="tftable"><tr><td>&nbsp;&nbsp;<b>IP Address</b></td><td>&nbsp;&nbsp;<b>Name</b></td><td>&nbsp;&nbsp;<b>Description</b></td><td>&nbsp;&nbsp;<b>Current User</b></td></tr>';
         do {
 			// tabellierung über tftable css
 		  echo '<tr>';
@@ -140,7 +140,7 @@ if ($myrow = mysqli_fetch_array($result)){
 echo "</table>\n";
 echo "</div>\n";
 echo "</td>\n";
-// include "include_right_column.php";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>

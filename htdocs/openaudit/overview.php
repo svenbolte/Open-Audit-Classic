@@ -1,7 +1,7 @@
 <?php
 include_once("include.php");
 
-$time_start = microtime_float();
+
 
 require("overview_viewdef.php");
 
@@ -35,7 +35,7 @@ foreach($query_array as $view_master) {
                 if(isset($view["headline"])){
                     $body .= $view["headline"];
                 }
-                $body .= "<table class=\"tftable\"    width=\"100%\">\n";
+                $body .= "<table class=\"tftable\"    >\n";
                 $body .= " <tr>\n";
 
                 $colgroup = "<colgroup>\n";
@@ -183,7 +183,7 @@ foreach($query_array as $view_master) {
     //Headline
     $buffer = "<div class=\"main_each\">";
 
-    $buffer .= "<table class=\"tftable\"    width=\"100%\" >\n";
+    $buffer .= "<table class=\"tftable\"     >\n";
      $buffer .= "<tr\n>";
       $buffer .= "<td class=\"contenthead\" width=\"450\">\n";
        $buffer .= "<a href=\"javascript://\" onclick=\"switchUl('f".$view_count."');\">\n";
@@ -216,7 +216,7 @@ foreach($query_array as $view_master) {
   
 
  echo "</td>\n";
-// include "include_right_column.php";
+
 echo "</body>\n";
 echo "</html>\n";
 ?>

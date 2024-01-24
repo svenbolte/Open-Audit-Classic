@@ -1,7 +1,7 @@
 <?php
     $page = "";
     include "include.php";
-    $time_start = microtime_float();
+    
 
     if (!empty($_POST['Perform'])) {
       foreach($_POST as $id) {
@@ -41,20 +41,20 @@
               }
             </script>
      
-              <table class=\"tftable\"  width=\"100%\">
+              <table>
                 <tr>
                    <td class=\"contenthead\">".__("Delete other Equipments")."<br />&nbsp;</td>
                 </tr>
               </table>
              
-              <table class=\"tftable\"  class=\"tftable\" width=\"100%\">
+              <table>
                 <tr>
                    <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected other equipments\" onclick=\"return confirm('Do you really want to DELETE all selected other equipments?')\"></td>
                    <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
                 </tr>
               </table>
 
-              <table class=\"tftable\"  class=\"tftable\" width=\"100%\">
+              <table class=\"tftable\"  class=\"tftable\" >
                 <tr>&nbsp;</tr>
                 <tr>
                    <td></td>
@@ -86,5 +86,5 @@
     echo "</div>\n";
     
     echo "</td>\n";
-    // include "include_right_column.php";
+    
 ?>

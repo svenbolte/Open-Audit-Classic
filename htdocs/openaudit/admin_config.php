@@ -551,7 +551,7 @@ function CheckedIfYes(&$var)
 </td>
 
 <?php
-// include "include_right_column.php";
+
 ?>
 
 </body>

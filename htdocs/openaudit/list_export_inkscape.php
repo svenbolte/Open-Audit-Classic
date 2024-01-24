@@ -6,7 +6,7 @@ include_once("include_lang.php");
 include_once("include_inkscape_config.php");
 // Set time limit to avoid broken pages, this may need to be a config var if this becomes an issue elsewhere.
 
-//$time_start = microtime_float();
+//
 
 
 //MySQL-Connect
