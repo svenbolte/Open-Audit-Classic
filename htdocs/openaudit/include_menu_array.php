@@ -199,6 +199,7 @@ $menue_array = array(
                                     "75"=>array("name"=>"Memory Size", "link"=>"./list.php?view=statistic_memory", "image"=>"fa-stack-exchange", "title"=>"Memory Size",),
                                     "80"=>array("name"=>"Processor Types", "link"=>"./list.php?view=statistic_processor", "image"=>"fa-microchip", "title"=>"Processor Types",),
                                     "85"=>array("name"=>"Hard Drive", "link"=>"./list.php?view=statistic_harddrive", "image"=>"fa-navicon", "title"=>"Hard Drive",),
+                                    "87"=>array("name"=>"DNS and Gateways", "link"=>"./list.php?view=systems_for_gateway", "image"=>"fa-sitemap", "title"=>"DNS-Server und Gateways",),
                                     "90"=>array("name"=>"Keys", "link"=>"./list.php?view=statistic_keys", "image"=>"fa-key", "title"=>"Lizenzschlüssel",),
                                     "92"=>array("name"=>"Model", "link"=>"list.php?view=statistic_model", "image"=>"fa-laptop", "title"=>"Modelle",), 
                                     "94"=>array("name"=>"Manufacturer", "link"=>"list.php?view=statistic_manufacturer", "image"=>"fa-truck", "title"=>"Hersteller",), 

@@ -1,4 +1,6 @@
-﻿* {
+﻿:root {--openauditcolor:#047;--openauditcolorlite4:#0474;--openauditcolorlite2:#0472;--openauditcolorlite1:#0471}
+
+* {
 border-radius:3px;
 font-family:Arial,sans-serif
 }
@@ -53,7 +55,7 @@ text-decoration:none
 
 input,select,textarea {
 background-color:#fff;
-border:1px solid #066;
+border:1px solid var(--openauditcolor);
 border-radius:2px;
 color:#000;
 font-size:14px;
@@ -67,15 +69,15 @@ height:auto
 }
 
 ::-webkit-file-upload-button {
-background:#066;
-border:1px solid #066;
+background:var(--openauditcolor);
+border:1px solid var(--openauditcolor);
 color:#fff;
 margin-top:-1px
 }
 
 button,submit,input.submit,input.file {
-background-color:#066;
-border:1px solid #066;
+background-color:var(--openauditcolor);
+border:1px solid var(--openauditcolor);
 border-radius:3px;
 color:#fff;
 cursor:pointer;
@@ -90,22 +92,22 @@ width:100%
 
 .button {
 background-color:#fff;
-border:1px solid #066;
-color:#066;
+border:1px solid var(--openauditcolor);
+color:var(--openauditcolor);
 cursor:pointer;
 padding:3px;
 text-transform:uppercase
 }
 
 .button:hover,.submit:hover {
-background:#066;
+background:var(--openauditcolor);
 box-shadow:inset 0 0 100px 100px rgba(255,255,255,0.2);
 color:#fff
 }
 
 input[type=button], input[type=submit], input[type=reset] {
 text-transform:uppercase;
-background-color: #066;
+background-color: var(--openauditcolor);
 vertical-align:middle;
 font-size:1.2em;
 height:32px;
@@ -117,7 +119,7 @@ cursor: pointer
 }
 
 .search_input {
-border:1px solid #066;
+border:1px solid var(--openauditcolor);
 height:21px;
 padding:2px;
 padding-left:3px;
@@ -148,7 +150,7 @@ vertical-align:top
 background-color:#fff;
 background-position:right;
 background-repeat:no-repeat;
-border:1px solid #066;
+border:1px solid var(--openauditcolor);
 border-radius:2px;
 height:16px;
 padding:0;
@@ -164,11 +166,11 @@ width:100%
 }
 
 .tftable tr:nth-child(odd) {
-background-color:#0662
+background-color:var(--openauditcolorlite2)
 }
 
 .tftable tr:nth-child(even) {
-background-color:#0661
+background-color:var(--openauditcolorlite1)
 }
 
 .headerbanner {
@@ -227,10 +229,10 @@ padding-right:5px
 
 a:link,a:visited {
 background-color:transparent;
-color:#066;
+color:var(--openauditcolor);
 font-weight:400;
 text-decoration:none;
-text-shadow:.5px 0 0 #066
+text-shadow:.5px 0 0 var(--openauditcolor)
 }
 
 a:active,a:hover {
@@ -314,7 +316,7 @@ background-color:#ddd;
 }
 
 ul#primary-nav li a:hover {
-color:#066
+color:var(--openauditcolor)
 }
 
 .menuparent img {
@@ -339,7 +341,7 @@ td.views_tablehead {
 font-weight:700;
 padding-right:10px;
 text-align:left;
-background-color:#0664;
+background-color:var(--openauditcolorlite4);
 }
 
 td.system_tablehead {
@@ -383,7 +385,7 @@ width:32px
 }
 
 div.npb_section_heading {
-background-color:#0662;
+background-color:var(--openauditcolor)2;
 border:none;
 font-weight:400;
 margin-top:8px;
@@ -400,7 +402,7 @@ color:#000
 }
 
 div.npb_section_heading a:hover {
-color:#066;
+color:var(--openauditcolor);
 text-decoration:none
 }
 
@@ -438,7 +440,7 @@ width:100%
 }
 
 tr.npb_highlight_row {
-background-color:#0666
+background-color:var(--openauditcolor)6
 }
 
 a.npb_ldap_logout {
@@ -452,7 +454,7 @@ background:url(images/Shading3.png) repeat-x top left
 }
 
 .ldap_details {
-border:1px solid #066a;
+border:1px solid var(--openauditcolor)a;
 margin:5px;
 padding:20px
 }
