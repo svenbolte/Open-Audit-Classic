@@ -67,6 +67,7 @@ $sumlcpu = 0;
 $total_hard_drive_size = 0;
 $total_system_memory = 0;
 $totals=0;
+
 if ($myrow = mysqli_fetch_array($result)){
 	do {
 		foreach($query_array["fields"] as $field) {

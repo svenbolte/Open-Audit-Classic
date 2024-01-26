@@ -1,4 +1,4 @@
-﻿:root {--openauditcolor:#047;--openauditcolorlite4:#0474;--openauditcolorlite2:#0472;--openauditcolorlite1:#0471}
+﻿:root {--openauditcolor:#047;--openauditcolorlite4:#0473;--openauditcolorlite2:#0472;--openauditcolorlite1:#0471}
 
 * {
 border-radius:3px;
@@ -328,7 +328,7 @@ width:16px
 
 table {
 background-color:#fff8;
-width:100%;
+width: calc(100% - 6px);
 border-spacing:1px
 }
 
