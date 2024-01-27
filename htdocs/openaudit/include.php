@@ -189,7 +189,7 @@ get_headerbanner();
 // Search box
 echo "<div id=\"inforechts\"><form action=\"search.php\" method=\"get\">\n";
 echo "<input size=\"25\" placeholder=\"Suchbegriff\" name=\"search_field\" />\n";
-echo "<input style=\"margin-top:0;font-family: FontAwesome\" value=\"&#xf002;\" type=\"submit\" />\n";
+echo "<input style=\"width:auto;margin-top:0;font-family: FontAwesome\" value=\"&#xf002;\" type=\"submit\" />\n";
 echo "</form>";
 echo "</div>\n";
 

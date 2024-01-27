@@ -40,7 +40,9 @@ function return_unknown($something)
 function get_headerbanner() {
 	?>
 	<div class="headerbanner"><div style="display:inline-block;backdrop-filter:blur(8px)">
-	<a style="padding-left:6px;font-size:2.5em;color:#000;line-height:1em;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff" href="index.php">OpenAudit Classic</a>
+	<a style="padding-left:6px;font-size:2.5em;color:#000;line-height:1em;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff" href="index.php">OpenAudit Classic - 
+	<?php echo strtoupper($_SERVER['SERVER_NAME']); ?>
+	</a>
 	</div>
 	<?php
 }

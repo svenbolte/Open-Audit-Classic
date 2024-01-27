@@ -156,7 +156,7 @@ function DisplaySection($SwitchID, $Display, $DivID, $TotalString, $RssUrl='')
 	// ****************************************************
 	
 	echo "			<a href=\"javascript://\" onclick=\"switchUl('$SwitchID');\">$Display</a>";
-	echo "			<img class='npb_down' src=\"images/down.png\" alt=\"\" onclick=\"switchUl('$SwitchID');\"/>";
+	echo "			<i class='fa fa-arrow-down' style='float:right;margin-top:6px;cursor:pointer' onclick=\"switchUl('$SwitchID');\"></i>";
 	echo "		</div>";
 	echo "		<div class='npb_section_data' id='$DivID'>";
 	echo "			<p class='npb_section_summary'>".__($TotalString).": <img class='npb_hourglass' alt='Retrieving...' src='images/hourglass-busy.gif'/></p>";

@@ -70,7 +70,7 @@ if (isset($_GET['ipliste'])) {
 echo '</td></tr><tr><td colspan=2 style="padding-left:50px"> <h2>IP-Rechner</h2>';
 
 ?>
-<script type="text/javascript">
+<script>
 function IPv4_Address( addressDotQuad, netmaskBits ) {
 	var split = addressDotQuad.split( '.', 4 );
 	var byte1 = Math.max( 0, Math.min( 255, parseInt( split[0] ))); /* sanity check: valid values: = 0-255 */
@@ -195,15 +195,15 @@ function update_ip(){
 	var a=new IPv4_Address(document.ip_subnet.in_ip_address.value,use_subnet_bits);
 	document.getElementById("ip_dotquad").firstChild.data=a.addressDotQuad;
 	document.getElementById("ip_integer").firstChild.data=a.addressInteger;
-	//document.getElementById("ip_binary").firstChild.data=IPv4_BinaryDotQuad(a.addressBinStr);
+	document.getElementById("ip_binary").firstChild.data=IPv4_BinaryDotQuad(a.addressBinStr);
 	document.getElementById("netmask_dotquad").firstChild.data=a.netmaskDotQuad;
 	document.getElementById("netmask_integer").firstChild.data=a.netmaskInteger;
-	//document.getElementById("netmask_binary").firstChild.data=IPv4_BinaryDotQuad(a.netmaskBinStr);
+	document.getElementById("netmask_binary").firstChild.data=IPv4_BinaryDotQuad(a.netmaskBinStr);
 	document.getElementById("netmask_bits").firstChild.data=a.netmaskBits+" bits";
-	//document.getElementById("netaddress_binary").firstChild.data=IPv4_BinaryDotQuad(a.netaddressBinStr);
+	document.getElementById("netaddress_binary").firstChild.data=IPv4_BinaryDotQuad(a.netaddressBinStr);
 	document.getElementById("netaddress_integer").firstChild.data=a.netaddressInteger;
 	document.getElementById("netaddress_dotquad").firstChild.data=a.netaddressDotQuad;
-	//document.getElementById("netbcast_binary").firstChild.data=IPv4_BinaryDotQuad(a.netbcastBinStr);
+	document.getElementById("netbcast_binary").firstChild.data=IPv4_BinaryDotQuad(a.netbcastBinStr);
 	document.getElementById("netbcast_integer").firstChild.data=a.netbcastInteger;
 	document.getElementById("netbcast_dotquad").firstChild.data=a.netbcastDotQuad;
 	document.getElementById("netpossible_quantity").firstChild.data=(parseFloat(a.netbcastInteger)-parseFloat(a.netaddressInteger)+1)+" IPs"};
@@ -214,37 +214,42 @@ Netzwerkmaske:	<select name="in_ip_netmask" id="in_ip_netmask" onchange="update_
 </form>
 <figure class="wp-block-table table table-responsive table-striped table-condensed">
 <style>.tftable td {padding:8px}</style>
-<table class=\"tftable\"  class="tftable" style="padding:8px;font-size:1.2em">
+<table class="tftable" style="padding:8px;font-size:1.2em">
 <tbody>
 <tr>
 <th></th>
 <th>Notation</th>
 <th>Zähler</th>
 <th>Range</th>
+<th>Binär</th>
 </tr>
 <tr>
 <th>Adresse:</th>
 <td><span id="ip_dotquad">unset</span></td>
 <td><span id="ip_integer">unset</span></td>
 <td></td>
+<td><span id="ip_binary">unset</span></td>
 </tr>
 <tr>
 <th>Netzmaske:</th>
 <td><span id="netmask_dotquad">unset</span></td>
 <td><span id="netmask_integer">unset</span></td>
 <td><nobr><span id="netmask_bits">unset</span></nobr></td>
+<td><span id="netmask_binary">unset</span></td>
 </tr>
 <tr>
 <th>Netzwerk:</th>
 <td><span id="netaddress_dotquad">unset</span></td>
 <td><span id="netaddress_integer">unset</span></td>
 <td></td>
+<td><span id="netaddress_binary">unset</span></td>
 </tr>
 <tr>
 <th>Broadcast:</th>
 <td><span id="netbcast_dotquad">unset</span></td>
 <td><span id="netbcast_integer">unset</span></td>
 <td><nobr><span id="netpossible_quantity">unset</span></nobr></td>
+<td><span id="netbcast_binary">unset</span></td>
 </tr>
 </tbody>
 </table>

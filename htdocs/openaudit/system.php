@@ -454,10 +454,10 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
      //Edit- and Submit-Button
      if(isset($viewdef_array["edit"]) AND $viewdef_array["edit"]=="y"){
          echo "<tr>\n";
-          echo "<td>\n";
+          echo "<td colspan=2>\n";
            if(isset($_REQUEST["edit"]) AND $_REQUEST["edit"]==1){
         echo "<input type=\"submit\" name=\"save\" value=\"".__("Save")."\" />";
-           }else{
+           } else {
         echo "<input type=\"button\" name=\"edit\" value=\"Edit\"";
         echo "onclick=\"window.location.href='".$_SERVER["PHP_SELF"]."?";
         if(isset($_REQUEST["pc"])){
