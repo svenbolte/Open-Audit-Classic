@@ -642,7 +642,7 @@ if ($myrow = mysqli_fetch_array($result)){
 
 } else {
 
-  echo "<tr><td colspan=\"4\">".__("No Results")."</td></tr>\n";
+  echo "<tr><td colspan=\"7\">".__("No Results")."</td></tr>\n";
   echo "</table>\n";
   echo "</form>\n";
 }

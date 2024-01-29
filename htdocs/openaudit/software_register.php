@@ -43,7 +43,6 @@ if ($myrow = mysqli_fetch_array($result)){
   echo "<td><b>Lic-Vendor</b></td>\n";
   echo "<td><b>Lic-Comments</b></td>\n";
   echo "<td><b>Comments</b></td>\n";
-  echo "<td align=\"center\" ><b>&nbsp;&nbsp;Remove&nbsp;&nbsp;</b></td>\n";
   echo "</tr>\n";
   do {    $sql2  = "SELECT sum(license_purchase_number) as number_purchased FROM ";
     $sql2 .= "software_licenses, software_register WHERE ";
@@ -89,11 +88,10 @@ if ($myrow = mysqli_fetch_array($result)){
     echo "<td align=\"left\" ><nobr>". $myrow['licpcomm'] . "</nobr></td>\n";
     echo "<td align=\"left\" style=\"width:30%;min-width:30%\" >". $myrow['software_comments'] . "</td>\n";
     echo "<td align=\"center\"><div id=\"s" . $myrow['software_reg_id'] . "\">\n";
-    echo "<a href=\"#\" onclick=\"sendRequest('" . url_clean($myrow["software_reg_id"]) . "');\"><img border=\"0\" src=\"images/button_fail.png\" width=\"16\" height=\"16\" alt=\"\" /></a>";
     echo "</div></td>\n"; 
     echo "</tr>";
   } while ($myrow = mysqli_fetch_array($result));
-  echo "</table><br><hr><b>Anzahl: ".($count + 1)."</b>";
+  echo "<tfoot><tr><td colspan=9><b>Anzahl: ".($count + 1)."</b></td></tr></tfoot></table>";
 } else {
   echo "<p class=\"content\">No Packages in database.</p>"; 
 }

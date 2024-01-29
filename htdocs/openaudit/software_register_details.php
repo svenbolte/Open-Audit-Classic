@@ -22,8 +22,8 @@ if ($myrow = mysqli_fetch_array($result)){
     $name = $myrow["software_title"];
     
     echo "<table>\n";
-    echo "<tr><td class=\"contenthead\" colspan=\"2\">Software License Register Details for: </td></tr>\n";
-    echo "<tr><td>" . $myrow["software_title"] . "</td></tr>\n";
+    echo "<tr><td class=\"contenthead\" colspan=\"2\">Software License Register Details for: ";
+    echo $myrow["software_title"] . "</td></tr>\n";
     echo "<tr><td class=\"contenthead\"><br />Usage Details.</td></tr>\n";
 	echo '</table><table class="tftable"><tr>';
     echo "<td width=\"25%\"><b>Package Name&nbsp;&nbsp;</b></td>\n";
