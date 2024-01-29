@@ -132,7 +132,9 @@ if ($use_pass != "n") {
 <meta name="msapplication-navbutton-color" content="#e1e1e1">
 <style>:root{--openauditcolor:<?php echo $accent_color ?>;--openauditcolorlite1:<?php echo $accent_color ?>1;--openauditcolorlite2:<?php echo $accent_color ?>2;--openauditcolorlite4:<?php echo $accent_color ?>3}
 <?php
-if ($accent_color == '#066') echo '.headerbanner, body img {filter: hue-rotate(-10deg);}';
+if ($accent_color == '#066') echo '.headerbanner {filter: hue-rotate(-15deg)}';
+if ($accent_color == '#822') echo '.headerbanner {filter: grayscale(.8)}';
+if ($accent_color == '#666') echo '.headerbanner {filter: grayscale(.8)}';
 ?>
 </style>
 <link media="screen" rel="stylesheet" type="text/css" href="default.css" />
@@ -169,7 +171,7 @@ if ($accent_color == '#066') echo '.headerbanner, body img {filter: hue-rotate(-
   }
 ?>
 </head>
-<body onload="IEHoverPseudo();">
+<body>
 <?php
 
 $pc = GetGETOrDefaultValue("pc", "");
@@ -195,8 +197,8 @@ get_headerbanner();
 
 // Search box
 echo "<div id=\"inforechts\"><form action=\"search.php\" method=\"get\">\n";
-echo "<input size=\"25\" placeholder=\"Suchbegriff\" name=\"search_field\" />\n";
-echo "<input style=\"width:auto;margin-top:0;font-family: FontAwesome\" value=\"&#xf002;\" type=\"submit\" />\n";
+echo "<input size=\"25\" placeholder=\"Suchbegriff (Enter)\" name=\"search_field\" />\n";
+// echo "<input style=\"width:auto;margin-top:0;font-family: FontAwesome\" value=\"&#xf002;\" type=\"submit\" />\n";
 echo "</form>";
 echo "</div>\n";
 
