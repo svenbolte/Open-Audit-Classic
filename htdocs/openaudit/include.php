@@ -117,52 +117,59 @@ if ($use_pass != "n") {
 } else {}
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Open-AudIT</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#e1e1e1">
-	<meta name="msapplication-navbutton-color" content="#e1e1e1">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
-	<link rel="stylesheet" href="/openaudit/fonts/css/font-awesome.min.css" />
-	<link rel="stylesheet" media="print" type="text/css" href="defaultprint.css" />
-	<script type='text/javascript' src="javascript/ajax.js"></script>
-	<script type='text/javascript' src="javascript/include.js"></script>
-    <?php 
-      // Used to only included pieces of jquery/jquery ui that the page needs.
-      if(isset($JQUERY_UI)){
-        echo '<script type="text/javascript" src="javascript/jquery/jquery.js"></script>'."\n";
-        echo '<script type="text/javascript" src="javascript/jquery/jquery-bgiframe.js"></script>'."\n";
-        echo '<link media="screen" rel="stylesheet" type="text/css" href="jquery-ui-theme.css" />'."\n";
-        foreach($JQUERY_UI as $script) {
-          echo '<script type="text/javascript" src="javascript/jquery/jquery-ui-'.$script.'.js"></script>'."\n";
-          if ( file_exists('jquery-ui-'.$script.'.css') ) {
-            echo '<link media="screen" rel="stylesheet" type="text/css" href="jquery-ui-'.$script.'.css" />'."\n";
-          }
-        }
-      }
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-AudIT</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e1e1e1">
+<meta name="msapplication-navbutton-color" content="#e1e1e1">
+<style>:root{--openauditcolor:<?php echo $accent_color ?>;--openauditcolorlite1:<?php echo $accent_color ?>1;--openauditcolorlite2:<?php echo $accent_color ?>2;--openauditcolorlite4:<?php echo $accent_color ?>3}
+<?php
+if ($accent_color == '#066') echo '.headerbanner, body img {filter: hue-rotate(-10deg);}';
+?>
+</style>
+<link media="screen" rel="stylesheet" type="text/css" href="default.css" />
+<link rel="stylesheet" href="/openaudit/fonts/css/font-awesome.min.css" />
+<link rel="stylesheet" media="print" type="text/css" href="defaultprint.css" />
+<script type='text/javascript' src="javascript/ajax.js"></script>
+<script type='text/javascript' src="javascript/include.js"></script>
+<?php 
+  // Used to only included pieces of jquery/jquery ui that the page needs.
+  if(isset($JQUERY_UI)){
+	echo '<script type="text/javascript" src="javascript/jquery/jquery.js"></script>'."\n";
+	echo '<script type="text/javascript" src="javascript/jquery/jquery-bgiframe.js"></script>'."\n";
+	echo '<link media="screen" rel="stylesheet" type="text/css" href="jquery-ui-theme.css" />'."\n";
+	foreach($JQUERY_UI as $script) {
+	  echo '<script type="text/javascript" src="javascript/jquery/jquery-ui-'.$script.'.js"></script>'."\n";
+	  if ( file_exists('jquery-ui-'.$script.'.css') ) {
+		echo '<link media="screen" rel="stylesheet" type="text/css" href="jquery-ui-'.$script.'.css" />'."\n";
+	  }
+	}
+  }
 
-      // Only include certain files if it's a page that needs it.
-      switch(basename($_SERVER["PHP_SELF"])){
-        case 'list.php':
-        case 'system.php':
-        case 'system_graphs.php':
-          echo '<script type="text/javascript" src="javascript/list-system.js"></script>'."\n";
-          break;
-        case 'admin_config.php':
-          echo '<script type="text/javascript" src="javascript/PopupMenu.js"></script>'."\n".
-               '<script type="text/javascript" src="javascript/admin_config.js"></script>'."\n".
-               '<link media="screen" rel="stylesheet" type="text/css" href="admin_config.css" />'."\n";
-          break;
-      }
-    ?>
-
-  </head>
-  <body onload="IEHoverPseudo();">
+  // Only include certain files if it's a page that needs it.
+  switch(basename($_SERVER["PHP_SELF"])){
+	case 'list.php':
+	case 'system.php':
+	case 'system_graphs.php':
+	  echo '<script type="text/javascript" src="javascript/list-system.js"></script>'."\n";
+	  break;
+	case 'admin_config.php':
+	  echo '<script type="text/javascript" src="javascript/PopupMenu.js"></script>'."\n".
+		   '<script type="text/javascript" src="javascript/admin_config.js"></script>'."\n".
+		   '<link media="screen" rel="stylesheet" type="text/css" href="admin_config.css" />'."\n";
+	  break;
+  }
+?>
+</head>
+<body onload="IEHoverPseudo();">
 <?php
 
 $pc = GetGETOrDefaultValue("pc", "");

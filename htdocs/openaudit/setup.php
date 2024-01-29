@@ -15,14 +15,22 @@ include_once "include_lang.php";
 include_once "include_functions.php";
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
     <title>Open-AudIT Setup</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<style>:root{--openauditcolor:<?php echo $accent_color ?>;--openauditcolorlite1:<?php echo $accent_color ?>1;--openauditcolorlite2:<?php echo $accent_color ?>2;--openauditcolorlite4:<?php echo $accent_color ?>3}
+	<?php
+	if ($accent_color == '#066') echo '.headerbanner, body img {filter: hue-rotate(-10deg);}';
+	?>
+	</style>
     <link rel="stylesheet" type="text/css" href="default.css" />
-  </head>
-  <body>
+</head>
+<body>
 <?php
 	get_headerbanner();
 ?>

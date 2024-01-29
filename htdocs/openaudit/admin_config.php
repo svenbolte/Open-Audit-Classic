@@ -32,12 +32,12 @@ $JQUERY_UI = array('core','dialog','tooltip');
 $page = "admin";
 include "include.php";
 
-if(isset($_POST['submit_button']))
-{
+if(isset($_POST['submit_button'])) {
 	/**********************************************************************************************************
 	$_POST['submit_button'] is defined - i.e. FORM has been submitted - check POSTed values
 	**********************************************************************************************************/
 
+	$accent_color = GetPOSTOrDefaultValue('accent_color','#047');
 	$language_post = GetPOSTOrDefaultValue('language_post','en');
 
 	// *************** Check Security settings ************************************************
@@ -111,8 +111,9 @@ if(isset($_POST['submit_button']))
 
   // ****************  General Settings *******************************************
   $content .= "// ****************  General Settings *******************************************\n";
+  $content .= "\$accent_color = '".$accent_color."';\n";
   $content .= "\$language = '".$language_post."';\n";
-	$content .= "\$mysqli_server = '".$_POST['mysqli_server_post']."';\n";
+  $content .= "\$mysqli_server = '".$_POST['mysqli_server_post']."';\n";
   $content .= "\$mysqli_user = '".$_POST['mysqli_user_post']."';\n";
   $content .= "\$mysqli_password = '".$_POST['mysqli_password_post']."';\n";
   $content .= "\$mysqli_database = '".$_POST['mysqli_database_post']."';\n\n";
@@ -190,7 +191,7 @@ if(isset($_POST['submit_button']))
     echo "Cannot write to file ($filename)";
     exit;
   }
-  echo "<font color=blue>" . __("The Open-AudIT config has been updated") . ".</font>";
+  echo '<div style="text-align:center">' . __("The Open-AudIT config has been updated") . '</div>';
   fclose($handle);
 }
 // re include the config so the page displays the updated variables
@@ -249,25 +250,35 @@ echo "<form method='post' action='" . $_SERVER["PHP_SELF"] . "' id='admin_config
 
 // ****************  Create DIV - General *******************************************
 echo "<div id='npb_config_general_div' class='npb_section_data'>\n";
+
 echo "<fieldset><legend>Language</legend>\n";
 echo "<label>".__("Language").":</label><select size='1' name='language_post'>\n";
-
 // Get available languages - under "lang" directory - and populate dropdown
 $handle=opendir('./lang/');
-while ($file = readdir ($handle))
-{
-	if ($file != "." && $file != "..")
-	{
-		if(substr($file,strlen($file)-4)==".inc")
-		{
+while ($file = readdir ($handle)) {
+	if ($file != "." && $file != "..") {
+		if(substr($file,strlen($file)-4)==".inc") {
 			if($language == substr($file,0,strlen($file)-4)) $selected="selected='selected'"; else $selected="";
       echo "<option $selected>".substr($file,0,strlen($file)-4)."</option>\n";
 		}
 	}
 }
 closedir($handle);
+echo "</select>\n";
+echo "</fieldset>\n";
+
+// Akzentfarbe
+echo "<fieldset><legend>Color Theme</legend>\n";
+echo "<label>".__("accent color").":</label><select size='1' name='accent_color'>\n";
+	$colorarray = array('#047','#066','#666','#822');
+	foreach ($colorarray as $colo) {
+		if ($accent_color == $colo) $selected='selected="selected"'; else $selected='';
+		echo '<option $selected value="'.$colo.'">'.$colo.'</option>';
+	}	
 
 echo "</select>\n";
+foreach ($colorarray as $colo) echo ' &nbsp; <span style="padding:8px;color:#fff;background-color:'.$colo.'">'.$colo.'</span>';
+
 echo "</fieldset>\n";
 echo "<fieldset><legend>MySQL</legend>\n";
 echo "<label>MySQL ".__("Server").":</label><input type='text' name='mysqli_server_post' size='12' value='".$mysqli_server."'/><br />\n";

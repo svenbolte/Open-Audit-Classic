@@ -1,185 +1,33 @@
-﻿.npb-tooltip {
-margin-right:5px
-}
-
-.npb-save-alert {
-float:left;
-margin-right:10px
-}
-
-#npb-save-error-div {
-height:90px;
-overflow:auto
-}
-
-#npb-save-error-list {
-font:normal 75% verdana,tahoma,arial,Sans
-}
-
-#npb_popupmenu_div {
-background-color:#fff;
-border:1px solid #CCC;
-font:normal 80% verdana,tahoma,arial,Sans;
-line-height:1.2em;
-position:absolute;
-visibility:hidden;
-z-index:100
-}
-
-#npb_popupmenu_div a {
-color:#000;
-display:block;
-padding-left:4px;
-text-decoration:none
-}
-
-#npb_popupmenu_div a:hover {
-background-color:#e1e1e1
-}
-
-ul.npb_tab_nav {
-font-size:1em;
-margin:0;
-padding:2px 10px
-}
-
-ul.npb_tab_nav li {
-border-right:1px #Ccc solid;
-display:inline;
-padding:0 10px
-}
-
-#npb_config_general_tab {
-font-weight:700;
-padding:0 10px 0 0
-}
-
-#npb_config_security_div,#npb_config_homepage_div,#npb_config_connections_div,#npb_config_audits_div,#npb_config_save_error {
-display:none
-}
-
-#config_general p,#config_security p,#config_homepage p,#config_ldap p {
-font-weight:400
-}
-
-div.npb_config_col {
-display:inline;
-margin:0 0 0 15px
-}
-
-#npb_ldap_connections_div,#npb_smtp_connection_div {
-font-size:1em;
-margin:10px;
-padding:5px
-}
-
-.npb-connection-config {
-display:none;
-font:normal 80% verdana,tahoma,arial,Sans;
-padding:10px
-}
-
-#npb_connection_test_div {
-margin:-20px 0 0
-}
-
-#npb_config_connections_div button,#npb_choose_email_div button {
-font:normal 80% verdana,tahoma,arial,Sans;
-margin:0 0 0 10px
-}
-
-.npb-connection-config fieldset,#npb_config_security_div fieldset,#npb_config_audits_div fieldset,#npb_config_general_div fieldset {
-border:1px solid #ccc;
-margin:5px;
-width:95%
-}
-
-.npb-connection-config label,#npb_config_general_div label,#npb_smtp_test {
-display:block;
-float:left;
-margin:5px 0 0;
-padding:0;
-text-align:right;
-width:150px
-}
-
-#npb_config_security_div label,#npb_config_general_div label {
-display:block;
-float:left;
-margin:5px 0 0;
-padding:0;
-text-align:right;
-width:200px
-}
-
-#npb_config_homepage_div label {
-display:block;
-float:left;
-margin:5px 0 0;
-padding:0;
-text-align:right;
-width:400px
-}
-
-div.npb_section_content form {
-display:inline
-}
-
-#npb_ldap_connections_div img,#npb_smtp_connection_div img {
-border:0;
-height:24px;
-margin:0 5px 0 0;
-vertical-align:middle;
-width:24px
-}
-
-#npb_ldap_connections_div table,#npb_smtp_connection_div table {
-border-collapse:collapse;
-border-spacing:0;
-vertical-align:middle;
-width:100%
-}
-
-#npb_ldap_connections_div td,#npb_smtp_connection_div td {
-border-bottom:2px solid #e0e0e0;
-padding:5px
-}
-
-#npb_ldap_connections_div th,#npb_smtp_connection_div th {
-background-color:#E0E0E0;
-margin-bottom:25px;
-padding:5px;
-text-align:left
-}
-
-#npb_ldap_connections_div ul {
-list-style:none outside;
-padding:0
-}
-
-.npb-smtp-data {
-text-align:center
-}
-
-.npb-label-div {
-float:left;
-margin-left:75px
-}
-
-#npb_config_save_error,.npb-connection-config button {
-font:normal 90% verdana,tahoma,arial,Sans
-}
-
-#npb_config_save_div,#npb_config_general_div,#npb_config_security_div,#npb_config_homepage_div,#npb_config_audits_div {
-padding:10px
-}
-
-.npb-connection-config input,#npb_config_general_div input,#npb_config_security_div input,#npb_config_homepage_div input,#npb_config_audits_div input,.npb-connection-config select {
-font:normal 90% verdana,tahoma,arial,Sans;
-margin:0 0 10px 10px;
-vertical-align:middle
-}
-
-.npb-connection-config input[type=checkbox],#npb_config_security_div input[type=checkbox],#npb_config_homepage_div input[type=checkbox],#npb_choose_email_div input[type=radio],#npb_config_general_div input[type=checkbox],#npb_config_general_div select {
-margin:4px 0 10px 10px
-}
+﻿.npb-tooltip{margin-right:5px}
+.npb-save-alert{float:left;margin-right:10px}
+#npb-save-error-div{height:90px;overflow:auto}
+#npb-save-error-list{font:normal 75% Arial,Sans}
+#npb_popupmenu_div{background-color:#fff;border:1px solid #ccc;font:normal 80% Arial,Sans;line-height:1.2em;position:absolute;visibility:hidden;z-index:100}
+#npb_popupmenu_div a{color:#000;display:block;padding-left:4px;text-decoration:none}
+#npb_popupmenu_div a:hover{background-color:#e1e1e1}
+ul.npb_tab_nav{font-size:1em;margin:0;padding:2px 10px}
+ul.npb_tab_nav li{border-right:1px #Ccc solid;display:inline;padding:0 10px}
+#npb_config_general_tab{font-weight:700;padding:0 10px 0 0}
+#npb_config_security_div,#npb_config_homepage_div,#npb_config_connections_div,#npb_config_audits_div,#npb_config_save_error{display:none}
+#config_general p,#config_security p,#config_homepage p,#config_ldap p{font-weight:400}
+div.npb_config_col{display:inline;margin:0 0 0 15px}
+#npb_ldap_connections_div,#npb_smtp_connection_div{font-size:1em;margin:10px;padding:5px}
+.npb-connection-config{display:none;font:normal 80% Arial,Sans;padding:10px}
+#npb_connection_test_div{margin:-20px 0 0}
+#npb_config_connections_div button,#npb_choose_email_div button{font:normal 80% Arial,Sans;margin:0 0 0 10px}
+.npb-connection-config fieldset,#npb_config_security_div fieldset,#npb_config_audits_div fieldset,#npb_config_general_div fieldset{border:1px solid #ccc;margin:5px;width:95%}
+.npb-connection-config label,#npb_config_general_div label,#npb_smtp_test{display:block;float:left;margin:5px 0 0;padding:0;text-align:right;width:150px}
+#npb_config_security_div label,#npb_config_general_div label{display:block;float:left;margin:5px 0 0;padding:0;text-align:right;width:200px}
+#npb_config_homepage_div label{display:block;float:left;margin:5px 0 0;padding:0;text-align:right;width:400px}
+div.npb_section_content form{display:inline}
+#npb_ldap_connections_div img,#npb_smtp_connection_div img{border:0;height:24px;margin:0 5px 0 0;vertical-align:middle;width:24px}
+#npb_ldap_connections_div table,#npb_smtp_connection_div table{border-collapse:collapse;border-spacing:0;vertical-align:middle;width:100%}
+#npb_ldap_connections_div td,#npb_smtp_connection_div td{border-bottom:2px solid #eee;padding:5px}
+#npb_ldap_connections_div th,#npb_smtp_connection_div th{margin-bottom:25px;padding:5px;text-align:left}
+#npb_ldap_connections_div ul{list-style:none outside;padding:0}
+.npb-smtp-data{text-align:center}
+.npb-label-div{float:left;margin-left:75px}
+#npb_config_save_error,.npb-connection-config button{font:normal 90% Arial,Sans}
+#npb_config_save_div,#npb_config_general_div,#npb_config_security_div,#npb_config_homepage_div,#npb_config_audits_div{padding:10px}
+.npb-connection-config input,#npb_config_general_div input,#npb_config_security_div input,#npb_config_homepage_div input,#npb_config_audits_div input,.npb-connection-config select{font:normal 90% Arial,Sans;margin:0 0 10px 10px;vertical-align:middle}
+.npb-connection-config input[type=checkbox],#npb_config_security_div input[type=checkbox],#npb_config_homepage_div input[type=checkbox],#npb_choose_email_div input[type=radio],#npb_config_general_div input[type=checkbox],#npb_config_general_div select{margin:4px 0 10px 10px}

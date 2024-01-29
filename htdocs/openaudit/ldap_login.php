@@ -90,14 +90,17 @@ if (isset($_POST['username']))
 	}
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Open-AudIT Setup</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <link rel="stylesheet" type="text/css" href="default.css" />
-  </head>
-	<body onload='document.getElementById("username").focus()'>
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-AudIT Setup</title>
+<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body onload='document.getElementById("username").focus()'>
 <?php
 	get_headerbanner();
 ?>
