@@ -327,9 +327,9 @@ if ($myrow = mysqli_fetch_array($result)){
 
                 //Generating the link
                 //Does the field have its own link? Otherwise take the standard-link of the view
-                if(isset($field["get"]["file"]) AND $field["get"]["file"]!=""){
+                if (isset($field["get"]["file"]) AND $field["get"]["file"]!="") {
                     $get_array=$field["get"];
-                }else{
+                } else {
                     if(isset($query_array["get"])){
                         $get_array=$query_array["get"];
                     }

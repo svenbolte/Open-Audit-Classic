@@ -24,7 +24,7 @@ if ($myrow = mysqli_fetch_array($result)){
     echo "<table>\n";
     echo "<tr><td class=\"contenthead\" colspan=\"2\">Software License Register Details for: ";
     echo $myrow["software_title"] . "</td></tr>\n";
-    echo "<tr><td class=\"contenthead\"><br />Usage Details.</td></tr>\n";
+    echo "<tr><td class=\"contenthead\"><br />Usage Details</td></tr>\n";
 	echo '</table><table class="tftable"><tr>';
     echo "<td width=\"25%\"><b>Package Name&nbsp;&nbsp;</b></td>\n";
     echo "<td width=\"25%\" align=\"center\"><b>&nbsp;&nbsp;Purchased&nbsp;&nbsp;</b></td>\n";
@@ -82,11 +82,11 @@ if ($myrow = mysqli_fetch_array($result)){
 $sql = "SELECT * FROM software_licenses WHERE license_comments <> 'OA initial license' AND license_software_id = '" . $_GET["id"] . "'";
 $result = mysqli_query($db,$sql);
 if ($myrow = mysqli_fetch_array($result)){
-  echo "<table class=\"tftable\"  >\n";
+	echo "<table>\n";
+    echo "<tr><td class=\"contenthead\"><br />Software Licenses Purchased</td></tr>\n";
+	echo '</table><table class="tftable"><tr>';
   echo "<tr>\n";
-  echo "  <td colspan=\"7\" class=\"contenthead\">Software Licenses Purchased.</td>\n";
-  echo "</tr>\n";
-  echo "<tr>\n";
+  echo "  <td width=\"10%\" align=\"center\"><b>Lic ID</b></td>\n";
   echo "  <td width=\"10%\" align=\"center\"><b>Purchase Date</b></td>\n";
   echo "  <td width=\"10%\" align=\"center\"><b>Number Purchased</b></td>\n";
   echo "  <td width=\"10%\" align=\"center\"><b>Vendor</b></td>\n";
@@ -98,12 +98,14 @@ if ($myrow = mysqli_fetch_array($result)){
   // tabellierung über tftable css
   do {
 	echo '<tr>';
+    echo "  <td align=\"center\">" . $myrow["license_id"] . "</td>\n";
     echo "  <td align=\"center\">" . substr($myrow["license_purchase_date"],0,10) . "</td>\n";
     echo "  <td align=\"center\">" . $myrow["license_purchase_number"] . "</td>\n";
     echo "  <td align=\"center\">" . $myrow["license_purchase_vendor"] . "</td>\n";
     echo "  <td align=\"center\">" . $myrow["license_purchase_cost_each"] . "</td>\n";
     echo "  <td align=\"center\">" . $myrow["license_purchase_type"] . "</td>\n";
-    echo "  <td align=\"center\"><a href=\"software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "\" onclick=\"return confirm('Do you really want to DELETE this license ?','software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "')\">Delete</a></td>\n";
+    echo "  <td align=\"center\"><a href=\"software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "\" onclick=\"return confirm('Do you really want to DELETE this license ?','software_register_del_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "')\">Delete</a>";
+    echo "   &nbsp; <a href=\"software_edit_license.php?id=" . $myrow["license_id"] . "&amp;id2=" . $_GET["id"] . "\">Edit License</a></td>\n";
     echo "  <td>" . $myrow["license_comments"] . "</td>\n";
     echo "</tr>\n";
 	// tabellierung über tftable css
@@ -122,7 +124,7 @@ if ($myrow = mysqli_fetch_array($result)){
       $result = mysqli_query($db,$sql);
       if ($myrow = mysqli_fetch_array($result)){
         echo "<table class=\"content\">\n";
-        echo "<tr><td class=\"contenthead\" colspan=\"3\"><br />Systems with \"" . $name . "\" installed.</td></tr>\n";
+        echo "<tr><td class=\"contenthead\" colspan=\"3\"><br />Systems with \"" . $name . "\" installed</td></tr>\n";
         echo '</table><table class="tftable"><tr><td>&nbsp;&nbsp;<b>IP Address</b></td><td>&nbsp;&nbsp;<b>Name</b></td><td>&nbsp;&nbsp;<b>Description</b></td><td>&nbsp;&nbsp;<b>Current User</b></td></tr>';
         do {
 			// tabellierung über tftable css

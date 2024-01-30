@@ -17,7 +17,8 @@ if ($myrow = mysqli_fetch_array($result)){
   <table class="content">
     <tr><td class="contenthead">Add Software License for: <?php echo $myrow["software_title"]; ?></td></tr>
   </table><table class="tftable">
-    <tr><td width="25%">Date Purchased:  </td><td><input type="text" name="date_purchased" size="20" />&nbsp;(yyyy-mm-dd)</td></tr>
+    <tr><td width="25%">Date Purchased:  </td><td>
+	  <input type="text" placeholder="yyyy-mm-dd" name="date_purchased" size="20" />&nbsp;(yyyy-mm-dd)</td></tr>
     <tr><td>Number Purchased:  </td><td><input type="text" name="number_purchased" size="20" /> Set to "-1" if this is free</td></tr>
     <tr><td>Vendor:  </td><td><input type="text" name="vendor" size="20" /></td></tr>
     <tr><td><nobr>Cost per License:</nobr></td><td><input type="text" name="cost" size="20" /></td></tr>
@@ -33,12 +34,13 @@ if ($myrow = mysqli_fetch_array($result)){
       <option value="Select License">Select License</option>
       <option value="VSPremium-MSDN">Visual Studio Premium MSDN</option>
       <option value="Abonnement">Lizenz-Software-Abonnement</option>
+	  <option value="NewCommerceAbo">Microsoft New Commerce Abo</option>
       <option value="Other">Other</option>
     </select></td></tr>
     <tr><td valign="top">Comments: </td><td colspan="2"><textarea rows="4" name="comments" cols="60"></textarea></td></tr>
-    <tr><td><input name="Submit" value="Submit" type="submit" /></td></tr>
+    <tr><td colspan=2><input name="Submit" value="Lizenz anlegen" type="submit" /></td></tr>
   </table>
-  <input type="hidden" value="<?php echo $_GET["id"]; ?>" name="id" />
+  <input type="hidden" value="<?php echo $_GET["id2"]; ?>" name="id" />
   </form>
   </div>
   <?php

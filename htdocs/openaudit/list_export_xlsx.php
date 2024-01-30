@@ -82,7 +82,9 @@ if ($myrow = mysqli_fetch_array($result)){
 
 // SUM line
 $sumstyle = '<style bgcolor="#cccccc"><b>';
-$csv_data = $sumstyle.($totals > 2 ? $totals : '').'</b>;'.$sumstyle.$result->num_rows.'</b>;'.$sumstyle.'Totals ungefiltert</b>;';
+$csv_data = $sumstyle.($totals > 2 ? $totals : '').'</b>;';
+if ($_REQUEST["view"] == 'all_systems_more' || $_REQUEST["view"] == 'all_servers') $csv_data .= $sumstyle.';'.$sumstyle.';';
+$csv_data .= $sumstyle.$result->num_rows.'</b>;'.$sumstyle.'Totals ungefiltert</b>;';
 $csv_data .= $sumstyle.($total_system_memory > 2 ? $total_system_memory : '').'</b>;'.$sumstyle.($total_hard_drive_size > 2 ? $total_hard_drive_size : '').'</b>;'.$sumstyle.'</b>;'.$sumstyle.($sumlcpu > 2 ? $sumlcpu : '').'</b>';
 $xlsx_data[] = explode(";",'');
 $xlsx_data[] = explode(";",$csv_data);

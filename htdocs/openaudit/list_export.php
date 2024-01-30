@@ -68,7 +68,7 @@ $total_hard_drive_size = 0;
 $total_system_memory = 0;
 $totals=0;
 
-if ($myrow = mysqli_fetch_array($result)){
+if ($myrow = mysqli_fetch_array($result)) {
 	do {
 		foreach($query_array["fields"] as $field) {
 			if ($field["head"]=="RAM") { $total_system_memory += (int) $myrow[$field["name"]]; }
@@ -97,12 +97,13 @@ if ($myrow = mysqli_fetch_array($result)){
         $csv_data .= "\r\n";
     } while ($myrow = mysqli_fetch_array($result));
 
-// SUM line
-$csv_data .= "\r\n";
-$csv_data .= ($totals > 2 ? $totals : '').';'.$result->num_rows.';'.'Totals ungefiltert;';
-$csv_data .= ($total_system_memory > 2 ? $total_system_memory : '').';'.($total_hard_drive_size > 2 ? $total_hard_drive_size : '').';;'.($sumlcpu > 2 ? $sumlcpu : '');
-$csv_data .= "\r\n";
-
+	// SUM line
+	$csv_data .= "\r\n";
+	$csv_data .= ($totals > 2 ? $totals : '').';';
+	if ($_REQUEST["view"] == 'all_systems_more' || $_REQUEST["view"] == 'all_servers') $csv_data .= ';;';
+	$csv_data .= $result->num_rows.';'.'Totals ungefiltert;';
+	$csv_data .= ($total_system_memory > 2 ? $total_system_memory : '').';'.($total_hard_drive_size > 2 ? $total_hard_drive_size : '').';;'.($sumlcpu > 2 ? $sumlcpu : '');
+	$csv_data .= "\r\n";
 }
 
 // set the filename if specified
