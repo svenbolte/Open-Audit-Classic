@@ -469,6 +469,8 @@ function returnConfig() {
   $content = "<";
   $content .= "?";
   $content .= "php \n";
+  $content .= "// Ensures that all variables have a default value\n";
+  $content .= "include_once \"include_config_defaults.php\"; \n\n";
   $content .= "\$mysqli_server = '" . $_POST['mysqli_server_post'] . "'; \n";
   $content .= "\$mysqli_database = '" . $_POST['mysqli_new_db'] . "'; \n";
   $content .= "\$mysqli_user = '" . $_POST['mysqli_new_user'] . "'; \n";
