@@ -1,2 +1,2 @@
-@cscript audit.vbs .
+@%windir%\system32\cscript.exe "audit.vbs" .
 

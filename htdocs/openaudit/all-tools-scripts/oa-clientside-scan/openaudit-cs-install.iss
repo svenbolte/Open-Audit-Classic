@@ -52,7 +52,7 @@ Name: "{commondesktop}\OpenAudit Clientsside Scan"; Filename: "{app}\oaclientsid
 Name: "{commondesktop}\Aufgabenplanung"; Filename: "%windir%\system32\taskschd.msc"; Parameters: "/s"; Tasks: desktopicon; Comment: "OpenAudit Aufgabe auf Domain-admin umstellen"
 
 [Run]
-Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\openaudit-clientscan.xml"" /TN Openaudit-Clientside-Scan"; Flags: runascurrentuser; Description: "OA Clientside Aufgabe importieren";
+Filename: "{sys}\schtasks.exe"; Parameters: "/create /RU SYSTEM /XML ""{app}\Openaudit-Clientside-Scan.xml"" /TN Openaudit-Clientside-Scan"; Flags: runascurrentuser; Description: "OA Clientside Aufgabe importieren";
 
 [UninstallRun]
 Filename: "{sys}\schtasks.exe"; Parameters: "/delete /TN Openaudit-Clientside-Scan"; RunOnceId: "DELCLITASK"
