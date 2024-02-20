@@ -2,7 +2,7 @@
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "OpenAudit Classic GPL3 Projekt"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
-#define Inhalte "Apache 2.4.58x64-VS17, MySQLMariaDB 10.6.16x64, PHP 8.3.3x64-thsafe, phpMyAdmin 5.2.1x64, NMap 7.94, NPCap 1.79 (für nmap), Wordpress 6.4.3, VC17Runtimes 02/24"
+#define Inhalte "Apache 2.4.58x64-VS17, MySQLMariaDB 10.6.17x64, PHP 8.3.3x64-thsafe, phpMyAdmin 5.2.1x64, NMap 7.94, NPCap 1.79 (für nmap), Wordpress 6.4.3, VC17Runtimes 02/24"
 
 [Setup]
 PrivilegesRequired=admin
@@ -86,6 +86,23 @@ Filename: "{app}\apache\apache_uninstallservice-win10.cmd"; Flags: shellexec; Ru
 Filename: "{app}\mysql\mysql_uninstallservice-win10.cmd"; Flags: shellexec; RunOnceId: "DELMYSQL"
 
 [Code]
+function InitializeSetup(): boolean;
+var
+  ResultCode: integer;
+begin
+  // Launch Notepad and wait for it to terminate
+  if Exec(ExpandConstant('{win}\system32\net.exe'), 'stop apache2.4', '', SW_SHOW,
+     ewWaitUntilTerminated, ResultCode) then
+  begin
+  end;
+  Result := True;
+  if Exec(ExpandConstant('{win}\system32\net.exe'), 'stop mysql', '', SW_SHOW,
+     ewWaitUntilTerminated, ResultCode) then
+  begin
+  end;
+  Result := True;
+end;
+
 // Rechnernamen, auf dem installiert wird, herausfinden
 function GetComputerName(Param: string): string;
 begin
