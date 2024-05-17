@@ -7,17 +7,17 @@ $query_array=array("headline"=>__("Statistic for Microsoft Edge on Chromium Vers
                                COUNT( * ) AS count_item,
                                round( 100 / (
                                        SELECT count(software_uuid) FROM software, system
-                                       WHERE (software_name LIKE 'Microsoft Edge%' OR software_name LIKE 'Edge%')
+                                       WHERE (software_name LIKE 'Microsoft Edge%')
                                               AND (software_name NOT LIKE 'Google Chrome Extension%' AND software_name NOT LIKE 'GoogleChrome%') 
                                               AND software_timestamp=system_timestamp AND software_uuid=system_uuid
                                        )
                                  * COUNT( * )
                                ,$round_to_decimal_places ) AS percentage
                                FROM software, system
-                               WHERE (software_name LIKE 'Microsoft Edge%' OR software_name LIKE 'Edge%')
+                               WHERE (software_name LIKE 'Microsoft Edge%')
                                       AND (software_name NOT LIKE 'Google Chrome Extension%' AND software_name NOT LIKE 'GoogleChrome%') 
                                       AND software_timestamp=system_timestamp AND software_uuid=system_uuid
-                               GROUP BY software_version
+                               GROUP BY software_name, software_version
                                ",
                    "sort"=>"count_item",
                    "dir"=>"DESC",

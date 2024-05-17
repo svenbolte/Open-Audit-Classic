@@ -33,6 +33,7 @@ if(is_file($include_filename)){
 }
 
 // totals defined
+$total_count_item = 0;
 $total_system_memory = 0;
 $total_hard_drive_size = 0;
 $total_partition_size = 0;
@@ -400,6 +401,8 @@ if ($myrow = mysqli_fetch_array($result)){
                 }
 
                 // numeric fields sums
+			   if ($field["name"]=="software_count") { $total_count_item += (int) $software_count; }
+			   if ($field["name"]=="count_item") { $total_count_item += (int) $count_item; }
 			   if ($field["name"]=="system_memory") { $total_system_memory += (int) $system_memory; }
 			   if ($field["name"]=="hard_drive_size") { $total_hard_drive_size += (int) $hard_drive_size; }
 			   if ($field["name"]=="partition_size") { $total_partition_size += (int) $partition_size; }
@@ -525,6 +528,8 @@ if ($myrow = mysqli_fetch_array($result)){
         foreach($query_array["fields"] as $field) {
             if($field["show"]!="n") {
 				echo "<td>";
+				if ($field["name"]=="software_count") echo number_format($total_count_item,0,",",".");
+				if ($field["name"]=="count_item") echo number_format($total_count_item,0,",",".");
 				if ($field["name"]=="system_memory") echo number_format($total_system_memory/1024,1,",",".").'G';
 				if ($field["name"]=="hard_drive_size") echo number_format($total_hard_drive_size/1024,1,",",".").'G';
 				if ($field["name"]=="partition_size") echo number_format($total_partition_size/1024,1,",",".").'G';

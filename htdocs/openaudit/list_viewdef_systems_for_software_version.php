@@ -54,7 +54,14 @@ $query_array=array("headline"=>__("List Systems for Software/Version"),
                                    "100"=>array("name"=>"net_domain",
                                                "head"=>__("Domain"),
                                                "show"=>$show_domain,
-                                              ),/*
+                                              ),
+								 "105"=>array("name"=>"software_location",
+                                               "head"=>__("Installdir"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+						  
+									 /*
                                    "110"=>array("name"=>"system_service_pack",
                                                "head"=>__("Servicepack"),
                                                "show"=>$show_service_pack,

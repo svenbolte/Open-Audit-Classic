@@ -3,7 +3,7 @@ host=NAME
 port=5900
 proxyhost=
 proxyport=5900
-password=
+password=D88CCA5E1E049C226C
 [options]
 use_encoding_0=1
 use_encoding_1=1
@@ -29,7 +29,7 @@ nostatus=0
 nohotkeys=0
 showtoolbar=1
 AutoScaling=0
-fullscreen=0
+fullscreen=1
 autoDetect=1
 8bit=0
 shared=1

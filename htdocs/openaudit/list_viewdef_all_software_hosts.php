@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List all Software with Hosts"),
-                   "sql"=>"SELECT software_name, software_version, software_publisher, softwareversionen.sv_version, softwareversionen.sv_instlocation, system_name, net_user_name, system_uuid
+                   "sql"=>"SELECT software_name, software_version, software_publisher, software_location, softwareversionen.sv_version, softwareversionen.sv_instlocation, system_name, net_user_name, system_uuid
 					 	FROM system, software 
 						LEFT JOIN softwareversionen
 						ON (
@@ -74,6 +74,12 @@ $query_array=array("headline"=>__("List all Software with Hosts"),
                                                "show"=>"y",
                                                "link"=>"y",
                                               ),
+								 "60"=>array("name"=>"software_location",
+                                               "head"=>__("Installdir"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+										  
                                   ),
                   );
 ?>

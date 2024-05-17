@@ -3,7 +3,7 @@
 $query_array=array("headline"=>__("Statistic for Microsoft Office Versions und Visio"),
                    "sql"=>"
                            SELECT
-                               DISTINCT software_name, software_version,
+                               DISTINCT software_name, software_version, software_location,
                                COUNT( software_name ) AS count_item,
                                round( 100 / (
                                        SELECT count(software_name) FROM software, system
@@ -24,7 +24,7 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions und V
 											software_name LIKE 'Microsoft 365%') AND
                                            software_timestamp=system_timestamp AND
                                            software_uuid=system_uuid
-                               GROUP BY software_name
+                               GROUP BY software_name,software_version
                                ",
                    "sort"=>"count_item",
                    "dir"=>"DESC",
@@ -36,23 +36,28 @@ $query_array=array("headline"=>__("Statistic for Microsoft Office Versions und V
                                              "headline_addition"=>"%software_name",
                                             ),
                                ),
-                   "fields"=>array(	"10"=>array("name"=>"software_name",
-                                               "head"=>__("Name"),
-                                               "show"=>"y",
-                                               "link"=>"y",
-                                              ),
-									"12"=>array("name"=>"software_version",
-                                               "head"=>__("Version"),
-                                               "show"=>"y",
-                                               "link"=>"y",
-                                              ),
-                                   "20"=>array("name"=>"count_item",
+                   "fields"=>array( "10"=>array("name"=>"count_item",
                                                "head"=>__("Count"),
                                                "show"=>"y",
                                                "link"=>"n",
                                                "search"=>"n",
+                                              ),	
+								"12"=>array("name"=>"software_name",
+                                               "head"=>__("Name"),
+                                               "show"=>"y",
+                                               "link"=>"y",
                                               ),
-                                   "30"=>array("name"=>"percentage",
+									"14"=>array("name"=>"software_version",
+                                               "head"=>__("Version"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+								 "16"=>array("name"=>"software_location",
+                                               "head"=>__("Installdir"),
+                                               "show"=>"y",
+                                               "link"=>"y",
+                                              ),
+								"30"=>array("name"=>"percentage",
                                                "head"=>__("Percentage"),
                                                "show"=>"y",
                                                "link"=>"n",

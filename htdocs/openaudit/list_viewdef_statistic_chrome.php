@@ -17,7 +17,7 @@ $query_array=array("headline"=>__("Statistic for Google Chrome Versions"),
                                WHERE (software_name LIKE 'Google Chrome%' OR software_name LIKE 'Chrome%')
                                       AND (software_name NOT LIKE 'Google Chrome Extension%' AND software_name NOT LIKE 'GoogleChrome%') 
                                       AND software_timestamp=system_timestamp AND software_uuid=system_uuid
-                               GROUP BY software_version
+                               GROUP BY software_name,software_version
                                ",
                    "sort"=>"count_item",
                    "dir"=>"DESC",
