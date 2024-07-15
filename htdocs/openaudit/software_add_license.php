@@ -40,7 +40,7 @@ if ($myrow = mysqli_fetch_array($result)){
     <tr><td valign="top">Comments: </td><td colspan="2"><textarea rows="4" name="comments" cols="60"></textarea></td></tr>
     <tr><td colspan=2><input name="Submit" value="Lizenz anlegen" type="submit" /></td></tr>
   </table>
-  <input type="hidden" value="<?php echo $_GET["id2"]; ?>" name="id" />
+  <input type="hidden" value="<?php echo $_GET["id"]; ?>" name="id" />
   </form>
   </div>
   <?php

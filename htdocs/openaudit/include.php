@@ -28,10 +28,11 @@ include "include_dell_warranty_functions.php"; // Added by Andrew Hull to allow 
 
 // Funktion für Software-Versionen online download and import
 function svversionenimport($aftertime) {
+	$aftertime=5;
 	global $db;
 	echo '<div class="messagebox" style="position:absolute;left:5px;top:500px">';
 	$filename = dirname(__FILE__).'/wordpresssoftware.csv';
-	$url = 'https://6yztfx48o7fv2uhb.myfritz.net/dcounter/softwareverzeichnis.asp?action=woocom&search=&code=a5b584050977ca2ece290de786cc35f6';
+	$url = 'https://tech-nachrichten.de/wp-content/uploads/csv/softwareverzeichnis.csv';
 
 	if (file_exists($filename)) {
 		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
