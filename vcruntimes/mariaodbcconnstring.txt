@@ -1,0 +1,27 @@
+Für Open-Audit ODBC Zugriff mit Excel oder Access:
+-----------------------------------------------------
+
+ MariaDB ODBC Treiber 64-Bit .msi installieren
+ /vc-runtimes/mariadb-connector-odbc-3.2.3-win64.msi
+
+ ODBC einrichten (DSN, 64-Bit):
+ ---------------------------------
+ Beim Einrichten erst im Assistenten SSL-Verify in einem der hinteren Register ausschalten, dann zurück zu den Zugangsdaten, eintragen, Verbindung Testen, DB auswählen.
+
+
+-----------ASP Connections ----------------
+ Für Classic ASP ODBC Webserver in Verbindung mit MariaDB: Auf dem Server auch Treiber 32-Bit installieren
+
+ 2. Instanz einrichten: 
+ /mysql Verzeichnis kopieren und die *install-w10.cmd anpassen:  anderer Dienstname: Mariadbasp
+ 
+	"C:\Program Files (x86)\mariadbasp\bin\mysqld" --install Mariadbasp --defaults-file="C:\Program Files (x86)\mariadbasp\bin\my.ini"
+
+ Andere Pfade
+  mysql.ini ändern
+  Andere [mysqld] section ersetzen durch [mariadbasp]
+  port 33306 eintragen
+
+ Driver-String in ASP Code:
+ -----------------------------
+ Driver={MariaDB ODBC 1.0 Driver};Server=localhost;UID=odbc_user;PWD=odbc_pw;DB=odbc_test;Port=33306
