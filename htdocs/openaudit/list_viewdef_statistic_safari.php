@@ -1,19 +1,19 @@
 <?php
 
-$query_array=array("headline"=>__("Statistic for Opera and Vivaldi Browser Versions"),
+$query_array=array("headline"=>__("Statistic for apple Safari Browser Versions"),
                    "sql"=>"
                            SELECT
                                DISTINCT software_name,software_publisher, software_version, software_location,
                                COUNT( * ) AS count_item,
                                round( 100 / (
                                        SELECT count(software_uuid) FROM software, system
-                                       WHERE (software_name LIKE 'Opera%' OR software_name LIKE 'Vivaldi%' )
+                                       WHERE (software_name LIKE 'Safari%')
                                               AND software_timestamp=system_timestamp AND software_uuid=system_uuid
                                        )
                                  * COUNT( * )
                                ,$round_to_decimal_places ) AS percentage
                                FROM software, system
-                               WHERE ( software_name LIKE 'Opera%' OR software_name LIKE 'Vivaldi%' ) 
+                               WHERE ( software_name LIKE 'Safari%' ) 
                                     AND software_timestamp=system_timestamp AND software_uuid=system_uuid
                                GROUP BY software_version
                                ",

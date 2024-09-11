@@ -32,8 +32,14 @@ function svversionenimport($aftertime) {
 	global $db;
 	echo '<div class="messagebox" style="position:absolute;left:5px;top:500px">';
 	$filename = dirname(__FILE__).'/wordpresssoftware.csv';
-	$url = 'https://tech-nachrichten.de/wp-content/uploads/csv/softwareverzeichnis.csv';
-
+	
+	$myserver = $_SERVER['SERVER_NAME'];
+	if ( $myserver == 'pat14sv' ) {
+		// PB Spezial Kellerserver direkt:
+		$url = 'https://ssl.pbcs.de/dcounter/softwareverzeichnis.asp?action=woocom&code=a5b584050977ca2ece290de786cc35f6';
+	} else {
+		$url = 'https://tech-nachrichten.de/wp-content/uploads/csv/softwareverzeichnis.csv';
+	}	
 	if (file_exists($filename)) {
 		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
 		echo ' | '.time()-filemtime($filename).'s';
