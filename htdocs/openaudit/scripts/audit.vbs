@@ -1,8 +1,8 @@
 '***********************************************************************************************
 ' Open Audit                   
 ' Software and Hardware Inventory 
-' Outputs into MySQL              
-' (c) Open-Audit.org 2003-2020    
+' Outputs into MySQL / MariaDB
+' (c) Open-Audit.org 2003-2024    
 ' Licensed under the GPL          
 '***********************************************************************************************
 
@@ -909,14 +909,6 @@ For Each objItem in colItems
    net_user_name = objItem.UserName
 Next
 
-'On Error Resume Next
-'Set colItems = objWMIService.ExecQuery("Select * from Win32_NTDomain",,48)
-'For Each objItem in colItems
-'   net_client_site_name = objItem.ClientSiteName
-'   net_domain_controller_address = objItem.DomainControllerAddress
-'   net_domain_controller_name = objItem.DomainControllerName
-'Next
-
 ' Get domain NetBIOS name from domain DNS name
 domain_dn="DC=" & Replace(net_domain,".",",DC=")
 Set oTranslate = CreateObject("NameTranslate")
@@ -932,9 +924,6 @@ For Each objItem in colItems
   net_domain_controller_address = objItem.DomainControllerAddress
   net_domain_controller_name = objItem.DomainControllerName
 Next
-
-
-
 
 
 If isnull(net_ip_address) Then net_ip_address = "" End If
@@ -3161,10 +3150,6 @@ Echo(comment)
 	'// Ende 32 Bit User apps
 
 
-
-
-
-
 '// inventory modern (metro) app names
 
 Set objCtx = CreateObject("WbemScripting.SWbemNamedValueSet")
@@ -3856,7 +3841,6 @@ Echo(comment)
   Next 
 
 
-
 ''''''''''''''''''''''''''''''''
 '   MS CD Keys for Office 2003 '
 ''''''''''''''''''''''''''''''''
@@ -3886,34 +3870,6 @@ For Each subkey In arrSubKeys
   end if
 Next
 
-''''''''''''''''''''''''''''''''
-'   MS CD Keys for Office XP   '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Microsoft\Office\10.0\Registration"
-oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath, arrSubKeys
-For Each subkey In arrSubKeys
-  name_xp = get_sku_xp(subkey)
-  release_type = get_release_type(subkey)
-  edition_type = get_edition_type(subkey)
-  path = strKeyPath & "\" & subkey
-  strOffXPRU = "HKLM\" & path & "\DigitalProductId"
-  subKey = "DigitalProductId"
-  oReg.GetBinaryValue HKEY_LOCAL_MACHINE,path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey=GetKey(key)
-      form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                                & strOffXPRUKey & "^^^" _
-                                & release_type  & "^^^" _
-                                & edition_type  & "^^^" _
-                                & "office_xp"   & "^^^"
-      entry form_input,comment,objTextFile,oAdd,oComment
-      strOffXPRUKey = ""
-      release_type = ""
-      edition_type = ""
-      form_input = ""
-  end if
-Next
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '   MS Product Keys for Windows XP, 2000, 2003, Vista, Win7 and 2008 (32-bit) '
@@ -3993,417 +3949,6 @@ Echo(comment)
 		form_input = ""
 	end if	
 
-
-''''''''''''''''''''''''''''''''
-'   MS CD Keys for Windows NT  '
-''''''''''''''''''''''''''''''''
-if InStr(OSName, "Windows NT") then
-  path = "SOFTWARE\Microsoft\Windows NT\CurrentVersion"
-  subKey = "ProductId"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,path,subKey,key
-  if IsNull(Key) then
-  else
-  form_input = "ms_keys^^^" & OSName            & "^^^" _
-                            & Key               & "^^^" _
-                            & SystemBuildNumber & "^^^" _
-                            & Version           & "^^^" _
-                            & "windows_nt"      & "^^^"
-  entry form_input,comment,objTextFile,oAdd,oComment
-  strOffXPRUKey = ""
-  release_type = ""
-  edition_type = ""
-  form_input = ""
-  end if
-end if
-
-''''''''''''''''''''''''''''''''
-'   MS CD Keys for Windows 98  '
-''''''''''''''''''''''''''''''''
-if (InStr(OSName, "Windows 98") Or InStr(OSName, "Windows ME")) then
-  path = "Software\Microsoft\Windows\CurrentVersion"
-  subKey = "ProductKey"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,path,subKey,key
-  if IsNull(Key) then
-  else
-  form_input = "ms_keys^^^" & OSName            & "^^^" _
-                            & Key               & "^^^" _
-                            & SystemBuildNumber & "^^^" _
-                            & Version           & "^^^" _
-                            & "windows_98"      & "^^^"
-  entry form_input,comment,objTextFile,oAdd,oComment
-  strOffXPRUKey = ""
-  release_type = ""
-  edition_type = ""
-  form_input = ""
-  end if
-end if
-
-''''''''''''''''''''''''''''''''
-'   Crystal Reports 9.0        '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Crystal Decisions\9.0\Crystal Reports\Keycodes"
-oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath, arrSubKeys
-For Each subkey In arrSubKeys
-
-  name_xp = "Crystal Reports 9.0 " & subkey
-  release_type = ""
-  edition_type = subkey
-  path = strKeyPath & "\" & subkey
-  subKey = ""
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = GetCrystalKey(key)
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "crystal_reports_9" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-Next
-
-''''''''''''''''''''''''''''''''
-'   Crystal Reports 11.0       '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Business Objects\Suite 11.0\Crystal Reports"
-
-  name_xp = "Crystal Reports - 11.0"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "PIDKEY"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    subKey = "Version"
-    oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-    release_type = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "crystal_reports_11" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-'        Nero 6.0              '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Ahead\Nero - Burning Rom\Info"
-
-  name_xp = "Nero Burning Rom - 6.0"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "Serial6"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "nero_6"      & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-'    Adobe Photoshop 5.0 LE    '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Adobe Photoshop 5.0 Limited Edition"
-
-  name_xp = "Adobe Photoshop 5.0 LE"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "ProductID"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "photoshop_5" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-' Autocad 2004 LT
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Autodesk\AutoCAD LT\R9\ACLT-201:40A"
-name_xp = "Autocad 2004 LT"
-release_type = ""
-edition_type = ""
-path = strKeyPath
-subKey = "SerialNumber"
-oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-if IsNull(key) then
-else
-strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "autocad_2000" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-end if
-
-''''''''''''''''''''''''''''''''
-' Autocad 2005 LT
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Autodesk\AutoCAD LT\R10\ACLT-301:409"
-name_xp = "Autocad 2005 LT"
-release_type = ""
-edition_type = ""
-path = strKeyPath
-subKey = "SerialNumber"
-oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-if IsNull(key) then
-else
-strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "autocad_2000" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-end if
-
-''''''''''''''''''''''''''''''''
-'    Adobe Photoshop 7.0       '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Adobe\Photoshop\7.0\Registration"
-
-  name_xp = "Adobe Photoshop 7.0"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "SERIAL"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "photoshop_7" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-'    Adobe Acrobat 5.0         '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Adobe Acrobat 5.0"
-
-  name_xp = "Adobe Acrobat 5.0"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "ProductID"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "acrobat_5"   & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-'    SQL Svr 2000              '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Microsoft\Microsoft SQL Server\80\Registration"
-
-  name_xp = "SQL Server 2000"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "CD_Key"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "sql_server_2000" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-'    VMWare 4.0  Workstation   '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\VMware, Inc.\VMware Workstation\License.ws.4.0"
-
-  name_xp = "VMWare Workstation 4.0"
-  release_type = ""
-  edition_type = ""
-  path = strKeyPath
-  subKey = "Serial"
-  oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-  if IsNull(key) then
-  else
-    strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "vmware_4"    & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-  end if
-
-''''''''''''''''''''''''''''''''
-' Autocad 2006 LT
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Autodesk\AutoCAD LT\R11\ACLT-4001:409"
-name_xp = "Autocad 2006 LT"
-release_type = ""
-edition_type = ""
-path = strKeyPath
-subKey = "SerialNumber"
-oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-if IsNull(key) then
-else
-strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "autocad_2000" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-end if
-
-''''''''''''''''''''''''''''''''
-' VMWare 5.0 Workstation '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\VMware, Inc.\VMware Workstation\License.ws.5.0"
-
-name_xp = "VMWare Workstation 5.0"
-release_type = ""
-edition_type = ""
-path = strKeyPath
-subKey = "Serial"
-oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-if IsNull(key) then
-else
-strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "vmware_5"    & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-end if
-
-''''''''''''''''''''''''''''''''
-' Adobe Illustrator 10.0 '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\Adobe\Illustrator\10\Registration"
-
-name_xp = "Adobe Illustrator 10.0"
-release_type = ""
-edition_type = ""
-path = strKeyPath
-subKey = "SERIAL"
-oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-if IsNull(key) then
-else
-strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "illustrator_10" & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-end if
-
-''''''''''''''''''''''''''''''''
-' Cyberlink PowerDVD 4.0 '
-''''''''''''''''''''''''''''''''
-strKeyPath = "SOFTWARE\CyberLink\PowerDVD"
-
-name_xp = "Cyberlink PowerDVD 4.0"
-release_type = ""
-edition_type = ""
-path = strKeyPath
-subKey = "CDKey"
-oReg.GetStringValue HKEY_LOCAL_MACHINE,Path,subKey,key
-if IsNull(key) then
-else
-strOffXPRUKey = key
-    form_input = "ms_keys^^^" & name_xp       & "^^^" _
-                              & strOffXPRUKey & "^^^" _
-                              & release_type  & "^^^" _
-                              & edition_type  & "^^^" _
-                              & "powerdvd_4"  & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    strOffXPRUKey = ""
-    release_type = ""
-    edition_type = ""
-    form_input = ""
-end if
 
 '''''''''''''''''''''''''''
 '   IIS Information       '
@@ -4773,7 +4318,7 @@ End If
 
 ' Skipping if audited system is not WinXp, W2k3, Vista, W2k8 or Seven
 if ((SystemBuildNumber = "2600") OR (SystemBuildNumber = "3790") OR (CInt(SystemBuildNumber) >= 6000)) then
-  comment = "ODBC Connections"
+  comment = "ODBC Connections (64-Bit, System DSN only"
   Echo(comment)
   On Error Resume Next
 
@@ -4785,19 +4330,25 @@ if ((SystemBuildNumber = "2600") OR (SystemBuildNumber = "3790") OR (CInt(System
     Echo("Name: " & comment)
     odbc_name = subkey
     strKeyPath1 = "SOFTWARE\ODBC\ODBC.INI\" & subkey
-    'comment = strKeyPath1
-    'wscript.echo comment
+    odsn = strKeyPath1
+	Echo(odsn)
     oReg.EnumValues HKEY_LOCAL_MACHINE, strKeyPath1, arrValueNames, arrValueTypes
 
-    For i=0 To UBound(arrValueNames)
+    detvalues = ""
+	For i=0 To UBound(arrValueNames)
         oReg.GetStringValue HKEY_LOCAL_MACHINE,strKeyPath1,_
         arrValueNames(i),strValue
-        Echo(arrValueNames(i) & ": " & strValue)
+        ' Echo(arrValueNames(i) & ": " & strValue)
+		detvalues = detvalues & arrValueNames(i) & ": " & strValue & " "
     Next
+
+    form_input = "odbc^^^" & clean(odsn)      & " ^^^" & clean(detvalues) & "^^^"
+	entry form_input,comment,objTextFile,oAdd,oComment
+	form_input = ""
+
   Next
 
 end if
-'
 
 
 '''''''''''''''''''''''''''

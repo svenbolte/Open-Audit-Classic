@@ -152,6 +152,7 @@ $menue_array = array(
                                     "90"=>array("name"=>"All Anti Virus Status", "link"=>"./list.php?view=all_systems_virus_uptodate", "image"=>"fa-life-saver", "title"=>" All Anti Virus Software",),
                                     "110"=>array("name"=>"All Services", "link"=>"./list.php?view=all_services", "image"=>"fa-gears", "title"=>"All Services",),
                                     "120"=>array("name"=>"All Scheduled Tasks", "link"=>"list.php?pc=$pc&amp;view=all_sch_tasks", "image"=>"fa-bell", "title"=>"",),
+                                    "125"=>array("name"=>"All ODBC DSNs", "link"=>"./list.php?view=all_odbc", "image"=>"fa-database", "title"=>"All ODBC DSNs",),
                                     "130"=>array("name"=>"All Software Keys", "link"=>"./list.php?view=all_keys", "image"=>"fa-key", "title"=>"All Keys",),
                                     "140"=>array("name"=>"All MS Office Keys", "link"=>"./list.php?view=keys_for_software&amp;type=office%&amp;headline_addition=Office", "image"=>"fa-file-word-o", "title"=>"All Office Keys",),
                                     "150"=>array("name"=>"All MS Windows Keys", "link"=>"./list.php?view=keys_for_software&amp;type=windows%&amp;headline_addition=Windows", "image"=>"fa-windows", "title"=>"All Windows Keys",),

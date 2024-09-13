@@ -1,30 +1,6 @@
 <?php
 /**********************************************************************************************************
 Recent Changes:
-
-[Edoardo]	30/01/2008	Modified function 'insert_system_03' to add/update the system last boot date/time
-						Modified function 'insert_harddrive' to add/update the HDD status
-						Added function 'insert_sched_task' for Scheduled tasks
-						Added function 'insert_env_var' for Environment variables
-						Added function 'insert_evt_log' for Event Logs
-						Added function 'insert_ip_route'
-						Added function 'insert_pagefile'
-						Added function 'insert_motherboard'
-						Added function 'insert_onboard' for onboard devices
-[Edoardo]	13/04/2008	Added function 'insert_system12' for IIS version. 
-						Modified function 'insert_iis_1' to add/update fields for site state, application pool, anonymous user, anonymous/basic/NTLM authentication flag, SSL/SSL 128 communications flag.
-						Fixed same function for updating dynamic fields.
-						Added function 'insert_iis_4' to add/update fields for Web service extensions (name, path and access).
-						Added function 'insert_auto_upd' for Automatic Updating settings
-[Edoardo]	19/05/2008	Added in the 'insert_network' function the adding/updating of driver provider, version and date for installed NICs 
-[Edoardo]	06/06/2008	Added in the 'insert_mapped' function the adding/updating of 'mapped_username' and 'mapped_connect_as' fields.
-						Fixed same function for updating dynamic fields.
-						Added in the 'insert_motherboard' function the adding/updating of 'motherboard_cpu_sockets' and 'motherboard_memory_slots' fields.
-[Edoardo]	23/07/2008	Added in the 'insert_memory' function the adding/updating of the 'memory_tag' field.
-[Edoardo]	21/05/2009	Fixed updating of printer share names on local printers.
-[Edoardo]	22/05/2009	Same fix as above for network printers also.	
-[Edoardo]	01/08/2009	Added in the 'insert_service' function the adding/updating of the 'service.service_start_name' field.
-[Edoardo]				Fixed a bug in updating the 'service' table (only name and display_name are static, every other field is dynamic and needs to be updated)	
 [Edoardo]	21/05/2010	Filtered out MS Office virtual printers, if any, in the 'insert_printers' function.
 [Edoardo]	27/05/2010	(by jpa) Filtered out Citrix virtual printers in the 'insert_printers' function.
 [Edoardo]	28/05/2010	Modified function 'insert_harddrive()' to to add/update the 'hard_drive_predicted_failure' field.
@@ -32,7 +8,7 @@ Recent Changes:
 [Edoardo]	27/07/2010	(by jpa) Added 'system_os_arch' in function 'insert_system03'
 [Edoardo]	07/08/2010	Fixed the 'insert_software()' function to update all fields
 [Edoardo]	01/09/2010	Added 'users_lockout' in function 'insert_users()' and fixed updating of other dynamic fields in the 'users' table						
-					
+[PBMOD]		13.09.2024  ODBC DSNs and Config and odbc table added.				
 **********************************************************************************************************/
 
 $page = "add_pc";
@@ -303,6 +279,8 @@ $split = mysqli_real_escape_string($db,$split);
   if (substr($split, 0, 6) == "ie_bho"){ insert_bho($split); }
   // Tenth system submit - AntiVirus Settings - XP SP2
   if (substr($split, 0, 8) == "system10"){ insert_system10($split); }
+  // ODBC DSNs and Connections
+  if (substr($split, 0, 4) == "odbc")     { insert_odbc($split); }
   //Software
   if (substr($split, 0, 8) == "software"){ insert_software($split); }
   //Softwapps
@@ -1046,56 +1024,6 @@ function insert_scsi_controller ($split) {
       $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
     }
   }
-/*
-function insert_scsi_device ($split) {
-    global $timestamp, $uuid, $verbose, $scsi_device_timestamp;
-    if ($verbose == "y"){echo "<h2>SCSI Device</h2><br />";}
-    $extended = explode('^^^',$split);
-
-    $scsi_device_controller = trim($extended[1]);
-    $first = explode("\'", $scsi_device_controller);
-    $scsi_device_controller = $first[1];
-    $scsi_device_controller = str_replace("\\\\", "\\" , $scsi_device_controller);
-    $scsi_device_controller = substr($scsi_device_controller, 0, (strlen($scsi_device_controller) -2));
-
-    $scsi_device_device = trim($extended[2]);
-    $second = explode("\'", $scsi_device_device);
-    $scsi_device_device = $second[1];
-    $scsi_device_device = str_replace("\\\\", "\\", $scsi_device_device);
-    $scsi_device_device = substr($scsi_device_device, 0, (strlen($scsi_device_device) -2));
-
-    echo $scsi_device_controller . "<br />" . $scsi_device_device . "<br />";
-
-    if (is_null($scsi_device_timestamp)){
-      $sql = "SELECT MAX(scsi_device_timestamp) FROM scsi_device WHERE scsi_device_uuid = '$uuid'";
-      if ($verbose == "y"){echo $sql . "<br />\n\n";}
-      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-      $myrow = mysqli_fetch_array($result);
-      if ($myrow["MAX(scsi_device_timestamp)"]) {$scsi_device_timestamp = $myrow["MAX(scsi_device_timestamp)"];} else {$scsi_device_timestamp = "";}
-    } else {}
-    $sql  = "SELECT count(scsi_device_uuid) AS count FROM scsi_device WHERE scsi_device_uuid = '$uuid' AND ";
-    $sql .= "scsi_device_controller = '$scsi_device_controller' AND scsi_device_device = '$scsi_device_device' AND ";
-    $sql .= "(scsi_device_timestamp = '$scsi_device_timestamp' OR scsi_device_timestamp = '$timestamp')";
-    if ($verbose == "y"){echo $sql . "<br />\n\n";}
-    $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    $myrow = mysqli_fetch_array($result);
-    if ($verbose == "y"){echo "Count: " . $myrow['count'] . "<br />\n\n";}
-    if ($myrow['count'] == "0"){
-      // Insert into database
-      $sql  = "INSERT INTO scsi_device (scsi_device_uuid, scsi_device_controller, scsi_device_device, ";
-      $sql .= "scsi_device_timestamp, scsi_device_first_timestamp) VALUES (";
-      $sql .= "'$uuid', '$scsi_device_controller', '$scsi_device_device', '$timestamp', '$timestamp')";
-      if ($verbose == "y"){echo $sql . "<br />\n\n";}
-      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    } else {
-      // Already present in database - update timestamp
-      $sql  = "UPDATE scsi_device SET scsi_device_timestamp = '$timestamp' WHERE scsi_device_controller = '$scsi_device_controller' ";
-      $sql .= "AND scsi_device_device = '$scsi_device_device' AND scsi_device_uuid = '$uuid' AND scsi_device_timestamp = '$scsi_device_timestamp'";
-      if ($verbose == "y"){echo $sql . "<br />\n\n";}
-      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    }
-  }
-*/
 
 function insert_scsi_device ($split) {
     global $timestamp, $uuid, $verbose, $scsi_device_timestamp;
@@ -1912,7 +1840,7 @@ function insert_bho ($split) {
       if ($verbose == "y"){echo $sql . "<br />\n\n";}
       $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
     }
-  }
+}
 
 
 function insert_system10 ($split) {
@@ -1927,7 +1855,50 @@ function insert_system10 ($split) {
     $sql .= "WHERE system_uuid = '$uuid' AND system_timestamp = '$timestamp'";
     if ($verbose == "y"){echo $sql . "<br />\n\n";}
     $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
+}
+
+
+function insert_odbc ($split){
+    global $timestamp, $uuid, $verbose, $odbc_timestamp;
+    $extended = explode('^^^',$split);
+    if ($verbose == "y"){echo "<h2>ODBC DSNs</h2><br />";}
+    $odbc_dsn = trim($extended[1]);
+    $odbc_config = trim($extended[2]);
+    if (is_null($odbc_timestamp)){
+      $sql  = "SELECT MAX(odbc_timestamp) FROM odbc WHERE odbc_uuid = '$uuid'";
+      if ($verbose == "y"){echo $sql . "<br />\n\n";}
+	$db=GetOpenAuditDbConnection();
+      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
+      $myrow = mysqli_fetch_array($result);
+      if ($myrow["MAX(odbc_timestamp)"]) {$bios_timestamp = $myrow["MAX(odbc_timestamp)"];} else {$odbc_timestamp = "";}
+    } else {}
+    $sql  = "SELECT count(odbc_uuid) as count FROM odbc WHERE ";
+    $sql .= "odbc_dsn = '$odbc_dsn' AND ";
+    $sql .= "(odbc_timestamp = '$timestamp' OR odbc_timestamp = '$odbc_timestamp')";
+    if ($verbose == "y"){echo $sql . "<br />\n\n";}
+    $db=GetOpenAuditDbConnection();
+	$result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
+    $myrow = mysqli_fetch_array($result);
+    if ($verbose == "y"){echo "Count: " . $myrow['count'] . "<br />\n\n";}
+    if ($myrow['count'] == "0"){
+      // Insert into database
+      $sql  = "INSERT INTO odbc (odbc_uuid, odbc_dsn, odbc_config, ";
+      $sql .= "odbc_first_timestamp, odbc_timestamp) VALUES (";
+      $sql .= "'$uuid', '$odbc_dsn', '$odbc_config', ";
+      $sql .= "'$timestamp', '$timestamp')";
+      if ($verbose == "y"){echo $sql . "<br />\n\n";}
+	$db=GetOpenAuditDbConnection();
+      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
+    } else {
+      // Already present in database - update timestamp
+      $sql = "UPDATE odbc SET odbc_timestamp = '$timestamp' WHERE odbc = '$uuid' AND bios_timestamp = '$odbc_timestamp'";
+      if ($verbose == "y"){echo $sql . "<br />\n\n";}
+	$db=GetOpenAuditDbConnection();
+      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
+    }
   }
+
+
 
 
 function insert_software ($split) {
