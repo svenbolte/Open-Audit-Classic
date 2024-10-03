@@ -175,12 +175,12 @@ if (!empty($_POST['Perform'])) {
 }
 
 $sql  = "SELECT system_uuid, net_ip_address, system_name, net_domain, system_os_name, system_system_type, system_timestamp FROM system ";
-$sql .= "WHERE system_timestamp < '" . adjustdate(0,0,-$days_systems_not_audited) . "000000' ";
+$sql .= "WHERE system_timestamp < '" . adjustdate(0,0,-$days_systems_not_audited) . "000000' ";  //
 $sql .= "ORDER BY system_name ";
 $result = mysqli_query($db,$sql);
  
-echo "<td style=\"vertical-align:top;width:100%\">
-      <div class=\"main_each\">";
+    echo "<td style=\"vertical-align:top;width:100%\">
+          <div class=\"main_each\">";
 
 if ($myrow = mysqli_fetch_array($result)){
   echo "<form name=\"DeleteList\" id=\"DeleteList\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\" >
@@ -202,20 +202,20 @@ if ($myrow = mysqli_fetch_array($result)){
           }
         </script>
  
-          <table class=\"tftable\"    >
+          <table>
             <tr>
                <td class=\"contenthead\">".__("Delete Systems Not Audited in the last " ). $days_systems_not_audited .__(" days")."<br />&nbsp;</td>
             </tr>
           </table>
          
-          <table class=\"tftable\"    >
+          <table>
             <tr>
                <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected systems\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
                <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
             </tr>
           </table>
 
-          <table class=\"tftable\"    >
+          <table class=\"tftable\">
             <tr>&nbsp;</tr>
             <tr>
                <td></td>

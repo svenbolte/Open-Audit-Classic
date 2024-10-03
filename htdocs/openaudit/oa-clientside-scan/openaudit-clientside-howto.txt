@@ -1,0 +1,58 @@
+Falls ein Rechner nicht über WMI erreichbar ist (Access denied), 
+bitte diesen Client installieren und ihn die Daten am Server abliefern lassen.
+
+Methode 1: mit Setup (Aufgabe startet täglich um 11:00 Uhr als system user)
+---------------------------------------------------------------------------
+
+Im Ordner:
+"C:/Program Files (x86)/xampplite/htdocs/openaudit/oa-clientside-scan" liegt die Client Setup Datei:
+
+1) openaudit-clientscan-setup.exe ausführen und auf dem PC installieren (erfordert Adminrechte)
+
+2) Im Ordner "C:/Program Files (x86)/oa-clientside-scan" die Datei "audit.config" mit dem Editor öffnen und in der Zeile
+
+    audit_host="http://openaudit:888"
+	
+  statt "openaudit" den Servernamen oder die IP-Adresse des OpenAudit Classic Servers eintragen	
+
+oder 2) Für den Openaudit-Server im DNS-Server einen (A) Alias Eintrag erzeugen namens "openaudit"
+
+3) Aufgabenplanung öffnen und beim geplanten Task "Openaudit Clientscan" einen Domänen-Admin oder Admin-Benutzer eintragen.
+
+
+Methode 2 (von Hand):
+---------------------
+
+1) Den Inhalt des Openaudit Server-Ordners: 
+"C:/Program Files (x86)/xampplite/htdocs/openaudit/oa-clientside-scan"
+vom OpenAudit Classic Server auf den Rechner kopieren (z.B. auf den Desktop)
+
+2) Die Datei "audit.config" mit dem Editor öffnen und in der Zeile
+
+    audit_host="http://openaudit:888"
+	
+  statt "openaudit" den Servernamen oder die IP-Adresse des OpenAudit Classic Servers eintragen	
+
+3) Die Aufgabe "openaudit-clientscan.xml" in die Windows Aufgabenplanung importieren
+  und den Benutzer auf einen Domänen-Admin umstellen.
+ (sie startet täglich um 11:00 Uhr liefert an den OpenAudit Classic Server ab)
+
+
+Methode 3 (Rechner nicht im Netzwerk erreichbar):
+--------------------------------------------------
+* Vorbereitung - Den Inhalt des Ordners: 
+"C:/Program Files (x86)/xampplite/htdocs/openaudit/oa-clientside-scan/offline-scan"
+vom OpenAudit Classic Server auf einen Speicherstick kopieren und in den zu erfassenden Rechner stecken
+(oder den Ordner auf dem Rechner lokal entpacken) 
+
+* Am zu erfassenden PC/Notebook:
+
+* "offline.cmd" ausführen --> //pcname//.txt entsteht auf dem Stick 
+
+* //pcname//.txt von C:/ mit dem Editor vopm Stick öffnen und Inhalt in die Zwischenablage kopieren.
+
+* Die Openaudit Oberfläche im Browser aufrufen https://openauditservername:4443/openaudit
+
+* Menü "Admin" / "Add system" aufrufen
+
+* Inhalt der Zwischenablage in das Eingabefeld dort einfügen und "Save" drücken" 

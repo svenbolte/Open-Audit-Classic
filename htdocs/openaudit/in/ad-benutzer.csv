@@ -1,7 +1,0 @@
-"surname";"givenname";"mail";"HomePhone";"MobilePhone";"OfficePhone";"DistinguishedName";"name"
-;;;;;;"CN=Gast,CN=Users,DC=meinedomain,DC=local";"Gast"
-;;;;;;"CN=krbtgt,CN=Users,DC=meinedomain,DC=local";"krbtgt"
-;;"Administrator@meinefirma.de";;;;"CN=Administrator,CN=Users,DC=meinedomain,DC=local";"Administrator"
-"Mustermann";"Erika";"ME@meinefirma.de";;;"020304-206-12";"CN=Erika Mustermann,OU=Benutzer,OU=meinefirma,DC=meinedomain,DC=local";"Erika Mustermann"
-"Mustermann";"Klaus";"MK@meinefirma.de";;;"020304-206-13";"CN=Klaus Mustermann,OU=Benutzer,OU=meinefirma,DC=meinedomain,DC=local";"Klaus Mustermann"
-"Mustermann";"Max";"MM@meinefirma.de";;;"020304-206-11";"CN=Max Mustermann,OU=Benutzer,OU=meinefirma,DC=meinedomain,DC=local";"Max Mustermann"

@@ -982,10 +982,10 @@ form_input = ""
 form_input = "audit^^^" & system_name & "^^^" & timestamp & "^^^" & system_uuid & "^^^" & user_name & "^^^" & ie_submit_verbose & "^^^" & software_audit & "^^^"
 entry form_input,comment,objTextFile,oAdd,oComment
 
-'''''''''''''''''''''''''''''''''''''
-'   System Information  & Timezone  '
-'''''''''''''''''''''''''''''''''''''
-comment = "System Info"
+''''''''''''''''''''''''''''''''''''''''''''''''''''
+'   System Information  & Timezone & TPM-Chip-Data '
+''''''''''''''''''''''''''''''''''''''''''''''''''''
+comment = "System Information"
 Echo(comment)
 On Error Resume Next
 Set colItems = objWMIService.ExecQuery("Select * from Win32_LogicalMemoryConfiguration",,48)
@@ -1030,6 +1030,7 @@ For Each objItem in colItems
    system_system_type = Join(objItem.ChassisTypes, ",")
 Next
 
+' Zeitzone
 Set colItems = objWMIService.ExecQuery("Select * from Win32_TimeZone",,48)
 For Each objItem in colItems
   tm_zone = clean(objItem.Caption)
@@ -1080,12 +1081,25 @@ if system_system_type = "34" then system_system_type = "Embedded PC"  end if
 if system_system_type = "35" then system_system_type = "Mini PC"  end if
 if system_system_type = "36" then system_system_type = "Stick PC"  end if
 
+' TPM auslesen (nur als admin)
+comment = "TPM auslesen..."
+Echo(comment)
+Set wmi1 = GetObject("winmgmts:{impersonationLevel=impersonate,authenticationLevel=pktPrivacy}!root\cimv2\Security\MicrosoftTPM")
+set TPM = wmi1.ExecQuery("SELECT * FROM Win32_Tpm")
+Set TPM_Import = TPM.ItemIndex(0)
+system_tpmver = TPM_Import.SpecVersion
+tpm_init = TPM_Import.IsEnabled_InitialValue
+tpm_password = TPM_Import.IsOwned_InitialValue
+Echo("TPM Version: " & system_tpmver)
+
 form_input = "system02^^^" & trim(system_model) & "^^^" & system_name _
                   & "^^^" & system_num_processors & "^^^" & system_part_of_domain _
                   & "^^^" & system_primary_owner_name & "^^^" & system_system_type _
                   & "^^^" & mem_size & "^^^" & system_id_number _
                   & "^^^" & trim(system_vendor) & "^^^" & domain_role_text _
-                  & "^^^" & tm_zone & "^^^" & tm_daylight & "^^^" & system_vcpu & "^^^" & system_lcpu & "^^^"
+                  & "^^^" & tm_zone & "^^^" & tm_daylight & "^^^" & system_vcpu & "^^^" & system_lcpu _
+				  & "^^^" & system_tpmver & "^^^" & tpm_init & "^^^" & tpm_password & "^^^"
+
 entry form_input,comment,objTextFile,oAdd,oComment
 form_input = ""
 

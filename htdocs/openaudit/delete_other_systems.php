@@ -14,8 +14,8 @@
 
       }
     }
-
-    $sql = "SELECT other_id, other_ip_address, other_network_name, other_description, other_type, other_timestamp FROM other ORDER BY other_ip_address ";
+	// SQL Query sortiert nach ältesten zuerst
+    $sql = "SELECT other_id, other_ip_address, other_network_name, other_description, other_type, other_timestamp FROM other ORDER BY other_timestamp ";
     $result = mysqli_query($db,$sql);
      
     echo "<td style=\"vertical-align:top;width:100%\">
@@ -43,13 +43,16 @@
      
               <table>
                 <tr>
-                   <td class=\"contenthead\">".__("Delete other Equipments")."<br />&nbsp;</td>
-                </tr>
+                   <td class=\"contenthead\">".__("Delete other devices")."</td></tr>
+                </tr><td>
+				   <a href=\"./list.php?view=other_all\"><i class=\"fa fa-sort\"></i>
+  				    Für das Sortieren der Liste, Exportieren oder bitte hier klicken</a></td>
+                </td></tr>
               </table>
              
               <table>
                 <tr>
-                   <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected other equipments\" onclick=\"return confirm('Do you really want to DELETE all selected other equipments?')\"></td>
+                   <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"".__("Delete other devices")."\" onclick=\"return confirm('Do you really want to DELETE all selected other equipments?')\"></td>
                    <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
                 </tr>
               </table>
@@ -63,9 +66,12 @@
                    <td class=\"contentsubtitle\">".__("Description")."</td>
                    <td class=\"contentsubtitle\">".__("Type")."</td>
                    <td class=\"contentsubtitle\">".__("Date Audited")."</td>
+                   <td class=\"contentsubtitle\"><i class=\"fa fa-sort-numeric-asc\"></i> ".__("age")."</td>
                 </tr>\n";
+	$xanzahl = 0;
       do {
           // tabellierung über tftable css
+			$datetime1 = return_timestamp( $myrow["other_timestamp"] );
           if (strlen($myrow["other_type"]) > 20) {$typebild="router";} else {$typebild = str_replace(" ","_",$myrow["other_type"]);}
 		  echo "<tr  >
                    <td width=\"5%\"><input type=\"checkbox\" name=" . $myrow["other_id"] . " id=" . $myrow["other_id"] . " value=" . $myrow["other_id"] . "></td>
@@ -74,8 +80,12 @@
                    <td>" . $myrow["other_description"] . "</td>
                    <td><img src=\"images/o_" .$typebild. ".png\" alt=\"\" border=\"0\" width=\"16\" height=\"16\"  /></td>
                    <td>" . return_date_time($myrow["other_timestamp"]) . "</td>
+                   <td>" . human_timing($datetime1) ."</td>
                 </tr>\n";
+				$xanzahl += 1;
         } while ($myrow = mysqli_fetch_array($result));
+		// Summenzeile
+	  echo "<tr><td><b>".$xanzahl."</b></td><td><b>Anzahl</b></td><td colspan=6></td></tr>";
       echo "  </table>
            </form>";
        

@@ -1,4 +1,5 @@
 <?php
+$GLOBALS["lang"]["age"]="Dateialter";
 $GLOBALS["lang"]["Home"]="Startseite";
 $GLOBALS["lang"]["Help"]="Hilfe";
 $GLOBALS["lang"]["Help Tips&Tricks"]="Dokumentation";
@@ -27,6 +28,7 @@ $GLOBALS["lang"]["Partition Size"]="Partition";
 $GLOBALS["lang"]["Freier Speicherplatz"]="frei";
 $GLOBALS["lang"]["Percent Used"]="%voll";
 $GLOBALS["lang"]["Delete/Create new database"]="Datenbank löschen/anlegen";
+$GLOBALS["lang"]["Delete other devices"]="Sonstige Geräte löschen";
 $GLOBALS["lang"]["Delete Systems"]="Systeme löschen";
 $GLOBALS["lang"]["Delete Systems older 30 days"]="Systeme >30Tg löschen";
 $GLOBALS["lang"]["Delete other items"]="andere Einträge löschen";

@@ -1,0 +1,18 @@
+Offline Inventar von Geräten, die nicht im Netzwerk sind:
+
+* Vorbereitung - Den Inhalt des Ordners: 
+"C:/Program Files (x86)/xampplite/htdocs/openaudit/all-tools-scripts/oa-clientside-scan/offline-scan"
+vom OpenAudit Classic Server auf einen Speicherstick kopieren und in den zu erfassenden Rechner stecken
+(oder den Ordner auf dem Rechner lokal entpacken) 
+
+* Am zu erfassenden PC/Notebook:
+
+* "offline.cmd" ausführen --> //pcname//.txt entsteht auf dem Stick 
+
+* //pcname//.txt von C:/ mit dem Editor vopm Stick öffnen und Inhalt in die Zwischenablage kopieren.
+
+* Die Openaudit Oberfläche im Browser aufrufen https://openauditservername:4443/openaudit
+
+* Menü "Admin" / "Add system" aufrufen
+
+* Inhalt der Zwischenablage in das Eingabefeld dort einfügen und "Save" drücken" 

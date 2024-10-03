@@ -114,25 +114,54 @@ $url_clean = str_replace ('`','%60',$url_clean);
 return $url_clean;
 }
 
-function return_date($timestamp)
-{
-$timestamp = substr($timestamp, 6, 2) . "." . substr($timestamp, 4, 2) . "." . substr($timestamp, 0, 4);
+function return_date($timestamp) {
+	$timestamp = substr($timestamp, 6, 2) . "." . substr($timestamp, 4, 2) . "." . substr($timestamp, 0, 4);
 return $timestamp;
 }
 
-function return_date_time($timestamp)
-{
-$timestamp = substr($timestamp, 6, 2) . "." . substr($timestamp, 4, 2) . "." . substr($timestamp, 0, 4) . " " . substr($timestamp, 8, 2) . ":" . substr($timestamp, 10, 2);
+function return_date_time($timestamp) {
+	$timestamp = substr($timestamp, 6, 2) . "." . substr($timestamp, 4, 2) . "." . substr($timestamp, 0, 4) . " " . substr($timestamp, 8, 2) . ":" . substr($timestamp, 10, 2);
 return $timestamp;
 }
 
-function return_unix_date_time($timestamp)
+function return_timestamp($timestamp) {
+	$timestamp = strtotime(substr($timestamp, 0, 4) . "-" . substr($timestamp, 4, 2) . "-" . substr($timestamp, 6, 2) . " " . substr($timestamp, 8, 2) . ":" . substr($timestamp, 10, 2). ":" . substr($timestamp, 12, 2));
+return $timestamp;
+}
+
+// Zeitdifferenz ermitteln und gestern/vorgestern/morgen schreiben: chartscodes, dedo, foldergallery, timeclock, w4-post-list
+function human_timing($time)
 {
+    $time = time() - $time; // to get the time since that moment
+    $tokens = array (
+        31536000 => 'Jahr',
+        2592000 => 'Monat',
+        604800 => 'Woche',
+        86400 => 'Tag',
+        3600 => 'Stunde',
+        // 60 => 'Min',
+        // 1 => 'Sek'
+    );
+    $result = '';
+    $counter = 1;
+    foreach ($tokens as $unit => $text) {
+        if ($time < $unit) continue;
+        if ($counter > 2) break;
+        if ($text=='Woche' || $text=='Stunde') $plural="n "; else $plural="e ";
+		$numberOfUnits = floor($time / $unit);
+		$result .= "$numberOfUnits $text".($numberOfUnits > 1 ? $plural : ' ');
+        $time -= $numberOfUnits * $unit;
+        ++$counter;
+    }
+    return $result;
+}
+
+
+function return_unix_date_time($timestamp) {
   return date('d/m/y h:i:s a', $timestamp);
 }
 
-function adjustdate($years=0,$months=0,$days=0)
-{
+function adjustdate($years=0,$months=0,$days=0) {
   $todayyear=date('Y');
   $todaymonth=date('m');
   $todayday=date('d');
@@ -140,8 +169,7 @@ function adjustdate($years=0,$months=0,$days=0)
 }
 
 
-function alternate_tr_class(&$current_class)
-{
+function alternate_tr_class(&$current_class) {
 	$current_class = ($current_class == 'npb_highlight_row') ? '' : 'npb_highlight_row';
 	return $current_class;
 }

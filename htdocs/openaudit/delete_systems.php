@@ -174,13 +174,15 @@
        }
     }
 
-    $sql = "SELECT system_uuid, net_ip_address, system_name, net_domain, system_os_name, system_system_type, system_timestamp FROM system ORDER BY system_name ";
+    // Query und Sortierung älteste zuerst
+	$sql = "SELECT system_uuid, net_ip_address, system_name, net_domain, system_os_name, system_system_type, system_timestamp FROM system ORDER BY system_timestamp ";
     $result = mysqli_query($db,$sql);
      
     echo "<td style=\"vertical-align:top;width:100%\">
           <div class=\"main_each\">";
 
     if ($myrow = mysqli_fetch_array($result)){
+
       echo "<form name=\"DeleteList\" id=\"DeleteList\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\" >
            
             <script language=\"JavaScript\" TYPE=\"text/javascript\">
@@ -202,13 +204,16 @@
      
               <table>
                 <tr>
-                   <td class=\"contenthead\">".__("Delete Systems")."<br />&nbsp;</td>
-                </tr>
+                   <td class=\"contenthead\">".__("Delete Systems")."<br /></td></tr>
+                </tr><td>
+				   <a href=\"./list.php?view=delete_system\"><i class=\"fa fa-sort\"></i>
+  				    Für das Sortieren der Liste, Exportieren oder einzeln löschen bitte hier klicken</a></td>
+                </td></tr>
               </table>
              
               <table>
                 <tr>
-                   <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"Delete selected systems\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
+                   <td width=\"30%\"><input type=\"submit\" name=\"Perform\" id=\"Perform\" value=\"".__("Delete Systems")."\" onclick=\"return confirm('Do you really want to DELETE all selected Systems?')\"></td>
                    <td width=\"70%\"><input type=\"checkbox\" name=\"SetUnset\" id=\"SetUnset\" onClick=\"CheckUncheckAll(this.form);\" />Check/Uncheck all<br /></td>   
                 </tr>
               </table>
@@ -223,10 +228,13 @@
                    <td class=\"contentsubtitle\">".__("OS")."</td>
                    <td class=\"contentsubtitle\">".__("Type")."</td>
                    <td class=\"contentsubtitle\">".__("Date Audited")."</td>
+                   <td class=\"contentsubtitle\"><i class=\"fa fa-sort-numeric-asc\"></i> ".__("age")."</td>
                 </tr>\n";
+	$xanzahl = 0;
       do {
           // tabellierung über tftable css
-          echo "<tr  >
+			$datetime1 = return_timestamp( $myrow["system_timestamp"] );
+		  echo "<tr>
                    <td width=\"5%\"><input type=\"checkbox\" name=\"" . $myrow["system_uuid"] . "\" id=\"" . $myrow["system_uuid"] . "\" value=\"" . $myrow["system_uuid"] . "\"></td>
                    <td><a href=\"system.php?pc=".$myrow["system_uuid"]."&amp;view=summary\">" . ip_trans($myrow["net_ip_address"]) . "</a></td>
                    <td><a href=\"system.php?pc=".$myrow["system_uuid"]."&amp;view=summary\">" . $myrow["system_name"] . "</a></td>
@@ -234,8 +242,12 @@
                    <td>" . determine_os($myrow["system_os_name"]) . "</td>
                    <td>" . determine_img($myrow["system_os_name"],$myrow["system_system_type"]) . "</td>
                    <td>" . return_date_time($myrow["system_timestamp"]) . "</td>
+                   <td>" . human_timing($datetime1) ."</td>
                 </tr>\n";
+				$xanzahl += 1;
         } while ($myrow = mysqli_fetch_array($result));
+		// Summenzeile
+	  echo "<tr><td><b>".$xanzahl."</b></td><td><b>Anzahl</b></td><td colspan=6></td></tr>";
       echo "  </table>
            </form>";
        

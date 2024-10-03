@@ -502,12 +502,16 @@ function insert_system02 ($split){
     $time_daylight = trim($extended[12]);
     $system_vcpu = trim($extended[13]);
     $system_lcpu = trim($extended[14]);
+    $system_tpmver = trim($extended[15]);
+    $tpm_init = trim($extended[16]);
+    $tpm_password = trim($extended[17]);
     $sql  = "UPDATE system SET system_model = '$system_model', system_name = '$system_name', ";
     $sql .= "system_num_processors = '$system_num_processors', system_part_of_domain = '$system_part_of_domain', ";
     $sql .= "system_primary_owner_name = '$system_primary_owner_name', system_system_type = '$system_system_type', ";
     $sql .= "system_memory = '$system_memory', system_id_number = '$system_id_number', system_vendor = '$system_vendor', ";
     $sql .= "net_domain_role = '$net_domain_role', time_caption = '$time_caption', time_daylight = '$time_daylight', ";
-    $sql .= "system_vcpu = '$system_vcpu', system_lcpu = '$system_lcpu' ";
+    $sql .= "system_vcpu = '$system_vcpu', system_lcpu = '$system_lcpu', ";
+    $sql .= "system_tpmver = '$system_tpmver', tpm_init = '$tpm_init', tpm_password = '$tpm_password' ";
     $sql .= "WHERE system_uuid = '$uuid' AND system_timestamp = '$timestamp'";
     if ($verbose == "y"){echo $sql . "<br />\n\n";}
 	$db=GetOpenAuditDbConnection();
