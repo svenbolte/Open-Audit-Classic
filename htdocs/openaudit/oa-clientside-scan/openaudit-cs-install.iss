@@ -1,3 +1,5 @@
+; den Ordner oa-clientside-scan nach c:\temp kopieren und ISS Datei neu compilieren. Setup-exe in den oa-clientside ordner
+
 #define MyAppName "Open-Audit Classic Clientside Scan"
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
 #define MyAppPublisher "OpenAudit Classic GPL3 Projekt"
@@ -46,9 +48,10 @@ Name: {app}; Permissions: users-full
 Source: "C:\temp\oa-clientside-scan\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
+Name: "{group}\OpenAudit Clientsside Task (als Admin)"; Filename: "{sys}\schtasks.exe"; Parameters: "/RUN /TN Openaudit-Clientside-Scan"; WorkingDir: "{app}"; Comment: "als Admin einen Clientside Scan ausführen"; IconFilename: "{app}\openaudit_logo.ico";
 Name: "{group}\OpenAudit Clientsside Scan"; Filename: "{app}\oaclientside.cmd"; WorkingDir: "{app}"; Comment: "als angemeldeter User einen Clientside Scan ausführen"; IconFilename: "{app}\openaudit_logo.ico";
 Name: "{group}\OpenAudit cl Explorer (Ordner)"; Filename: "%windir%\explorer.exe"; Parameters: "/e,""{app}"" "; WorkingDir: "{app}"; IconFilename: "{app}\openaudit_logo.ico"; Comment: "Ordner mit scripts öffnen"
-Name: "{commondesktop}\OpenAudit Clientsside Scan"; Filename: "{app}\oaclientside.cmd"; WorkingDir: "{app}"; Comment: "als angemeldeter User einen Clientside Scan ausführen"; Tasks: desktopicon;
+Name: "{commondesktop}\OpenAudit Clientsside Scan"; Filename: "{app}\oaclientside.cmd"; WorkingDir: "{app}"; Comment: "als administrator ausführen - einen Clientside Scan ausführen"; Tasks: desktopicon;
 Name: "{commondesktop}\Aufgabenplanung"; Filename: "%windir%\system32\taskschd.msc"; Parameters: "/s"; Tasks: desktopicon; Comment: "OpenAudit Aufgabe auf Domain-admin umstellen"
 
 [Run]
