@@ -53,13 +53,25 @@ if ($myrow = mysqli_fetch_array($result)){
 	do {
 		$csv_data = '';
 		foreach($query_array["fields"] as $field) {
+
+               //Convert the array-values to local variables
+				foreach($myrow as $key => $val) {
+                   $$key=$val;
+               }
+
 			if ($field["head"]=="RAM") { $total_system_memory += (int) $myrow[$field["name"]]; }
 			if ($field["head"]=="Größe C") { $total_hard_drive_size += (int) $myrow[$field["name"]]; }
 			if ($field["head"]=="l cpu") { $sumlcpu += (int) $myrow[$field["name"]]; }
 			if ( $field["head"]=="Anzahl") $totals += (int) $myrow[$field["name"]];
 			if ( $field["show"]!="n" && isset($myrow[$field["name"]] ) ) {
 				if ($field["name"]=='software_version' || $field["name"]=='sv_version') {
+					if (empty($software_version)) $software_version='9999.0';
+					if (empty($sv_version)) $sv_version='';
+					if ( version_compare($sv_version, $software_version,'>')) $warnmarker= "X"; else $warnmarker="";
 					$csv_data .= "\0".$myrow[$field["name"]];
+					$csv_data .= '^^^';
+				} else if ($field["name"]=='sv_newer') {
+					$csv_data .= '"' . $warnmarker .'"';
 					$csv_data .= '^^^';
 				} else if ( (float) $myrow[$field["name"]] > 20000101000000) {
 					$csv_data .= '"'.return_date_time($myrow[$field["name"]]).'"';

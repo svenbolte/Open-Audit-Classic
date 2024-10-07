@@ -416,13 +416,13 @@ if ($myrow = mysqli_fetch_array($result)){
 					// Special field calculations here, for example warranty days. 
 					//
 					
-					if(isset($field["dell_warranty"]) AND $field["dell_warranty"]=="y") {
+					if(isset($field["lenovo_warranty"]) AND $field["lenovo_warranty"]=="y") {
 						// allow another 10 seconds for this bit to complete
 						set_time_limit(240);
 						$show_value = $myrow["system_id_number"];
-						$this_dell_warranty_remaining = get_dell_warranty_days( $show_value);
-						$myrow ["dell_warranty"] = $this_dell_warranty_remaining ;
-						$show_value = $this_dell_warranty_remaining; 
+						$this_lenovo_warranty_remaining = get_lenovo_warranty_days( $show_value);
+						$myrow ["lenovo_warranty"] = $this_lenovo_warranty_remaining ;
+						$show_value = $this_lenovo_warranty_remaining; 
 					}
 				} else {
 				// If this is not a calculated value, just show it
@@ -448,9 +448,17 @@ if ($myrow = mysqli_fetch_array($result)){
 			   if ($field["name"]=="sv_version") {
 					if (empty($software_version)) $software_version='9999.0';
 					if (empty($sv_version)) $sv_version='';
-					if ( version_compare($sv_version, $software_version,'>')) $warncolor = "#f80000"; else $warncolor="#00cc00";
-					$show_value = "<div style='font-size:0.9em;max-width:100px;color:".$warncolor."'>".$sv_version."</div>";
+					if ( version_compare($sv_version, $software_version,'>')) $warncolor = "#f80000"; else $warncolor="#00aa00";
+					$show_value = "<div style='font-size:.9em;max-width:100px;color:".$warncolor."'>".$sv_version."</div>";
 				}
+
+			   if ($field["name"]=="sv_newer") {
+					if (empty($software_version)) $software_version='9999.0';
+					if (empty($sv_version)) $sv_version='';
+					if ( version_compare($sv_version, $software_version,'>')) $warnmarker= "X"; else $warnmarker="";
+					$show_value = $warnmarker;
+				}
+
 			   if ($field["name"]=="software_version") {
 					$show_value = "<div style='word-break: break-all;font-size:0.9em;max-width:100px'>".$software_version."</div>";
 				}

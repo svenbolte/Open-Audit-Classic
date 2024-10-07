@@ -2261,63 +2261,24 @@ end if 'QPCU
 ''''''''''''''''''''''''''''''''''''''''''''''
 comment = "Scheduled Tasks Info"
 Echo(comment)
-On Error Resume Next
+On Error goto 0
 
-' We rely on schtasks.exe so skipping if local system is older than WinXP
-' Check Build Number: Win2k-->2195, Win98-->2222, WinME-->3000, 
-if (CInt(LocalSystemBuildNumber) > 2222 and not LocalSystemBuildNumber = "3000") then
-  Set oShell = CreateObject("Wscript.Shell")
-  Set oFS = CreateObject("Scripting.FileSystemObject")
-  sTemp = oShell.ExpandEnvironmentStrings("%TEMP%")
-  sTempFile = sTemp & "\" & oFS.GetTempName & ".csv"
-  sCmd = "%ComSpec% /c schtasks.exe /query /v /nh /fo csv /s " & strComputer 
-  if strUser <> "" and strPass <> "" then
-    sCmd = sCmd & " /u " & strUser & " /p " & strPass
-  end if
-  sCmd = sCmd & " > " & sTempFile
-  'Run SchTasks via Command Prompt and dump results into a temp CSV file
-  oShell.Run sCmd, 0, True
-  ' Open the CSV File and Read out the Data
-  Set oTF = oFS.OpenTextFile(sTempFile)
-  'Parse the CSV file
-  'When auditing from WinXp one field is missing
-  if LocalSystemBuildNumber = "2600" then
-    intOffset = 0
-  else 
-    intOffset = 1
-  End if
+Const wbemFlagReturnImmediately = &H10
+Const wbemFlagForwardOnly = &H20
 
-  ibreaker=0
-  Do While (ibreaker<200) ' (Not oTF.AtEndOfStream)
-    sLine = oTF.Readline
-    ibreaker=ibreaker+1   
-    if sLine <> "" then
-      ' Parse the line
-      sTask = CSVParser(sLine)
-      'Check if scheduled tasks are set
-      if UCase(sTask(0)) = UCase(strComputer) then
-        sTaskName = clean(sTask(1))
-        sNextRunTime = clean(sTask(2))
-        sStatus = clean(sTask(3))
-        sLastRunTime = clean(sTask(4+intOffset))
-        sLastResult = clean(sTask(5+intOffset))
-        sCreator = clean(sTask(6+intOffset))
-        sSchedule = clean(sTask(7+intOffset))
-        sTaskToRun = clean(sTask(8+intOffset))
-        sTaskState = clean(sTask(11+intOffset))
-        sRunAsUser = clean(sTask(18+intOffset))
-        form_input = "sched_task^^^" & sTaskName & "^^^" & sNextRunTime & "^^^" & sStatus    & "^^^" & sLastRunTime & "^^^" & sLastResult _
-                             & "^^^" & sCreator  & "^^^" & sSchedule    & "^^^" & sTaskToRun & "^^^" & sTaskState   & "^^^" & sRunAsUser  & "^^^"
-        entry form_input,comment,objTextFile,oAdd,oComment
-        form_input = ""
-      end if
-    end if 
-  Loop
-  'Delete the CSV file
-  oTF.Close
-  oFS.DeleteFile sTempFile
-  set oShell = nothing
-end if
+Set objItems = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\Root\Microsoft\Windows\TaskScheduler").ExecQuery("" & _
+"SELECT * FROM MSFT_ScheduledTask", "WQL", wbemFlagReturnImmediately + wbemFlagForwardOnly)
+
+For Each objItem In objItems
+	' &"*"& objItem.Description)
+    sTaskName = clean(objItem.TaskName)
+    sTaskState = clean(objItem.State)
+    sTaskPath = clean(objItem.TaskPath )
+	form_input = "sched_task^^^" & sTaskName & "^^^" & sNextRunTime & "^^^" & sTaskPath & "^^^" & sLastRunTime & "^^^" & sLastResult _
+						 & "^^^" & sCreator  & "^^^" & sSchedule    & "^^^" & sTaskToRun & "^^^" & sTaskState   & "^^^" & sRunAsUser  & "^^^"
+	entry form_input,comment,objTextFile,oAdd,oComment
+	form_input = ""
+Next
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '   System Environment Variables information      '

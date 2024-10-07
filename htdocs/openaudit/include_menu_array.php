@@ -147,21 +147,22 @@ $menue_array = array(
                     "class"=>"menuparent",
                     "childs"=>array("60"=>array("name"=>"All Software", "link"=>"./list.php?view=all_software", "image"=>"fa-archive", "title"=>" All Software",),
 									"70"=>array("name"=>"All Software w/ Hosts", "link"=>"./list.php?view=all_software_hosts", "image"=>"fa-folder-open", "title"=>"All Software with Hosts",),
+									"71"=>array("name"=>"Old Software w/ Hosts", "link"=>"./list.php?view=all_software_hosts_old", "image"=>"fa-bug", "title"=>"Old Software with Hosts",),
 									"72"=>array("name"=>"All Software short", "link"=>"./list.php?view=all_software-short", "image"=>"fa-folder", "title"=>" All Software Shortlist",),
                                     "74"=>array("name"=>"All Software versions", "link"=>"./list.php?view=all_softwareversionen", "image"=>"fa-road", "title"=>"All Software versions imported from PB",),
                                     "76"=>array("name"=>"All Modern Apps", "link"=>"./list.php?view=all_softwareapps", "image"=>"fa-windows", "title"=>" All Modern Apps",),
                                     "80"=>array("name"=>"All SW Patches", "link"=>"./list.php?view=all_hotfixes_patches", "image"=>"fa-bug", "title"=>"All Hotfixes &amp; Patches",),
                                     "85"=>array("name"=>"All SW Patches w/ Hosts", "link"=>"./list.php?view=all_hotfixes_patches", "image"=>"fa-bug", "title"=>"All Hotfixes &amp; Patches with Hosts",),
+                                    "86"=>array("name"=>"All MS Windows Shares", "link"=>"./list.php?view=all_network_shares", "image"=>"fa-share-square", "title"=>"All Windows Shares by Host",),
+                                    "87"=>array("name"=>"All Mapped Drives", "link"=>"./list.php?view=all_mapped_drives", "image"=>"fa-folder-open-o", "title"=>"All Mapped Drives by Host",),
+                                    "88"=>array("name"=>"All MS Windows Admins", "link"=>"./list.php?view=all_win_admins", "image"=>"fa-user-secret", "title"=>"All Admins by Host",),
                                     "90"=>array("name"=>"All Anti Virus Status", "link"=>"./list.php?view=all_systems_virus_uptodate", "image"=>"fa-life-saver", "title"=>" All Anti Virus Software",),
                                     "110"=>array("name"=>"All Services", "link"=>"./list.php?view=all_services", "image"=>"fa-gears", "title"=>"All Services",),
-                                    "120"=>array("name"=>"All Scheduled Tasks", "link"=>"list.php?pc=$pc&amp;view=all_sch_tasks", "image"=>"fa-bell", "title"=>"",),
                                     "125"=>array("name"=>"All ODBC DSNs", "link"=>"./list.php?view=all_odbc", "image"=>"fa-database", "title"=>"All ODBC DSNs",),
+                                    "127"=>array("name"=>"All Scheduled Tasks", "link"=>"list.php?pc=$pc&amp;view=all_sch_tasks", "image"=>"fa-bell", "title"=>"",),
                                     "130"=>array("name"=>"All Software Keys", "link"=>"./list.php?view=all_keys", "image"=>"fa-key", "title"=>"All Keys",),
                                     "140"=>array("name"=>"All MS Office Keys", "link"=>"./list.php?view=keys_for_software&amp;type=office%&amp;headline_addition=Office", "image"=>"fa-file-word-o", "title"=>"All Office Keys",),
                                     "150"=>array("name"=>"All MS Windows Keys", "link"=>"./list.php?view=keys_for_software&amp;type=windows%&amp;headline_addition=Windows", "image"=>"fa-windows", "title"=>"All Windows Keys",),
-                                    "160"=>array("name"=>"All MS Windows Shares", "link"=>"./list.php?view=all_network_shares", "image"=>"fa-share-square", "title"=>"All Windows Shares by Host",),
-                                    "170"=>array("name"=>"All MS Windows Admins", "link"=>"./list.php?view=all_win_admins", "image"=>"fa-user-secret", "title"=>"All Admins by Host",),
-                                    "180"=>array("name"=>"All Mapped Drives", "link"=>"./list.php?view=all_mapped_drives", "image"=>"fa-folder-open-o", "title"=>"All Mapped Drives by Host",),
                                     "190"=>array("name"=>"All LDAP Systems", "link"=>"./list.php?view=ldap_computers", "image"=>"fa-desktop", "title"=>"All LDAP Audited Systems",),
                                     "200"=>array("name"=>"All LDAP Users", "link"=>"./list.php?view=ldap_users", "image"=>"fa-user", "title"=>"All LDAP Audited Users",),
                               ),
@@ -284,9 +285,8 @@ $menue_array = array(
 if ((isset($use_ldap_integration))and($use_ldap_integration == 'y')) {
  $menue_array['misc']['60']['childs']['100']=array("name"=>"Audit LDAP Directory", "link"=>"ldap_audit_script.php", "image"=>"fa-phone", "title"=>"Audit the LDAP Directory.",);
 };
-if ((isset($show_dell_warranty ))and($show_dell_warranty  == 'y')) {
- $menue_array['misc']['10']['childs']['230']=array("name"=>"All Dell Warranty", "link"=>"./list.php?view=all_dell_warranty", "image"=>"fa-dollar", "title"=>"All Dell Warranty.",);
+if ((isset($show_lenovo_warranty ))and($show_lenovo_warranty  == 'y')) {
+ $menue_array['misc']['10']['childs']['230']=array("name"=>"All lenovo Warranty", "link"=>"./list.php?view=all_lenovo_warranty", "image"=>"fa-dollar", "title"=>"All lenovo Warranty.",);
 };
-
 
 ?>

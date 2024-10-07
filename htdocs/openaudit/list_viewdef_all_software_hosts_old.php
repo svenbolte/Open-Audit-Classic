@@ -1,17 +1,27 @@
 <?php
-
-$query_array=array("headline"=>__("List all Software with Hosts"),
-                   "sql"=>"SELECT software_name, software_version, software_publisher, software_location, softwareversionen.sv_version, softwareversionen.sv_instlocation, system_name, net_user_name, system_uuid, (1=1) as sv_newer 
-					 	FROM system, software 
-						LEFT JOIN softwareversionen
-						ON (
-							 CONCAT('%', LOWER(RTRIM(Replace(Replace(software.software_name,'(x64)',''),'.',''))) ,'%')      
-						LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
-						) 
-				   WHERE software_name NOT LIKE '%hotfix%'
-				   AND software_name NOT LIKE '%Service Pack%'
-				   AND software_name NOT LIKE '%MUI (%' AND software_name NOT LIKE '%Proofing %' AND software_name NOT LIKE '%Language%' AND software_name NOT LIKE '%Korrektur%' AND software_name NOT LIKE '%linguisti%' AND software_name NOT REGEXP 'SP[1-4]{1,}' AND software_name NOT REGEXP '[KB|Q][0-9]{6,}' 
-				   AND software_uuid = system_uuid AND software_timestamp = system_timestamp ",
+$query_array=array("headline"=>__("List all known old Software with hosts"),
+                   "sql"=>"
+		SELECT software_location, net_user_name, system_name,software.software_name, softwareversionen.sv_product, 
+				software_version, softwareversionen.sv_version, (1=1) as sv_newer  
+			FROM system,software
+			LEFT JOIN softwareversionen
+			ON (
+			   CONCAT('%', LOWER(RTRIM(Replace(Replace(software.software_name,'(x64)',''),'.',''))) ,'%')      
+			   LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
+			   )
+		WHERE CONCAT(
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 1), '.', -1), 10, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 2), '.', -1), 10, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 3), '.', -1), 10, '0') 
+			   ) <
+			   CONCAT(
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 1), '.', -1), 10, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 2), '.', -1), 10, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 3), '.', -1), 10, '0') 
+			   ) 
+				AND software_uuid = system_uuid AND software_timestamp = system_timestamp
+				GROUP BY software_name, software_version
+",
                    "sort"=>"software_name",
                    "dir"=>"ASC",
                    "get"=>array("file"=>"list.php",
