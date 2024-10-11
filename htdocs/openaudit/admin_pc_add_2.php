@@ -269,8 +269,6 @@ $split = mysqli_real_escape_string($db,$split);
   if (substr($split, 0, 7) == "l_group"){ insert_group($split); }
   // Local Users
   if (substr($split, 0, 6) == "l_user"){ insert_user($split); }
-  // Hfnet Info
-  if (substr($split, 0, 5) == "hfnet"){ insert_hfnet($split); }
   // Startup Programs
   if (substr($split, 0, 7) == "startup"){ insert_startup($split); }
   // Services
@@ -1669,61 +1667,6 @@ function insert_user ($split) {
   }
 
 
-function insert_hfnet ($split) {
-    global $timestamp, $uuid, $verbose, $hfnet_timestamp;
-    if ($verbose == "y"){echo "<h2>System Security</h2><br />";}
-    $extended        = explode('^^^',$split);
-    $ss_qno          = trim($extended[1]);
-    $ss_status       = trim($extended[2]);
-    $ss_reason       = trim($extended[3]);
-    $ss_product      = trim($extended[4]);
-    $ssb_title       = trim($extended[5]);
-    $ssb_description = trim($extended[6]);
-    $ssb_bulletin    = trim($extended[7]);
-    $ssb_url         = trim($extended[8]);
-    $sql = "SELECT count(software_uuid) AS count FROM software WHERE software_name LIKE '%KB" . $ss_qno . "' AND software_uuid = '" . $uuid . "'";
-    $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    $myrow = mysqli_fetch_array($result);
-    if ($myrow["count"] <> "0") {
-      if ($verbose == "y"){ echo "Hotfix present in software table. <br />"; } else {}
-    } else {
-
-    if (is_null($hfnet_timestamp)){
-      $sql = "SELECT MAX(ss_timestamp) FROM system_security WHERE ss_uuid = '$uuid'";
-      if ($verbose == "y"){echo $sql . "<br />\n\n";}
-      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-      $myrow = mysqli_fetch_array($result);
-      if ($myrow["MAX(ss_timestamp)"]) {$hfnet_timestamp = $myrow["MAX(ss_timestamp)"];} else {$hfnet_timestamp = "";}
-    } else {}
-    $sql  = "SELECT count(ss_qno) AS count FROM system_security WHERE ss_uuid = '$uuid' AND ss_qno = '$ss_qno' AND ";
-    $sql .= "(ss_timestamp = '$hfnet_timestamp' OR ss_timestamp = '$timestamp')";
-    if ($verbose == "y"){echo $sql . "<br />\n\n";}
-    $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    $myrow = mysqli_fetch_array($result);
-    if ($verbose == "y"){echo "Count: " . $myrow['count'] . "<br />\n\n";}
-    if ($myrow['count'] == "0"){
-      // Insert into database
-      $sql  = "INSERT INTO system_security (ss_uuid, ss_qno, ss_status, ss_reason, ";
-      $sql .= "ss_product, ss_timestamp, ss_first_timestamp) VALUES (";
-      $sql .= "'$uuid', '$ss_qno', '$ss_status', '$ss_reason', ";
-      $sql .= "'$ss_product', '$timestamp', '$timestamp')";
-      if ($verbose == "y"){echo $sql . "<br />\n\n";}
-      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    } else {
-      // Already present in database - update timestamp
-      $sql = "UPDATE system_security SET ss_timestamp = '$timestamp' WHERE ss_uuid = '$uuid' AND ss_qno = '$ss_qno' AND ss_timestamp = '$hfnet_timestamp'";
-      if ($verbose == "y"){echo $sql . "<br />\n\n";}
-      $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-    }
-    $sql  = "INSERT IGNORE INTO system_security_bulletins (ssb_title, ssb_description, ";
-    $sql .= "ssb_bulletin, ssb_qno, ssb_url) VALUES ('$ssb_title', '$ssb_description', ";
-    $sql .= "'$ssb_bulletin', '$ss_qno', '$ssb_url')";
-    if ($verbose == "y"){echo $sql . "<br />\n\n";}
-    $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
-
-    } //End of hotfix in software table check.
-  } // End of function
-
 
 function insert_startup ($split) {
     global $timestamp, $uuid, $verbose, $startup_timestamp;
@@ -1854,8 +1797,9 @@ function insert_system10 ($split) {
     $virus_name = trim($extended[2]);
     $virus_uptodate = trim($extended[3]);
     $virus_version = trim($extended[4]);
+    $virus_date = trim($extended[5]);
     $sql  = "UPDATE system SET virus_manufacturer = '$virus_manufacturer', ";
-    $sql .= "virus_name = '$virus_name', virus_uptodate = '$virus_uptodate', virus_version = '$virus_version' ";
+    $sql .= "virus_name = '$virus_name', virus_uptodate = '$virus_uptodate', virus_version = '$virus_date' ";
     $sql .= "WHERE system_uuid = '$uuid' AND system_timestamp = '$timestamp'";
     if ($verbose == "y"){echo $sql . "<br />\n\n";}
     $db=GetOpenAuditDbConnection(); $result = mysqli_query($db,$sql) or die ('Insert Failed: ' . mysqli_error($db) . '<br />' . $sql);
@@ -2352,7 +2296,7 @@ function insert_sched_task ($split) {
     if ($verbose == "y"){echo "<h2>Scheduled task</h2><br />";}
     $sched_task_name = trim($extended[1]);
     $sched_task_next_run = trim($extended[2]);
-    $sched_task_status = trim($extended[3]);
+    $sched_task_status = trim($extended[3]);  // path
     $sched_task_last_run = trim($extended[4]);
     $sched_task_last_result = trim($extended[5]);
     $sched_task_creator = trim($extended[6]);

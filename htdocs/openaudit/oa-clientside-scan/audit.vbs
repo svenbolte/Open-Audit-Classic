@@ -687,10 +687,8 @@ end if
 '   Setup for Offline file creation   '
 '''''''''''''''''''''''''''''''''''''''
 if online = "n" then
-   scriptdir = replace(WScript.ScriptFullName,WScript.ScriptName,"")
-   echo(scriptdir & system_name & ".txt")
    Set objFSO = CreateObject("Scripting.FileSystemObject")
-   Set objTextFile = objFSO.OpenTextFile (scriptdir & system_name & ".txt", ForAppending, True)
+   Set objTextFile = objFSO.OpenTextFile (system_name & ".txt", ForAppending, True)
 end if
 
 '''''''''''''''''''''''''''
@@ -2195,131 +2193,31 @@ else
 end if
 
 
-''''''''''''
-' HFNetChk '
-''''''''''''
-if (strComputer <> "KEDRON-QPCU" AND strComputer <> "ACADEMY02-QPCU" AND strComputer <> "ACADEMY05-QPCU") then 'QPCU
-if hfnet = "y" then
-  comment = "HFNetChk"
-  Echo(comment)
-  Set oShell = CreateObject("Wscript.Shell")
-  Set oFS = CreateObject("Scripting.FileSystemObject")
-  sTemp = oShell.ExpandEnvironmentStrings("%TEMP%")
-  sTempFile = sTemp & "\" & oFS.GetTempName
-  if (strUser <> "" AND strPass <>"") then
-    hfnetchk = "hfnetchk.exe -h " & system_name & " -u " & strUser & " -p " & strPass & " -nosum -vv -x mssecure.xml -o tab -f " & sTempFile
-  else
-    hfnetchk = "hfnetchk.exe -h " & system_name & " -vv -x mssecure.xml -nosum -o tab -f " & sTempFile
-  end if
-  Set sh=WScript.CreateObject("WScript.Shell")
-  sh.Run hfnetchk, 6, True
-  set sh = nothing
-  'sql = "DELETE FROM system_security WHERE ss_name = '" & strComputer & "'"
-  'create_sql sql, objTextFile, database
-  Set objFSO = CreateObject("Scripting.FileSystemObject")
-  Set objTextFile2 = objFSO.OpenTextFile(sTempFile, 1)
-  Do Until objTextFile2.AtEndOfStream
-    strString = objTextFile2.ReadLine
-    MyArray = Split(strString, vbTab, -1, 1)
-    'hf_org_name = MyArray(0)
-    'hf_name = Split(hf_org_name, " ", -1, 1)
-    'echo "Name: " & hf_name(0)
-    qno = clean(right(MyArray(4),6))
-    if MyArray(0) <> "Machine Name" then
-      'sql = "INSERT IGNORE INTO system_security_bulletins (ssb_bulletin, ssb_title, ssb_qno, ssb_url, ssb_description) VALUES ('" _
-      '& clean(MyArray(2)) & "','" & clean(MyArray(3)) & "','" & qno & "','" & clean(MyArray(5)) & "','" & clean(MyArray(7)) & "')"
-      'create_sql sql, objTextFile, database
-      'form_input = "sys_sec_bul^^^" & clean(MyArray(3)) & "^^^" _
-      '                              & clean(MyArray(7)) & "^^^" _
-      '                              & clean(MyArray(2)) & "^^^" _
-      '                              & qno & "^^^" _
-      '                              & clean(MyArray(5)) & "^^^"
-      'entry form_input,comment,objTextFile,oAdd,oComment
-      'form_input = ""
-
-      'sql = "INSERT INTO system_security (ss_name, ss_product, ss_qno, ss_reason, ss_status) VALUES ('" _
-      '& hf_name(0) & "','" & clean(MyArray(1)) & "','" & qno & "','" & clean(MyArray(6)) & "','" & clean(MyArray(8)) & "')"
-      'create_sql sql, objTextFile, database
-      form_input = "hfnet^^^" & qno & "^^^" _
-                              & clean(MyArray(8)) & "^^^" _
-                              & clean(MyArray(6)) & "^^^" _
-                              & clean(MyArray(1)) & "^^^" _
-                              & clean(MyArray(3)) & "^^^" _
-                              & clean(MyArray(7)) & "^^^" _
-                              & clean(MyArray(2)) & "^^^" _
-                              & clean(MyArray(5)) & "^^^"
-      entry form_input,comment,objTextFile,oAdd,oComment
-      form_input = ""
-
-    end if
-  Loop
-  objTextFile2.Close
-  objFSO.DeleteFile sTempFile
-end if
-end if 'QPCU
-
 ''''''''''''''''''''''''''''''''''''''''''''''
 '   Scheduled Tasks information      '
 ''''''''''''''''''''''''''''''''''''''''''''''
 comment = "Scheduled Tasks Info"
 Echo(comment)
-On Error Resume Next
+On Error resume next
 
-' We rely on schtasks.exe so skipping if local system is older than WinXP
-' Check Build Number: Win2k-->2195, Win98-->2222, WinME-->3000, 
-if (CInt(LocalSystemBuildNumber) > 2222 and not LocalSystemBuildNumber = "3000") then
-  Set oShell = CreateObject("Wscript.Shell")
-  Set oFS = CreateObject("Scripting.FileSystemObject")
-  sTemp = oShell.ExpandEnvironmentStrings("%TEMP%")
-  sTempFile = sTemp & "\" & oFS.GetTempName & ".csv"
-  sCmd = "%ComSpec% /c schtasks.exe /query /v /nh /fo csv /s " & strComputer 
-  if strUser <> "" and strPass <> "" then
-    sCmd = sCmd & " /u " & strUser & " /p " & strPass
-  end if
-  sCmd = sCmd & " > " & sTempFile
-  'Run SchTasks via Command Prompt and dump results into a temp CSV file
-  oShell.Run sCmd, 0, True
-  ' Open the CSV File and Read out the Data
-  Set oTF = oFS.OpenTextFile(sTempFile)
-  'Parse the CSV file
-  'When auditing from WinXp one field is missing
-  if LocalSystemBuildNumber = "2600" then
-    intOffset = 0
-  else 
-    intOffset = 1
-  End if
+Const wbemFlagReturnImmediately = &H10
+Const wbemFlagForwardOnly = &H20
 
-  ibreaker=0
-  Do While (ibreaker<200) ' (Not oTF.AtEndOfStream)
-    sLine = oTF.Readline
-    ibreaker=ibreaker+1   
-    if sLine <> "" then
-      ' Parse the line
-      sTask = CSVParser(sLine)
-      'Check if scheduled tasks are set
-      if UCase(sTask(0)) = UCase(strComputer) then
-        sTaskName = clean(sTask(1))
-        sNextRunTime = clean(sTask(2))
-        sStatus = clean(sTask(3))
-        sLastRunTime = clean(sTask(4+intOffset))
-        sLastResult = clean(sTask(5+intOffset))
-        sCreator = clean(sTask(6+intOffset))
-        sSchedule = clean(sTask(7+intOffset))
-        sTaskToRun = clean(sTask(8+intOffset))
-        sTaskState = clean(sTask(11+intOffset))
-        sRunAsUser = clean(sTask(18+intOffset))
-        form_input = "sched_task^^^" & sTaskName & "^^^" & sNextRunTime & "^^^" & sStatus    & "^^^" & sLastRunTime & "^^^" & sLastResult _
-                             & "^^^" & sCreator  & "^^^" & sSchedule    & "^^^" & sTaskToRun & "^^^" & sTaskState   & "^^^" & sRunAsUser  & "^^^"
-        entry form_input,comment,objTextFile,oAdd,oComment
-        form_input = ""
-      end if
-    end if 
-  Loop
-  'Delete the CSV file
-  oTF.Close
-  oFS.DeleteFile sTempFile
-  set oShell = nothing
-end if
+Set objItems = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\Root\Microsoft\Windows\TaskScheduler").ExecQuery("" & _
+"SELECT * FROM MSFT_ScheduledTask", "WQL", wbemFlagReturnImmediately + wbemFlagForwardOnly)
+
+For Each objItem In objItems
+	' &"*"& objItem.Description)
+    sTaskName = clean(objItem.TaskName)
+    sTaskState = clean(objItem.State)
+    sNextRunTime = clean(objItem.Date)
+    sCreator = clean(objItem.Author)
+    sTaskPath = clean(objItem.TaskPath )
+	form_input = "sched_task^^^" & sTaskName & "^^^" & sNextRunTime & "^^^" & sTaskPath & "^^^" & sLastRunTime & "^^^" & sLastResult _
+						 & "^^^" & sCreator  & "^^^" & sSchedule    & "^^^" & sTaskToRun & "^^^" & sTaskState   & "^^^" & sRunAsUser  & "^^^"
+	entry form_input,comment,objTextFile,oAdd,oComment
+	form_input = ""
+Next
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '   System Environment Variables information      '
@@ -2478,57 +2376,96 @@ Next
 if ((SystemBuildNumber = "2600" AND CInt(ServicePack) > 1) OR (CInt(SystemBuildNumber) >= 6000)) then
   comment = "AV - Security Center Settings"
   Echo(comment)
+  ' Windows 8.1, 7 und älter
   Set objWMIService_AV = GetObject("winmgmts:\\" & strComputer & "\root\SecurityCenter")
   Set colItems = objWMIService_AV.ExecQuery("Select * from AntiVirusProduct")
 
-  For Each objAntiVirusProduct In colItems
-    av_prod = Clean(objAntiVirusProduct.companyName)
-    av_disp = Clean(objAntiVirusProduct.displayName)
-    av_vers = Clean(objAntiVirusProduct.versionNumber)
-    av_up2d = Clean(objAntiVirusProduct.productUptoDate)
-    If av_up2d Then
-      av_up2d = "True"
-    Else
-      av_up2d = "False"
-    End If
-    
-    form_input = "system10^^^" & av_prod  & "^^^"   & av_disp  & "^^^" _
-                               & av_up2d  & "^^^"   & av_vers  & "^^^"
-    entry form_input,comment,objTextFile,oAdd,oComment
-    form_input = ""
-  Next
-  Set objWMIService_AV = GetObject("winmgmts:\\" & strComputer & "\root\SecurityCenter2")
-  Set colItems2 = objWMIService_AV.ExecQuery("Select * from AntiVirusProduct")
+	If Err = 0 Then
+	  For Each objAntiVirusProduct In colItems
+		av_prod = Clean(objAntiVirusProduct.companyName)
+		av_disp = Clean(objAntiVirusProduct.displayName)
+		av_vers = Clean(objAntiVirusProduct.versionNumber)
+		av_up2d = Clean(objAntiVirusProduct.productUptoDate)
+		av_date = Clean(objAntiVirusProduct.timestamp)
+		If av_up2d Then
+		  av_up2d = "True"
+		Else
+		  av_up2d = "False"
+		End If
+		
+		form_input = "system10^^^" & av_prod  & "^^^"   & av_disp  & "^^^" _
+								   & av_up2d  & "^^^"   & av_vers  & "^^^"    & av_date & "^^^"
+		entry form_input,comment,objTextFile,oAdd,oComment
+		form_input = ""
+	  Next
+	Else
+		strMessage = "Error Description: " & Err.Description & vbCRLF
+		Echo(strMessage)
+		Err.Clear
+	End If
 
-  For Each objAntiVirusProduct In colItems2
-  PathToSignedProductExe = Replace(objAntiVirusProduct.PathToSignedProductExe,"\","\\")
-  echo ("Path " & PathToSignedProductExe)
-  echo ("Name " & objAntiVirusProduct.displayName)
-  Set colFiles = objWMIService.ExecQuery ("Select * from CIM_Datafile Where name = '" & PathToSignedProductExe & "'",,48)
-  For Each itemFile In colFiles  
-    av_prod  = Clean(itemFile.Manufacturer)
-    av_vers = Clean(itemFile.Version)
-    av_disp = Clean(objAntiVirusProduct.displayName)  
-	  if objAntiVirusProduct.ProductState = "266240" then  
-		av_up2d = "True"
-	  Else
-		av_up2d = "False"
-	  End If
-  Next
-    av_prod  = Clean(objAntiVirusProduct.Manufacturer)
-    av_vers = Clean(objAntiVirusProduct.Version)
-    av_disp = Clean(objAntiVirusProduct.displayName)  
-	  if objAntiVirusProduct.ProductState = "266240" then  
-		av_up2d = "True"
-	  Else
-		av_up2d = "False"
-	  End If
-  form_input = "system10^^^" & av_prod  & "^^^"   & av_disp  & "^^^" _
-                               & av_up2d  & "^^^"   & av_vers  & "^^^"
+	' Sec Center 2 ab Win10
+	Set objWMIService_AV = GetObject("winmgmts:\\" & strComputer & "\root\SecurityCenter2")
+	If Err.Number = -2147217394 Then
+		Err.Clear
+		Echo("WMI Class SecurityCenter2 not found")
+	Else
+		Set colItems2 = objWMIService_AV.ExecQuery("Select * from AntiVirusProduct")
+		If Err = 0 Then
+		  For Each objAntiVirusProduct In colItems2
+			  PathToSignedProductExe = Replace(objAntiVirusProduct.PathToSignedProductExe,"\","\\")
+			  echo ("Path " & PathToSignedProductExe)
+			  echo ("Name " & objAntiVirusProduct.displayName)
+			  Set colFiles = objWMIService.ExecQuery ("Select * from CIM_Datafile Where name = '" & PathToSignedProductExe & "'",,48)
+				  For Each itemFile In colFiles  
+					av_disp = Clean(itemFile.displayName)  
+					av_date = Clean(itemFile.timestamp)  
+					  if objAntiVirusProduct.ProductState = "266240" OR objAntiVirusProduct.ProductState = "397568" then  
+						av_up2d = "True"
+					  Else
+						av_up2d = "False"
+					  End If
+				  Next
+			  av_disp = Clean(objAntiVirusProduct.displayName)  
+			  av_date = Clean(objAntiVirusProduct.timestamp)  
+			  if objAntiVirusProduct.ProductState = "266240" OR objAntiVirusProduct.ProductState = "397568" then  
+				av_up2d = "True"
+			  Else
+				av_up2d = "False"
+			  End If
+		  Next
+		Else
+			strMessage = "Error Description: " & Err.Description & vbCRLF
+			Echo(strMessage)
+			Err.Clear
+		End If
+
+		' Firewall in Manufacturer Spalte eintragen, wenn Seccenter 2
+		Set colItems3 = objWMIService_AV.ExecQuery("Select * from FirewallProduct")
+		If Err = 0 Then
+			For Each objFirewallProduct In colItems3
+				strMessage = objFirewallProduct.companyName & "   "
+				strMessage = strMessage & objFirewallProduct.displayName & "   "
+				strMessage = strMessage & objFirewallProduct.enabled & "   "
+				strMessage = strMessage & objFirewallProduct.versionNumber
+				av_prod  = "Windows Firewall " & Clean(strMessage)
+			Next
+		Else
+			strMessage = "Error Description: " & Err.Description & vbCRLF
+			Echo(strMessage)
+			Err.Clear
+		End If
+	Echo("Firewall: " & strMessage) 
+	av_prod  = "Windows Firewall " & Clean(strMessage)
+
+    ' Daten an PHP übergeben
+	form_input = "system10^^^" & av_prod  & "^^^"   & av_disp  & "^^^" _
+                               & av_up2d  & "^^^"   & av_vers  & "^^^"   & av_date  & "^^^"
     entry form_input,comment,objTextFile,oAdd,oComment
     form_input = ""
-  Next
-end if
+end if     ' Fehlermeldung seccenter2?
+
+end if    ' Neuer als xp sp2
 
 if software_audit = "y" then
 ' software audit finishes further down the script
@@ -3579,7 +3516,7 @@ if ((SystemBuildNumber = "2600" AND CInt(ServicePack) > 1) OR (SystemBuildNumber
                              & clean(std_EnFirewall) & "^^^" _
                              & clean(std_DisNotifications) & "^^^" _
                              & clean(std_DNExceptions) & "^^^"
-  entry form_input,comment,objTextFile,oAdd,oComment
+  entry form_inpuroot\SecurityCenter2t,comment,objTextFile,oAdd,oComment
   form_input = ""
   strKeyPath = "SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile\AuthorizedApplications\List"
   oReg.EnumValues HKEY_LOCAL_MACHINE,strKeyPath,arrSubKeys
