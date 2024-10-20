@@ -1,4 +1,6 @@
-; den Ordner oa-clientside-scan nach c:\temp kopieren und ISS Datei neu compilieren. Setup-exe in den oa-clientside ordner
+; Innosetup 6.3.3. compiled
+; den Ordner oa-clientside-scan nach c:\temp kopieren, die openaudit-clientscan-setup.exe und die unin* Dateien entfernen
+; und ISS Datei neu compilieren. Setup-exe in den oa-clientside ordner
 
 #define MyAppName "Open-Audit Classic Clientside Scan"
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
