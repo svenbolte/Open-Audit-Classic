@@ -1,5 +1,6 @@
 <?php
 
+include "include_functions.php";
 include "include_config.php";
 
   if (isset($_GET['pc'])) {

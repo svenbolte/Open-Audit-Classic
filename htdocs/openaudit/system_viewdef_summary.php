@@ -454,9 +454,7 @@ if ((isset($use_ldap_integration))and($use_ldap_integration == 'y')) {
 
        $result_model = str_replace('/', '', $myrow["system_model"]);
         $filename = 'images/equipment/'.$result_model.'.jpg';
-        
         $filename = strtolower($filename);
-
         if (file_exists($filename)) {
         // FIXME: OK We got a good image,but we need to make it a bit bigger than the default of 16 x 16 . 
         $scale_image_by = "3.5";
@@ -469,8 +467,5 @@ if ((isset($use_ldap_integration))and($use_ldap_integration == 'y')) {
 
      } else {
         // echo $filename;
-         }
-//echo $filename;
-//      $query_array['views']['summary']['fields']['102']['head'] = "Dell Express Code: ".base_convert('system_id_number',36,10) ;
-//echo $query_array['views']['management']['image'] ;
+     }
 ?>

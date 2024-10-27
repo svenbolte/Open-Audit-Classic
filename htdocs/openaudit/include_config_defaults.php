@@ -5,19 +5,7 @@ Module:	include_config_defaults.php
 Description:
 	This module is included by "include_config.php".  Provides a default set of values for the system. These default values 
 	are overridden by the values in "include_config.php".
-		
-Change Control:
-	
-	[Nick Brown]	02/03/2009
-	Increased $max_log_entries value to 1000. Increased $systems_audited_days value to 45. Added $admin_list and 
-	$user_list.
-	
-	[Nick Brown]	23/04/2009
-	Re-organised settings into sections. Removed $domain_suffix and $ldap_connect_string settings as they don't appear to 
-	be used anywhere.
-	[Edoardo]		28/05/2010	Added $show_hard_disk_alerts and $hard_disk_alerts_days in the Homepage Settings section
-	[Edoardo]		12/06/2010	Fixed missing quotes to $hard_disk_alerts_days. Suggested by jpa.
-	
+
 **********************************************************************************************************/
 
 // ****************  General Settings *******************************************
@@ -82,7 +70,7 @@ $hard_disk_alerts_days = '14';
 $enable_remote_management = 'y';
 $max_log_entries = 1000;
 $utf8 = 'y';
-$show_dell_warranty = 'y';
+$show_lenovo_warranty = 'y';
 $show_tips = 'y';
 $admin_list = Array('Domain Admins');
 $user_list = Array('Domain Admins');

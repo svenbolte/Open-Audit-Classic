@@ -21,7 +21,7 @@ include_once "application_class.php";
 include_once "include_config.php";
 include_once "include_lang.php";
 include_once "include_functions.php";
-include "include_dell_warranty_functions.php"; // Added by Andrew Hull to allow us to grab Dell Warranty details from the Dell website
+include "include_lenovo_warranty_functions.php"; // Added by Andrew Hull to allow us to grab Dell Warranty details from the Dell website
 
 
 //die(var_dump($TheApp));

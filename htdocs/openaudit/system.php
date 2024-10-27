@@ -378,17 +378,14 @@ if (isset($field["name"]) and ($field["name"]=="Bilder")) {
                  echo "</td>\n";
                  echo "<td>\n";
 
-                     if ($myrow["system_vendor"] == "Dell Inc." || $myrow["system_vendor"] == "Dell Computer Corporation" || $myrow["system_vendor"] == "Dell Inc") {
+                     if ($myrow["system_vendor"] == "LENOVO" || $myrow["system_vendor"] == "Lenovo" ) {
                        if(isset($myrow["system_id_number"]) AND $myrow["system_id_number"]!=""){
-                           echo " <a href='http://support.dell.com/support/topics/global.aspx/support/my_systems_info/en/details?c=us&amp;cs=usbsdt1&amp;servicetag=" . $myrow["system_id_number"] . "' onclick=\"this.target='_blank';\">".__("Warranty Information")."</a>";
-                           echo " / ";
-                           echo " <a href='http://support.dell.com/support/downloads/index.aspx?c=us&amp;l=en&amp;s=gen&amp;servicetag=" . $myrow["system_id_number"] . "' onclick=\"this.target='_blank';\">".__("Drivers &amp; Software")."</a>";
+                           echo " <a href='https://pcsupport.lenovo.com/de/de/products/" . $myrow["system_id_number"] . "/warranty' onclick=\"this.target='_blank';\">".__("Warranty Information")."</a>";
+                           echo " | ";
+                           echo " <a href='https://pcsupport.lenovo.com/de/de/products/" . $myrow["system_id_number"] . "/downloads/driver-list' onclick=\"this.target='_blank';\">".__("Drivers &amp; Software")."</a>";
+                           echo " | ";
+                           echo " <a href='https://pcsupport.lenovo.com/de/de/products/" . $myrow["system_id_number"] . "' onclick=\"this.target='_blank';\">".__("system overview")."</a>";
                            $links_to_manu=1;
-						   $express_code= base36_convert($myrow["system_id_number"]);
-						   $express_code_formatted = substr($express_code,0,3)."-".substr($express_code,3,3)."-".substr($express_code,6,3)."-".substr($express_code,9,2);
-					   	echo "  -   ".__("Dell Express Service Code").": ".$express_code_formatted ;
-//						echo "</tr>\n";
-//						echo "<td>\n";						   
                        }
                        // Added Hewlett-Packard (AJH 14th April 2009)
                      } elseif ($myrow["system_vendor"] == "Compaq" || $myrow["system_vendor"] == "HP" || $myrow["system_vendor"] == "Hewlett-Packard"){
