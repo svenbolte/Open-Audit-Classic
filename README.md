@@ -1,4 +1,4 @@
-# Open-Audit Classic
+# OpenAudit Classic
 
 Open-Audit Classic ist eine quelloffene Software, die auf einem Windows Server betrieben, per WMI-Anfragen alle Windows PCs und Server mit
 ihrer Hardware und Software und Konfiguration erfasst und in einer MySQL-Datenbank speichert.
@@ -21,7 +21,7 @@ Ein optionales Setup-Paket lässt sich mit Innosetup erstellen. Es fügt diese K
 
 ## Entstehungsgeschichte
 
-in den 2000er Jahren wurde Open-Audit als Open Source Software erstellt und war als Quellcode verfügbar.
+in den 2000er Jahren wurde Open-Audit als Open Source Software erstellt und war komplett als Quellcode verfügbar.
 Seit der Haupt-Entwickler von einer Firma übernommen wurde, wird dort das Projekt "Open-AudIT" als Freemium Modell mit AGPL Lizenz weiterentwickelt.
 Weil damit Teile der Software Closed Source sind aufgrund einer grundlegenden Neuprogrammierung wurde die Weiterentwicklung eigener Vorstellungen damit komplizierter.
 Daher habe ich mich entschlossen, auf Basis der Open-Audit Stands, der noch unter der echten GPL-Lizenz stammt, diesen zu "forken" und weiter zu entwickeln.
