@@ -30,5 +30,5 @@ Das Resultat ist "OpenAudit Classic".
 Berücksichtigt wurden Anpassungen auf neue PHP-Versionen, MySQL und Apache, häufig benutzte zusätzliche Auswertungen, Erweiterungen in der WMI-Erkennung und vieles mehr
 Auch die Integration von NMAP und WinPCap wurde auf den aktuellen Stand gebracht.
 
-Mein OpenAudit Classic Fork ist GPLv3 lizenziert --> GPL.txt im htdocs/openaudit Verzeichnis
+Mein OpenAudit Classic Fork ist AGPLv3 lizenziert --> GPL.txt im htdocs/openaudit Verzeichnis
 Fork and evolution based on Open-Audit when it was GPL3 licensed
