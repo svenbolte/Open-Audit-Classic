@@ -1,4 +1,4 @@
-﻿# OpenAudit Classic
+# OpenAudit Classic
 
 Open-Audit Classic ist eine quelloffene Software, die auf einem Windows Server betrieben, per WMI-Anfragen alle Windows PCs und Server mit
 ihrer Hardware und Software und Konfiguration erfasst und in einer MySQL-Datenbank speichert.
@@ -30,8 +30,9 @@ Das Resultat ist "OpenAudit Classic".
 Berücksichtigt wurden Anpassungen auf neue PHP-Versionen, MySQL und Apache, häufig benutzte zusätzliche Auswertungen, Erweiterungen in der WMI-Erkennung und vieles mehr
 Auch die Integration von NMAP und WinPCap wurde auf den aktuellen Stand gebracht.
 
-Mein OpenAudit Classic Fork ist GPLv3 lizenziert --> GPL.txt im htdocs/openaudit Verzeichnis
-Fork and evolution based on Open-Audit when it was GPL3 licensed
+Mein OpenAudit Classic Fork ist AGPLv3 lizenziert --> GPL.txt im htdocs/openaudit Verzeichnis
+
+-This Fork and further development on it is based on Open-Audit when 2010.08.31-
 
 
 = Entwicklung =
