@@ -21,14 +21,14 @@ Ein optionales Setup-Paket lässt sich mit Innosetup erstellen. Es fügt diese K
 
 ## Entstehungsgeschichte
 
-in den 2000er Jahren wurde Open-Audit als GPLv3 lizensierte Open Source Software erstellt und war als Quellcode verfügbar.
-Seit Weggang des Haupt Entwicklers wird das Produkt unter einer AGPL-Lizenz weiterentwickelt.
+in den 2000er Jahren wurde Open-Audit als Open Source Software erstellt und war als Quellcode verfügbar.
+Seit der Haupt-Entwickler von einer Firma übernommen wurde, wird dort das Projekt "Open-AudIT" als Freemium Modell mit AGPL Lizenz weiterentwickelt.
 Weil damit Teile der Software Closed Source sind aufgrund einer grundlegenden Neuprogrammierung wurde die Weiterentwicklung eigener Vorstellungen damit komplizierter.
 Daher habe ich mich entschlossen, auf Basis der Open-Audit Stands, der noch unter der echten GPL-Lizenz stammt, diesen zu "forken" und weiter zu entwickeln.
-Das Resultat ist "Open-Audit Classic". 
+Das Resultat ist "OpenAudit Classic". 
 
 Berücksichtigt wurden Anpassungen auf neue PHP-Versionen, MySQL und Apache, häufig benutzte zusätzliche Auswertungen, Erweiterungen in der WMI-Erkennung und vieles mehr
 Auch die Integration von NMAP und WinPCap wurde auf den aktuellen Stand gebracht.
 
-Lizenz: GPLv3 --> GPL.txt im htdocs/openaudit Verzeichnis
+Mein OpenAudit Classic Fork ist GPLv3 lizenziert --> GPL.txt im htdocs/openaudit Verzeichnis
 Fork and evolution based on Open-Audit when it was GPL3 licensed
