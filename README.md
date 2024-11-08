@@ -2,19 +2,20 @@
 
 OpenAudit Classic ist eine quelloffene Software, die auf einem Windows Server betrieben, per WMI-Anfragen alle Windows PCs und Server mit
 ihrer Hardware und Software und Konfiguration erfasst und in einer MySQL-Datenbank speichert.
-Die Oberfläche ist komplett in PHP geschrieben und liegt in dieser Form vollumfänglich als Quellcode im Unterordner htdoc/openaudit.
+Die Oberfläche ist komplett in PHP geschrieben und liegt in dieser Form vollumfänglich als Quellcode im Unterordner htdocs/openaudit.
 
-Die notwendigen Basiskomponenten sind ebenfalls Quelloffen und in der Form als Windows-kompilierte Dateien im XAMPP for Windows Projekt
+Die notwendigen Basiskomponenten sind ebenfalls quelloffen und in der Form als Windows-kompilierte Dateien im XAMPP for Windows Projekt
 herunterladbar.
 
 https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/
 
 Aus dem Projekt werden nur Apache, Mysql (MariaDB), PHP und PHPMyadmin benötigt.
 
+Um ein Setup zu erstellen, ist Innosetup verwendbar - die .ISS Datei liegt mit im Stammordner.
+
 ### Hinweis: OpenAudit Classic ist nun Mariadb 10.11.x kompatibel (Supportende 16. Feb 2028) auf PHP8.3 umgestellt (Supportende 31.12.2027)
 
 Für das Inventarisieren von SNMP- und Netzwerkgeräten (Switches, Kameras, Webserver, IRMCs) wird das ebenfalls quelloffene NMAP mit WinPCAP benötigt
-Für eine auch häufig benötigte, einfache Softwareverteilung ist WPKG leicht zu implementieren.
 Der Ordner htdocs/ lässt sich auch optimal für eine Entwicklerinstallation von Wordpress verwenden oder für ein kleines Intranet.
 
 Ein optionales Setup-Paket lässt sich mit Innosetup erstellen. Es fügt diese Komponenten zu einem installierbaren Paket zusammen.
