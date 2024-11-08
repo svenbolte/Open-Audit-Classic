@@ -32,4 +32,4 @@ Auch die Integration von NMAP und WinPCap wurde auf den aktuellen Stand gebracht
 
 Mein OpenAudit Classic Fork ist AGPLv3 lizenziert --> GPL.txt im htdocs/openaudit Verzeichnis
 
--This Fork and further development on it is based on Open-Audit when 2010.08.31-
+-This Fork and its further development on it is based on Open-Audit when 2010.08.31-
