@@ -4,7 +4,7 @@
 
 #define MyAppName "Open-Audit Classic Clientside Scan"
 #define MyDateString GetDateTimeString('yyyy/mm/dd', '.', '');
-#define MyAppPublisher "OpenAudit Classic GPL3 Projekt"
+#define MyAppPublisher "OpenAudit Classic"
 #define MyAppURL "https://github.com/svenbolte/Open-Audit-Classic"
 #define Inhalte "Open-Audit Classic Clientside Scan"
 
