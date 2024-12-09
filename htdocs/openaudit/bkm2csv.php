@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 include_once("include.php");
 
@@ -15,7 +12,7 @@ include_once("include.php");
   <head>
 	<title>HTML Browser Bookmarks to CSV (Excel)</title>
     <script type="module">
-      import { readFile, removeExtension } from './bkm2csv/index.js';
+      import { readFile, removeExtension } from './javascript/bkmindex.js';
 
       document.addEventListener('DOMContentLoaded', (event) => {
         const changeFile = () => {
