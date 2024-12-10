@@ -2,7 +2,7 @@
 $query_array=array("headline"=>__("List all known old Software with hosts"),
                    "sql"=>"
 		SELECT software_location, net_user_name, system_name,software.software_name, softwareversionen.sv_product, 
-				software_version, softwareversionen.sv_version, (1=1) as sv_newer  
+				software_version, softwareversionen.sv_version, softwareversionen.sv_icondata,  (1=1) as sv_newer  
 			FROM system,software
 			LEFT JOIN softwareversionen
 			ON (

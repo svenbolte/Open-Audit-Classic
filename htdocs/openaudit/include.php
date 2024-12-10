@@ -38,9 +38,10 @@ function svversionenimport($aftertime) {
 		// PB Spezial Kellerserver direkt:
 		$url = 'https://ssl.pbcs.de/dcounter/softwareverzeichnis.asp?action=woocom&code=a5b584050977ca2ece290de786cc35f6';
 	} else {
-		$url = 'https://tech-nachrichten.de/wp-content/uploads/csv/softwareverzeichnis.csv';
+		$url = 'https://tech-nachrichten.de/wp-content/uploads/csv/softwareverzeichnis.txt';
 	}	
 	if (file_exists($filename)) {
+		echo substr($url,0,66).' | ';
 		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
 		echo ' | '.time()-filemtime($filename).'s';
 		if (time() - filemtime($filename) > (int) $aftertime ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
@@ -56,7 +57,8 @@ function svversionenimport($aftertime) {
 			// $source = curl_exec($ch);
 			// curl_close($ch);
 
-			if (!empty($source) && substr($source,0,18)=='Datum,Rating,Ldfnr' ) file_put_contents($filename, $source); else echo ' Downloadfehler, verwende alte Datei zum Import!';
+			
+			if (!empty($source) && substr($source,0,18)=='Datum;Rating;Ldfnr' ) file_put_contents($filename, $source); else echo ' Downloadfehler, verwende alte Datei zum Import!';
 		}
 	}
 	// Datei worpresssoftware.csv in Datenbank einlesen
@@ -67,14 +69,14 @@ function svversionenimport($aftertime) {
 	$sql_all = "truncate table softwareversionen";
 	$result_all = mysqli_query($db,$sql_all);
 	// Daten schreiben in Tabelle
-	while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+	while (($emapData = fgetcsv($file, 1000000, ";")) !== FALSE) {
 		if($flag) { $flag = false; continue; }
 		if (isset($emapData[0])) {
 			$emapData[5] = htmlentities($emapData[5]);
 			// mb_convert_encoding($emapData[5], "HTML-ENTITIES", "UTF-8");
 			//iconv( "UTF-8", "latin1Windows-1252",  );
-			$sql_all = "INSERT into softwareversionen (sv_datum,sv_rating,sv_id,sv_product,sv_version,sv_bemerkungen,sv_vorinstall,sv_quelle,sv_lizenztyp,sv_lizenzgeber,sv_lizenzbestimmungen,sv_instlocation,sv_herstellerwebsite)
-	 values ('$emapData[0]','$emapData[1]','$emapData[2]','$emapData[3]','$emapData[4]','$emapData[5]','$emapData[6]','$emapData[7]','$emapData[8]','$emapData[9]','$emapData[10]','$emapData[11]','$emapData[12]')";
+			$sql_all = "INSERT into softwareversionen (sv_datum,sv_rating,sv_id,sv_product,sv_version,sv_bemerkungen,sv_vorinstall,sv_quelle,sv_lizenztyp,sv_lizenzgeber,sv_lizenzbestimmungen,sv_instlocation,sv_herstellerwebsite,sv_linkempf,sv_icondata)
+	 values ('$emapData[0]','$emapData[1]','$emapData[2]','$emapData[3]','$emapData[4]','$emapData[5]','$emapData[6]','$emapData[7]','$emapData[8]','$emapData[9]','$emapData[10]','$emapData[11]','$emapData[12]','$emapData[13]','$emapData[14]')";
 			$result_all = mysqli_query($db,$sql_all);
 		}	
 	}

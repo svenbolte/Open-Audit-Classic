@@ -9,8 +9,9 @@ set_time_limit(240000);
 //
 // Softwaredatenbank importieren
 //
-
-svversionenimport(300);
+if (isset($_REQUEST["view"]) AND str_contains($_REQUEST["view"], "software") ) {
+	svversionenimport(300);
+}	
 
 $count_system_max="10000";
 
@@ -20,12 +21,12 @@ $count_system_max="10000";
 // -> option: include_functions.php: ConvertSpecialField()
 
 //Include the view-definition
-if(isset($_REQUEST["view"]) AND $_REQUEST["view"]!=""){
+if (isset($_REQUEST["view"]) AND $_REQUEST["view"]!="") {
     $include_filename = "list_viewdef_".$_REQUEST["view"].".php";
-}else{
+} else {
     $include_filename = "list_viewdef_all_systems.php";
 }
-if(is_file($include_filename)){
+if (is_file($include_filename)) {
     include_once($include_filename);
     $viewdef_array=$query_array;
 }else{
@@ -478,10 +479,17 @@ if ($myrow = mysqli_fetch_array($result)){
 						} 
 						$logobild = preg_replace('/[^A-Za-z0-9\-_]/', '', $logobild);
 				}	
-				if (($field["name"]=="software_name" or $field["head"]=="Software" or $field["name"]=="system_os_name") and is_file("softwarelogos/".$logobild.".png")){
-				   $show_value = "<img src=\"softwarelogos/".$logobild.".png\" style=\"border:0px;\" alt=\"\" /> ".$software_name;
-				}
 
+				if ( $field["name"]=="software_name" or $field["head"]=="Software" or $field["name"]=="system_os_name" ) {
+					$show_value = '';
+					if (isset($sv_icondata) && $sv_icondata !== "") $show_value .= " <img src=\"".$sv_icondata."\" alt=\"\" /> ";
+					elseif (is_file("softwarelogos/".$logobild.".png")) {
+					   $show_value .= "<img src=\"softwarelogos/".$logobild.".png\" alt=\"\" /> ";
+					} 
+						
+					$show_value .= '<span style="font-size:.95em">'.$software_name.'</span>';
+				}
+				
 				if (isset($software_title)) {
 					if (strpos($software_title," ")!=0) {
 							$logobild = substr($software_title,0,strpos($software_title," "));

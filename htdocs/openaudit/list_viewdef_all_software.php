@@ -1,7 +1,7 @@
 <?php
 $query_array=array("headline"=>__("List all Software"),
                    "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, softwareversionen.sv_bemerkungen, 
-							softwareversionen.sv_lizenztyp, softwareversionen.sv_version, softwareversionen.sv_instlocation, software_version, 
+							softwareversionen.sv_lizenztyp, softwareversionen.sv_version, softwareversionen.sv_instlocation, softwareversionen.sv_icondata, software_version, 
 							software_publisher, software_url, software_comment, software_first_timestamp, (1=1) as sv_newer   
 						FROM system, software
 						LEFT JOIN softwareversionen

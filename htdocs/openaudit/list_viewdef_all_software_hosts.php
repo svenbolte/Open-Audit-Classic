@@ -1,7 +1,7 @@
 <?php
 
 $query_array=array("headline"=>__("List all Software with Hosts"),
-                   "sql"=>"SELECT software_name, software_version, software_publisher, software_location, softwareversionen.sv_version, softwareversionen.sv_instlocation, system_name, net_user_name, system_uuid, (1=1) as sv_newer 
+                   "sql"=>"SELECT software_name, software_version, software_publisher, software_location, softwareversionen.sv_version, softwareversionen.sv_icondata, softwareversionen.sv_instlocation, system_name, net_user_name, system_uuid, (1=1) as sv_newer 
 					 	FROM system, software 
 						LEFT JOIN softwareversionen
 						ON (
