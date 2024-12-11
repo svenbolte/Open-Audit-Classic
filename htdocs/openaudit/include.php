@@ -28,7 +28,6 @@ include "include_lenovo_warranty_functions.php"; // Added by Andrew Hull to allo
 
 // Funktion für Software-Versionen online download and import
 function svversionenimport($aftertime) {
-	$aftertime=5;
 	global $db;
 	echo '<div class="messagebox" style="position:absolute;left:5px;top:500px">';
 	$filename = dirname(__FILE__).'/wordpresssoftware.csv';
@@ -43,8 +42,12 @@ function svversionenimport($aftertime) {
 	if (file_exists($filename)) {
 		echo substr($url,0,66).' | ';
 		echo "Update: " . date ("d.m.Y H:i:s", filemtime($filename));
-		echo ' | '.time()-filemtime($filename).'s';
-		if (time() - filemtime($filename) > (int) $aftertime ) {   // erst nach 5 Minuten wieder DB-Update herunterladen
+		
+		$tdif = (int) (time()-filemtime($filename));
+		echo ' | '. sprintf('%02d:%02d:%02d', $tdif/3600, floor($tdif/60)%60, $tdif%60);
+		 // erst nach 5 Minuten wieder DB-Update herunterladen
+		echo ' | '. $aftertime .' min.';
+		if ($tdif > ( (int) $aftertime * 60 ) ) {  
 			$arrContextOptions=array( "ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false, ), );  
 			$source = file_get_contents($url, false, stream_context_create($arrContextOptions));
 

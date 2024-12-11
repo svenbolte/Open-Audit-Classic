@@ -7,10 +7,10 @@ include_once("include.php");
 set_time_limit(240000);
 
 //
-// Softwaredatenbank importieren
+// Softwaredatenbank importieren alle 120 Minuten, sonst aus dem admin menü
 //
 if (isset($_REQUEST["view"]) AND str_contains($_REQUEST["view"], "software") ) {
-	svversionenimport(300);
+	svversionenimport(120);
 }	
 
 $count_system_max="10000";
