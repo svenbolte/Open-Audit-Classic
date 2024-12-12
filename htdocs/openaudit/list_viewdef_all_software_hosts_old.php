@@ -2,7 +2,7 @@
 $query_array=array("headline"=>__("List all known old Software with hosts"),
                    "sql"=>"
 		SELECT software_location, net_user_name, system_name,software.software_name, softwareversionen.sv_product, 
-				software_version, softwareversionen.sv_version, softwareversionen.sv_icondata,  (1=1) as sv_newer  
+				software_version, softwareversionen.sv_version, softwareversionen.sv_icondata,sv_lizenztyp, software_first_timestamp, (1=1) as sv_newer  
 			FROM system,software
 			LEFT JOIN softwareversionen
 			ON (
@@ -10,14 +10,16 @@ $query_array=array("headline"=>__("List all known old Software with hosts"),
 			   LIKE CONCAT('%', LOWER(RTRIM(Replace(Replace(softwareversionen.sv_product,'(x64)',''),'.',''))) ,'%')
 			   )
 		WHERE CONCAT(
-				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 1), '.', -1), 10, '0'),
-				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 2), '.', -1), 10, '0'),
-				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 3), '.', -1), 10, '0') 
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 1), '.', -1), 15, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 2), '.', -1), 15, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 3), '.', -1), 15, '0'), 
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(software_version, '.', 4), '.', -1), 15, '0') 
 			   ) <
 			   CONCAT(
-				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 1), '.', -1), 10, '0'),
-				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 2), '.', -1), 10, '0'),
-				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 3), '.', -1), 10, '0') 
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 1), '.', -1), 15, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 2), '.', -1), 15, '0'),
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 3), '.', -1), 15, '0'), 
+				LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(softwareversionen.sv_version , '.', 4), '.', -1), 15, '0') 
 			   ) 
 				AND software_uuid = system_uuid AND software_timestamp = system_timestamp
 				GROUP BY software_name, software_version
@@ -92,10 +94,24 @@ $query_array=array("headline"=>__("List all known old Software with hosts"),
                                                "show"=>"y",
                                                "link"=>"y",
                                               ),
-								 "60"=>array("name"=>"software_location",
+
+									"60"=>array("name"=>"software_location",
                                                "head"=>__("Installdir"),
                                                "show"=>"y",
                                                "link"=>"y",
+                                              ),
+
+									"65"=>array("name"=>"software_first_timestamp",
+                                               "head"=>__("First installed"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+                                              ),
+
+								   "70"=>array("name"=>"sv_lizenztyp",
+                                               "head"=>__("Lizenztyp"),
+                                               "show"=>"y",
+                                               "link"=>"n",
+											   "search"=>"y",
                                               ),
 										  
                                   ),

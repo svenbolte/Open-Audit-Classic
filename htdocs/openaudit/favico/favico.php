@@ -57,7 +57,8 @@ function get_favicon($seitenurl) {
 
 echo '<html><head><title>FAVICON herunterladen und als Bild und dataurl speichern</title></head><body>';
 echo '<h1>FAVICON URL to IMG and DATA-URL</h1>';
-echo '<p>Füllen Sie den Array im PHP-Ciode mit URLs oder geben hinter dieser seite den Parameter ?url=https:/webeite.de an</p>';
+echo '<p>Füllen Sie den Array im PHP-Code mit URLs oder geben hinter dieser seite den Parameter ?url=https:/webeite.de an. ';
+echo 'Mit dem zweiten Parameter &int=1 wird nicht der Google Favicon-Dienst, sondern eine interne Lib benutzt</p>';
 
 $iconout = array();
 
@@ -66,9 +67,12 @@ if (isset($_GET['url'])) {
 	$iconfilename = 'favicon-'.time().'-'.str_replace(".","-",parse_url($_GET['url'], PHP_URL_HOST)).'.png';
 	file_put_contents($iconfilename, geticongoogle($_GET['url']));
 	echo '<br><br>Icon: <img src="'.$iconfilename.'">';
-	$iconout[] = $iconfilename;
-	// use library to get icon alternately
-	//$iconout[] = get_favicon($_GET['url']);
+	if (!isset($_GET['int'])) {
+		$iconout[] = $iconfilename;
+	} else {	
+		// use library to get icon alternately
+		$iconout[] = get_favicon($_GET['url']);
+	}	
 } else {
 	// Hier die URLs in den Array eintragen
 	$urlarray = array (
@@ -79,9 +83,12 @@ if (isset($_GET['url'])) {
 		$iconfilename = 'favicon-'.time().'-'.str_replace(".","-",parse_url($singleurl, PHP_URL_HOST)).'.png';
 		file_put_contents($iconfilename, geticongoogle($singleurl));
 		echo '<br><br>Icon: <img src="'.$iconfilename.'">';
-		$iconout[] = $iconfilename;
-		// use library to get icon alternately
-		//$iconout[] = get_favicon($singleurl);
+		if (!isset($_GET['int'])) {
+			$iconout[] = $iconfilename;
+		} else {	
+			// use library to get icon alternately
+			$iconout[] = get_favicon($singleurl);
+		}	
 	}
 }	
 	
@@ -89,6 +96,6 @@ if (isset($_GET['url'])) {
 require 'imagetourl.php';
 use imageToURI\imageToURI;
 $images = new imageToURI();
-$images->imageToURI( $iconout, '0-output-dataUris.txt', false);
+echo $images->imageToURI( $iconout, '0-output-dataUris.txt', false).'<br><br>';
 
 ?>
