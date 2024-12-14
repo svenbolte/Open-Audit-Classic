@@ -83,7 +83,7 @@ if ($myrow = mysqli_fetch_array($result)){
 			} else if ( $field["show"]!="n" ) {
                 $csv_data .= '""^^^';
 			}
-			if ( ($field["show"]=="n" && $field["name"]=="sv_bemerkungen") || $field["name"]=="software_comment" ) {
+			if ( $field["show"]=="n" && ($field["name"]=="sv_bemerkungen" || $field["name"]=="software_comment")  ) {
 				$csv_data .= html_entity_decode($myrow[$field["name"]] ?? '');
 				$csv_data .= '^^^';
 			}	

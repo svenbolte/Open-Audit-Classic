@@ -89,7 +89,7 @@ if ($myrow = mysqli_fetch_array($result)) {
 			} else if ( $field["show"]!="n" ) {
                 $csv_data .= '"";';
 			}
-			if ( $field["show"]=="n" && $field["name"]=="sv_bemerkungen") {
+			if (  $field["name"]=="sv_bemerkungen") {
 				$csv_data .= '"'.convertToWindowsCharset($myrow[$field["name"]]).'"';
 				$csv_data .= ';';
 			}	
