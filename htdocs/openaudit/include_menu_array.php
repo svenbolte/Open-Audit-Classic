@@ -150,6 +150,7 @@ $menue_array = array(
 									"71"=>array("name"=>"Old Software w/ Hosts", "link"=>"./list.php?view=all_software_hosts_old", "image"=>"fa-bug", "title"=>"Old Software with Hosts",),
 									"72"=>array("name"=>"All Software short", "link"=>"./list.php?view=all_software-short", "image"=>"fa-folder", "title"=>" All Software Shortlist",),
                                     "74"=>array("name"=>"All Software versions", "link"=>"./list.php?view=all_softwareversionen", "image"=>"fa-road", "title"=>"All Software versions imported from PB",),
+                                    "75"=>array("name"=>"AVV-Liste alle Software", "link"=>"./list.php?view=all_software_avv", "image"=>"fa-legal", "title"=>"AVV relevant data for All Software",),
                                     "76"=>array("name"=>"All Modern Apps", "link"=>"./list.php?view=all_softwareapps", "image"=>"fa-windows", "title"=>" All Modern Apps",),
                                     "80"=>array("name"=>"All SW Patches", "link"=>"./list.php?view=all_hotfixes_patches", "image"=>"fa-bug", "title"=>"All Hotfixes &amp; Patches",),
                                     "85"=>array("name"=>"All SW Patches w/ Hosts", "link"=>"./list.php?view=all_hotfixes_patches", "image"=>"fa-bug", "title"=>"All Hotfixes &amp; Patches with Hosts",),

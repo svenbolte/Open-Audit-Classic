@@ -1,6 +1,6 @@
 <?php
 $query_array=array("headline"=>__("List all Software"),
-                   "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, software_version, software_url, software_comment, software_first_timestamp
+                   "sql"=>" SELECT COUNT(software.software_name) AS software_count, software_name, software_version, software_url, software_comment, software_publisher, software_first_timestamp
 						FROM  system, software
 						WHERE software_name NOT LIKE '%hotfix%'
 						AND software_name NOT LIKE '%Service Pack%' 
